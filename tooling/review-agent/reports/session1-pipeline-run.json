@@ -4,11 +4,27 @@
   "publish_tag_created": false,
   "draft_pr_opened": false,
   "draft_pr_blocker": "No git remote is configured for this local repository; cannot push/open draft PR from current state.",
+  "secret_inputs": {
+    "GOV24_SERVICE_KEY_present": false,
+    "secret_persisted": false
+  },
   "stages": [
     {
       "stage": "api-refresh",
       "blocked": true,
-      "reason": "GOV24_SERVICE_KEY is not set; full national+regional gov24 ingestion cannot run without CI secret."
+      "reason": "GOV24_SERVICE_KEY is not set; full national+regional gov24 ingestion cannot run without CI secret.",
+      "source_id": "gov24-serviceList",
+      "source_org_scope": [
+        "national",
+        "regional"
+      ],
+      "requires_env": "GOV24_SERVICE_KEY",
+      "secret_persisted": false,
+      "operations_planned": [
+        "serviceDetail",
+        "serviceList",
+        "supportConditions"
+      ]
     },
     {
       "stage": "portal-refresh",
@@ -18,7 +34,7 @@
     {
       "stage": "evidence-refresh",
       "count": 6,
-      "note": "Evidence JSON written from seed metadata; local data.go.kr page fetch was unavailable/timeout for some pages."
+      "note": "Evidence JSON written from seed metadata; local data.go.kr page fetch may be unavailable outside maintainer CI."
     },
     {
       "stage": "review",

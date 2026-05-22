@@ -1,0 +1,17 @@
+{
+  "stage": "api-refresh",
+  "blocked": true,
+  "reason": "GOV24_SERVICE_KEY is not set; full national+regional gov24 ingestion cannot run without CI secret.",
+  "source_id": "gov24-serviceList",
+  "source_org_scope": [
+    "national",
+    "regional"
+  ],
+  "requires_env": "GOV24_SERVICE_KEY",
+  "secret_persisted": false,
+  "operations_planned": [
+    "serviceDetail",
+    "serviceList",
+    "supportConditions"
+  ]
+}

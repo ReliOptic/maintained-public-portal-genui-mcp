@@ -16,7 +16,6 @@ import json
 import os
 import re
 import ssl
-import sys
 import time
 import urllib.error
 import urllib.parse
@@ -39,7 +38,6 @@ ALLOW_HOSTS = {"hometax.go.kr", "www.gov.kr", "gov.kr", "plus.gov.kr", "www.data
 SENSITIVE_DOMAINS = {"tax", "welfare", "family", "immigration", "legal"}
 ORDINALS = {"low", "medium", "high"}
 FEATURE_CAPS = {"card_title": 40, "card_body": 120, "cta_label": 20}
-FRAME_CAPS = {"hero.title": 30, "hero.subtitle": 60, "handoff_notice": 100, "evidence_rail.label": 40}
 
 
 def load_yaml(path: Path) -> Any:
@@ -113,6 +111,130 @@ def fetch_url(url: str, timeout: int = 20) -> tuple[int | str, str, str]:
         return e.code, url, body
     except Exception as e:
         return "ERR", url, repr(e)
+
+
+def redact_secret(value: Any, secret: str | None) -> Any:
+    if isinstance(value, dict):
+        return {k: redact_secret(v, secret) for k, v in value.items() if str(k) != "serviceKey"}
+    if isinstance(value, list):
+        return [redact_secret(v, secret) for v in value]
+    if isinstance(value, str) and secret:
+        encoded = urllib.parse.quote_plus(secret)
+        return value.replace(secret, "[REDACTED]").replace(encoded, "[REDACTED]")
+    return value
+
+
+def registry_aliases(registry: dict[str, Any], field: str) -> list[str]:
+    return list(registry.get("response_schema", {}).get("raw_key_aliases", {}).get(field, []))
+
+
+def first_alias_value(row: dict[str, Any], aliases: list[str], default: str = "") -> str:
+    for alias in aliases:
+        value = row.get(alias)
+        if value not in {None, ""}:
+            return str(value)
+    return default
+
+
+def normalized_api_row(registry: dict[str, Any], row: dict[str, Any]) -> dict[str, str]:
+    fields = registry.get("response_schema", {}).get("raw_key_aliases", {})
+    return {field: first_alias_value(row, aliases) for field, aliases in fields.items()}
+
+
+def extract_row_id(registry: dict[str, Any], row: dict[str, Any]) -> str:
+    row_id = first_alias_value(row, registry_aliases(registry, "service_id"))
+    if row_id:
+        return row_id
+    return hashlib.sha1(json.dumps(row, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def extract_title(registry: dict[str, Any], row: dict[str, Any]) -> str:
+    return first_alias_value(row, registry_aliases(registry, "service_name"), "정부24 공공서비스")
+
+
+def gov24_api_get_json(endpoint: str, key: str, params: dict[str, Any], timeout: int = 30) -> dict[str, Any]:
+    safe_params = {k: v for k, v in params.items() if v not in {None, ""}}
+    query = urllib.parse.urlencode({**safe_params, "serviceKey": key})
+    status, final_url, body = fetch_url(endpoint + "?" + query, timeout=timeout)
+    safe_url = redact_secret(final_url, key)
+    meta: dict[str, Any] = {"status": status, "endpoint": endpoint, "final_url": safe_url}
+    if status != 200:
+        meta["error_excerpt"] = redact_secret(body[:500], key)
+        return {"ok": False, "meta": meta, "data": None}
+    try:
+        return {"ok": True, "meta": meta, "data": redact_secret(json.loads(body), key)}
+    except json.JSONDecodeError as exc:
+        meta["error_excerpt"] = f"json_decode:{exc}"
+        return {"ok": False, "meta": meta, "data": None}
+
+
+def candidate_param_sets(row_id: str) -> list[dict[str, str]]:
+    # data.go.kr operation parameters have changed across notices; try all known aliases.
+    return [{"serviceId": row_id}, {"svcId": row_id}, {"서비스ID": row_id}]
+
+
+def fetch_gov24_companion(operation: dict[str, Any], key: str, row_id: str) -> dict[str, Any]:
+    attempts = []
+    for params in candidate_param_sets(row_id):
+        result = gov24_api_get_json(operation["endpoint"], key, params, timeout=30)
+        attempts.append({"params": params, "meta": result["meta"]})
+        if result["ok"]:
+            return {"fetch_status": "ok", "attempts": attempts, "payload": result["data"]}
+        # Stop retrying aliases on transport errors; continue aliases on likely parameter mismatch.
+        if result["meta"].get("status") in {"ERR"}:
+            break
+    return {"fetch_status": "unavailable", "attempts": attempts, "payload": None}
+
+
+def payload_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    data = payload.get("data", [])
+    if isinstance(data, list):
+        return [r for r in data if isinstance(r, dict)]
+    if isinstance(data, dict):
+        return [data]
+    return []
+
+
+def infer_region_tags(normalized: dict[str, str]) -> list[str]:
+    scope = " ".join([normalized.get("provider_org", ""), normalized.get("jurisdiction_scope", "")])
+    regional = {
+        "서울": "seoul", "부산": "busan", "대구": "daegu", "인천": "incheon", "광주": "gwangju",
+        "대전": "daejeon", "울산": "ulsan", "세종": "sejong", "경기": "gyeonggi", "강원": "gangwon",
+        "충북": "chungbuk", "충청북": "chungbuk", "충남": "chungnam", "충청남": "chungnam",
+        "전북": "jeonbuk", "전라북": "jeonbuk", "전남": "jeonnam", "전라남": "jeonnam",
+        "경북": "gyeongbuk", "경상북": "gyeongbuk", "경남": "gyeongnam", "경상남": "gyeongnam",
+        "제주": "jeju", "교육청": "education_office",
+    }
+    tags = [v for k, v in regional.items() if k in scope]
+    if "중앙" in scope or "국가" in scope or "전국" in scope or not tags:
+        tags.insert(0, "nationwide")
+    if "교육청" not in scope and ("부" in scope or "청" in scope or "위원회" in scope):
+        tags.append("central_government")
+    deduped = []
+    for tag in tags:
+        if tag not in deduped:
+            deduped.append(tag)
+    return deduped[:3] or ["nationwide"]
+
+
+def infer_api_domain_and_tags(title: str, normalized: dict[str, str], companions: dict[str, Any]) -> dict[str, Any]:
+    text = " ".join(str(v) for v in [title, *normalized.values(), companions.get("detail", {}).get("payload"), companions.get("conditions", {}).get("payload")])
+    if any(k in text for k in ["세금", "국세", "지방세", "소득세", "부가가치세", "장려금"]):
+        return {"domain": "tax", "persona_tags": ["salary_worker", "self_employed"], "task_intent": ["tax_inquiry"], "life_event_tags": ["tax_season", "income_change"], "evidence_refs": ["ev_nts_retirement_income_tenure", "ev_nts_education_tax"], "season": "comprehensive_income_tax_may"}
+    if any(k in text for k in ["교육", "장학", "학생", "학교"]):
+        return {"domain": "welfare", "persona_tags": ["student", "parent_guardian"], "task_intent": ["education_application", "benefit_check"], "life_event_tags": ["school_enrollment"], "evidence_refs": ["ev_local_welfare_services"], "season": "scholarship_mar"}
+    if any(k in text for k in ["장애", "기초생활", "차상위", "복지", "보조금", "지원금", "수당"]):
+        return {"domain": "welfare", "persona_tags": ["low_income_household"], "task_intent": ["benefit_check"], "life_event_tags": ["income_change"], "evidence_refs": ["ev_local_welfare_services", "ev_household_income_incheon"], "season": "heating_winter"}
+    if any(k in text for k in ["체류", "외국인", "국적", "재외"]):
+        return {"domain": "immigration", "persona_tags": ["foreign_resident"], "task_intent": ["address_change", "identity_verification"], "life_event_tags": ["immigration"], "evidence_refs": [], "season": "jan"}
+    if any(k in text for k in ["출생", "가족", "혼인", "보육", "아동"]):
+        return {"domain": "family", "persona_tags": ["parent_guardian"], "task_intent": ["certificate_issue", "benefit_check"], "life_event_tags": ["family_relation", "childcare"], "evidence_refs": ["ev_local_welfare_services"], "season": "childcare_mar"}
+    return {"domain": "welfare", "persona_tags": ["low_income_household"], "task_intent": ["benefit_check"], "life_event_tags": ["income_change"], "evidence_refs": ["ev_local_welfare_services"], "season": "jan"}
+
+
+def write_api_refresh_summary(summary: dict[str, Any]) -> None:
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    dump_json(REPORT_DIR / "session1-api-refresh-summary.json", summary)
 
 
 def strip_text(raw: str, limit: int = 4000) -> str:
@@ -301,26 +423,83 @@ def evidence_refresh(args: argparse.Namespace) -> dict[str, Any]:
 
 def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
     key = os.environ.get("GOV24_SERVICE_KEY")
-    if not key:
-        return {"stage": "api-refresh", "blocked": True, "reason": "GOV24_SERVICE_KEY is not set; full national+regional gov24 ingestion cannot run without CI secret."}
-    # This implementation intentionally streams pages and does not persist secrets.
     registry = load_yaml(ROOT / "catalog" / "api-registry" / "gov24-serviceList.yaml")
+    operations = registry["operations"]
+    endpoint = operations["serviceList"]["endpoint"]
+    if not key:
+        summary = {
+            "stage": "api-refresh",
+            "blocked": True,
+            "reason": "GOV24_SERVICE_KEY is not set; full national+regional gov24 ingestion cannot run without CI secret.",
+            "source_id": registry["source_id"],
+            "source_org_scope": registry.get("source_org_scope", []),
+            "requires_env": registry.get("auth", {}).get("env", "GOV24_SERVICE_KEY"),
+            "secret_persisted": False,
+            "operations_planned": sorted(operations.keys()),
+        }
+        write_api_refresh_summary(summary)
+        return summary
+
+    # Maintainer CI only: stream serviceList pages and fetch serviceDetail/supportConditions
+    # companions per row. No serviceKey value is persisted in any report or candidate.
     per_page = int(registry["paging"]["per_page"])
-    endpoint = registry["operations"]["serviceList"]["endpoint"]
+    page_param = registry["paging"].get("page_param", "page")
+    per_page_param = registry["paging"].get("per_page_param", "perPage")
     written = []
-    page = 1
+    page = int(registry["paging"].get("start_page", 1))
+    pages_fetched = 0
+    rows_seen = 0
+    operation_status_counts: dict[str, dict[str, int]] = {"serviceList": {}, "serviceDetail": {}, "supportConditions": {}}
+
     while True:
-        params = urllib.parse.urlencode({"page": page, "perPage": per_page, "serviceKey": key})
-        status, final_url, body = fetch_url(endpoint + "?" + params, timeout=30)
-        if status != 200:
-            raise RuntimeError(f"gov24 serviceList failed page={page} status={status} body={body[:200]}")
-        payload = json.loads(body)
-        rows = payload.get("data", [])
+        list_result = gov24_api_get_json(endpoint, key, {page_param: page, per_page_param: per_page}, timeout=30)
+        status_key = str(list_result["meta"].get("status"))
+        operation_status_counts["serviceList"][status_key] = operation_status_counts["serviceList"].get(status_key, 0) + 1
+        if not list_result["ok"]:
+            summary = {
+                "stage": "api-refresh",
+                "blocked": True,
+                "reason": f"gov24 serviceList failed page={page} status={status_key}",
+                "source_id": registry["source_id"],
+                "source_org_scope": registry.get("source_org_scope", []),
+                "pages_fetched": pages_fetched,
+                "rows_seen": rows_seen,
+                "operation_status_counts": operation_status_counts,
+                "secret_persisted": False,
+                "last_error": list_result["meta"],
+            }
+            write_api_refresh_summary(summary)
+            raise RuntimeError(summary["reason"])
+
+        pages_fetched += 1
+        rows = payload_rows(list_result["data"] or {})
         if not rows:
             break
+        rows_seen += len(rows)
+        ENTRIES.mkdir(parents=True, exist_ok=True)
         for row in rows:
-            row_id = str(row.get("서비스ID") or row.get("svcId") or row.get("serviceId") or hashlib.sha1(json.dumps(row, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:16])
-            title = str(row.get("서비스명") or row.get("serviceName") or row.get("서비스목록명") or "정부24 공공서비스")
+            row_id = extract_row_id(registry, row)
+            title = extract_title(registry, row)
+            normalized = normalized_api_row(registry, row)
+            companions = {
+                "detail": fetch_gov24_companion(operations["serviceDetail"], key, row_id),
+                "conditions": fetch_gov24_companion(operations["supportConditions"], key, row_id),
+            }
+            for op_name, companion_key in [("serviceDetail", "detail"), ("supportConditions", "conditions")]:
+                fetch_status = companions[companion_key]["fetch_status"]
+                operation_status_counts[op_name][fetch_status] = operation_status_counts[op_name].get(fetch_status, 0) + 1
+
+            inferred = infer_api_domain_and_tags(title, normalized, companions)
+            domain = inferred["domain"]
+            sensitive_domain = domain if domain in SENSITIVE_DOMAINS else None
+            service_url = normalized.get("apply_url_or_menu") or "https://www.gov.kr/portal/rcvfvrSvc/main"
+            if not str(service_url).startswith("http"):
+                service_url = "https://www.gov.kr/portal/rcvfvrSvc/main"
+            menu_path = normalized.get("apply_url_or_menu") if normalized.get("apply_url_or_menu", "").startswith("정부24") else f"정부24 > 보조금24 > {title[:40]}"
+            payload_excerpt = {k: v for k, v in normalized.items() if v}
+            if not payload_excerpt:
+                payload_excerpt = {k: row[k] for k in list(row.keys())[:12]}
+            api_payload_keys = list(dict.fromkeys(list(normalized.keys()) + list(row.keys())[:40]))[:60]
             entry_id = ulid_from_seed("gov24|" + row_id)
             entry = {
                 "entry_id": entry_id,
@@ -330,34 +509,49 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "merged_into": None,
                 "access_mode": "api_cached",
                 "portal": "gov24",
-                "domain": "welfare",
-                "sensitive_domain": "welfare",
+                "domain": domain,
+                "sensitive_domain": sensitive_domain,
                 "title": title[:80],
-                "canonical_intent": "benefit_check",
+                "canonical_intent": inferred["task_intent"][0],
                 "canonical_action_verb": "check",
-                "key_keywords": [title[:20]],
+                "key_keywords": [k for k in re.split(r"\s+", title) if k][:4] or [title[:20]],
                 "content_fingerprint": f"gov24|gov24-serviceList|{row_id}",
-                "source_urls": [endpoint],
-                "api_ref": {"source_id": "gov24-serviceList", "operation": "serviceList", "row_id": row_id},
-                "api_payload_keys": list(row.keys())[:40],
-                "api_payload_excerpt": {k: row[k] for k in list(row.keys())[:12]},
-                "menu_path": f"정부24 > 보조금24 > {title[:40]}",
-                "handoff": {"tier": "tier3", "portal": "gov24", "url": "https://www.gov.kr/portal/rcvfvrSvc/main", "menu_path": f"정부24 > 보조금24 > {title[:40]}"},
-                "persona_tags": ["low_income_household"],
-                "task_intent": ["benefit_check"],
-                "life_event_tags": ["income_change"],
-                "region_tags": ["nationwide"],
-                "evidence_refs": ["ev_local_welfare_services"],
-                "free_tags": ["gov24", "api_cached"],
-                "seasonality_hint": "jan",
-                "intrinsic_ordinals": {"actionability": "medium", "evidence_value": "medium", "sensitivity_risk": "high"},
-                "confidence_score": 0.86,
-                "review_required": True,
-                "review_reason": "sensitive_domain:welfare",
+                "source_urls": [operations[name]["endpoint"] for name in ["serviceList", "serviceDetail", "supportConditions"]],
+                "api_ref": {
+                    "source_id": registry["source_id"],
+                    "operation": "serviceList",
+                    "row_id": row_id,
+                    "detail_operation": "serviceDetail",
+                    "conditions_operation": "supportConditions",
+                },
+                "source_api_fetch": {
+                    "serviceList": {"page": page, "status": status_key},
+                    "serviceDetail": {"fetch_status": companions["detail"]["fetch_status"], "attempt_count": len(companions["detail"]["attempts"])},
+                    "supportConditions": {"fetch_status": companions["conditions"]["fetch_status"], "attempt_count": len(companions["conditions"]["attempts"])},
+                },
+                "api_payload_keys": api_payload_keys,
+                "api_payload_excerpt": redact_secret(payload_excerpt, key),
+                "api_companion_payloads": {
+                    "serviceDetail": redact_secret(companions["detail"]["payload"], key),
+                    "supportConditions": redact_secret(companions["conditions"]["payload"], key),
+                },
+                "menu_path": menu_path,
+                "handoff": {"tier": "tier3", "portal": "gov24", "url": service_url, "menu_path": menu_path},
+                "persona_tags": inferred["persona_tags"],
+                "task_intent": inferred["task_intent"],
+                "life_event_tags": inferred["life_event_tags"],
+                "region_tags": infer_region_tags(normalized),
+                "evidence_refs": inferred["evidence_refs"],
+                "free_tags": ["gov24", "api_cached", title[:20]],
+                "seasonality_hint": inferred["season"],
+                "intrinsic_ordinals": {"actionability": "medium", "evidence_value": "medium", "sensitivity_risk": "high" if sensitive_domain else "medium"},
+                "confidence_score": 0.86 if companions["detail"]["fetch_status"] == "ok" or companions["conditions"]["fetch_status"] == "ok" else 0.82,
+                "review_required": bool(sensitive_domain),
+                "review_reason": f"sensitive_domain:{sensitive_domain}" if sensitive_domain else None,
                 "card_title": title[:40],
                 "card_body": f"{title[:40]}의 지원 조건과 신청 안내를 정부24 공공서비스 정보에서 확인하세요."[:120],
                 "cta_label": "정부24에서 확인",
-                "safe_copy_audit": {"safe_copy_rule": "confirm_not_assert", "outcome": "pass", "checked_patterns": ["대상 단정 없음"]},
+                "safe_copy_audit": {"safe_copy_rule": "confirm_not_assert", "outcome": "pass", "checked_patterns": ["대상 단정 없음", "승인 보장 없음", "금액 단정 없음"]},
                 "last_sync_at": today(),
             }
             out = ENTRIES / f"{entry_id}.json"
@@ -367,7 +561,22 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
         if args.max_pages and page > args.max_pages:
             break
         time.sleep(args.rate_delay)
-    return {"stage": "api-refresh", "written": written, "count": len(written), "blocked": False}
+
+    summary = {
+        "stage": "api-refresh",
+        "written": written,
+        "count": len(written),
+        "blocked": False,
+        "source_id": registry["source_id"],
+        "source_org_scope": registry.get("source_org_scope", []),
+        "pages_fetched": pages_fetched,
+        "rows_seen": rows_seen,
+        "operation_status_counts": operation_status_counts,
+        "secret_persisted": False,
+        "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope.",
+    }
+    write_api_refresh_summary(summary)
+    return summary
 
 
 def safe_patterns() -> list[str]:
