@@ -96,6 +96,8 @@ Three tiers, in preference order:
 
 Therefore: tier1 and tier2 are upgrades to the user experience, not preconditions for publishing.
 
+For seeded portal handoffs, including HomeTax seed URLs, `handoff.tier` is determined during ingestion/browser validation from the rendered page and final URL. The seed URL alone does not guarantee tier1; `menu_path` remains the mandatory publish floor.
+
 The `handoff_ref` string in the architecture doc §6.2 is replaced by a structured `handoff` object: `{ tier, url?, menu_path, portal }`.
 
 ### entry_id
@@ -137,8 +139,9 @@ The ranking pipeline is **two-stage filter-then-score**, not a single weighted s
 - `merged_into != null`
 - `menu_path` is missing (violates [[Handoff]] floor)
 
-**Stage 2 — Positive-feature score.** Only seven features participate:
-`IF, PF, LF, SE, UR, AC, EV` — `sensitivity_risk` is **excluded** from the score.
+**Stage 2 — Positive-feature score.** Nine of the eleven Feature Dictionary entries participate:
+`IF, PF, LF, SE, UR, AC, EV, api_availability, freshness`.
+Two features are deliberately excluded — `sensitivity_risk` (safety gate, see Stage 3) and `official_handoff_need` (handled by [[access_mode]]-driven CTA, not by the score; excluding it avoids a zero-sum conflict with `api_availability`).
 `Q(entry) = Σ_i  S_entry[i] × W_context[i]`, with `Σ W_context[i] = 1` (weights normalised per request).
 
 **Stage 3 — SR-driven adjustment.** `sensitivity_risk` shapes presentation, not score:
@@ -188,6 +191,8 @@ Members: `actionability` (AC), `evidence_value` (EV), `sensitivity_risk` (SR).
 | `api_live`       | 1.0              | 0.0                   |
 | `portal_handoff` | 0.0              | 1.0                   |
 | `manual_check`   | 0.0              | 1.0                   |
+
+Of these two, **`api_availability` participates in the [[Ranking pipeline]] Stage 2 score, while `official_handoff_need` does not**. The latter is consumed by the composer at presentation time — it drives `access_mode`-specific CTA wording and slot decisions — but is excluded from W_base to avoid a zero-sum conflict with `api_availability`. Both are still computed on every Entry so the composer and Stage 3 / safe_copy adjustments can reference them.
 
 **Match (derived at ranking time from set overlap).** `IF`, `PF`, `LF`, `SE` — same as before.
 
@@ -254,6 +259,14 @@ The coarse bucket that selects a [[Frame copy]] variant. v0.1 segments:
 | `general`          | fallback when no other segment matches (includes the empty-context case)               |
 
 Resolution is **first-match in the listed priority order**. The mapping table itself is data (`frame_copy_segments.json`) and PR-reviewable; new segments require a `minor` [[catalog_version]] bump.
+
+**Match-rule semantics (fixed).** A segment's `match` block may contain multiple condition keys (e.g. `intent_any`, `season_any`, `persona_any`, `life_event_any`):
+
+- **Across different keys: AND.** Every present key must match.
+- **Within a single `_any` array: OR.** Any one value in the array satisfies that key.
+- A `fallback: true` block matches unconditionally (used only by the `general` last-priority segment).
+
+Example: `tax_season` with `intent_any = [tax_filing, tax_inquiry]` and `season_any = [jan, may]` matches when `(intent contains tax_filing OR tax_inquiry) AND (season is jan OR may)`. This convention is the implementation contract for the composer's segment resolver.
 
 Consequence: v0.1 needs only ~6 × 4 ≈ 24 frame copy strings (and one segment mapping table), authorable by a single maintainer in one session.
 
@@ -390,5 +403,14 @@ These caps make the L2 / L3 / L4 byte caps achievable without runtime trimming.
 
 ### Handoff allowlist
 
-The fixed set of host names that may appear in any tier1/tier2 URL. Currently: `hometax.go.kr`, `gov.kr`, `data.go.kr`. Any URL outside this allowlist is rejected at publish time, satisfying the architecture doc §9 "Allowlist-based external links" constraint.
+The fixed set of host names that may appear in any tier1 / tier2 URL or in any `api_ref` endpoint. Currently:
+
+| host              | role                                                            | user-facing? |
+| ----------------- | --------------------------------------------------------------- | ------------ |
+| `hometax.go.kr`   | tier1 / tier2 [[Handoff]] target for tax actions                | yes          |
+| `gov.kr`          | tier1 / tier2 [[Handoff]] target for civic-service actions      | yes          |
+| `data.go.kr`      | dataset metadata pages referenced in [[Evidence Registry]]      | yes          |
+| `api.odcloud.kr`  | gov24 / NTS / data.go.kr API endpoints (api_cached sync source) | no — internal source only; never surfaced as a card CTA |
+
+Any URL outside this allowlist is rejected at publish time. `api.odcloud.kr` is in the list because it is the canonical host for the API operations driving the api-refresh-pipeline; it is treated as an **internal source**, not as a user-facing CTA target. The composer never renders `api.odcloud.kr` URLs in card UI.
 
