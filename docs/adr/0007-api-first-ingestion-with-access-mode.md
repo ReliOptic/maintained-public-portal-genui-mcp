@@ -1,6 +1,22 @@
 # API-first ingestion with access_mode discrimination
 
-The original architecture treated every Entry as portal-crawled. Real Korean public services split into two camps: (a) structured data exposed through stable REST APIs — gov24 service catalog, NTS businessman status, data.go.kr datasets — and (b) actions that still terminate on portal screens (홈택스 신고, 정부24 신청류). We pivot the Catalog to **API-first**: every Entry carries an `access_mode` field in `{api_cached, portal_handoff, manual_check}` (v0.1 subset), and the Refresh pipeline splits into two parallel tracks — `api-refresh-pipeline` (automated, nightly) for API-sourced Entries and `portal-refresh-pipeline` (manual-trigger) for hand-curated handoff URLs. One API row becomes one Entry; "search" or "discovery" itself is never an Entry. Datasets are not Entries — they live in a separate Evidence Registry referenced by Entries via `evidence_refs`.
+The original architecture treated every Entry as portal-crawled. Real Korean public services split into two camps: (a) structured data exposed through stable REST APIs — gov24 service catalog, 복지로 welfare catalogs, 워크넷 jobs, NTS live checks, data.go.kr/KOSIS datasets — and (b) actions that still terminate on portal screens (홈택스 신고, 정부24 신청류). We pivot the Catalog to **API-first**: every Entry carries an `access_mode` field in `{api_cached, portal_handoff, manual_check}` (v0.1 subset), and the Refresh pipeline splits into two parallel tracks — `api-refresh-pipeline` (automated, nightly) for API-sourced Task Entries and `portal-refresh-pipeline` (manual-trigger) for hand-curated handoff URLs. One Task API row becomes one Entry; "search" or "discovery" itself is never an Entry. Datasets are not Entries — they live in a separate Evidence Registry referenced by Entries via `evidence_refs`.
+
+## API role taxonomy
+
+Generic public APIs exist, but v0.1 correctness depends on assigning each API to the right role rather than attaching every API as an Entry source:
+
+| API family | Catalog role | Rationale |
+| --- | --- | --- |
+| Gov24 공공서비스 정보 | Task Entry candidates | Service rows describe user-facing public-service tasks. |
+| 복지로 중앙부처복지서비스 / 지자체복지서비스 | Task Entry candidates | Welfare-service rows map to benefits/tasks users can check or apply for. |
+| 워크넷 채용정보 / 정부지원일자리 | Task Entry candidates | Job/support rows map to employment-support tasks. |
+| 공공데이터포털 목록조회 / 검색서비스 | Evidence Registry / source registry | Dataset discovery supports evidence and source coverage; it is not itself a Leaf Service. |
+| KOSIS OpenAPI | Evidence Registry | Statistics support Evidence Rail context and confidence, not Task cards. |
+| 소상공인 상권정보 API | Evidence Registry | Commercial-area facts support small-business evidence and ranking context. |
+| 국세청 사업자 상태조회 | Live Check Entry | A narrow runtime check for a specific business-status task, not a bulk catalog source. |
+
+Therefore: general-purpose APIs are available, but the architecture's consistency comes from separating API roles into **Task**, **Evidence**, **Registry**, and **Live Check** surfaces. Adding more APIs is not a goal by itself.
 
 ## Considered options
 

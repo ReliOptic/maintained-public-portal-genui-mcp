@@ -33,7 +33,7 @@ A required field on every [[Entry]] that names **how this Task is fulfilled**. T
 
 ### Evidence Registry
 
-Public datasets and reference statistics (data.go.kr file/auto-OpenAPI rows, regional data, statistics) are **not** Entries — they are not Leaf Services. They live in a separate registry under `catalog/v1.0.0/evidence/*.json` with its own refresh cadence. Tasks reference them through an `Entry.evidence_refs: string[]` field; the composer resolves those references when assembling the §13 Evidence Rail.
+Public datasets and reference statistics (data.go.kr file/auto-OpenAPI rows, KOSIS statistics, regional data, 소상공인 상권정보) are **not** Entries — they are not Leaf Services. They live in a separate registry under `catalog/v1.0.0/evidence/*.json` with its own refresh cadence. Tasks reference them through an `Entry.evidence_refs: string[]` field; the composer resolves those references when assembling the §13 Evidence Rail.
 
 This separation keeps the [[Ranking pipeline]] semantically single-purposed ("how relevant is this Task to the user?") and avoids comparing a Task ("근로장려금 신청") against a dataset ("상권 통계") in the same score space.
 
@@ -69,8 +69,9 @@ Catalog ingestion is **two parallel pipelines**, both running in maintainer-oper
 
 **api-refresh-pipeline** (primary, automated):
 - Triggered nightly on a cron schedule (or manually).
-- For each registered API source (gov24 serviceList primary in v0.1; NTS, data.go.kr deferred), calls the API, paginates, normalises each row into an `EntryCandidate`, and runs LLM Annotation to produce taxonomy tags, intrinsic ordinals, and card_copy.
-- ADR-0001 (LLM Splitter) is **not** in this path — one API row = one Entry by definition.
+- For each registered Task API source (Gov24 serviceList primary in v0.1; 복지로 중앙부처/지자체 복지서비스 and 워크넷 채용정보/정부지원일자리 are future Task candidates), calls the API, paginates, normalises each row into an `EntryCandidate`, and runs LLM Annotation to produce taxonomy tags, intrinsic ordinals, and card_copy.
+- ADR-0001 (LLM Splitter) is **not** in this path — one Task API row = one Entry by definition.
+- General-purpose data APIs are deliberately excluded from Entry generation: 공공데이터포털 목록조회/검색, KOSIS OpenAPI, and 소상공인 상권정보 feed the [[Evidence Registry]] or source registry, not Task cards. 국세청 사업자 상태조회 is a specific live-check source, not a bulk Task catalog source.
 - Output: a draft PR containing the diff of `catalog/v1.0.0/entries/*.json`. Often auto-mergeable (small `patch` bumps).
 
 **portal-refresh-pipeline** (secondary, manual-trigger):
