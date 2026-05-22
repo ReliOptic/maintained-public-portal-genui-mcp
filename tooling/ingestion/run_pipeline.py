@@ -16,6 +16,7 @@ import json
 import os
 import re
 import ssl
+import sys
 import time
 import urllib.error
 import urllib.parse
@@ -173,10 +174,10 @@ def candidate_param_sets(row_id: str) -> list[dict[str, str]]:
     return [{"cond[서비스ID::EQ]": row_id}, {"serviceId": row_id}, {"svcId": row_id}, {"서비스ID": row_id}]
 
 
-def fetch_gov24_companion(operation: dict[str, Any], key: str, row_id: str) -> dict[str, Any]:
+def fetch_gov24_companion(operation: dict[str, Any], key: str, row_id: str, timeout: int = 20) -> dict[str, Any]:
     attempts = []
     for params in candidate_param_sets(row_id):
-        result = gov24_api_get_json(operation["endpoint"], key, params, timeout=30)
+        result = gov24_api_get_json(operation["endpoint"], key, params, timeout=timeout)
         attempts.append({"params": params, "meta": result["meta"]})
         if result["ok"]:
             return {"fetch_status": "ok", "attempts": attempts, "payload": result["data"]}
@@ -426,6 +427,10 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
     registry = load_yaml(ROOT / "catalog" / "api-registry" / "gov24-serviceList.yaml")
     operations = registry["operations"]
     endpoint = operations["serviceList"]["endpoint"]
+    page_start = args.start_page or int(registry["paging"].get("start_page", 1))
+    page_end = args.end_page or 0
+    if page_end and page_end < page_start:
+        raise SystemExit("--end-page must be greater than or equal to --start-page")
     if not key:
         summary = {
             "stage": "api-refresh",
@@ -436,6 +441,8 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
             "requires_env": registry.get("auth", {}).get("env", "GOV24_SERVICE_KEY"),
             "secret_persisted": False,
             "operations_planned": sorted(operations.keys()),
+            "page_start": page_start,
+            "page_end": page_end or None,
         }
         write_api_refresh_summary(summary)
         return summary
@@ -446,13 +453,26 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
     page_param = registry["paging"].get("page_param", "page")
     per_page_param = registry["paging"].get("per_page_param", "perPage")
     written = []
-    page = int(registry["paging"].get("start_page", 1))
+    page = page_start
     pages_fetched = 0
     rows_seen = 0
+    stopped_reason = "completed"
+    last_page_attempted: int | None = None
+    last_page_completed: int | None = None
     operation_status_counts: dict[str, dict[str, int]] = {"serviceList": {}, "serviceDetail": {}, "supportConditions": {}}
+    started = time.monotonic()
+    progress_every = max(1, int(args.progress_every))
 
     while True:
-        list_result = gov24_api_get_json(endpoint, key, {page_param: page, per_page_param: per_page, "returnType": "JSON"}, timeout=30)
+        if page_end and page > page_end:
+            stopped_reason = "page_end_reached"
+            break
+        if args.max_pages and pages_fetched >= args.max_pages:
+            stopped_reason = "max_pages_reached"
+            break
+        print(f"api-refresh page={page} start rows_seen={rows_seen} written={len(written)}", file=sys.stderr, flush=True)
+        last_page_attempted = page
+        list_result = gov24_api_get_json(endpoint, key, {page_param: page, per_page_param: per_page, "returnType": "JSON"}, timeout=args.api_timeout)
         status_key = str(list_result["meta"].get("status"))
         operation_status_counts["serviceList"][status_key] = operation_status_counts["serviceList"].get(status_key, 0) + 1
         if not list_result["ok"]:
@@ -462,6 +482,10 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "reason": f"gov24 serviceList failed page={page} status={status_key}",
                 "source_id": registry["source_id"],
                 "source_org_scope": registry.get("source_org_scope", []),
+                "page_start": page_start,
+                "page_end": page_end or None,
+                "last_page_attempted": last_page_attempted,
+                "last_page_completed": last_page_completed,
                 "pages_fetched": pages_fetched,
                 "rows_seen": rows_seen,
                 "operation_status_counts": operation_status_counts,
@@ -473,17 +497,19 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
 
         pages_fetched += 1
         rows = payload_rows(list_result["data"] or {})
+        print(f"api-refresh page={page} status={status_key} rows={len(rows)}", file=sys.stderr, flush=True)
         if not rows:
+            stopped_reason = "empty_page"
             break
         rows_seen += len(rows)
         ENTRIES.mkdir(parents=True, exist_ok=True)
-        for row in rows:
+        for idx, row in enumerate(rows, 1):
             row_id = extract_row_id(registry, row)
             title = extract_title(registry, row)
             normalized = normalized_api_row(registry, row)
             companions = {
-                "detail": fetch_gov24_companion(operations["serviceDetail"], key, row_id),
-                "conditions": fetch_gov24_companion(operations["supportConditions"], key, row_id),
+                "detail": fetch_gov24_companion(operations["serviceDetail"], key, row_id, timeout=args.companion_timeout),
+                "conditions": fetch_gov24_companion(operations["supportConditions"], key, row_id, timeout=args.companion_timeout),
             }
             for op_name, companion_key in [("serviceDetail", "detail"), ("supportConditions", "conditions")]:
                 fetch_status = companions[companion_key]["fetch_status"]
@@ -557,9 +583,11 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
             out = ENTRIES / f"{entry_id}.json"
             dump_json(out, entry)
             written.append(str(out.relative_to(ROOT)))
+            if idx % progress_every == 0:
+                print(f"api-refresh page={page} row={idx}/{len(rows)} total_written={len(written)}", file=sys.stderr, flush=True)
+        print(f"api-refresh page={page} done rows_seen={rows_seen} written={len(written)} elapsed_sec={time.monotonic() - started:.1f}", file=sys.stderr, flush=True)
+        last_page_completed = page
         page += 1
-        if args.max_pages and page > args.max_pages:
-            break
         time.sleep(args.rate_delay)
 
     summary = {
@@ -569,10 +597,16 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
         "blocked": False,
         "source_id": registry["source_id"],
         "source_org_scope": registry.get("source_org_scope", []),
+        "page_start": page_start,
+        "page_end": page_end or None,
+        "last_page_attempted": last_page_attempted,
+        "last_page_completed": last_page_completed,
         "pages_fetched": pages_fetched,
         "rows_seen": rows_seen,
+        "stopped_reason": stopped_reason,
         "operation_status_counts": operation_status_counts,
         "secret_persisted": False,
+        "elapsed_sec": round(time.monotonic() - started, 3),
         "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope.",
     }
     write_api_refresh_summary(summary)
@@ -778,6 +812,11 @@ def main() -> None:
     ap.add_argument("--parallel", type=int, default=8)
     ap.add_argument("--rate-delay", type=float, default=0.2)
     ap.add_argument("--max-pages", type=int, default=0, help="testing limit for gov24 api-refresh; 0 means all")
+    ap.add_argument("--start-page", type=int, default=0, help="first gov24 page to fetch for sharded api-refresh")
+    ap.add_argument("--end-page", type=int, default=0, help="last gov24 page to fetch for sharded api-refresh; 0 means until empty")
+    ap.add_argument("--api-timeout", type=int, default=20, help="seconds per gov24 HTTP request")
+    ap.add_argument("--companion-timeout", type=int, default=20, help="seconds per gov24 companion-operation HTTP request")
+    ap.add_argument("--progress-every", type=int, default=25, help="log progress every N rows within a page")
     args = ap.parse_args()
     if args.command == "api-refresh": result = api_refresh(args)
     elif args.command == "portal-refresh": result = portal_refresh(args)

@@ -8,21 +8,30 @@ on:
         required: true
         default: "1"
       max_pages:
-        description: Optional Gov24 page limit for smoke tests; 0 means full ingestion
+        description: Optional Gov24 page limit for smoke tests; 0 means sharded full ingestion
         required: true
         default: "0"
+      commit_artifacts:
+        description: Commit generated artifacts and update/comment on the draft PR
+        required: true
+        default: "true"
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  full-ingestion:
-    name: Maintainer-only full catalog ingestion
+  api-shard:
+    name: Gov24 API shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
     env:
       GOV24_SERVICE_KEY: ${{ secrets.GOV24_SERVICE_KEY }}
-      GH_TOKEN: ${{ github.token }}
+      SHARD_SIZE: 5
     steps:
       - name: Check out PR branch
         uses: actions/checkout@v4
@@ -45,13 +54,99 @@ jobs:
             exit 1
           }
 
-      - name: Run API refresh from Gov24 v3
+      - name: Run Gov24 API shard
         run: |
-          if [ "${{ inputs.max_pages }}" = "0" ]; then
-            python3 tooling/ingestion/run_pipeline.py api-refresh
-          else
-            python3 tooling/ingestion/run_pipeline.py api-refresh --max-pages "${{ inputs.max_pages }}"
+          if [ "${{ inputs.max_pages }}" != "0" ] && [ "${{ matrix.shard }}" != "1" ]; then
+            echo "Smoke mode: shard ${{ matrix.shard }} skipped because max_pages=${{ inputs.max_pages }}"
+            mkdir -p tooling/review-agent/reports
+            printf '{"stage":"api-refresh","skipped":true,"reason":"smoke_mode_non_primary_shard","shard":%s}\n' "${{ matrix.shard }}" > tooling/review-agent/reports/session1-api-refresh-summary.json
+            exit 0
           fi
+          START=$(( (${{ matrix.shard }} - 1) * SHARD_SIZE + 1 ))
+          END=$(( ${{ matrix.shard }} * SHARD_SIZE ))
+          if [ "${{ inputs.max_pages }}" = "0" ]; then
+            echo "Running full shard ${{ matrix.shard }} pages ${START}-${END}"
+            python3 tooling/ingestion/run_pipeline.py api-refresh --start-page "$START" --end-page "$END" --api-timeout 20 --companion-timeout 10 --progress-every 25
+          else
+            echo "Running smoke shard pages 1-${{ inputs.max_pages }}"
+            python3 tooling/ingestion/run_pipeline.py api-refresh --start-page 1 --max-pages "${{ inputs.max_pages }}" --api-timeout 20 --companion-timeout 10 --progress-every 25
+          fi
+
+      - name: Stage shard artifact payload
+        if: always()
+        run: |
+          mkdir -p /tmp/session1-api-shard-${{ matrix.shard }}/catalog/v1.0.0/entries
+          mkdir -p /tmp/session1-api-shard-${{ matrix.shard }}/tooling/review-agent/reports/api-shards
+          find catalog/v1.0.0/entries -maxdepth 1 -type f -name '*.json' ! -name '_example-*' -exec cp {} /tmp/session1-api-shard-${{ matrix.shard }}/catalog/v1.0.0/entries/ \;
+          if [ -f tooling/review-agent/reports/session1-api-refresh-summary.json ]; then
+            cp tooling/review-agent/reports/session1-api-refresh-summary.json /tmp/session1-api-shard-${{ matrix.shard }}/tooling/review-agent/reports/api-shards/shard-${{ matrix.shard }}.json
+          fi
+
+      - name: Upload shard artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: session1-api-shard-${{ matrix.shard }}
+          path: /tmp/session1-api-shard-${{ matrix.shard }}
+          if-no-files-found: warn
+          retention-days: 7
+
+  assemble-review-pr:
+    name: Assemble API shards, review, and update draft PR
+    runs-on: ubuntu-latest
+    needs: api-shard
+    env:
+      GOV24_SERVICE_KEY: ${{ secrets.GOV24_SERVICE_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install maintainer tooling dependencies
+        run: python -m pip install --upgrade PyYAML
+
+      - name: Download API shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: session1-api-shard-*
+          path: /tmp/session1-api-shards
+
+      - name: Merge API shard artifacts into workspace
+        run: |
+          mkdir -p catalog/v1.0.0/entries tooling/review-agent/reports/api-shards
+          find /tmp/session1-api-shards -path '*/catalog/v1.0.0/entries/*.json' -type f -exec cp {} catalog/v1.0.0/entries/ \;
+          find /tmp/session1-api-shards -path '*/tooling/review-agent/reports/api-shards/*.json' -type f -exec cp {} tooling/review-agent/reports/api-shards/ \;
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          shards=[]
+          for p in sorted(Path('tooling/review-agent/reports/api-shards').glob('*.json')):
+              try:
+                  shards.append(json.loads(p.read_text()))
+              except Exception as exc:
+                  shards.append({'path': str(p), 'error': repr(exc)})
+          aggregate={
+              'stage': 'api-refresh-sharded',
+              'shard_count': len(shards),
+              'count': sum(int(s.get('count', 0)) for s in shards if not s.get('skipped')),
+              'rows_seen': sum(int(s.get('rows_seen', 0)) for s in shards if not s.get('skipped')),
+              'pages_fetched': sum(int(s.get('pages_fetched', 0)) for s in shards if not s.get('skipped')),
+              'skipped_shards': sum(1 for s in shards if s.get('skipped')),
+              'blocked_shards': sum(1 for s in shards if s.get('blocked')),
+              'secret_persisted': False,
+              'shards': shards,
+          }
+          Path('tooling/review-agent/reports/session1-api-refresh-summary.json').write_text(json.dumps(aggregate, ensure_ascii=False, indent=2) + '\n')
+          print(json.dumps({k: aggregate[k] for k in ['shard_count','count','rows_seen','pages_fetched','skipped_shards','blocked_shards']}, ensure_ascii=False, indent=2))
+          PY
 
       - name: Run portal and evidence refresh
         run: |
@@ -75,6 +170,7 @@ jobs:
           fi
 
       - name: Commit generated ingestion artifacts back to branch
+        if: ${{ inputs.commit_artifacts == 'true' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -85,11 +181,11 @@ jobs:
             {
               echo "Refresh Session 1 catalog candidates in maintainer CI"
               echo
-              echo "Constraint: Full Gov24 ingestion ran in GitHub Actions with GOV24_SERVICE_KEY from repository secrets."
+              echo "Constraint: Full Gov24 ingestion ran as paged GitHub Actions shards with GOV24_SERVICE_KEY from repository secrets."
               echo "Confidence: medium"
               echo "Scope-risk: broad"
               echo "Directive: Keep generated EntryCandidates as draft PR input until Review Agent and maintainer checks pass; do not publish a catalog tag from this workflow."
-              echo "Tested: api-refresh; portal-refresh; evidence-refresh; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
+              echo "Tested: sharded api-refresh; artifact merge; portal-refresh; evidence-refresh; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
               echo "Not-tested: Catalog publish tag; Session 2 compiled-SQLite build."
             } > /tmp/session1-ingestion-commit-message
             git commit -F /tmp/session1-ingestion-commit-message
@@ -97,8 +193,15 @@ jobs:
           fi
 
       - name: Update draft PR body
+        if: ${{ inputs.commit_artifacts == 'true' }}
         run: gh pr edit "${{ inputs.pr_number }}" --body-file tooling/review-agent/reports/session1-draft-pr-body.md
 
       - name: Comment CI completion summary
+        if: ${{ inputs.commit_artifacts == 'true' }}
         run: |
-          gh pr comment "${{ inputs.pr_number }}" --body "Session 1 full ingestion workflow completed on branch \`${{ github.ref_name }}\`. Gov24 API refresh used \`GOV24_SERVICE_KEY\` from GitHub Actions secrets. Generated artifacts were committed back to the branch when changed; draft PR body was refreshed from \`tooling/review-agent/reports/session1-draft-pr-body.md\`."
+          gh pr comment "${{ inputs.pr_number }}" --body "Session 1 sharded full ingestion workflow completed on branch \`${{ github.ref_name }}\`. Gov24 API refresh used \`GOV24_SERVICE_KEY\` from GitHub Actions secrets and ran as page shards. Generated artifacts were committed back to the branch when changed; draft PR body was refreshed from \`tooling/review-agent/reports/session1-draft-pr-body.md\`."
+
+      - name: Report smoke-only validation
+        if: ${{ inputs.commit_artifacts != 'true' }}
+        run: |
+          echo "Smoke-only validation completed. Generated artifacts were intentionally not committed and the draft PR was not edited."
