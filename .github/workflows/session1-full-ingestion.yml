@@ -1,0 +1,104 @@
+name: Session 1 full ingestion
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Draft PR number to update after ingestion
+        required: true
+        default: "1"
+      max_pages:
+        description: Optional Gov24 page limit for smoke tests; 0 means full ingestion
+        required: true
+        default: "0"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  full-ingestion:
+    name: Maintainer-only full catalog ingestion
+    runs-on: ubuntu-latest
+    env:
+      GOV24_SERVICE_KEY: ${{ secrets.GOV24_SERVICE_KEY }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install maintainer tooling dependencies
+        run: python -m pip install --upgrade PyYAML
+
+      - name: Require CI-only Gov24 secret
+        run: |
+          test -n "${GOV24_SERVICE_KEY:-}" || {
+            echo "GOV24_SERVICE_KEY GitHub Actions secret is required for full ingestion" >&2
+            exit 1
+          }
+
+      - name: Run API refresh from Gov24 v3
+        run: |
+          if [ "${{ inputs.max_pages }}" = "0" ]; then
+            python3 tooling/ingestion/run_pipeline.py api-refresh
+          else
+            python3 tooling/ingestion/run_pipeline.py api-refresh --max-pages "${{ inputs.max_pages }}"
+          fi
+
+      - name: Run portal and evidence refresh
+        run: |
+          python3 tooling/ingestion/run_pipeline.py portal-refresh
+          python3 tooling/ingestion/run_pipeline.py evidence-refresh
+
+      - name: Run Review Agent chunks and draft PR body
+        run: |
+          python3 tooling/review-agent/runner/run_review_chunks.py --parallel 8
+          python3 tooling/ingestion/run_pipeline.py pr-body
+
+      - name: Verify generated reports do not contain credentials
+        run: |
+          if grep -R -F -q -- "$GOV24_SERVICE_KEY" tooling/review-agent/reports catalog/v1.0.0; then
+            echo "Secret value leaked into generated artifacts" >&2
+            exit 1
+          fi
+          if grep -R -n "serviceKey" tooling/review-agent/reports; then
+            echo "API key query literal leaked into reports" >&2
+            exit 1
+          fi
+
+      - name: Commit generated ingestion artifacts back to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog/v1.0.0 tooling/review-agent/reports tooling/review-agent/chunks
+          if git diff --cached --quiet; then
+            echo "No generated artifact changes to commit."
+          else
+            {
+              echo "Refresh Session 1 catalog candidates in maintainer CI"
+              echo
+              echo "Constraint: Full Gov24 ingestion ran in GitHub Actions with GOV24_SERVICE_KEY from repository secrets."
+              echo "Confidence: medium"
+              echo "Scope-risk: broad"
+              echo "Directive: Keep generated EntryCandidates as draft PR input until Review Agent and maintainer checks pass; do not publish a catalog tag from this workflow."
+              echo "Tested: api-refresh; portal-refresh; evidence-refresh; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
+              echo "Not-tested: Catalog publish tag; Session 2 compiled-SQLite build."
+            } > /tmp/session1-ingestion-commit-message
+            git commit -F /tmp/session1-ingestion-commit-message
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+
+      - name: Update draft PR body
+        run: gh pr edit "${{ inputs.pr_number }}" --body-file tooling/review-agent/reports/session1-draft-pr-body.md
+
+      - name: Comment CI completion summary
+        run: |
+          gh pr comment "${{ inputs.pr_number }}" --body "Session 1 full ingestion workflow completed on branch \`${{ github.ref_name }}\`. Gov24 API refresh used \`GOV24_SERVICE_KEY\` from GitHub Actions secrets. Generated artifacts were committed back to the branch when changed; draft PR body was refreshed from \`tooling/review-agent/reports/session1-draft-pr-body.md\`."
