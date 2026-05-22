@@ -13,3 +13,7 @@ The architecture v0.1 document §3.1 explicitly excluded LLMs from the Collector
 - The Collector has an LLM operational dependency (cost, rate limits, latency on ingestion).
 - Annotation pipeline owns the same LLM trust surface as Stage 2 — both gate through the same confidence/review thresholds.
 - Re-runs of Stage 2 must be deterministic w.r.t. [[content_fingerprint]] inputs, otherwise `entry_id` stability breaks. The `canonical_intent` / `canonical_action_verb` normalisation step is the load-bearing piece.
+
+## Amendment (API-first session)
+
+Status for v0.1: **policy accepted, runtime deactivated**. Under [[ADR-0007]] the api-refresh-pipeline does not invoke Stage 2 at all (API rows are 1:1 with Entries), and [[ADR-0009]] removes Stage 2 from the portal-refresh-pipeline as well — the maintainer pre-splits multi-Task pages into leaf URLs in the seed file. The policy remains the codified answer for future scale; the runtime activates in a later release when handoff seed volume justifies the LLM cost.

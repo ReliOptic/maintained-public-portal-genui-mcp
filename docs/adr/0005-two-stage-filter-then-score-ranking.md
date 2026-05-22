@@ -20,3 +20,16 @@ The architecture v0.1 document §4 expressed ranking as `Q = S_entry × W_contex
 - `explain_ranking` (deferred past v0.1) can answer "why not shown?" and "why this order?" from disjoint mechanisms — the gate result and the weighted-sum trace.
 - The Stage 1 gate is hard-coded thresholds; tuning them is a `weights_version` patch (not a Catalog change), kept separate from any per-Entry data change.
 - `compose_genui_artifact` can trust `ui_slot` and `safe_copy_rule` on every result item — they are already post-Stage-3.
+
+## Amendment (API-first session)
+
+The four-stage pipeline shape stays. What changed is **where the weight vector `W_context` comes from**: [[ADR-0006]] makes the host LLM's per-query `weight_override` the primary source, with compositional `W_base + Σ Δ_axis` as fallback. The pipeline still:
+
+1. Drops candidates by gate.
+2. Computes `Q = Σ_i S_i · W_i` over the positive features.
+3. Applies SR-driven `ui_slot` / `safe_copy_rule` adjustments.
+4. Cuts Top-K.
+
+`sensitivity_risk` remains a Stage-1 / Stage-3 gate, not a score term — the host LLM cannot weight-engineer around it.
+
+The positive-feature count grows from 7 to **9** because the Feature Dictionary expanded to 11 in [[ADR-0002]]'s amendment (added `api_availability`, `official_handoff_need`, `freshness`; SR is still excluded from the score).

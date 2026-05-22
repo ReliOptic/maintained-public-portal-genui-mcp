@@ -1,0 +1,113 @@
+source_id: gov24-serviceList
+title: 행정안전부_대한민국 공공서비스 정보
+source_org_scope:
+- national
+- regional
+source_org_scope_note: 중앙행정기관, 지방자치단체, 공공기관, 교육청 서비스 행을 포함하는 API source입니다.
+auth:
+  type: serviceKey
+  env: GOV24_SERVICE_KEY
+  placement: query.serviceKey
+paging:
+  page_param: page
+  per_page_param: perPage
+  per_page: 100
+  start_page: 1
+format:
+- json
+- xml
+operations:
+  serviceList:
+    method: GET
+    endpoint: https://api.odcloud.kr/api/gov24/v1/serviceList
+    purpose: 공공서비스 목록 행을 EntryCandidate의 기본 단위로 수집합니다.
+  serviceDetail:
+    method: GET
+    endpoint: https://api.odcloud.kr/api/gov24/v1/serviceDetail
+    purpose: 목록 행의 상세 설명, 신청 경로, 구비서류를 보강합니다.
+  supportConditions:
+    method: GET
+    endpoint: https://api.odcloud.kr/api/gov24/v1/supportConditions
+    purpose: 지원 조건과 대상 요건을 보강합니다.
+swagger_verification:
+  checked_at: '2026-05-22'
+  official_openapi_detail: https://www.data.go.kr/data/15113968/openapi.do
+  official_2021_change_notice: https://www.data.go.kr/bbs/ntc/selectNotice.do?originId=NOTICE_0000000002221
+  official_2025_detail_notice: https://www.data.go.kr/en/bbs/ntc/selectNotice.do?originId=NOTICE_0000000004156
+  note: 2021 공지의 v1 3종 operation을 bootstrap 기준으로 등록하고, 2025 공지의 v3/serviceDetail 필드
+    추가는 운영 전 swagger 재검증 항목으로 남깁니다.
+response_schema:
+  row_required_fields:
+  - service_id
+  - service_name
+  - service_summary
+  - service_field
+  - provider_org
+  - jurisdiction_scope
+  - apply_url_or_menu
+  - last_modified_at
+  row_optional_fields:
+  - support_target
+  - support_content
+  - selection_criteria
+  - application_period
+  - required_documents
+  - online_apply_available
+  - contact
+  - law_basis
+  raw_key_aliases:
+    service_id:
+    - 서비스ID
+    - svcId
+    - serviceId
+    service_name:
+    - 서비스명
+    - 서비스목록명
+    - serviceName
+    provider_org:
+    - 소관기관명
+    - 제공기관명
+    - orgName
+    jurisdiction_scope:
+    - 기관구분
+    - 소관기관유형
+    - 지역범위
+    apply_url_or_menu:
+    - 신청URL
+    - 온라인신청URL
+    - 서비스URL
+    - menuPath
+    last_modified_at:
+    - 수정일
+    - 변경일
+    - lastModifiedAt
+mapping_row_to_entry:
+  entry_id: stable hash of source_id + service_id
+  access_mode: api_cached
+  portal: gov24
+  domain: infer from service_field and supportConditions; sensitive domains escalate
+  title: row.service_name
+  source_urls:
+  - operation.serviceList row pointer
+  - operation.serviceDetail detail pointer
+  api_ref:
+    source_id: gov24-serviceList
+    operation: serviceList
+    row_id: row.service_id
+  api_payload_keys:
+  - service_id
+  - service_name
+  - service_summary
+  - provider_org
+  - support_target
+  - support_content
+  - selection_criteria
+  - application_period
+  - required_documents
+  - last_modified_at
+  handoff: tier3 menu_path from apply_url_or_menu or 정부24 > 보조금24 > 서비스명
+  persona_tags: LLM Annotation from support_target
+  task_intent: LLM Annotation from service_summary/support_content
+  life_event_tags: LLM Annotation from supportConditions
+  evidence_refs: curated join by domain/region/persona
+  last_sync_at: API fetch timestamp

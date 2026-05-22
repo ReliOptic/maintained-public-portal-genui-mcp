@@ -3,8 +3,10 @@
   "catalog_version": "1.0.0",
   "status": "published",
   "merged_into": null,
+  "access_mode": "portal_handoff",
   "portal": "hometax",
   "domain": "tax",
+  "sensitive_domain": "tax",
   "title": "종합소득세 신고",
   "canonical_intent": "tax_filing",
   "canonical_action_verb": "file",
@@ -20,10 +22,11 @@
   ],
   "menu_path": "홈택스 > 세금신고 > 종합소득세 신고",
   "handoff": {
-    "tier": "tier3",
+    "tier": "tier1",
     "portal": "hometax",
-    "url": "https://hometax.go.kr/",
-    "menu_path": "홈택스 > 세금신고 > 종합소득세 신고"
+    "url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0",
+    "menu_path": "홈택스 > 세금신고 > 종합소득세 신고",
+    "fallback_tier3_url": "https://hometax.go.kr/"
   },
   "persona_tags": [
     "freelancer",
@@ -41,7 +44,12 @@
     "business_operation"
   ],
   "region_tags": [
-    "nationwide"
+    "nationwide",
+    "central_government"
+  ],
+  "evidence_refs": [
+    "ev_nts_retirement_income_tenure",
+    "ev_nts_education_tax"
   ],
   "free_tags": [
     "5월 신고",
@@ -68,8 +76,7 @@
       "대상 단정 없음",
       "환급 단정 없음",
       "세액 절감 단정 없음"
-    ],
-    "notes": "민감 세무 영역이므로 대상 여부 확인형 문구만 사용했습니다."
+    ]
   },
   "last_verified_at": "2026-05-22"
 }

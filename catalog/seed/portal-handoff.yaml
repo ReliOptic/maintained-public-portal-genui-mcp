@@ -1,0 +1,244 @@
+seed_version: v0.1-api-first-bootstrap
+splitter_v0_1: out
+leaf_count: 30
+urls:
+- portal: hometax
+  leaf_task: 종합소득세 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: tax_filing
+    expected_persona: freelancer
+    menu_path: 홈택스 > 세금신고 > 종합소득세 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 부가가치세 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B6%80%EA%B0%80%EA%B0%80%EC%B9%98%EC%84%B8%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: tax_filing
+    expected_persona: self_employed
+    menu_path: 홈택스 > 세금신고 > 부가가치세 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 원천세 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%9B%90%EC%B2%9C%EC%84%B8%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: tax_filing
+    expected_persona: small_business_owner
+    menu_path: 홈택스 > 세금신고 > 원천세 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 법인세 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B2%95%EC%9D%B8%EC%84%B8%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: tax_filing
+    expected_persona: corporation_operator
+    menu_path: 홈택스 > 세금신고 > 법인세 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 양도소득세 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%96%91%EB%8F%84%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: tax_filing
+    expected_persona: homeowner
+    menu_path: 홈택스 > 세금신고 > 양도소득세 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 종합소득세 신고도움 조회
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0%EB%8F%84%EC%9B%80%20%EC%A1%B0%ED%9A%8C
+  hint:
+    expected_intent: tax_inquiry
+    expected_persona: freelancer
+    menu_path: 홈택스 > 조회/발급 > 세금신고납부 > 종합소득세 신고도움
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 부가가치세 신고도움 조회
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B6%80%EA%B0%80%EA%B0%80%EC%B9%98%EC%84%B8%20%EC%8B%A0%EA%B3%A0%EB%8F%84%EC%9B%80%20%EC%A1%B0%ED%9A%8C
+  hint:
+    expected_intent: tax_inquiry
+    expected_persona: self_employed
+    menu_path: 홈택스 > 조회/발급 > 세금신고납부 > 부가가치세 신고도움
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 연말정산 간소화 자료 조회
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0%20%EA%B0%84%EC%86%8C%ED%99%94%20%EC%9E%90%EB%A3%8C%20%EC%A1%B0%ED%9A%8C
+  hint:
+    expected_intent: tax_inquiry
+    expected_persona: salary_worker
+    menu_path: 홈택스 > 장려금·연말정산 > 연말정산 간소화
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 근로장려금 신청
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EA%B7%BC%EB%A1%9C%EC%9E%A5%EB%A0%A4%EA%B8%88%20%EC%8B%A0%EC%B2%AD
+  hint:
+    expected_intent: benefit_application
+    expected_persona: low_income_household
+    menu_path: 홈택스 > 장려금·연말정산 > 근로장려금 신청
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 자녀장려금 신청
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%9E%90%EB%85%80%EC%9E%A5%EB%A0%A4%EA%B8%88%20%EC%8B%A0%EC%B2%AD
+  hint:
+    expected_intent: benefit_application
+    expected_persona: parent_guardian
+    menu_path: 홈택스 > 장려금·연말정산 > 자녀장려금 신청
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 사업자등록 신청
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%8B%A0%EC%B2%AD
+  hint:
+    expected_intent: business_registration
+    expected_persona: sole_proprietor
+    menu_path: 홈택스 > 증명·등록·신청 > 사업자등록 신청
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 사업자등록 정정 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%A0%95%EC%A0%95%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: registration_report
+    expected_persona: sole_proprietor
+    menu_path: 홈택스 > 증명·등록·신청 > 사업자등록 정정
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 휴업 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%ED%9C%B4%EC%97%85%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: business_closure
+    expected_persona: self_employed
+    menu_path: 홈택스 > 증명·등록·신청 > 휴업 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 폐업 신고
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%ED%8F%90%EC%97%85%20%EC%8B%A0%EA%B3%A0
+  hint:
+    expected_intent: business_closure
+    expected_persona: self_employed
+    menu_path: 홈택스 > 증명·등록·신청 > 폐업 신고
+    split_status: pre_split_leaf
+- portal: hometax
+  leaf_task: 국세 납부
+  url: https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EA%B5%AD%EC%84%B8%20%EB%82%A9%EB%B6%80
+  hint:
+    expected_intent: tax_payment
+    expected_persona: salary_worker
+    menu_path: 홈택스 > 납부·고지·환급 > 국세 납부
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 전입신고
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000016&tp_seq=01
+  hint:
+    expected_intent: address_change
+    expected_persona: tenant
+    menu_path: 정부24 > 민원서비스 > 전입신고
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 주민등록표 등본 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13100000015&HighCtgCD=A1004
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: salary_worker
+    menu_path: 정부24 > 민원서비스 > 주민등록표 등본 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 사실증명 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12100000352&HighCtgCD=
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: freelancer
+    menu_path: 정부24 > 민원서비스 > 사실증명 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 초중등학교 제적증명
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13404000029
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: student
+    menu_path: 정부24 > 민원서비스 > 초중등학교 제적증명
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 가정위탁보호확인서 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13520000076
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: parent_guardian
+    menu_path: 정부24 > 민원서비스 > 가정위탁보호확인서 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 교통사고사실확인원 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13200000034&HighCtgCD=A08004
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: driver
+    menu_path: 정부24 > 민원서비스 > 교통사고사실확인원 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 차상위계층 확인서 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13520000098&HighCtgCD=A05003
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: low_income_household
+    menu_path: 정부24 > 민원서비스 > 차상위계층 확인서 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 외국인체류확인서 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12700000115&HighCtgCD=A01010
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: foreign_resident
+    menu_path: 정부24 > 민원서비스 > 외국인체류확인서 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 교육급여 수급자 증명서 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13420000007&HighCtgCD=A05006
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: student
+    menu_path: 정부24 > 민원서비스 > 교육급여 수급자 증명서 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 선박국적증서 영역서 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000185
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: fisher
+    menu_path: 정부24 > 민원서비스 > 선박국적증서 영역서 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 선박원부 등본 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000107&HighCtgCD=
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: fisher
+    menu_path: 정부24 > 민원서비스 > 선박원부 등본 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 국적취득 사실증명서 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12700000103&tp_seq=01
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: naturalized_citizen
+    menu_path: 정부24 > 민원서비스 > 국적취득 사실증명서 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 국적 관련 사실증명 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12700000017&HighCtgCD=-
+  hint:
+    expected_intent: certificate_issue
+    expected_persona: naturalized_citizen
+    menu_path: 정부24 > 민원서비스 > 국적 관련 사실증명
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 언어재활사 자격증 발급
+  url: https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13520000028
+  hint:
+    expected_intent: license_application
+    expected_persona: salary_worker
+    menu_path: 정부24 > 민원서비스 > 언어재활사 자격증 발급
+    split_status: pre_split_leaf
+- portal: gov24
+  leaf_task: 정부24 보조금24 맞춤안내 조회
+  url: https://www.gov.kr/portal/rcvfvrSvc/main
+  hint:
+    expected_intent: benefit_check
+    expected_persona: low_income_household
+    menu_path: 정부24 > 보조금24 > 맞춤안내 조회
+    split_status: pre_split_leaf

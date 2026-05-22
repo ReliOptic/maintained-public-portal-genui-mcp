@@ -13,3 +13,13 @@ The architecture v0.1 document §4 listed eight ranking features (IF, PF, LF, SE
 - Extending the taxonomy from v1.0 → v1.1 does **not** require re-annotating existing Entries — only new `Δ_axis` rows. Match values recompute themselves.
 - The annotation rubric only has to define `low/medium/high` for AC, EV, SR — a small, reviewable surface.
 - `explain_ranking` (deferred past v0.1) will need three separate explanation traces (intrinsic, match, time), not one weight vector trace.
+
+## Amendment (API-first session)
+
+The split now has **four origin classes, not three**, and the Feature Dictionary holds **eleven features, not eight**. Changes from the API-first pivot ([[ADR-0007]]) and SLC hardening ([[ADR-0009]]):
+
+- New class: **intrinsic derived from `access_mode`** — `api_availability`, `official_handoff_need`. Not stored; computed at Entry-load time from the `access_mode` field. Constant per Entry, but does not need its own storage column.
+- New time-derived feature: **`freshness`** — decays from `last_sync_at` (api-sourced) or `last_verified_at` (portal-sourced).
+- Considered-and-cut: `api_reliability`, `link_stability`. They would be intrinsic-stored ordinals like AC/EV/SR, but v0.1 has no operational telemetry to assign them — they would be dead weight. Reintroduction requires a fresh ADR once monitoring exists.
+
+Resulting tally: intrinsic stored (AC, EV, SR) = 3; intrinsic derived from access_mode = 2; match derived (IF, PF, LF, SE) = 4; time-derived (UR, freshness) = 2. Total 11.

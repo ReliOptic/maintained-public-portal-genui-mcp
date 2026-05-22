@@ -1,0 +1,59 @@
+registry_version: v0.1-bootstrap
+items:
+- evidence_id: ev_sbiz_store_area_api
+  title: 소상공인시장진흥공단_상가(상권)정보_API
+  data_go_kr_dataset_id: '15012005'
+  data_go_kr_url: https://www.data.go.kr/data/15012005/openapi.do
+  role: startup_business_market_context
+  applies_to:
+  - startup_business
+  - small_business_owner
+  refresh_hint: real_time_or_provider_update
+- evidence_id: ev_major_commercial_area_standard
+  title: 전국주요상권현황표준데이터
+  data_go_kr_dataset_id: '15029180'
+  data_go_kr_url: https://www.data.go.kr/data/15029180/openapi.do
+  role: regional_commercial_area_context
+  applies_to:
+  - startup_business
+  - region
+  refresh_hint: quarterly_or_provider_update
+- evidence_id: ev_local_welfare_services
+  title: 한국사회보장정보원_지자체 복지서비스
+  data_go_kr_dataset_id: '15108347'
+  data_go_kr_url: https://www.data.go.kr/data/15108347/openapi.do
+  role: welfare_program_context
+  applies_to:
+  - benefit_check
+  - benefit_application
+  - low_income_household
+  refresh_hint: provider_update
+- evidence_id: ev_household_income_incheon
+  title: 인천광역시_월 평균 가구소득
+  data_go_kr_dataset_id: '15066303'
+  data_go_kr_url: https://www.data.go.kr/data/15066303/fileData.do
+  role: household_income_regional_context
+  applies_to:
+  - benefit_check
+  - low_income_household
+  - region
+  refresh_hint: annual_or_provider_update
+- evidence_id: ev_nts_retirement_income_tenure
+  title: 국세청_퇴직소득자의 근속연수 현황
+  data_go_kr_dataset_id: '15070658'
+  data_go_kr_url: https://www.data.go.kr/data/15070658/fileData.do
+  role: tax_income_statistics_context
+  applies_to:
+  - tax_inquiry
+  - retirement
+  - salary_worker
+  refresh_hint: annual
+- evidence_id: ev_nts_education_tax
+  title: 국세청_교육세 현황
+  data_go_kr_dataset_id: '15003129'
+  data_go_kr_url: https://www.data.go.kr/data/15003129/fileData.do
+  role: tax_statistics_context
+  applies_to:
+  - tax_inquiry
+  - policy_information
+  refresh_hint: annual

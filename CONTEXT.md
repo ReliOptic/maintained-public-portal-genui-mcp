@@ -6,7 +6,9 @@ This file is the project's glossary. It defines the canonical meaning of domain 
 
 ### Entry
 
-The atomic unit of the Catalog. **An Entry represents a single Leaf Service** — one concrete action a citizen can take on a public portal (e.g. "종합소득세 신고", "전입신고", "근로장려금 신청", "공공데이터 dataset 조회").
+The atomic unit of the Catalog. **An Entry represents a single Leaf Service** — one concrete action a citizen can take on a public portal (e.g. "종합소득세 신고", "전입신고", "근로장려금 신청", "공공데이터 dataset 조회"). Also known as a **Public Task Entry** when emphasising that the source can be either a public API row or a portal handoff target.
+
+A single API row from a structured source (e.g. one `gov24/serviceList` row, one `nts-businessman/status` operation) is exactly one Entry. The API itself is **not** the Entry — "discovery" or "search" is a means, not a Leaf Service. This preserves the Entry/Leaf Service definition across both crawled-portal and API-sourced origins.
 
 An Entry is **not** a URL, a menu node, or a portal page. The relationship between Entry and URL is many-to-many:
 
@@ -14,6 +16,26 @@ An Entry is **not** a URL, a menu node, or a portal page. The relationship betwe
 - A single Leaf Service may be reachable from multiple URLs (mirror paths, query-string variants) → one Entry.
 
 Consequence: the Collector is not a pure crawler — it must produce **semantic units**, not raw page records. See [[collector-role]] (TBD).
+
+### access_mode
+
+A required field on every [[Entry]] that names **how this Task is fulfilled**. The Catalog v0.1 uses three values; the broader enum is reserved for v0.2+.
+
+| value             | meaning                                                                    | v0.1 |
+| ----------------- | -------------------------------------------------------------------------- | ---- |
+| `api_cached`      | Entry's data comes from a scheduled API sync (gov24 service rows, etc.).   | ✓    |
+| `portal_handoff`  | Entry is performed on a public portal screen; we provide [[Handoff]] only. | ✓    |
+| `manual_check`    | Entry requires the user to confirm/authenticate at the portal; we only point. | ✓    |
+| `api_live`        | Entry calls a live API per request (e.g. NTS businessman status).          | deferred to v0.2 (credential issue) |
+| `hybrid`          | Discovery via API + action via portal.                                     | not a value — expressed by `api_cached` + populated [[Handoff]] together |
+
+`access_mode` discriminates the ingestion pipeline and the runtime CTA, not the ranking math. Every Entry, regardless of mode, still has the same Feature vector and is ranked by the same [[Ranking pipeline]].
+
+### Evidence Registry
+
+Public datasets and reference statistics (data.go.kr file/auto-OpenAPI rows, regional data, statistics) are **not** Entries — they are not Leaf Services. They live in a separate registry under `catalog/v1.0.0/evidence/*.json` with its own refresh cadence. Tasks reference them through an `Entry.evidence_refs: string[]` field; the composer resolves those references when assembling the §13 Evidence Rail.
+
+This separation keeps the [[Ranking pipeline]] semantically single-purposed ("how relevant is this Task to the user?") and avoids comparing a Task ("근로장려금 신청") against a dataset ("상권 통계") in the same score space.
 
 ### Leaf Service
 
@@ -43,13 +65,20 @@ The set of URLs that Collector Stage 1 will visit on the next ingestion. Lives i
 
 ### Refresh pipeline
 
-Catalog ingestion runs in a **maintainer-operated CI**, not on contributor machines. Reason: the Stage 1 agentic capture and Stage 2 LLM Splitter both depend on credentialed APIs (computer-use, LLM). The flow:
+Catalog ingestion is **two parallel pipelines**, both running in maintainer-operated CI:
 
-1. Contributor opens a PR adding URLs to a `catalog/seed/<portal>.yaml`.
-2. Maintainer merges to `main`.
-3. CI picks up the diff, runs Stage 1 (agentic capture) on the new URLs, then Stage 2 (LLM Splitter) and the LLM Annotation Layer on the resulting `RawPageRecord`s.
-4. CI opens a **draft PR** containing the generated `EntryCandidate` JSON files and a confidence summary. Auto-accepted candidates are pre-marked; review-required candidates are flagged inline.
-5. Reviewer approves and merges → `catalog_version` patch (or minor) bump → git tag.
+**api-refresh-pipeline** (primary, automated):
+- Triggered nightly on a cron schedule (or manually).
+- For each registered API source (gov24 serviceList primary in v0.1; NTS, data.go.kr deferred), calls the API, paginates, normalises each row into an `EntryCandidate`, and runs LLM Annotation to produce taxonomy tags, intrinsic ordinals, and card_copy.
+- ADR-0001 (LLM Splitter) is **not** in this path — one API row = one Entry by definition.
+- Output: a draft PR containing the diff of `catalog/v1.0.0/entries/*.json`. Often auto-mergeable (small `patch` bumps).
+
+**portal-refresh-pipeline** (secondary, manual-trigger):
+- Triggered when a maintainer merges a PR adding URLs to `catalog/seed/<portal>.yaml`.
+- v0.1: runs Stage 1 (agentic capture via Codex computer use) → LLM Annotation → confidence routing → draft PR. **Stage 2 LLM Splitter is not active in v0.1** — the maintainer pre-splits any multi-Task pages into leaf URLs in the seed file. ADR-0001 remains the policy of record and activates in a later release once seed volume justifies the automation.
+- Lower cadence (≈ monthly), heavier review.
+
+Both pipelines converge on the same `catalog/v1.0.0/entries/*.json` and obey the same [[Human Review Queue]] gates. The `access_mode` field on each Entry records which pipeline produced it.
 
 ### EntryCandidate
 
@@ -137,10 +166,9 @@ The v0.1 MCP Tool set is reduced to four tools:
 
 ### Feature value origin
 
-The eight features of the Feature Dictionary (§4) are produced in **three different ways**, not stored uniformly on every [[Entry]]:
+The Feature Dictionary v1.1 has **eleven** features produced in **four** ways. (The original eight grew when the API-first pivot added `freshness` plus two access-mode-derived features.)
 
-**Intrinsic (stored on Entry as ordinal enum).**
-`actionability`, `evidence_value`, `sensitivity_risk` are stored as one of `{low, medium, high}` and mapped to numeric values at ranking time:
+**Intrinsic stored ordinal.** Authored at annotation time, stored on the [[Entry]] as `{low, medium, high}`. Mapped to numeric values at ranking time.
 
 | label  | AC, EV | SR  |
 | ------ | ------ | --- |
@@ -148,36 +176,49 @@ The eight features of the Feature Dictionary (§4) are produced in **three diffe
 | medium | 0.50   | 0.50 |
 | high   | 0.85   | 0.90 |
 
-Ordinal-not-floating-point because LLM annotators do not produce calibrated [0,1] scores; ordinals are reviewable by rubric.
+Members: `actionability` (AC), `evidence_value` (EV), `sensitivity_risk` (SR).
 
-**Match (derived at ranking time, never stored).**
-`IF`, `PF`, `LF`, `SE` are computed per-request from set overlap between the Entry's [[taxonomy]] tags and the request payload:
+(`api_reliability` and `link_stability` were considered and dropped — without operational telemetry they would be dead-weight in v0.1, violating SLC "complete". They may return in a later release once monitoring data exists.)
+
+**Intrinsic derived from `access_mode`.** Not stored — computed at Entry-load time from the [[access_mode]] field.
+
+| access_mode      | api_availability | official_handoff_need |
+| ---------------- | ---------------- | --------------------- |
+| `api_cached`     | 1.0              | 0.0                   |
+| `api_live`       | 1.0              | 0.0                   |
+| `portal_handoff` | 0.0              | 1.0                   |
+| `manual_check`   | 0.0              | 1.0                   |
+
+**Match (derived at ranking time from set overlap).** `IF`, `PF`, `LF`, `SE` — same as before.
 
 - `IF = |entry.task_intent ∩ req.intent| / max(|req.intent|, 1)`
 - `PF = |entry.persona_tags ∩ req.persona| / max(|req.persona|, 1)`
 - `LF = |entry.life_event_tags ∩ req.life_event| / max(|req.life_event|, 1)`
 - `SE = 1.0` if `entry.seasonality_hint == req.season`, `0.3` if adjacent month, else `0.0`.
 
-This is why extending the taxonomy in v1.0 → v1.1 does **not** require re-annotating existing Entries.
-
 **Time-derived (computed at ranking time).**
-`UR` is a function of `entry.seasonality_hint` and the current date — proximity to seasonal deadline. Not stored.
+
+- `UR` (urgency) — a function of `entry.seasonality_hint` and the current date.
+- `freshness` — a function of `entry.last_sync_at` (for `api_cached`/`api_live`) or `entry.last_verified_at` (for `portal_handoff`/`manual_check`) and the current date. Decays smoothly; e.g. `freshness = 1.0` if synced within 7 days, `0.5` at 30 days, `0.1` at 180 days.
+
+Extending the [[Taxonomy]] from v1.0 → v1.1 still does **not** require re-annotating existing Entries (Match features stay derived). Adding telemetry-backed ordinals for `api_reliability` / `link_stability` is a `patch` bump per Entry once data accrues.
 
 ### W_context
 
-The per-request weight vector applied to the seven positive features in the [[Ranking pipeline]]. Computed **compositionally** from sparse axis deltas:
+The per-request weight vector applied to the positive features in the [[Ranking pipeline]]. The host LLM produces W **as part of the same call that produces structured context** (see [[Context extraction boundary]]).
 
-```
-W = clip(W_base + Σ_axis Δ_axis(req[axis]), lower=0)
-W = W / Σ W                                   # normalise so Σ W = 1
-```
+Resolution order at request time:
 
-- `W_base` — the no-context default weight vector, summing to 1.
-- `Δ_axis` — sparse dictionaries keyed by [[taxonomy]] enum value, defined per axis (persona, intent, life_event, season, region). Each Δ row alters at most a handful of features.
+1. **Host-proposed W** *(primary path)* — the host LLM emits an explicit `weight_override: number[]` along with the structured context. Its rationale string is captured for [[explain_ranking]]. The MCP server clips negatives, renormalises to Σ = 1, and uses this W.
+2. **Compositional fallback** — if `weight_override` is missing, the MCP server falls back to `W = clip(W_base + Σ_axis Δ_axis(req[axis])) / Σ`. This guarantees a deterministic Top-K even when the host cannot or will not propose weights.
 
-**Compositional is canonical.** Named profiles (e.g. `freelancer_tax_may`) are **aliases** — convenience names that resolve to the same `(persona, intent, life_event, season)` tuple and therefore the same compositional W. They are a cache key, not a separate definition.
+This reverses the earlier v0.1 decision to make compositional W canonical. Recorded in [[ADR-0006]]. The compositional path is retained as a baseline so that:
 
-Consequence: adding a new enum value to `taxonomy/v1.1` requires adding one `Δ_axis` row, not authoring profiles. The combinatorial axis-product (~14k combos for v1.0) never has to be enumerated by hand.
+- Catalog `weights/v1.0.0.json` (W_base + Δ_axis tables, see [[Weights bootstrap]]) is still authored and shipped.
+- Hosts without a proposal step (CI checks, debug clients, deterministic replay) still get reproducible rankings.
+- [[explain_ranking]] (deferred past v0.1) can compare host-proposed W against the compositional baseline to surface "why this LLM chose differently".
+
+Trade-offs adopted: per-query cache miss is the common case; rationale must be returned by the host for auditability; SR safety gate (Stage 1) is untouched — the LLM cannot weight its way around a `sensitivity_risk` block.
 
 ### Card copy
 
@@ -236,16 +277,27 @@ Cache key for the runtime ranking cache: `(input_hash, catalog_version, weights_
 
 ### Catalog source of truth
 
-The Catalog is **JSON-in-git**: a directory of plain JSON files under `catalog/<version>/` is the canonical store of every Entry, frame_copy row, taxonomy file, and `weights.json` (W_base + Δ_axis tables).
+The Catalog is **JSON-in-git as source of truth, pre-compiled SQLite as runtime artifact shipped via npm**. The distribution model is fixed by the product reality: the MCP server runs locally inside Claude Desktop, installed once via `npm install -g portal-genui-mcp` (or equivalent). End users never clone the git repo and never compile anything.
 
-Layered:
+Three layers:
 
-- **Source of truth (git)**: human- and LLM-authored content. Public, PR-reviewable, transparent for an OSS community. The [[Human Review Queue]] is GitHub PR review.
-- **Runtime form (v0.1)**: the MCP server reads JSON at startup, builds an in-memory `Map<entry_id, Entry>` plus inverted indices over `task_intent`, `persona_tags`, `life_event_tags`, and `seasonality_hint`. No external DB. Tractable to ~1k Entries on a single-user stdio process.
-- **Runtime form (later, when scale warrants)**: an upstream build step compiles `catalog/<version>/` into a `compiled.sqlite` shipped alongside the JSON. The MCP server loads sqlite instead of JSON; the source of truth stays JSON. Trigger: measurable startup-latency regression or > ~5k Entries.
-- **Runtime form (v1.0 multi-tenant HTTP)**: the same compiled artifact is loaded into Postgres in a hosted deployment. Source of truth still JSON.
+- **Source of truth (git, `catalog/<version>/*.json`)** — human- and AI-authored content; PR-reviewable; gated by the [[Review Queue]] and the [[Review Agent]]. This is where OSS contribution happens.
+- **Build artifact (npm publish CI, `compiled.sqlite`)** — generated automatically by the publish pipeline from the JSON source. Smaller, indexed, instant-load. Lives inside the npm package; never committed to git.
+- **Runtime form (end user's machine)** — the locally-installed npm package contains both the MCP server binary and `compiled.sqlite`. Server starts via stdio in <100ms. The MCP server never compiles or fetches at runtime.
 
-A [[catalog_version]] release is a git tag (`catalog@1.0.7`) on `main`. A `minor` or `major` bump is one PR (one publish). A `patch` may be a bot PR with auto-merge once safety lint passes.
+Catalog freshness: end users update by running `npm update -g portal-genui-mcp`. The server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
+
+This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working server.
+
+### Publish cadence
+
+PR merges to `main` do **not** themselves publish. Each merge is a staging-only update. Two automated jobs produce the published versions:
+
+- **Daily `patch`** — every day at 00:00 KST, CI inspects diffs since the last tag. If only `patch`-level changes exist (copy fixes, tier1→tier2 [[Handoff]] downgrades, `last_sync_at` / `last_verified_at` updates, free_tag updates), CI tags `catalog@MAJOR.MINOR.PATCH+1`, builds the npm package, and publishes.
+- **Weekly `minor`** — on a fixed weekday, if Entries were added or removed since the last `minor` tag, CI bumps `MINOR`, resets `PATCH=0`, builds, publishes.
+- **`major`** — manual maintainer-triggered (schema or [[Taxonomy]] breaking change).
+
+End users get exactly one observable release per day on the patch cadence, regardless of internal PR volume.
 
 ### MCP transport (v0.1)
 
@@ -256,23 +308,40 @@ Consequences:
 - No auth surface during v0.1.
 - HTTP transport is a later capability triggered by a need to share infra across users; the architecture above does not depend on the transport choice.
 
-### Human Review Queue
+### Review Queue
 
-The gate that promotes an [[EntryCandidate]] (or any catalog change PR) into a published [[Entry]]. Operated as GitHub PR review under a `CODEOWNERS` policy that routes every `catalog/**` change to the maintainer(s).
+The gate that promotes an [[EntryCandidate]] (or any catalog change PR) into a published [[Entry]]. Operated as GitHub PR review, but with an **AI Review Agent as the first-pass reviewer** and the human maintainer as escalation-only. The CODEOWNERS policy still routes every `catalog/**` change to the maintainer, but the maintainer's effective workload is the escalated minority, not every candidate.
 
 Confidence-driven routing of automation output:
 
-| confidence_score        | route                                                |
-| ----------------------- | ---------------------------------------------------- |
-| `≥ 0.85`                | auto-accepted (still surfaces as a draft PR for visibility) |
-| `[0.60, 0.85)`          | sampling review (~10 % flagged inline for spot check) |
-| `< 0.60`                | manual review required, blocked from merge          |
+| confidence_score        | route                                                              |
+| ----------------------- | ------------------------------------------------------------------ |
+| `≥ 0.85`                | auto-accepted by [[Review Agent]] if rubric passes; surfaces in draft PR |
+| `[0.60, 0.85)`          | [[Review Agent]] applies full rubric; passes → auto-accept, fails → escalate to maintainer |
+| `< 0.60`                | escalate to maintainer; agent provides a structured analysis but cannot accept |
 
-**Sensitive-domain hard gate.** Independent of `confidence_score`, every Entry whose `domain ∈ sensitive_domains` is forced into manual review. v0.1 `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`. This is the codified form of the architecture doc §9 safety constraints — the schema, not LLM intent, enforces them.
+**Sensitive-domain hard gate.** Independent of `confidence_score`, every Entry whose `domain ∈ sensitive_domains` is forced into maintainer review (the Review Agent may pre-analyse but cannot accept). v0.1 `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`. Schema-enforced, not policy-enforced.
 
-**Bot auto-merge** is limited to pure data corrections: tier1→tier2 [[Handoff]] downgrades from health-check, `last_verified_at` refreshes, and formatting-only changes. Anything touching `card_title`, `card_body`, `cta_label`, taxonomy tags, or intrinsic ordinals goes through human review.
+**Bot auto-merge** is limited to pure data corrections: tier1→tier2 [[Handoff]] downgrades from health-check, `last_verified_at` / `last_sync_at` refreshes, formatting-only changes. Anything touching `card_title`, `card_body`, `cta_label`, taxonomy tags, intrinsic ordinals, or `access_mode` goes through the Review Agent + maintainer-as-needed path.
 
-**v0.1 operational assumption:** a single maintainer can hold this queue at the MVA scale of ~90 Entries plus weekly patches. Scaling reviewer count or splitting domain ownership is deferred past v0.1.
+**v0.1 operational assumption:** the maintainer operates 1+ AI Review Agents, so the throughput ceiling is the agent's, not the human's. The maintainer reviews escalations (estimated ≤ 10 % of candidates at v0.1 scale).
+
+### Review Agent
+
+An AI agent (Claude Code, Codex, or equivalent) tasked with first-pass review of every [[EntryCandidate]] PR. Reads the candidate JSON plus its source `RawPageRecord` (for portal-handoff) or source API row (for api_cached), and applies a fixed rubric:
+
+1. Taxonomy enum compliance (no values outside `taxonomy/v1.0`).
+2. `menu_path` present (the [[Handoff]] floor).
+3. `card_copy` length-cap compliance and [[safe_copy_rule]] lint pass (no assertive phrases).
+4. Intrinsic ordinal sanity (e.g. an Entry tagged `sensitive_domain=tax` must have `sensitivity_risk ≥ medium`).
+5. `access_mode` matches the source pipeline (api_cached candidates must carry `api_ref`; portal_handoff must carry tier-resolved [[Handoff]] object).
+
+On rubric pass + non-sensitive domain + confidence ≥ 0.60: agent posts an approval comment and the PR is auto-mergeable.
+On rubric fail or sensitive domain or confidence < 0.60: agent posts a structured findings comment and tags the maintainer.
+
+The Review Agent's prompt + rubric checklist itself is versioned in `tooling/review-agent/` and PR-reviewable; changing it is a separate concern from `catalog_version`.
+
+**Throughput.** At v0.1 launch the Catalog is built from scratch (gov24 national + regional, plus hand-curated portal_handoff and Evidence rows — estimated ~10k Entries). A single-agent serial pass would block launch by ~24+ hours. The Review Agent therefore runs as **N parallel agents over disjoint chunks** (N≈8 at v0.1). After launch, the daily incremental delta is small enough for a single agent. The chunk runner lives in `tooling/review-agent/runner/` and is itself PR-reviewable.
 
 ### Weights bootstrap
 
