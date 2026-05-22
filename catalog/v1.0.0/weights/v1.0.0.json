@@ -1,0 +1,976 @@
+{
+  "weights_version": "1.0.0",
+  "feature_order": [
+    "IF",
+    "PF",
+    "LF",
+    "SE",
+    "UR",
+    "AC",
+    "EV"
+  ],
+  "W_base": {
+    "IF": {
+      "weight": 0.22,
+      "rationale": "사용자가 요청한 행정 의도와 맞는지가 기본 정렬의 가장 큰 축입니다."
+    },
+    "PF": {
+      "weight": 0.18,
+      "rationale": "서비스 대상자와 사용자 자격의 일치는 실사용 가능성을 크게 좌우합니다."
+    },
+    "LF": {
+      "weight": 0.16,
+      "rationale": "생활 사건은 같은 의도 안에서 우선순위를 세밀하게 가릅니다."
+    },
+    "SE": {
+      "weight": 0.1,
+      "rationale": "월별·시즌별 적합성은 정기 민원에서 보조 신호로 작동합니다."
+    },
+    "UR": {
+      "weight": 0.1,
+      "rationale": "마감이 가까운 서비스는 동일 적합도 안에서 앞에 와야 합니다."
+    },
+    "AC": {
+      "weight": 0.16,
+      "rationale": "즉시 처리 가능한 서비스는 안내성 콘텐츠보다 우선합니다."
+    },
+    "EV": {
+      "weight": 0.08,
+      "rationale": "증빙 가치가 높은 서비스는 후속 행정의 근거가 되므로 반영합니다."
+    }
+  },
+  "W_base_sum": 1.0,
+  "delta_axis": {
+    "persona": {
+      "salary_worker": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "self_employed": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "sole_proprietor": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "freelancer": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "small_business_owner": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "startup_founder": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "corporation_operator": {
+        "delta": {
+          "IF": 0.02,
+          "PF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "소득·사업 상태가 서비스 대상 적합도와 직접 연결되어 PF를 높입니다."
+      },
+      "job_seeker": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "student": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "parent_guardian": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "expectant_parent": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "senior": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "person_with_disability": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "low_income_household": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "homeowner": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "tenant": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "driver": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "vehicle_owner": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "foreign_resident": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "overseas_korean": {
+        "delta": {
+          "PF": 0.05,
+          "AC": -0.01,
+          "EV": 0.02
+        },
+        "rationale": "자격 확인과 증빙 중요도가 커서 PF와 EV를 높이고 즉시성은 보수적으로 둡니다."
+      },
+      "farmer": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "fisher": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "public_official": {
+        "delta": {
+          "PF": 0.04,
+          "LF": 0.01
+        },
+        "rationale": "이용자 상태가 생활 사건과 맞물려 서비스 대상 적합도를 높입니다."
+      },
+      "data_user": {
+        "delta": {
+          "IF": 0.03,
+          "PF": 0.03,
+          "AC": 0.02
+        },
+        "rationale": "데이터 활용 목적은 검색·다운로드 의도와 직접 연결되어 IF와 AC를 보강합니다."
+      }
+    },
+    "intent": {
+      "tax_filing": {
+        "delta": {
+          "IF": 0.05,
+          "SE": 0.02,
+          "UR": 0.03
+        },
+        "rationale": "세무·납부 의도는 기한 영향이 커서 IF와 UR을 함께 높입니다."
+      },
+      "tax_payment": {
+        "delta": {
+          "IF": 0.05,
+          "SE": 0.02,
+          "UR": 0.03
+        },
+        "rationale": "세무·납부 의도는 기한 영향이 커서 IF와 UR을 함께 높입니다."
+      },
+      "tax_inquiry": {
+        "delta": {
+          "IF": 0.05,
+          "SE": 0.02,
+          "UR": 0.03
+        },
+        "rationale": "세무·납부 의도는 기한 영향이 커서 IF와 UR을 함께 높입니다."
+      },
+      "certificate_issue": {
+        "delta": {
+          "IF": 0.04,
+          "AC": 0.04,
+          "EV": 0.01
+        },
+        "rationale": "조회·발급·데이터 활용은 즉시 수행성이 커서 IF와 AC를 높입니다."
+      },
+      "benefit_check": {
+        "delta": {
+          "IF": 0.04,
+          "PF": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "지원 대상 여부와 증빙 가치가 함께 중요해 IF, PF, EV를 보강합니다."
+      },
+      "benefit_application": {
+        "delta": {
+          "IF": 0.04,
+          "PF": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "지원 대상 여부와 증빙 가치가 함께 중요해 IF, PF, EV를 보강합니다."
+      },
+      "subsidy_application": {
+        "delta": {
+          "IF": 0.04,
+          "PF": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "지원 대상 여부와 증빙 가치가 함께 중요해 IF, PF, EV를 보강합니다."
+      },
+      "license_application": {
+        "delta": {
+          "IF": 0.05,
+          "AC": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "법정 절차형 업무는 의도 일치와 완료 가능성, 증빙 가치가 중요합니다."
+      },
+      "registration_report": {
+        "delta": {
+          "IF": 0.05,
+          "AC": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "법정 절차형 업무는 의도 일치와 완료 가능성, 증빙 가치가 중요합니다."
+      },
+      "status_inquiry": {
+        "delta": {
+          "IF": 0.04,
+          "AC": 0.04,
+          "EV": 0.01
+        },
+        "rationale": "조회·발급·데이터 활용은 즉시 수행성이 커서 IF와 AC를 높입니다."
+      },
+      "refund_claim": {
+        "delta": {
+          "IF": 0.04,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "일반 행정 의도는 의도 일치를 중심으로 생활 맥락과 실행성을 보조 반영합니다."
+      },
+      "appeal_objection": {
+        "delta": {
+          "IF": 0.05,
+          "AC": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "법정 절차형 업무는 의도 일치와 완료 가능성, 증빙 가치가 중요합니다."
+      },
+      "education_application": {
+        "delta": {
+          "IF": 0.04,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "일반 행정 의도는 의도 일치를 중심으로 생활 맥락과 실행성을 보조 반영합니다."
+      },
+      "employment_support": {
+        "delta": {
+          "IF": 0.04,
+          "PF": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "지원 대상 여부와 증빙 가치가 함께 중요해 IF, PF, EV를 보강합니다."
+      },
+      "business_closure": {
+        "delta": {
+          "IF": 0.05,
+          "AC": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "법정 절차형 업무는 의도 일치와 완료 가능성, 증빙 가치가 중요합니다."
+      },
+      "business_registration": {
+        "delta": {
+          "IF": 0.05,
+          "AC": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "법정 절차형 업무는 의도 일치와 완료 가능성, 증빙 가치가 중요합니다."
+      },
+      "address_change": {
+        "delta": {
+          "IF": 0.05,
+          "AC": 0.02,
+          "EV": 0.02
+        },
+        "rationale": "법정 절차형 업무는 의도 일치와 완료 가능성, 증빙 가치가 중요합니다."
+      },
+      "identity_verification": {
+        "delta": {
+          "IF": 0.04,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "일반 행정 의도는 의도 일치를 중심으로 생활 맥락과 실행성을 보조 반영합니다."
+      },
+      "data_search": {
+        "delta": {
+          "IF": 0.04,
+          "AC": 0.04,
+          "EV": 0.01
+        },
+        "rationale": "조회·발급·데이터 활용은 즉시 수행성이 커서 IF와 AC를 높입니다."
+      },
+      "dataset_download": {
+        "delta": {
+          "IF": 0.04,
+          "AC": 0.04,
+          "EV": 0.01
+        },
+        "rationale": "조회·발급·데이터 활용은 즉시 수행성이 커서 IF와 AC를 높입니다."
+      },
+      "api_application": {
+        "delta": {
+          "IF": 0.04,
+          "AC": 0.04,
+          "EV": 0.01
+        },
+        "rationale": "조회·발급·데이터 활용은 즉시 수행성이 커서 IF와 AC를 높입니다."
+      },
+      "policy_information": {
+        "delta": {
+          "IF": 0.04,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "일반 행정 의도는 의도 일치를 중심으로 생활 맥락과 실행성을 보조 반영합니다."
+      },
+      "reservation_booking": {
+        "delta": {
+          "IF": 0.04,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "일반 행정 의도는 의도 일치를 중심으로 생활 맥락과 실행성을 보조 반영합니다."
+      },
+      "fee_payment": {
+        "delta": {
+          "IF": 0.05,
+          "SE": 0.02,
+          "UR": 0.03
+        },
+        "rationale": "세무·납부 의도는 기한 영향이 커서 IF와 UR을 함께 높입니다."
+      }
+    },
+    "life_event": {
+      "relocation": {
+        "delta": {
+          "LF": 0.05,
+          "AC": 0.01,
+          "EV": 0.02
+        },
+        "rationale": "생활 사건이 행정 필요를 직접 유발하므로 LF와 증빙 가치를 높입니다."
+      },
+      "address_change": {
+        "delta": {
+          "LF": 0.05,
+          "AC": 0.01,
+          "EV": 0.02
+        },
+        "rationale": "생활 사건이 행정 필요를 직접 유발하므로 LF와 증빙 가치를 높입니다."
+      },
+      "marriage": {
+        "delta": {
+          "LF": 0.05,
+          "AC": 0.01,
+          "EV": 0.02
+        },
+        "rationale": "생활 사건이 행정 필요를 직접 유발하므로 LF와 증빙 가치를 높입니다."
+      },
+      "birth": {
+        "delta": {
+          "LF": 0.05,
+          "AC": 0.01,
+          "EV": 0.02
+        },
+        "rationale": "생활 사건이 행정 필요를 직접 유발하므로 LF와 증빙 가치를 높입니다."
+      },
+      "family_relation": {
+        "delta": {
+          "LF": 0.05,
+          "EV": 0.02,
+          "AC": 0.01
+        },
+        "rationale": "가족관계 변화는 증명과 신고 업무를 직접 유발하므로 LF와 EV를 높입니다."
+      },
+      "childcare": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.05,
+          "EV": 0.02
+        },
+        "rationale": "지원 자격과 증빙이 중요한 생활 변화라 LF, PF, EV를 높입니다."
+      },
+      "school_enrollment": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.05,
+          "EV": 0.02
+        },
+        "rationale": "지원 자격과 증빙이 중요한 생활 변화라 LF, PF, EV를 높입니다."
+      },
+      "employment": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "job_loss": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.05,
+          "EV": 0.02
+        },
+        "rationale": "지원 자격과 증빙이 중요한 생활 변화라 LF, PF, EV를 높입니다."
+      },
+      "retirement": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "startup": {
+        "delta": {
+          "IF": 0.02,
+          "LF": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "세무·사업 사건은 의도와 마감이 함께 중요해 LF, IF, UR을 보강합니다."
+      },
+      "business_operation": {
+        "delta": {
+          "IF": 0.02,
+          "LF": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "세무·사업 사건은 의도와 마감이 함께 중요해 LF, IF, UR을 보강합니다."
+      },
+      "business_closure": {
+        "delta": {
+          "IF": 0.02,
+          "LF": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "세무·사업 사건은 의도와 마감이 함께 중요해 LF, IF, UR을 보강합니다."
+      },
+      "income_change": {
+        "delta": {
+          "IF": 0.02,
+          "LF": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "세무·사업 사건은 의도와 마감이 함께 중요해 LF, IF, UR을 보강합니다."
+      },
+      "tax_season": {
+        "delta": {
+          "IF": 0.02,
+          "LF": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "세무·사업 사건은 의도와 마감이 함께 중요해 LF, IF, UR을 보강합니다."
+      },
+      "vehicle_purchase": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "home_purchase": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "rental_contract": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "illness_disability": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.05,
+          "EV": 0.02
+        },
+        "rationale": "지원 자격과 증빙이 중요한 생활 변화라 LF, PF, EV를 높입니다."
+      },
+      "death_in_family": {
+        "delta": {
+          "LF": 0.05,
+          "AC": 0.01,
+          "EV": 0.02
+        },
+        "rationale": "생활 사건이 행정 필요를 직접 유발하므로 LF와 증빙 가치를 높입니다."
+      },
+      "immigration": {
+        "delta": {
+          "LF": 0.05,
+          "AC": 0.01,
+          "EV": 0.02
+        },
+        "rationale": "생활 사건이 행정 필요를 직접 유발하므로 LF와 증빙 가치를 높입니다."
+      },
+      "overseas_travel": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "disaster_damage": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.05,
+          "EV": 0.02
+        },
+        "rationale": "지원 자격과 증빙이 중요한 생활 변화라 LF, PF, EV를 높입니다."
+      },
+      "agriculture_cycle": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.04,
+          "AC": 0.01
+        },
+        "rationale": "생활 사건 기반 매칭은 같은 서비스군 안에서 우선순위를 정교하게 합니다."
+      },
+      "public_data_project": {
+        "delta": {
+          "IF": 0.03,
+          "LF": 0.04,
+          "AC": 0.02
+        },
+        "rationale": "데이터 프로젝트 맥락은 데이터 검색·활용 업무의 즉시성을 높입니다."
+      }
+    },
+    "season": {
+      "jan": {
+        "delta": {
+          "IF": 0.01,
+          "SE": 0.05,
+          "UR": 0.04
+        },
+        "rationale": "정기 세무 시즌은 시점 적합성과 마감 임박도가 순위에 크게 작용합니다."
+      },
+      "feb": {
+        "delta": {
+          "SE": 0.03,
+          "UR": 0.01
+        },
+        "rationale": "월별 시점은 정기 업무의 보조 신호로 반영합니다."
+      },
+      "mar": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.02,
+          "SE": 0.04
+        },
+        "rationale": "새 학기 시즌은 가족·학생 생활 사건과 대상 적합도를 보조합니다."
+      },
+      "apr": {
+        "delta": {
+          "SE": 0.03,
+          "UR": 0.01
+        },
+        "rationale": "월별 시점은 정기 업무의 보조 신호로 반영합니다."
+      },
+      "may": {
+        "delta": {
+          "IF": 0.01,
+          "SE": 0.05,
+          "UR": 0.04
+        },
+        "rationale": "정기 세무 시즌은 시점 적합성과 마감 임박도가 순위에 크게 작용합니다."
+      },
+      "jun": {
+        "delta": {
+          "SE": 0.03,
+          "UR": 0.01
+        },
+        "rationale": "월별 시점은 정기 업무의 보조 신호로 반영합니다."
+      },
+      "jul": {
+        "delta": {
+          "SE": 0.04,
+          "UR": 0.03,
+          "EV": 0.01
+        },
+        "rationale": "지방세·주민세 시즌은 납부 기한과 고지 증빙 확인이 중요합니다."
+      },
+      "aug": {
+        "delta": {
+          "SE": 0.04,
+          "UR": 0.03,
+          "EV": 0.01
+        },
+        "rationale": "지방세·주민세 시즌은 납부 기한과 고지 증빙 확인이 중요합니다."
+      },
+      "sep": {
+        "delta": {
+          "SE": 0.04,
+          "UR": 0.03,
+          "EV": 0.01
+        },
+        "rationale": "지방세·주민세 시즌은 납부 기한과 고지 증빙 확인이 중요합니다."
+      },
+      "oct": {
+        "delta": {
+          "SE": 0.03,
+          "UR": 0.01
+        },
+        "rationale": "월별 시점은 정기 업무의 보조 신호로 반영합니다."
+      },
+      "nov": {
+        "delta": {
+          "SE": 0.03,
+          "UR": 0.01
+        },
+        "rationale": "월별 시점은 정기 업무의 보조 신호로 반영합니다."
+      },
+      "dec": {
+        "delta": {
+          "SE": 0.03,
+          "UR": 0.01
+        },
+        "rationale": "월별 시점은 정기 업무의 보조 신호로 반영합니다."
+      },
+      "year_end_settlement": {
+        "delta": {
+          "IF": 0.01,
+          "SE": 0.05,
+          "UR": 0.04
+        },
+        "rationale": "정기 세무 시즌은 시점 적합성과 마감 임박도가 순위에 크게 작용합니다."
+      },
+      "comprehensive_income_tax_may": {
+        "delta": {
+          "IF": 0.01,
+          "SE": 0.05,
+          "UR": 0.04
+        },
+        "rationale": "정기 세무 시즌은 시점 적합성과 마감 임박도가 순위에 크게 작용합니다."
+      },
+      "vat_jan": {
+        "delta": {
+          "IF": 0.01,
+          "SE": 0.05,
+          "UR": 0.04
+        },
+        "rationale": "정기 세무 시즌은 시점 적합성과 마감 임박도가 순위에 크게 작용합니다."
+      },
+      "vat_jul": {
+        "delta": {
+          "IF": 0.01,
+          "SE": 0.05,
+          "UR": 0.04
+        },
+        "rationale": "정기 세무 시즌은 시점 적합성과 마감 임박도가 순위에 크게 작용합니다."
+      },
+      "property_tax_jul": {
+        "delta": {
+          "SE": 0.04,
+          "UR": 0.03,
+          "EV": 0.01
+        },
+        "rationale": "지방세·주민세 시즌은 납부 기한과 고지 증빙 확인이 중요합니다."
+      },
+      "property_tax_sep": {
+        "delta": {
+          "SE": 0.04,
+          "UR": 0.03,
+          "EV": 0.01
+        },
+        "rationale": "지방세·주민세 시즌은 납부 기한과 고지 증빙 확인이 중요합니다."
+      },
+      "resident_tax_aug": {
+        "delta": {
+          "SE": 0.04,
+          "UR": 0.03,
+          "EV": 0.01
+        },
+        "rationale": "지방세·주민세 시즌은 납부 기한과 고지 증빙 확인이 중요합니다."
+      },
+      "scholarship_mar": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.02,
+          "SE": 0.04
+        },
+        "rationale": "새 학기 시즌은 가족·학생 생활 사건과 대상 적합도를 보조합니다."
+      },
+      "childcare_mar": {
+        "delta": {
+          "PF": 0.01,
+          "LF": 0.02,
+          "SE": 0.04
+        },
+        "rationale": "새 학기 시즌은 가족·학생 생활 사건과 대상 적합도를 보조합니다."
+      },
+      "disaster_summer": {
+        "delta": {
+          "LF": 0.02,
+          "SE": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "계절성 지원은 해당 시기에 생활 사건과 긴급도가 함께 높아집니다."
+      },
+      "heating_winter": {
+        "delta": {
+          "LF": 0.02,
+          "SE": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "계절성 지원은 해당 시기에 생활 사건과 긴급도가 함께 높아집니다."
+      },
+      "harvest_autumn": {
+        "delta": {
+          "LF": 0.02,
+          "SE": 0.04,
+          "UR": 0.02
+        },
+        "rationale": "계절성 지원은 해당 시기에 생활 사건과 긴급도가 함께 높아집니다."
+      }
+    },
+    "region": {
+      "nationwide": {
+        "delta": {
+          "AC": 0.02,
+          "EV": 0.01
+        },
+        "rationale": "전국 공통 서비스는 접근 가능성과 재사용 가능한 증빙 가치가 높습니다."
+      },
+      "seoul": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "busan": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "daegu": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "incheon": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "gwangju": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "daejeon": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "ulsan": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "sejong": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "gyeonggi": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "gangwon": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "chungbuk": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "chungnam": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "jeonbuk": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "jeonnam": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "gyeongbuk": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "gyeongnam": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "jeju": {
+        "delta": {
+          "PF": 0.02,
+          "LF": 0.01,
+          "AC": 0.01
+        },
+        "rationale": "광역 단위 조건은 대상·생활 맥락을 좁혀 지역 맞춤성을 높입니다."
+      },
+      "overseas": {
+        "delta": {
+          "PF": 0.03,
+          "LF": 0.02,
+          "AC": -0.01
+        },
+        "rationale": "특수 권역은 대상 적합도는 중요하지만 처리 경로가 제한될 수 있습니다."
+      },
+      "border_area": {
+        "delta": {
+          "PF": 0.03,
+          "LF": 0.02,
+          "AC": -0.01
+        },
+        "rationale": "특수 권역은 대상 적합도는 중요하지만 처리 경로가 제한될 수 있습니다."
+      }
+    }
+  },
+  "authoring_note": "LLM first draft; relative weights only, maintainer-reviewable sparse deltas."
+}
