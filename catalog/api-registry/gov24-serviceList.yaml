@@ -19,23 +19,23 @@ format:
 operations:
   serviceList:
     method: GET
-    endpoint: https://api.odcloud.kr/api/gov24/v1/serviceList
+    endpoint: https://api.odcloud.kr/api/gov24/v3/serviceList
     purpose: 공공서비스 목록 행을 EntryCandidate의 기본 단위로 수집합니다.
   serviceDetail:
     method: GET
-    endpoint: https://api.odcloud.kr/api/gov24/v1/serviceDetail
+    endpoint: https://api.odcloud.kr/api/gov24/v3/serviceDetail
     purpose: 목록 행의 상세 설명, 신청 경로, 구비서류를 보강합니다.
   supportConditions:
     method: GET
-    endpoint: https://api.odcloud.kr/api/gov24/v1/supportConditions
+    endpoint: https://api.odcloud.kr/api/gov24/v3/supportConditions
     purpose: 지원 조건과 대상 요건을 보강합니다.
 swagger_verification:
   checked_at: '2026-05-22'
   official_openapi_detail: https://www.data.go.kr/data/15113968/openapi.do
   official_2021_change_notice: https://www.data.go.kr/bbs/ntc/selectNotice.do?originId=NOTICE_0000000002221
   official_2025_detail_notice: https://www.data.go.kr/en/bbs/ntc/selectNotice.do?originId=NOTICE_0000000004156
-  note: 2021 공지의 v1 3종 operation을 bootstrap 기준으로 등록하고, 2025 공지의 v3/serviceDetail 필드
-    추가는 운영 전 swagger 재검증 항목으로 남깁니다.
+  live_swagger: https://infuser.odcloud.kr/api/stages/44436/api-docs?1684891964110
+  note: 2026-05-22 live swagger 인증 확인 결과 Base URL은 https://api.odcloud.kr/api 이고 v3 serviceList/serviceDetail/supportConditions만 노출됩니다. registry endpoint는 v3를 기준으로 합니다.
 response_schema:
   row_required_fields:
   - service_id

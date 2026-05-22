@@ -170,7 +170,7 @@ def gov24_api_get_json(endpoint: str, key: str, params: dict[str, Any], timeout:
 
 def candidate_param_sets(row_id: str) -> list[dict[str, str]]:
     # data.go.kr operation parameters have changed across notices; try all known aliases.
-    return [{"serviceId": row_id}, {"svcId": row_id}, {"서비스ID": row_id}]
+    return [{"cond[서비스ID::EQ]": row_id}, {"serviceId": row_id}, {"svcId": row_id}, {"서비스ID": row_id}]
 
 
 def fetch_gov24_companion(operation: dict[str, Any], key: str, row_id: str) -> dict[str, Any]:
@@ -452,7 +452,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
     operation_status_counts: dict[str, dict[str, int]] = {"serviceList": {}, "serviceDetail": {}, "supportConditions": {}}
 
     while True:
-        list_result = gov24_api_get_json(endpoint, key, {page_param: page, per_page_param: per_page}, timeout=30)
+        list_result = gov24_api_get_json(endpoint, key, {page_param: page, per_page_param: per_page, "returnType": "JSON"}, timeout=30)
         status_key = str(list_result["meta"].get("status"))
         operation_status_counts["serviceList"][status_key] = operation_status_counts["serviceList"].get(status_key, 0) + 1
         if not list_result["ok"]:
