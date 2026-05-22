@@ -290,17 +290,22 @@ Cache key for the runtime ranking cache: `(input_hash, catalog_version, weights_
 
 ### Catalog source of truth
 
-The Catalog is **JSON-in-git as source of truth, pre-compiled SQLite as runtime artifact shipped via npm**. The distribution model is fixed by the product reality: the MCP server runs locally inside Claude Desktop, installed once via `npm install -g portal-genui-mcp` (or equivalent). End users never clone the git repo and never compile anything.
+The Catalog is **JSON-in-git as source of truth, pre-compiled SQLite as runtime artifact shipped inside two distribution targets**. The distribution model is fixed by the product reality: the MCP server runs locally inside Claude Desktop, and the general user installs it through Claude Desktop's Extensions UI — not by running `npm`.
 
 Three layers:
 
 - **Source of truth (git, `catalog/<version>/*.json`)** — human- and AI-authored content; PR-reviewable; gated by the [[Review Queue]] and the [[Review Agent]]. This is where OSS contribution happens.
-- **Build artifact (npm publish CI, `compiled.sqlite`)** — generated automatically by the publish pipeline from the JSON source. Smaller, indexed, instant-load. Lives inside the npm package; never committed to git.
-- **Runtime form (end user's machine)** — the locally-installed npm package contains both the MCP server binary and `compiled.sqlite`. Server starts via stdio in <100ms. The MCP server never compiles or fetches at runtime.
+- **Build artifact (CI, `compiled.sqlite`)** — generated automatically by the publish pipeline from the JSON source. Smaller, indexed, instant-load. Bundled into both distribution targets below; never committed to git.
+- **Runtime form (end user's machine)** — the installed package (whichever distribution target) contains both the MCP server binary and `compiled.sqlite`. Server starts via stdio in <100ms. The MCP server never compiles or fetches at runtime.
 
-Catalog freshness: end users update by running `npm update -g portal-genui-mcp`. The server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
+**Two distribution targets:**
 
-This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working server.
+- **Primary — `.mcpb` Claude Desktop Extension** for general users. Three-click install in Claude Desktop's Extensions UI, no Node install, no JSON config, no env vars, no credentials. Bundles server + `compiled.sqlite` + `node_modules`. See [[Session 1.5]].
+- **Secondary — `npm install -g portal-genui-mcp`** for developers validating the server during iteration. Requires manual `claude_desktop_config.json` entry. Not advertised to general users.
+
+Catalog freshness: `.mcpb` users get a new file from GitHub Releases each tag (and Claude Desktop's update UI surfaces it); npm users run `npm update -g`. Either way the server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
+
+This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working extension.
 
 ### Publish cadence
 
