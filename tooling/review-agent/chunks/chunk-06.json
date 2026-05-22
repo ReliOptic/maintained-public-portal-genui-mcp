@@ -1,0 +1,31 @@
+{
+  "chunk": 6,
+  "results": [
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN0046GXDPT9YG4K1S38.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN0066ZQ8T401G7HMQ8G.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00M51279PEDXFSRZYS.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00ZASYPABDS1ZZD6M8.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    }
+  ]
+}

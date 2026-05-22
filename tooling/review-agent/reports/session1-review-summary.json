@@ -1,0 +1,221 @@
+{
+  "reviewed_at": "2026-05-22",
+  "parallel_instances": 8,
+  "candidate_count": 30,
+  "processed_percent": 100,
+  "decision_counts": {
+    "auto_accept": 7,
+    "escalate": 23
+  },
+  "reason_counts": {
+    "confidence_lt_0.85": 6,
+    "sensitive_domain:family": 1,
+    "sensitive_domain:immigration": 4,
+    "sensitive_domain:tax": 15,
+    "sensitive_domain:welfare": 3
+  },
+  "results": [
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN000NPBCFEFNNVP9GRD.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:welfare"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN000TRRR1GH5TB8WZEM.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN000WM3VA57T3QKJ100.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN0035PZXHTCVD38R391.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN003Z030C6KCGA39J8Z.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN0046GXDPT9YG4K1S38.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN004JBPV5RNC5XAB5J7.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN004RBZSNM2S33SCBAE.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN004S8M8H68DX1ASNCG.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN005DT543SD02ADTRQX.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN005KQ5VT7AD05HGHXQ.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:immigration"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN005QD5X2JRPEQS73HN.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN005QEMQP46XNXDHQ85.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN0066ZQ8T401G7HMQ8G.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00A5KA52VMB54QB9BS.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00A5MT8X3EK960KDS1.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:welfare"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00CH7HE2K8QW5HGQHC.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:family"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00CRHK6A12PZ3DX8HA.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:immigration"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00D2GNH44K77F3PBQC.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00HK3R8ZM034YY3MR5.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00J0T5PZA7GDMAAXNA.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00M51279PEDXFSRZYS.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00N17CF6HQBER3SZ80.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:welfare"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00N2TE3SVB0M272NTM.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00NT0EKKE6NQ4CD34J.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00PC5TYN0XEYZHCXRZ.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00Q0NQ5K48EZZ46F7Z.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00RXNREABYPDHMGNRT.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:immigration"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00T67EMVCC8V46VKSS.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:immigration"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00ZASYPABDS1ZZD6M8.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    }
+  ]
+}

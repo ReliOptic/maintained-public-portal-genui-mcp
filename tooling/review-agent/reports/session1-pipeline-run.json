@@ -1,0 +1,44 @@
+{
+  "ran_at": "2026-05-22",
+  "maintainer_side_only": true,
+  "publish_tag_created": false,
+  "draft_pr_opened": false,
+  "draft_pr_blocker": "No git remote is configured for this local repository; cannot push/open draft PR from current state.",
+  "stages": [
+    {
+      "stage": "api-refresh",
+      "blocked": true,
+      "reason": "GOV24_SERVICE_KEY is not set; full national+regional gov24 ingestion cannot run without CI secret."
+    },
+    {
+      "stage": "portal-refresh",
+      "count": 30,
+      "note": "Generated from pre-split portal-handoff seed with text fetch captures; browser screenshot capture remains CI/browser environment work."
+    },
+    {
+      "stage": "evidence-refresh",
+      "count": 6,
+      "note": "Evidence JSON written from seed metadata; local data.go.kr page fetch was unavailable/timeout for some pages."
+    },
+    {
+      "stage": "review",
+      "candidate_count": 30,
+      "processed_percent": 100,
+      "decision_counts": {
+        "auto_accept": 7,
+        "escalate": 23
+      },
+      "reason_counts": {
+        "confidence_lt_0.85": 6,
+        "sensitive_domain:family": 1,
+        "sensitive_domain:immigration": 4,
+        "sensitive_domain:tax": 15,
+        "sensitive_domain:welfare": 3
+      }
+    },
+    {
+      "stage": "pr-body",
+      "path": "tooling/review-agent/reports/session1-draft-pr-body.md"
+    }
+  ]
+}

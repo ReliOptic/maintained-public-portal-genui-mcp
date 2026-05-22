@@ -1,0 +1,19 @@
+{
+  "evidence_id": "ev_major_commercial_area_standard",
+  "catalog_version": "1.0.0",
+  "title": "전국주요상권현황표준데이터",
+  "data_go_kr_dataset_id": "15029180",
+  "data_go_kr_url": "https://www.data.go.kr/data/15029180/openapi.do",
+  "role": "regional_commercial_area_context",
+  "applies_to": [
+    "startup_business",
+    "region"
+  ],
+  "refresh_hint": "quarterly_or_provider_update",
+  "metadata_fetch": {
+    "status": "ERR",
+    "final_url": "https://www.data.go.kr/data/15029180/openapi.do",
+    "fetched_at": "2026-05-22"
+  },
+  "metadata_excerpt": "URLError(TimeoutError('timed out'))"
+}

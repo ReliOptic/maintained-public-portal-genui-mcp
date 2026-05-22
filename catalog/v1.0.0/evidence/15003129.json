@@ -1,0 +1,19 @@
+{
+  "evidence_id": "ev_nts_education_tax",
+  "catalog_version": "1.0.0",
+  "title": "국세청_교육세 현황",
+  "data_go_kr_dataset_id": "15003129",
+  "data_go_kr_url": "https://www.data.go.kr/data/15003129/fileData.do",
+  "role": "tax_statistics_context",
+  "applies_to": [
+    "tax_inquiry",
+    "policy_information"
+  ],
+  "refresh_hint": "annual",
+  "metadata_fetch": {
+    "status": "seed_metadata_only",
+    "final_url": "https://www.data.go.kr/data/15003129/fileData.do",
+    "fetched_at": "2026-05-22"
+  },
+  "metadata_excerpt": "국세청_교육세 현황 / role=tax_statistics_context / applies_to=tax_inquiry, policy_information. Local data.go.kr page fetch may be unavailable; registry keeps source URL for CI metadata refresh."
+}

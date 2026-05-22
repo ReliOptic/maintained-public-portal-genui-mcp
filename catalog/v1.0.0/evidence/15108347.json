@@ -1,0 +1,20 @@
+{
+  "evidence_id": "ev_local_welfare_services",
+  "catalog_version": "1.0.0",
+  "title": "한국사회보장정보원_지자체 복지서비스",
+  "data_go_kr_dataset_id": "15108347",
+  "data_go_kr_url": "https://www.data.go.kr/data/15108347/openapi.do",
+  "role": "welfare_program_context",
+  "applies_to": [
+    "benefit_check",
+    "benefit_application",
+    "low_income_household"
+  ],
+  "refresh_hint": "provider_update",
+  "metadata_fetch": {
+    "status": "seed_metadata_only",
+    "final_url": "https://www.data.go.kr/data/15108347/openapi.do",
+    "fetched_at": "2026-05-22"
+  },
+  "metadata_excerpt": "한국사회보장정보원_지자체 복지서비스 / role=welfare_program_context / applies_to=benefit_check, benefit_application, low_income_household. Local data.go.kr page fetch may be unavailable; registry keeps source URL for CI metadata refresh."
+}

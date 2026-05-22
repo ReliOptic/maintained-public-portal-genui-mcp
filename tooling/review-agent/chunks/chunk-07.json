@@ -1,0 +1,24 @@
+{
+  "chunk": 7,
+  "results": [
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN004JBPV5RNC5XAB5J7.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00A5KA52VMB54QB9BS.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00N17CF6HQBER3SZ80.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:welfare"
+      ]
+    }
+  ]
+}

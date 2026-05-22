@@ -1,0 +1,32 @@
+{
+  "chunk": 2,
+  "results": [
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN000TRRR1GH5TB8WZEM.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN005DT543SD02ADTRQX.json",
+      "decision": "auto_accept",
+      "reasons": []
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00CRHK6A12PZ3DX8HA.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:immigration"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/01KS6FPN00PC5TYN0XEYZHCXRZ.json",
+      "decision": "escalate",
+      "reasons": [
+        "confidence_lt_0.85",
+        "sensitive_domain:tax"
+      ]
+    }
+  ]
+}

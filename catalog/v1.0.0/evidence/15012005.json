@@ -1,0 +1,19 @@
+{
+  "evidence_id": "ev_sbiz_store_area_api",
+  "catalog_version": "1.0.0",
+  "title": "소상공인시장진흥공단_상가(상권)정보_API",
+  "data_go_kr_dataset_id": "15012005",
+  "data_go_kr_url": "https://www.data.go.kr/data/15012005/openapi.do",
+  "role": "startup_business_market_context",
+  "applies_to": [
+    "startup_business",
+    "small_business_owner"
+  ],
+  "refresh_hint": "real_time_or_provider_update",
+  "metadata_fetch": {
+    "status": "ERR",
+    "final_url": "https://www.data.go.kr/data/15012005/openapi.do",
+    "fetched_at": "2026-05-22"
+  },
+  "metadata_excerpt": "URLError(TimeoutError('timed out'))"
+}

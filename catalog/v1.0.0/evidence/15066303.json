@@ -1,0 +1,20 @@
+{
+  "evidence_id": "ev_household_income_incheon",
+  "catalog_version": "1.0.0",
+  "title": "인천광역시_월 평균 가구소득",
+  "data_go_kr_dataset_id": "15066303",
+  "data_go_kr_url": "https://www.data.go.kr/data/15066303/fileData.do",
+  "role": "household_income_regional_context",
+  "applies_to": [
+    "benefit_check",
+    "low_income_household",
+    "region"
+  ],
+  "refresh_hint": "annual_or_provider_update",
+  "metadata_fetch": {
+    "status": "seed_metadata_only",
+    "final_url": "https://www.data.go.kr/data/15066303/fileData.do",
+    "fetched_at": "2026-05-22"
+  },
+  "metadata_excerpt": "인천광역시_월 평균 가구소득 / role=household_income_regional_context / applies_to=benefit_check, low_income_household, region. Local data.go.kr page fetch may be unavailable; registry keeps source URL for CI metadata refresh."
+}
