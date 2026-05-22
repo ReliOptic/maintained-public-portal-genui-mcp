@@ -17,3 +17,11 @@ The architecture v0.1 document §3.1 explicitly excluded LLMs from the Collector
 ## Amendment (API-first session)
 
 Status for v0.1: **policy accepted, runtime deactivated**. Under [[ADR-0007]] the api-refresh-pipeline does not invoke Stage 2 at all (API rows are 1:1 with Entries), and [[ADR-0009]] removes Stage 2 from the portal-refresh-pipeline as well — the maintainer pre-splits multi-Task pages into leaf URLs in the seed file. The policy remains the codified answer for future scale; the runtime activates in a later release when handoff seed volume justifies the LLM cost.
+
+## Amendment (cross-source dedup, API-first follow-up)
+
+The v0.1 fingerprint formula in this ADR was `portal | canonical_intent | canonical_action_verb | sorted_keywords`. With four Task sources now feeding the same Catalog (gov24, 복지로 central, 복지로 regional, 워크넷 정부지원일자리), the same Leaf Service can appear in multiple sources. We therefore **remove `portal` from the fingerprint inputs in v0.1** so cross-source duplicates collapse to a single Entry under primary-source priority (see [[Task source]] in CONTEXT.md).
+
+Revised v0.1 fingerprint: `canonical_intent | canonical_action_verb | normalized_title | region_scope | persona_scope`. The original ADR-0001 fingerprint formula is the design-time policy; the v0.1 implementation uses this portal-free variant.
+
+The hand-curated NTS Live Check Entry is **excluded from this dedup pool** — it does not come from the row stream and never participates in fingerprint matching.

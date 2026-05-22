@@ -107,13 +107,41 @@ A registry-assigned ULID issued at the moment an [[EntryCandidate]] is promoted 
 
 ### content_fingerprint
 
-A deterministic hash used **only** for dedup between an incoming `EntryCandidate` and the existing Catalog. Inputs (in this order):
-`portal | canonical_intent | canonical_action_verb | key_keywords (sorted)`.
+A deterministic hash used **only** for dedup between an incoming `EntryCandidate` and the existing Catalog. v0.1 inputs (in this order):
+`canonical_intent | canonical_action_verb | normalized_title | region_scope | persona_scope`.
 
-All four inputs are drawn from fixed enums or normalized lemmas (see [[taxonomy]], TBD) — not free text — so the same Leaf Service produces the same fingerprint across LLM re-runs.
+**`portal` is deliberately not in the fingerprint** so that the same Leaf Service surfaced from multiple [[Task source]] APIs (e.g. "근로장려금 신청" from both gov24 service catalog and 복지로 central) collapses to a single Entry. All inputs are drawn from fixed enums or normalised lemmas (see [[Taxonomy]]) — never free text — so the same Leaf Service produces the same fingerprint across LLM re-runs and across sources.
 
-On match: the incoming candidate updates the existing Entry; **entry_id is preserved**.
+On match: the incoming candidate updates the existing Entry; **entry_id is preserved**, and the second source attaches to the Entry's `secondary_sources` array (see [[Task source]]).
 On miss: a new entry_id is issued.
+
+### API role
+
+Every external API integrated into this project is assigned exactly one of four roles. The role determines whether and how the API is wired into the pipeline — adding APIs is not a goal in itself; assigning each one a single role is.
+
+| role             | what it produces                                                  | v0.1 examples                                    | user-visible? |
+| ---------------- | ----------------------------------------------------------------- | ------------------------------------------------ | ------------- |
+| Task source      | rows that become catalog Entries (1 row = 1 Entry)                | gov24, 복지로 central/regional, 워크넷 정부지원일자리 | yes (as cards) |
+| Evidence source  | rows that become [[Evidence Registry]] entries (statistics, refs) | KOSIS, 소상공인 상권, hand-picked data.go.kr file rows | yes (as Evidence Rail) |
+| Live Check Entry | a single hand-curated Entry, label only — runs as `portal_handoff` in v0.1 | NTS 사업자 상태조회 | yes (as one card) |
+| Discovery tool   | metadata *about* other datasets — used by the maintainer to find Evidence candidates | 공공데이터포털 목록조회 / 검색서비스 | **no** — maintainer-side only, never in catalog |
+
+See [[ADR-0007]] for the binding decision.
+
+### Task source
+
+A registered API source whose rows produce candidate Entries. v0.1 has four Task sources, listed in **primary-source priority order** for cross-source dedup:
+
+1. `gov24-serviceList` (행정안전부 공공서비스 정보) — most authoritative for general public-service tasks.
+2. `bokjiro-central` (복지로 중앙부처복지서비스) — welfare-specialised, richer support-conditions.
+3. `bokjiro-regional` (복지로 지자체복지서비스) — regional welfare detail.
+4. `worknet-supported-jobs` (워크넷 정부지원일자리) — employment-support tasks.
+
+When the same [[content_fingerprint]] appears in multiple sources, the **primary source's row owns the Entry** — its `entry_id`, `title`, and `card_copy` win. Lower-priority sources are recorded on the Entry's `secondary_sources: { source_id, row_id, fields }[]` field; they enrich `api_payload`, `support_conditions`, `evidence_refs`, etc., but do **not** create a separate Entry.
+
+`worknet-supported-jobs` uses a `last_sync_at + 60-day TTL`: rows not refreshed within 60 days are auto-marked `status=archived` and removed from the published Catalog. This handles the short-lived nature of job postings without inventing a new lifecycle.
+
+The single Live Check Entry (`nts-businessman-status`, NTS 사업자 상태조회) is not a bulk Task source — it is one curated Entry with `access_mode = portal_handoff`. **It is excluded from the cross-source [[content_fingerprint]] dedup pool**: it is hand-authored, lives outside the api-refresh-pipeline's row stream, and never merges into a secondary source. See [[ADR-0007]].
 
 ### merged_into
 
