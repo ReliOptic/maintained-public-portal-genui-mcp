@@ -21,15 +21,15 @@
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%A0%95%EC%A0%95%20%EC%8B%A0%EA%B3%A0"
   ],
   "stage1_capture": {
-    "fetch_status": "ERR",
+    "fetch_status": 200,
     "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%A0%95%EC%A0%95%20%EC%8B%A0%EA%B3%A0",
-    "rendered_text_excerpt": "URLError(TimeoutError('timed out'))",
+    "rendered_text_excerpt": "국세청 홈택스",
     "screenshot_ref": null,
     "observed_actions": []
   },
   "menu_path": "홈택스 > 증명·등록·신청 > 사업자등록 정정",
   "handoff": {
-    "tier": "tier3",
+    "tier": "tier1",
     "portal": "hometax",
     "url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%A0%95%EC%A0%95%20%EC%8B%A0%EA%B3%A0",
     "menu_path": "홈택스 > 증명·등록·신청 > 사업자등록 정정"
@@ -58,11 +58,11 @@
   ],
   "seasonality_hint": "jan",
   "intrinsic_ordinals": {
-    "actionability": "medium",
+    "actionability": "high",
     "evidence_value": "high",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.72,
+  "confidence_score": 0.88,
   "review_required": true,
   "review_reason": "sensitive_domain:tax",
   "card_title": "사업자등록 정정 신고",
@@ -76,5 +76,5 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-22"
+  "last_verified_at": "2026-05-23"
 }

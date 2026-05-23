@@ -22,7 +22,7 @@
   "stage1_capture": {
     "fetch_status": "ERR",
     "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0",
-    "rendered_text_excerpt": "URLError(TimeoutError('timed out'))",
+    "rendered_text_excerpt": "URLError(ConnectionResetError(104, 'Connection reset by peer'))",
     "screenshot_ref": null,
     "observed_actions": []
   },
@@ -75,5 +75,5 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-22"
+  "last_verified_at": "2026-05-23"
 }

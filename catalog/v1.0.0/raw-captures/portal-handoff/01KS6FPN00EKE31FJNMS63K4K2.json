@@ -1,9 +1,9 @@
 {
   "leaf_task": "사업자등록 정정 신고",
   "source_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%A0%95%EC%A0%95%20%EC%8B%A0%EA%B3%A0",
-  "status": "ERR",
+  "status": 200,
   "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%20%EC%A0%95%EC%A0%95%20%EC%8B%A0%EA%B3%A0",
-  "text_excerpt": "URLError(TimeoutError('timed out'))",
+  "text_excerpt": "국세청 홈택스",
   "screenshot_ref": null,
   "observed_actions": [],
   "capture_note": "Maintainer CI should replace text-only fetch with computer-use rendered DOM+screenshot when browser credentials are available."

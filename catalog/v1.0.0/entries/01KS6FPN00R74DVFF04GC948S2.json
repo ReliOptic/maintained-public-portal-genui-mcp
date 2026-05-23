@@ -1,0 +1,135 @@
+{
+  "entry_id": "01KS6FPN00R74DVFF04GC948S2",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "api_cached",
+  "portal": "gov24",
+  "domain": "welfare",
+  "sensitive_domain": "welfare",
+  "title": "빈집 자진철거 지원",
+  "canonical_intent": "benefit_check",
+  "canonical_action_verb": "check",
+  "key_keywords": [
+    "빈집",
+    "자진철거",
+    "지원"
+  ],
+  "content_fingerprint": "gov24|gov24-serviceList|458000000108",
+  "source_urls": [
+    "https://api.odcloud.kr/api/gov24/v3/serviceList",
+    "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
+    "https://api.odcloud.kr/api/gov24/v3/supportConditions"
+  ],
+  "api_ref": {
+    "source_id": "gov24-serviceList",
+    "operation": "serviceList",
+    "row_id": "458000000108",
+    "detail_operation": "serviceDetail",
+    "conditions_operation": "supportConditions"
+  },
+  "source_api_fetch": {
+    "serviceList": {
+      "page": 42,
+      "status": "200"
+    },
+    "serviceDetail": {
+      "fetch_status": "skipped",
+      "attempt_count": 0
+    },
+    "supportConditions": {
+      "fetch_status": "skipped",
+      "attempt_count": 0
+    }
+  },
+  "api_payload_keys": [
+    "service_id",
+    "service_name",
+    "provider_org",
+    "jurisdiction_scope",
+    "apply_url_or_menu",
+    "last_modified_at",
+    "등록일시",
+    "부서명",
+    "사용자구분",
+    "상세조회URL",
+    "서비스ID",
+    "서비스명",
+    "서비스목적요약",
+    "서비스분야",
+    "선정기준",
+    "소관기관명",
+    "소관기관유형",
+    "소관기관코드",
+    "수정일시",
+    "신청기한",
+    "신청방법",
+    "전화문의",
+    "접수기관",
+    "조회수",
+    "지원내용",
+    "지원대상",
+    "지원유형"
+  ],
+  "api_payload_excerpt": {
+    "service_id": "458000000108",
+    "service_name": "빈집 자진철거 지원",
+    "provider_org": "충청남도 서천군",
+    "jurisdiction_scope": "시군구"
+  },
+  "api_companion_payloads": {
+    "serviceDetail": null,
+    "supportConditions": null
+  },
+  "menu_path": "정부24 > 보조금24 > 빈집 자진철거 지원",
+  "handoff": {
+    "tier": "tier3",
+    "portal": "gov24",
+    "url": "https://www.gov.kr/portal/rcvfvrSvc/main",
+    "menu_path": "정부24 > 보조금24 > 빈집 자진철거 지원"
+  },
+  "persona_tags": [
+    "low_income_household"
+  ],
+  "task_intent": [
+    "benefit_check"
+  ],
+  "life_event_tags": [
+    "income_change"
+  ],
+  "region_tags": [
+    "chungnam",
+    "central_government"
+  ],
+  "evidence_refs": [
+    "ev_local_welfare_services"
+  ],
+  "free_tags": [
+    "gov24",
+    "api_cached",
+    "빈집 자진철거 지원"
+  ],
+  "seasonality_hint": "jan",
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "medium",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.82,
+  "review_required": true,
+  "review_reason": "sensitive_domain:welfare",
+  "card_title": "빈집 자진철거 지원",
+  "card_body": "빈집 자진철거 지원의 지원 조건과 신청 안내를 정부24 공공서비스 정보에서 확인하세요.",
+  "cta_label": "정부24에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "대상 단정 없음",
+      "승인 보장 없음",
+      "금액 단정 없음"
+    ]
+  },
+  "last_sync_at": "2026-05-23"
+}
