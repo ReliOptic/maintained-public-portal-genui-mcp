@@ -162,6 +162,18 @@ jobs:
           print(json.dumps({k: aggregate[k] for k in ['shard_count','count','rows_seen','pages_fetched','skipped_shards','blocked_shards']}, ensure_ascii=False, indent=2))
           PY
 
+      - name: Sanity check row count vs previous catalog
+        run: |
+          set -euo pipefail
+          PREV=$(git show HEAD:tooling/review-agent/reports/session1-api-refresh-summary.json 2>/dev/null | jq '.count // 0' || echo 0)
+          CURR=$(jq '.count // 0' tooling/review-agent/reports/session1-api-refresh-summary.json)
+          echo "Previous API row count: ${PREV}"
+          echo "Current API row count: ${CURR}"
+          if [ "$PREV" -gt 0 ] && [ "$CURR" -lt $((PREV / 2)) ]; then
+            echo "Row count regression: ${CURR} < ${PREV}/2" >&2
+            exit 1
+          fi
+
       - name: Validate planned non-Gov24 Task source registries
         run: python3 tooling/ingestion/run_pipeline.py source-registry-check
 
