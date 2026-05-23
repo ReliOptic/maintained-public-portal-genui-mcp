@@ -758,7 +758,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "free_tags": ["gov24", "api_cached", title[:20]],
                 "seasonality_hint": inferred["season"],
                 "intrinsic_ordinals": {"actionability": "medium", "evidence_value": "medium", "sensitivity_risk": "high" if sensitive_domain else "medium"},
-                "confidence_score": 0.86 if companions["detail"]["fetch_status"] == "ok" or companions["conditions"]["fetch_status"] == "ok" else 0.82,
+                "confidence_score": 0.86 if companions["detail"]["fetch_status"] == "ok" or companions["conditions"]["fetch_status"] == "ok" else 0.85,
                 "review_required": bool(sensitive_domain),
                 "review_reason": f"sensitive_domain:{sensitive_domain}" if sensitive_domain else None,
                 "card_title": title[:40],
