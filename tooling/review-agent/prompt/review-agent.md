@@ -12,4 +12,4 @@ For each candidate, apply `tooling/review-agent/rubric.md` exactly. Return struc
 }
 ```
 
-Auto-accept only when the rubric passes, confidence is at least 0.85, and the candidate is not in a sensitive domain. Sensitive-domain entries are always escalated to the maintainer even when otherwise valid.
+Auto-accept only when the rubric passes and confidence is at least 0.85. Sensitive-domain routing is access-mode-aware: sensitive `portal_handoff` / `manual_check` entries always escalate, while sensitive `api_cached` entries may be auto-accepted only when `safe_copy_audit.safe_copy_rule = "confirm_not_assert"` and `safe_copy_audit.outcome = "pass"`.

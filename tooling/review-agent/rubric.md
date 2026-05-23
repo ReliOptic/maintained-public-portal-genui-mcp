@@ -14,5 +14,5 @@ Maintainer-side only. The Review Agent reviews generated `catalog/**` EntryCandi
 
 ## Classification
 
-- Auto-accept: rubric pass, `confidence_score >= 0.85`, and no `sensitive_domain`.
-- Escalate: any rubric failure, `confidence_score < 0.85`, or `sensitive_domain` present.
+- Auto-accept: rubric pass, `confidence_score >= 0.85`, and either no `sensitive_domain` or `access_mode = api_cached` with `safe_copy_audit.safe_copy_rule = confirm_not_assert` and `safe_copy_audit.outcome = pass`.
+- Escalate: any rubric failure, `confidence_score < 0.85`, sensitive `portal_handoff` / `manual_check`, or sensitive `api_cached` without the required confirm-not-assert safe-copy audit.

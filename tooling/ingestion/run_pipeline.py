@@ -949,6 +949,22 @@ def safe_patterns() -> list[str]:
     return pats
 
 
+def api_cached_sensitive_guard(e: dict[str, Any]) -> list[str]:
+    if e.get("sensitive_domain") not in SENSITIVE_DOMAINS or e.get("access_mode") != "api_cached":
+        return []
+    audit = e.get("safe_copy_audit") if isinstance(e.get("safe_copy_audit"), dict) else {}
+    reasons = []
+    if audit.get("safe_copy_rule") != "confirm_not_assert":
+        reasons.append("safe_copy:confirm_not_assert_required")
+    if audit.get("outcome") != "pass":
+        reasons.append("safe_copy:audit_not_pass")
+    return reasons
+
+
+def sensitive_requires_maintainer(e: dict[str, Any]) -> bool:
+    return e.get("sensitive_domain") in SENSITIVE_DOMAINS and e.get("access_mode") != "api_cached"
+
+
 def review_candidate(path: Path, taxonomy: dict[str, Any], ev_ids: set[str], patterns: list[str]) -> dict[str, Any]:
     rel = str(path.relative_to(ROOT))
     try:
@@ -1002,11 +1018,11 @@ def review_candidate(path: Path, taxonomy: dict[str, Any], ev_ids: set[str], pat
         if ev not in ev_ids:
             reasons.append(f"evidence_ref:{ev}")
     confidence = float(e.get("confidence_score", 0))
-    sensitive = e.get("sensitive_domain") in SENSITIVE_DOMAINS
     if confidence < 0.85:
         reasons.append("confidence_lt_0.85")
-    if sensitive:
-        reasons.append(f"sensitive_domain:{e.get('sensitive_domain')}")
+    reasons.extend(api_cached_sensitive_guard(e))
+    if sensitive_requires_maintainer(e):
+        reasons.append(f"sensitive_domain_maintainer:{e.get('sensitive_domain')}")
     decision = "auto_accept" if not reasons else "escalate"
     return {"candidate": rel, "decision": decision, "reasons": reasons}
 

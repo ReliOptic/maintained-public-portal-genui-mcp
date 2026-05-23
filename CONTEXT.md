@@ -366,10 +366,10 @@ Confidence-driven routing of automation output:
 | confidence_score        | route                                                              |
 | ----------------------- | ------------------------------------------------------------------ |
 | `≥ 0.85`                | auto-accepted by [[Review Agent]] if rubric passes; surfaces in draft PR |
-| `[0.60, 0.85)`          | [[Review Agent]] applies full rubric; passes → auto-accept, fails → escalate to maintainer |
+| `[0.60, 0.85)`          | [[Review Agent]] applies full rubric and posts findings; not auto-accepted until confidence reaches 0.85 |
 | `< 0.60`                | escalate to maintainer; agent provides a structured analysis but cannot accept |
 
-**Sensitive-domain hard gate.** Independent of `confidence_score`, every Entry whose `domain ∈ sensitive_domains` is forced into maintainer review (the Review Agent may pre-analyse but cannot accept). v0.1 `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`. Schema-enforced, not policy-enforced.
+**Sensitive-domain review gate is access-mode-aware.** v0.1 `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`. Sensitive `portal_handoff` / `manual_check` Entries are forced into maintainer review because the source record depends on LLM/interpreter reading of a portal screen and the card copy may encode that interpretation. Sensitive `api_cached` Entries are not automatically maintainer-blocked when they come from a structured official API row: the Review Agent may auto-accept them only if confidence is ≥ 0.85, the rubric passes, `safe_copy_rule = "confirm_not_assert"`, and safe-copy lint/audit pass. Otherwise they escalate. Schema enforces the fields; policy decides the route.
 
 **Bot auto-merge** is limited to pure data corrections: tier1→tier2 [[Handoff]] downgrades from health-check, `last_verified_at` / `last_sync_at` refreshes, formatting-only changes. Anything touching `card_title`, `card_body`, `cta_label`, taxonomy tags, intrinsic ordinals, or `access_mode` goes through the Review Agent + maintainer-as-needed path.
 
@@ -385,8 +385,8 @@ An AI agent (Claude Code, Codex, or equivalent) tasked with first-pass review of
 4. Intrinsic ordinal sanity (e.g. an Entry tagged `sensitive_domain=tax` must have `sensitivity_risk ≥ medium`).
 5. `access_mode` matches the source pipeline (api_cached candidates must carry `api_ref`; portal_handoff must carry tier-resolved [[Handoff]] object).
 
-On rubric pass + non-sensitive domain + confidence ≥ 0.60: agent posts an approval comment and the PR is auto-mergeable.
-On rubric fail or sensitive domain or confidence < 0.60: agent posts a structured findings comment and tags the maintainer.
+On rubric pass + confidence ≥ 0.85 + either non-sensitive domain or sensitive `api_cached` with `confirm_not_assert` audit pass: agent posts an approval comment and the PR is auto-mergeable.
+On rubric fail, confidence < 0.85, or sensitive `portal_handoff` / `manual_check`: agent posts a structured findings comment and tags the maintainer.
 
 The Review Agent's prompt + rubric checklist itself is versioned in `tooling/review-agent/` and PR-reviewable; changing it is a separate concern from `catalog_version`.
 
