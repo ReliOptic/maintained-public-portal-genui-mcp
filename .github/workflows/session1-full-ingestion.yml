@@ -77,7 +77,21 @@ jobs:
         run: |
           mkdir -p /tmp/session1-api-shard-${{ matrix.shard }}/catalog/v1.0.0/entries
           mkdir -p /tmp/session1-api-shard-${{ matrix.shard }}/tooling/review-agent/reports/api-shards
-          find catalog/v1.0.0/entries -maxdepth 1 -type f -name '*.json' ! -name '_example-*' -exec cp {} /tmp/session1-api-shard-${{ matrix.shard }}/catalog/v1.0.0/entries/ \;
+          python3 - <<'PY'
+          import json
+          import shutil
+          from pathlib import Path
+          summary_path = Path('tooling/review-agent/reports/session1-api-refresh-summary.json')
+          dest_root = Path('/tmp/session1-api-shard-${{ matrix.shard }}')
+          if summary_path.exists():
+              summary = json.loads(summary_path.read_text())
+              for rel in summary.get('written', []):
+                  src = Path(rel)
+                  if src.is_file() and src.suffix == '.json' and not src.name.startswith('_example'):
+                      dest = dest_root / src
+                      dest.parent.mkdir(parents=True, exist_ok=True)
+                      shutil.copy2(src, dest)
+          PY
           if [ -f tooling/review-agent/reports/session1-api-refresh-summary.json ]; then
             cp tooling/review-agent/reports/session1-api-refresh-summary.json /tmp/session1-api-shard-${{ matrix.shard }}/tooling/review-agent/reports/api-shards/shard-${{ matrix.shard }}.json
           fi
