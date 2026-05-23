@@ -15,7 +15,7 @@
     "교통사고사실확인원",
     "발급"
   ],
-  "content_fingerprint": "semantic:v1|certificate_issue|handoff|교통사고사실확인원 발급|nationwide|driver",
+  "content_fingerprint": "gov24|portal_handoff|ac53f07ddaeca9c1",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13200000034&HighCtgCD=A08004"
   ],
@@ -71,5 +71,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "certificate_issue|handoff|교통사고사실확인원 발급|nationwide|driver"
 }

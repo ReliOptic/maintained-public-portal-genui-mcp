@@ -15,7 +15,7 @@
     "자녀장려금",
     "신청"
   ],
-  "content_fingerprint": "semantic:v1|benefit_application|handoff|자녀장려금 신청|nationwide|parent_guardian",
+  "content_fingerprint": "hometax|portal_handoff|d7abdb7b7b05b37d",
   "source_urls": [
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%9E%90%EB%85%80%EC%9E%A5%EB%A0%A4%EA%B8%88%20%EC%8B%A0%EC%B2%AD"
   ],
@@ -74,5 +74,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_application|handoff|자녀장려금 신청|nationwide|parent_guardian"
 }

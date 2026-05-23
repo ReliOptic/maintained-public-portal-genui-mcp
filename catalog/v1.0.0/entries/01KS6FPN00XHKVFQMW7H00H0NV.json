@@ -15,7 +15,7 @@
     "장학재단",
     "장학금(보훈)"
   ],
-  "content_fingerprint": "semantic:v1|education_application|check|장학재단 장학금 보훈|gyeonggi|parent_guardian,student",
+  "content_fingerprint": "gov24|gov24-serviceList|405000000656",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -131,5 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "education_application|check|장학재단 장학금 보훈|gyeonggi|parent_guardian,student"
 }

@@ -15,7 +15,7 @@
     "휴업",
     "신고"
   ],
-  "content_fingerprint": "semantic:v1|business_closure|handoff|휴업 신고|nationwide|self_employed",
+  "content_fingerprint": "hometax|portal_handoff|55de6cf62f320e20",
   "source_urls": [
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%ED%9C%B4%EC%97%85%20%EC%8B%A0%EA%B3%A0"
   ],
@@ -75,5 +75,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "business_closure|handoff|휴업 신고|nationwide|self_employed"
 }

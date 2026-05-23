@@ -16,7 +16,7 @@
     "이용요금",
     "감면(왕송호수캠핑장)"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|문화시설 이용요금 감면 왕송호수캠핑장|nationwide|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|O00009700005",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -130,5 +130,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|문화시설 이용요금 감면 왕송호수캠핑장|nationwide|low_income_household"
 }

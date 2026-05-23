@@ -16,7 +16,7 @@
     "등본",
     "발급"
   ],
-  "content_fingerprint": "semantic:v1|certificate_issue|handoff|선박원부 등본 발급|nationwide|fisher",
+  "content_fingerprint": "gov24|portal_handoff|b2bc5117d448548b",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000107&HighCtgCD="
   ],
@@ -72,5 +72,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "certificate_issue|handoff|선박원부 등본 발급|nationwide|fisher"
 }

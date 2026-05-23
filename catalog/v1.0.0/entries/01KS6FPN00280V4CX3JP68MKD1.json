@@ -17,7 +17,7 @@
     "사업화",
     "지원"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|고양 콘텐츠 사업화 지원|nationwide|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|O00046700023",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -131,5 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|고양 콘텐츠 사업화 지원|nationwide|low_income_household"
 }

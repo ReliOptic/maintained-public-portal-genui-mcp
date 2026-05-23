@@ -17,7 +17,7 @@
     "사실증명",
     "발급"
   ],
-  "content_fingerprint": "semantic:v1|certificate_issue|handoff|국적 관련 사실증명 발급|nationwide|naturalized_citizen",
+  "content_fingerprint": "gov24|portal_handoff|2d686f933ff06e80",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12700000017&HighCtgCD=-"
   ],
@@ -73,5 +73,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "certificate_issue|handoff|국적 관련 사실증명 발급|nationwide|naturalized_citizen"
 }

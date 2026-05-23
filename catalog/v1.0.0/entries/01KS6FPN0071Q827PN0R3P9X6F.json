@@ -17,7 +17,7 @@
     "종자",
     "관련"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|국가유공자 등의 종자 관련 수수료 면제 및 반환|central_government,nationwide|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|140000000163",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -132,5 +132,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|국가유공자 등의 종자 관련 수수료 면제 및 반환|central_government,nationwide|low_income_household"
 }

@@ -16,7 +16,7 @@
     "특지",
     "장학금"
   ],
-  "content_fingerprint": "semantic:v1|education_application|check|중 고 대학생 특지 장학금|gyeongnam|parent_guardian,student",
+  "content_fingerprint": "gov24|gov24-serviceList|540000000129",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -132,5 +132,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "education_application|check|중 고 대학생 특지 장학금|gyeongnam|parent_guardian,student"
 }

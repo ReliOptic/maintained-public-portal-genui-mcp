@@ -1,6 +1,7 @@
 # Local credentials and maintainer-only environment files.
 .env
 .env.*
+env_GOV24 API.txt
 env_*
 *SERVICE_KEY*
 *.pem

@@ -16,7 +16,7 @@
     "자격증",
     "발급"
   ],
-  "content_fingerprint": "semantic:v1|license_application|handoff|언어재활사 자격증 발급|nationwide|salary_worker",
+  "content_fingerprint": "gov24|portal_handoff|4a3e3168f0bf82b0",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13520000028"
   ],
@@ -72,5 +72,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "license_application|handoff|언어재활사 자격증 발급|nationwide|salary_worker"
 }

@@ -1,7 +1,8 @@
 source_id: bokjiro-central
 title: 복지로 중앙부처복지서비스
 role: task_source
-priority: 2
+primary_priority: 2
+access_mode: api_cached
 source_org_scope:
 - national
 source_org_scope_note: 중앙부처 복지서비스 행을 welfare-specialised Task Entry 후보로 수집하는 planned API source입니다.
@@ -11,11 +12,17 @@ auth:
   type: serviceKey
   env: BOKJIRO_SERVICE_KEY
   placement: query.serviceKey
+paging:
+  page_param: pageNo
+  per_page_param: numOfRows
+  per_page: 100
+  start_page: 1
+format:
+- json
 operations:
   serviceList:
     method: GET
-    endpoint: null
-    official_reference: https://www.data.go.kr/
+    endpoint: https://apis.data.go.kr/B460010/welfareQcpInfoService01/getWelfareQcpInfoList01
     purpose: 중앙부처 복지서비스 목록 행을 EntryCandidate의 기본 단위로 수집합니다.
 mapping_row_to_entry:
   entry_id: stable hash of source_id + service_id
@@ -33,6 +40,6 @@ mapping_row_to_entry:
   life_event_tags: LLM Annotation from support_conditions
   evidence_refs: curated join by domain/region/persona
 dedup_policy:
-  content_fingerprint: semantic_v1
+  semantic_fingerprint: semantic_v1
   primary_source_priority: 2
   attach_as_secondary_when_duplicate: true

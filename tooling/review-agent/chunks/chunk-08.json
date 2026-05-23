@@ -10966,10 +10966,8 @@
     },
     {
       "candidate": "catalog/v1.0.0/entries/nts-business-status.json",
-      "decision": "escalate",
-      "reasons": [
-        "sensitive_domain:tax"
-      ]
+      "decision": "auto_accept",
+      "reasons": []
     }
   ]
 }

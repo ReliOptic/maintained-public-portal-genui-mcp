@@ -17,7 +17,7 @@
     "프리랜서",
     "등"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|1인 자영업자 프리랜서 등 출산휴가급여 임산부 배우자|seoul|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|611000019649",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -131,5 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|1인 자영업자 프리랜서 등 출산휴가급여 임산부 배우자|seoul|low_income_household"
 }

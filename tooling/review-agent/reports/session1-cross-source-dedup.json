@@ -1,12 +1,11 @@
 {
-  "stage": "cross-source-dedup",
+  "stage": "dedup",
   "semantic_fingerprint_version": "v1",
   "entries_scanned": 10976,
-  "fingerprints_rewritten": 10975,
+  "semantic_fingerprints_written": 10975,
   "cross_source_duplicate_groups": 0,
-  "entries_marked_merged": 0,
+  "merged": 0,
+  "secondary_attached": 0,
   "policy": "Only duplicates spanning two or more registered Task sources are collapsed; same-source repeats remain separate candidate rows for maintainer review.",
-  "excluded_entry_ids": [
-    "nts-business-status"
-  ]
+  "excluded_free_tag": "live_check_only"
 }

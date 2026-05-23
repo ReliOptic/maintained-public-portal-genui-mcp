@@ -17,7 +17,7 @@
     "자료",
     "조회"
   ],
-  "content_fingerprint": "semantic:v1|tax_inquiry|handoff|연말정산 간소화 자료 조회|nationwide|salary_worker",
+  "content_fingerprint": "hometax|portal_handoff|753c796883e65bdc",
   "source_urls": [
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%97%B0%EB%A7%90%EC%A0%95%EC%82%B0%20%EA%B0%84%EC%86%8C%ED%99%94%20%EC%9E%90%EB%A3%8C%20%EC%A1%B0%ED%9A%8C"
   ],
@@ -77,5 +77,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "tax_inquiry|handoff|연말정산 간소화 자료 조회|nationwide|salary_worker"
 }

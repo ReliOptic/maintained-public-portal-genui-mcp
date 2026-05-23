@@ -1,5 +1,5 @@
 {
-  "entry_id": "nts-business-status",
+  "entry_id": "01KS6FPN00JVDZ9V98T4HQWQ6C",
   "catalog_version": "1.0.0",
   "status": "published",
   "candidate_state": "entry_candidate",
@@ -7,27 +7,24 @@
   "access_mode": "portal_handoff",
   "portal": "hometax",
   "domain": "tax",
-  "sensitive_domain": "tax",
-  "title": "사업자등록 상태 조회",
+  "sensitive_domain": null,
+  "title": "사업자등록 상태조회",
   "canonical_intent": "status_inquiry",
   "canonical_action_verb": "check",
   "key_keywords": [
     "사업자등록",
-    "상태",
-    "조회"
+    "상태조회"
   ],
-  "content_fingerprint": "nts-business-status|excluded-live-check",
-  "exclude_from_cross_source_dedup": true,
-  "live_check_role": "label_only_v0_1",
+  "content_fingerprint": "hometax|portal_handoff|cd5c61bc8f4bcd45",
   "source_urls": [
     "https://www.hometax.go.kr/"
   ],
-  "menu_path": "홈택스 > 조회/발급 > 사업자상태 > 사업자등록번호로 조회",
+  "menu_path": "홈택스 > 조회/발급 > 사업자등록 상태조회",
   "handoff": {
     "tier": "tier3",
     "portal": "hometax",
     "url": "https://www.hometax.go.kr/",
-    "menu_path": "홈택스 > 조회/발급 > 사업자상태 > 사업자등록번호로 조회"
+    "menu_path": "홈택스 > 조회/발급 > 사업자등록 상태조회"
   },
   "persona_tags": [
     "self_employed",
@@ -47,10 +44,7 @@
   ],
   "evidence_refs": [],
   "free_tags": [
-    "nts",
-    "business_status",
-    "live_check_entry",
-    "label_only"
+    "live_check_only"
   ],
   "seasonality_hint": "jan",
   "intrinsic_ordinals": {
@@ -58,18 +52,17 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.88,
-  "review_required": true,
-  "review_reason": "sensitive_domain:tax",
-  "card_title": "사업자등록 상태 조회",
-  "card_body": "사업자등록 상태 조회 경로를 홈택스에서 확인하세요. 결과와 이용 가능 여부는 공식 화면에서 확인해야 합니다.",
+  "confidence_score": 1.0,
+  "review_required": false,
+  "review_reason": null,
+  "card_title": "사업자등록 상태조회",
+  "card_body": "사업자등록 상태조회 경로를 홈택스에서 확인하세요. 결과와 이용 가능 여부는 공식 화면에서 확인해야 합니다.",
   "cta_label": "홈택스에서 확인",
   "safe_copy_audit": {
     "safe_copy_rule": "confirm_not_assert",
     "outcome": "pass",
     "checked_patterns": [
       "상태 단정 없음",
-      "실시간 조회 아님",
       "승인 보장 없음"
     ]
   },

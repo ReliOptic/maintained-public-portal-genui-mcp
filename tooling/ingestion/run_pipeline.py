@@ -47,7 +47,7 @@ TASK_SOURCE_PRIORITY = {
     "worknet-supported-jobs": 4,
 }
 REQUIRED_TASK_SOURCE_REGISTRIES = tuple(TASK_SOURCE_PRIORITY)
-LIVE_CHECK_ENTRY_IDS = {"nts-business-status"}
+LIVE_CHECK_FREE_TAG = "live_check_only"
 
 
 def load_yaml(path: Path) -> Any:
@@ -103,12 +103,11 @@ def fingerprint_scope(values: Any) -> str:
     return ",".join(normalized) or "none"
 
 
-def semantic_content_fingerprint(entry: dict[str, Any]) -> str:
-    """ADR-0001 v0.1 portal-free content fingerprint.
+def compute_semantic_fingerprint(entry: dict[str, Any]) -> str:
+    """ADR-0001 v0.1 portal-free semantic fingerprint.
 
-    This is intentionally independent of source portal/API name. Source-specific
-    row identity stays in api_ref/source_urls; this field is only for detecting
-    the same Leaf Service across Task sources.
+    Source-specific row identity remains in content_fingerprint/api_ref. This
+    field exists only to merge the same Leaf Service across Task sources.
     """
     parts = [
         normalize_fingerprint_text(entry.get("canonical_intent")),
@@ -117,11 +116,11 @@ def semantic_content_fingerprint(entry: dict[str, Any]) -> str:
         fingerprint_scope(entry.get("region_tags")),
         fingerprint_scope(entry.get("persona_tags")),
     ]
-    return "semantic:v1|" + "|".join(parts)
+    return "|".join(parts)
 
 
 def should_exclude_from_cross_source_dedup(entry: dict[str, Any]) -> bool:
-    return bool(entry.get("exclude_from_cross_source_dedup")) or entry.get("entry_id") in LIVE_CHECK_ENTRY_IDS
+    return LIVE_CHECK_FREE_TAG in set(entry.get("free_tags") or [])
 
 
 def task_source_id(entry: dict[str, Any]) -> str:
@@ -133,8 +132,45 @@ def task_source_id(entry: dict[str, Any]) -> str:
     return "unknown"
 
 
+def task_source_priorities() -> dict[str, int]:
+    priorities = dict(TASK_SOURCE_PRIORITY)
+    for path in sorted((ROOT / "catalog" / "api-registry").glob("*.yaml")):
+        data = load_yaml(path)
+        source_id = data.get("source_id")
+        if source_id:
+            priorities[str(source_id)] = registry_primary_priority(data, str(source_id))
+    return priorities
+
+
 def source_priority(entry: dict[str, Any]) -> int:
-    return TASK_SOURCE_PRIORITY.get(task_source_id(entry), 90)
+    return task_source_priorities().get(task_source_id(entry), 90)
+
+
+def registry_primary_priority(data: dict[str, Any], fallback_source_id: str) -> int:
+    return int(data.get("primary_priority", data.get("priority", TASK_SOURCE_PRIORITY.get(fallback_source_id, 90))))
+
+
+def api_registry_endpoint(data: dict[str, Any]) -> str | None:
+    operation = data.get("operations", {}).get("serviceList", {})
+    endpoint = operation.get("endpoint")
+    return str(endpoint) if endpoint else None
+
+
+def append_pipeline_stage(stage: dict[str, Any]) -> None:
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    path = REPORT_DIR / "session1-pipeline-run.json"
+    if path.exists():
+        try:
+            data = load_json(path)
+        except Exception:
+            data = {"ran_at": today(), "stages": []}
+    else:
+        data = {"ran_at": today(), "stages": []}
+    stages = [s for s in data.get("stages", []) if s.get("stage") != stage.get("stage")]
+    stages.append(stage)
+    data["stages"] = stages
+    data["ran_at"] = today()
+    dump_json(path, data)
 
 
 def secondary_source_descriptor(entry: dict[str, Any]) -> dict[str, Any]:
@@ -467,7 +503,7 @@ def portal_entry_from_seed(row: dict[str, Any], capture: dict[str, Any]) -> dict
         "canonical_intent": intent,
         "canonical_action_verb": "handoff",
         "key_keywords": [k for k in re.split(r"\s+", title) if k][:4],
-        "content_fingerprint": "",
+        "content_fingerprint": f"{portal}|portal_handoff|{hashlib.sha1(row['url'].encode()).hexdigest()[:16]}",
         "source_urls": [row["url"]],
         "stage1_capture": {
             "fetch_status": capture["status"],
@@ -504,7 +540,6 @@ def portal_entry_from_seed(row: dict[str, Any], capture: dict[str, Any]) -> dict
         "safe_copy_audit": {"safe_copy_rule": "confirm_not_assert", "outcome": "pass", "checked_patterns": ["대상 단정 없음", "승인 보장 없음"]},
         "last_verified_at": today(),
     }
-    entry["content_fingerprint"] = semantic_content_fingerprint(entry)
     return entry
 
 
@@ -693,7 +728,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "canonical_intent": inferred["task_intent"][0],
                 "canonical_action_verb": "check",
                 "key_keywords": [k for k in re.split(r"\s+", title) if k][:4] or [title[:20]],
-                "content_fingerprint": "",
+                "content_fingerprint": f"gov24|gov24-serviceList|{row_id}",
                 "source_urls": [operations[name]["endpoint"] for name in ["serviceList", "serviceDetail", "supportConditions"]],
                 "api_ref": {
                     "source_id": registry["source_id"],
@@ -732,7 +767,6 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "safe_copy_audit": {"safe_copy_rule": "confirm_not_assert", "outcome": "pass", "checked_patterns": ["대상 단정 없음", "승인 보장 없음", "금액 단정 없음"]},
                 "last_sync_at": today(),
             }
-            entry["content_fingerprint"] = semantic_content_fingerprint(entry)
             out = ENTRIES / f"{entry_id}.json"
             dump_json(out, entry)
             written.append(str(out.relative_to(ROOT)))
@@ -772,26 +806,47 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
 def source_registry_check(args: argparse.Namespace) -> dict[str, Any]:
     registries = []
     missing = []
-    for source_id in REQUIRED_TASK_SOURCE_REGISTRIES:
-        path = ROOT / "catalog" / "api-registry" / f"{source_id}.yaml"
-        if not path.exists():
-            missing.append(source_id)
-            continue
+    registry_paths = sorted((ROOT / "catalog" / "api-registry").glob("*.yaml"))
+    path_by_source = {}
+    for path in registry_paths:
         data = load_yaml(path)
+        source_id = data.get("source_id")
+        if source_id:
+            path_by_source[source_id] = path
+    for source_id in REQUIRED_TASK_SOURCE_REGISTRIES:
+        if source_id not in path_by_source:
+            missing.append(source_id)
+    for path in registry_paths:
+        data = load_yaml(path)
+        source_id = data.get("source_id")
+        endpoint = api_registry_endpoint(data)
+        paging = data.get("paging", {}) if isinstance(data.get("paging"), dict) else {}
         registries.append({
             "source_id": source_id,
             "path": str(path.relative_to(ROOT)),
             "role": data.get("role", "task_source" if source_id == "gov24-serviceList" else None),
-            "priority": data.get("priority", TASK_SOURCE_PRIORITY[source_id]),
+            "primary_priority": registry_primary_priority(data, str(source_id)),
             "ingestion_status": data.get("ingestion_status", "active" if source_id == "gov24-serviceList" else "planned"),
             "ci_stage": data.get("ci_stage", "full_ingestion" if source_id == "gov24-serviceList" else "registry_validated_only"),
             "auth_env": data.get("auth", {}).get("env"),
+            "endpoint": endpoint,
+            "paging": paging,
             "has_service_list_operation": "serviceList" in data.get("operations", {}),
         })
     errors = []
     if missing:
         errors.append("missing_task_source_registries:" + ",".join(missing))
     for item in registries:
+        if not item.get("source_id"):
+            errors.append(f"missing_source_id:{item['path']}")
+        if not item.get("auth_env"):
+            errors.append(f"missing_auth_env:{item.get('source_id') or item['path']}")
+        if not item.get("endpoint"):
+            errors.append(f"missing_endpoint:{item.get('source_id') or item['path']}")
+        paging = item.get("paging", {})
+        for field in ["page_param", "per_page_param", "per_page", "start_page"]:
+            if not paging.get(field):
+                errors.append(f"missing_paging_{field}:{item.get('source_id') or item['path']}")
         if item["source_id"] != "gov24-serviceList" and item["ci_stage"] != "registry_validated_only":
             errors.append(f"planned_source_ci_stage:{item['source_id']}")
         if not item["has_service_list_operation"]:
@@ -807,6 +862,7 @@ def source_registry_check(args: argparse.Namespace) -> dict[str, Any]:
     }
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     dump_json(REPORT_DIR / "session1-source-registry-check.json", summary)
+    append_pipeline_stage({k: summary[k] for k in ["stage", "passed", "missing", "errors"]})
     if errors:
         raise RuntimeError(";".join(errors))
     return summary
@@ -815,23 +871,26 @@ def source_registry_check(args: argparse.Namespace) -> dict[str, Any]:
 def apply_cross_source_dedup(args: argparse.Namespace) -> dict[str, Any]:
     files = sorted(p for p in ENTRIES.glob("*.json") if not p.name.startswith("_example"))
     entries: list[tuple[Path, dict[str, Any]]] = []
-    rewrote_fingerprints = 0
+    semantic_written = 0
     for path in files:
         entry = load_json(path)
         if not should_exclude_from_cross_source_dedup(entry):
-            next_fingerprint = semantic_content_fingerprint(entry)
-            if entry.get("content_fingerprint") != next_fingerprint:
-                entry["content_fingerprint"] = next_fingerprint
-                rewrote_fingerprints += 1
+            next_fingerprint = compute_semantic_fingerprint(entry)
+            if entry.get("semantic_fingerprint") != next_fingerprint:
+                entry["semantic_fingerprint"] = next_fingerprint
+                semantic_written += 1
+        else:
+            entry.pop("semantic_fingerprint", None)
         entries.append((path, entry))
 
     groups: dict[str, list[tuple[Path, dict[str, Any]]]] = {}
     for path, entry in entries:
         if should_exclude_from_cross_source_dedup(entry):
             continue
-        groups.setdefault(str(entry.get("content_fingerprint")), []).append((path, entry))
+        groups.setdefault(str(entry.get("semantic_fingerprint")), []).append((path, entry))
 
     merged = 0
+    secondary_attached = 0
     duplicate_groups = 0
     for fingerprint, group in groups.items():
         source_ids = {task_source_id(entry) for _, entry in group}
@@ -852,6 +911,7 @@ def apply_cross_source_dedup(args: argparse.Namespace) -> dict[str, Any]:
             if key not in seen_secondary:
                 secondary.append(descriptor)
                 seen_secondary.add(key)
+                secondary_attached += 1
             loser["merged_into"] = winner.get("entry_id")
             loser["status"] = "merged"
             merged += 1
@@ -862,17 +922,19 @@ def apply_cross_source_dedup(args: argparse.Namespace) -> dict[str, Any]:
         written.append(str(path.relative_to(ROOT)))
 
     summary = {
-        "stage": "cross-source-dedup",
+        "stage": "dedup",
         "semantic_fingerprint_version": "v1",
         "entries_scanned": len(entries),
-        "fingerprints_rewritten": rewrote_fingerprints,
+        "semantic_fingerprints_written": semantic_written,
         "cross_source_duplicate_groups": duplicate_groups,
-        "entries_marked_merged": merged,
+        "merged": merged,
+        "secondary_attached": secondary_attached,
         "policy": "Only duplicates spanning two or more registered Task sources are collapsed; same-source repeats remain separate candidate rows for maintainer review.",
-        "excluded_entry_ids": sorted(LIVE_CHECK_ENTRY_IDS),
+        "excluded_free_tag": LIVE_CHECK_FREE_TAG,
     }
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     dump_json(REPORT_DIR / "session1-cross-source-dedup.json", summary)
+    append_pipeline_stage({"stage": "dedup", "merged": merged, "secondary_attached": secondary_attached})
     return summary
 
 
@@ -929,13 +991,13 @@ def review_candidate(path: Path, taxonomy: dict[str, Any], ev_ids: set[str], pat
         if not e.get("api_ref") or not e.get("api_payload_keys") or not e.get("last_sync_at"):
             reasons.append("access_mode:api_cached_source_fields")
         api_ref = e.get("api_ref") if isinstance(e.get("api_ref"), dict) else {}
-        if api_ref.get("source_id") in TASK_SOURCE_PRIORITY and not str(e.get("content_fingerprint", "")).startswith("semantic:v1|"):
-            reasons.append("dedup:non_semantic_content_fingerprint")
+        if api_ref.get("source_id") in TASK_SOURCE_PRIORITY and not e.get("semantic_fingerprint"):
+            reasons.append("dedup:missing_semantic_fingerprint")
     if e.get("access_mode") in {"portal_handoff", "manual_check"}:
         if not e.get("source_urls") or not e.get("last_verified_at"):
             reasons.append("access_mode:portal_source_fields")
-        if not should_exclude_from_cross_source_dedup(e) and not str(e.get("content_fingerprint", "")).startswith("semantic:v1|"):
-            reasons.append("dedup:non_semantic_content_fingerprint")
+        if not should_exclude_from_cross_source_dedup(e) and not e.get("semantic_fingerprint"):
+            reasons.append("dedup:missing_semantic_fingerprint")
     for ev in e.get("evidence_refs", []):
         if ev not in ev_ids:
             reasons.append(f"evidence_ref:{ev}")
@@ -991,7 +1053,7 @@ def pr_body(args: argparse.Namespace) -> dict[str, Any]:
     if not summary_path.exists():
         raise SystemExit("run review first")
     summary = load_json(summary_path)
-    persona_path = REPORT_DIR / "persona-check.json"
+    persona_path = REPORT_DIR / "session1-persona-check.json"
     persona_summary = load_json(persona_path) if persona_path.exists() else None
     registry_path = REPORT_DIR / "session1-source-registry-check.json"
     registry_summary = load_json(registry_path) if registry_path.exists() else None
@@ -1034,8 +1096,13 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 - Task source registries validated: {len(registry_summary.get('registries', [])) if registry_summary else 'not run'}
 - Cross-source duplicate groups: {dedup_summary.get('cross_source_duplicate_groups', 'not run') if dedup_summary else 'not run'}
-- Entries marked merged by cross-source dedup: {dedup_summary.get('entries_marked_merged', 'not run') if dedup_summary else 'not run'}
-- Persona check findings: {persona_summary.get('finding_count', 'not run') if persona_summary else 'not run'}
+- Entries merged by cross-source dedup: {dedup_summary.get('merged', 'not run') if dedup_summary else 'not run'}
+- Secondary sources attached: {dedup_summary.get('secondary_attached', 'not run') if dedup_summary else 'not run'}
+- Persona check duplicate entry IDs: {persona_summary.get('duplicate_entry_id_count', 'not run') if persona_summary else 'not run'}
+
+## Hero Persona validation
+
+{json.dumps(persona_summary.get('hero_personas', {}) if persona_summary else {}, ensure_ascii=False, indent=2)}
 
 ## Review decisions
 
@@ -1056,10 +1123,10 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 - [ ] Portal handoff generated at least 30 EntryCandidates and every candidate has `menu_path`.
 - [ ] `bokjiro-central`, `bokjiro-regional`, and `worknet-supported-jobs` registry YAML files exist and are validated as planned Task sources.
 - [ ] `nts-business-status` exists as a hand-curated v0.1 Live Check Entry and remains excluded from cross-source dedup.
-- [ ] Cross-source dedup uses ADR-0001 `semantic:v1` content fingerprints; same-source repeats are not collapsed automatically.
+- [ ] Cross-source dedup writes ADR-0001 `semantic_fingerprint` while preserving `content_fingerprint`; same-source repeats are not collapsed automatically.
 - [ ] Evidence metadata was refreshed for every seed dataset.
 - [ ] Review Agent ran with N={summary['parallel_instances']} chunks and `processed_percent` is `{summary['processed_percent']}`.
-- [ ] Persona check ran and produced `tooling/review-agent/reports/persona-check.json`.
+- [ ] Persona check ran and produced `tooling/review-agent/reports/session1-persona-check.json`.
 - [ ] Auto-accept / escalation counts and reason counts are included below.
 - [ ] Rubric violation counts are zero for taxonomy, menu_path, safe-copy, copy caps, ordinal sanity, access-mode/source fields, and evidence refs.
 - [ ] Reports and catalog artifacts contain no secret value and no report contains the API query-key literal.
@@ -1089,7 +1156,10 @@ def run_all(args: argparse.Namespace) -> dict[str, Any]:
     stages.append(review(args))
     stages.append(pr_body(args))
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    dump_json(REPORT_DIR / "session1-pipeline-run.json", {"ran_at": today(), "stages": stages})
+    existing_path = REPORT_DIR / "session1-pipeline-run.json"
+    existing = load_json(existing_path) if existing_path.exists() else {}
+    existing.update({"ran_at": today(), "stages": stages})
+    dump_json(existing_path, existing)
     return {"stages": stages}
 
 

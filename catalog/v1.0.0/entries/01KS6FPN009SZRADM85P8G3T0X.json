@@ -17,7 +17,7 @@
     "주차장",
     "만들기"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|내 집 주차장 만들기|gyeongnam|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|535000000164",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -131,5 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|내 집 주차장 만들기|gyeongnam|low_income_household"
 }

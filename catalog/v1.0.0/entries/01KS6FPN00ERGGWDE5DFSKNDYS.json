@@ -17,7 +17,7 @@
     "비용(수수료)",
     "지원"
   ],
-  "content_fingerprint": "semantic:v1|address_change|check|결혼이민자 국적취득 비용 수수료 지원|jeonnam|foreign_resident",
+  "content_fingerprint": "gov24|gov24-serviceList|486000000111",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -130,5 +130,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "address_change|check|결혼이민자 국적취득 비용 수수료 지원|jeonnam|foreign_resident"
 }

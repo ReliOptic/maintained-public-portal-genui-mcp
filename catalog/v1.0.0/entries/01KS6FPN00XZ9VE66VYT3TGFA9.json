@@ -16,7 +16,7 @@
     "Ⅰ유형",
     "(학생직접지원형)"
   ],
-  "content_fingerprint": "semantic:v1|education_application|check|국가장학금 유형 학생직접지원형|central_government,nationwide|parent_guardian,student",
+  "content_fingerprint": "gov24|gov24-serviceList|SD0000004508",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -133,5 +133,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "education_application|check|국가장학금 유형 학생직접지원형|central_government,nationwide|parent_guardian,student"
 }

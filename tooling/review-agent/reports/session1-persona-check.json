@@ -1,0 +1,190 @@
+{
+  "stage": "persona-check",
+  "candidate_count": 10976,
+  "hero_personas": {
+    "프리랜서": {
+      "query": {
+        "intent": [
+          "tax_filing",
+          "certificate_issue"
+        ],
+        "persona": [
+          "freelancer",
+          "sole_proprietor"
+        ]
+      },
+      "top_k": 5,
+      "results": [
+        {
+          "entry_id": "01KS6FPN000WM3VA57T3QKJ100",
+          "title": "종합소득세 신고",
+          "access_mode": "portal_handoff",
+          "intent_fit": 0.5,
+          "persona_fit": 0.5,
+          "life_event_fit": 0.0,
+          "mock_score": 0.5
+        },
+        {
+          "entry_id": "01KS6FPN00A5KA52VMB54QB9BS",
+          "title": "사실증명 발급",
+          "access_mode": "portal_handoff",
+          "intent_fit": 0.5,
+          "persona_fit": 0.5,
+          "life_event_fit": 0.0,
+          "mock_score": 0.5
+        },
+        {
+          "entry_id": "01KS6FPN0001ANR4V6GJA37BJ5",
+          "title": "평일 결식아동 급식비 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN00021A5EN2RACQ8HSN",
+          "title": "아동청소년 심리지원서비스",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN00025QC35BZ8WX3SHR",
+          "title": "승강기검사수수료 감면(아동양육시설)",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        }
+      ]
+    },
+    "신혼부부": {
+      "query": {
+        "life_event": [
+          "relocation",
+          "marriage"
+        ],
+        "intent": [
+          "address_change",
+          "benefit_check"
+        ]
+      },
+      "top_k": 5,
+      "results": [
+        {
+          "entry_id": "01KS6FPN00HK3R8ZM034YY3MR5",
+          "title": "전입신고",
+          "access_mode": "portal_handoff",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.5,
+          "mock_score": 0.5
+        },
+        {
+          "entry_id": "01KS6FPN000008VPYZ1WKC95WP",
+          "title": "유·초·중·고 학생 무상급식비 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN00000DCYQAWH8W8AWW",
+          "title": "대전 서구 고등 ·대학생 장학금(특수영상콘텐츠분야)",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN00001SZC9Y2N543FMS",
+          "title": "난임부부 약제비 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN0000A4B8CAQ0TTX49M",
+          "title": "가축생균제 공급 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        }
+      ]
+    },
+    "창업자": {
+      "query": {
+        "persona": [
+          "startup_founder",
+          "sole_proprietor"
+        ],
+        "intent": [
+          "business_registration",
+          "benefit_check"
+        ]
+      },
+      "top_k": 5,
+      "results": [
+        {
+          "entry_id": "01KS6FPN003Z030C6KCGA39J8Z",
+          "title": "사업자등록 신청",
+          "access_mode": "portal_handoff",
+          "intent_fit": 0.5,
+          "persona_fit": 0.5,
+          "life_event_fit": 0.0,
+          "mock_score": 0.5
+        },
+        {
+          "entry_id": "01KS6FPN000008VPYZ1WKC95WP",
+          "title": "유·초·중·고 학생 무상급식비 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN00000DCYQAWH8W8AWW",
+          "title": "대전 서구 고등 ·대학생 장학금(특수영상콘텐츠분야)",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN00001SZC9Y2N543FMS",
+          "title": "난임부부 약제비 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        },
+        {
+          "entry_id": "01KS6FPN0000A4B8CAQ0TTX49M",
+          "title": "가축생균제 공급 지원",
+          "access_mode": "api_cached",
+          "intent_fit": 0.5,
+          "persona_fit": 0.0,
+          "life_event_fit": 0.0,
+          "mock_score": 0.25
+        }
+      ]
+    }
+  },
+  "duplicate_entry_id_count": 0,
+  "duplicate_entry_ids": [],
+  "error_count": 0,
+  "errors": []
+}

@@ -1,7 +1,8 @@
 source_id: worknet-supported-jobs
 title: 워크넷 정부지원일자리
 role: task_source
-priority: 4
+primary_priority: 4
+access_mode: api_cached
 source_org_scope:
 - national
 - regional
@@ -10,14 +11,24 @@ ingestion_status: planned
 ci_stage: registry_validated_only
 auth:
   type: serviceKey
-  env: WORKNET_AUTH_KEY
+  env: WORKNET_SERVICE_KEY
   placement: query.authKey
+paging:
+  page_param: pageIndex
+  per_page_param: display
+  per_page: 100
+  start_page: 1
+format:
+- xml
+- json
 operations:
   serviceList:
     method: GET
-    endpoint: null
-    official_reference: https://www.work24.go.kr/
+    endpoint: https://openapi.work.go.kr/opi/opi/opia/wantedApi.do
     purpose: 정부지원일자리성 채용/지원 행을 EntryCandidate의 기본 단위로 수집합니다.
+filters:
+  active_only: true
+ttl_days: 60
 mapping_row_to_entry:
   entry_id: stable hash of source_id + job_or_program_id
   access_mode: api_cached
@@ -36,10 +47,7 @@ mapping_row_to_entry:
   life_event_tags:
   - employment
   evidence_refs: curated join by region/persona
-ttl_policy:
-  last_sync_at_plus_days: 60
-  expired_status: archived
 dedup_policy:
-  content_fingerprint: semantic_v1
+  semantic_fingerprint: semantic_v1
   primary_source_priority: 4
   attach_as_secondary_when_duplicate: true

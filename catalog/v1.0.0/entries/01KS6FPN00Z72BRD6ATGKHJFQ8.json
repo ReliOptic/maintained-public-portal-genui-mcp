@@ -17,7 +17,7 @@
     "등",
     "주거약자"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|아산시 장애인 고령자 등 주거약자 주택개량지원|central_government,chungnam|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|452000000130",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -133,5 +133,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|아산시 장애인 고령자 등 주거약자 주택개량지원|central_government,chungnam|low_income_household"
 }

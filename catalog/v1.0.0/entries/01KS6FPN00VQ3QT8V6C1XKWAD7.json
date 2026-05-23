@@ -17,7 +17,7 @@
     "주택",
     "매각"
   ],
-  "content_fingerprint": "semantic:v1|benefit_check|check|채무조정 및 주택 매각 후 임차거주 지원|nationwide|low_income_household",
+  "content_fingerprint": "gov24|gov24-serviceList|B01000300009",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
@@ -131,5 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23"
+  "last_sync_at": "2026-05-23",
+  "semantic_fingerprint": "benefit_check|check|채무조정 및 주택 매각 후 임차거주 지원|nationwide|low_income_household"
 }

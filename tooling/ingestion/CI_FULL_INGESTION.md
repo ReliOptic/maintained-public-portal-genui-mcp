@@ -57,7 +57,7 @@ Expected full-run evidence before opening the draft PR:
 - Evidence seed metadata JSON exists under `catalog/v1.0.0/evidence/`.
 - ADR-0001 semantic content fingerprints are written before review, and cross-source duplicates merge only when two or more registered Task sources share a fingerprint.
 - Review Agent processed percent is `100` across N=8 chunks.
-- Persona check writes `tooling/review-agent/reports/persona-check.json` and has zero errors.
+- Persona check writes `tooling/review-agent/reports/session1-persona-check.json` and has zero errors.
 - Review summary has no taxonomy, menu_path, copy-cap, safe-copy, ordinal, access-mode/source, or evidence-ref rubric violations.
 - No catalog publish tag is created.
 

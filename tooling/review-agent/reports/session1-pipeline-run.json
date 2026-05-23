@@ -1,9 +1,8 @@
 {
-  "ran_at": "2026-05-22",
+  "ran_at": "2026-05-23",
   "maintainer_side_only": true,
   "publish_tag_created": false,
-  "draft_pr_opened": false,
-  "draft_pr_blocker": "No git remote is configured for this local repository; cannot push/open draft PR from current state.",
+  "draft_pr_opened": true,
   "secret_inputs": {
     "GOV24_SERVICE_KEY_present": false,
     "secret_persisted": false
@@ -37,24 +36,42 @@
       "note": "Evidence JSON written from seed metadata; local data.go.kr page fetch may be unavailable outside maintainer CI."
     },
     {
+      "stage": "source-registry-check",
+      "passed": true,
+      "missing": [],
+      "errors": []
+    },
+    {
+      "stage": "dedup",
+      "merged": 0,
+      "secondary_attached": 0
+    },
+    {
       "stage": "review",
-      "candidate_count": 30,
+      "candidate_count": 10976,
       "processed_percent": 100,
       "decision_counts": {
-        "auto_accept": 7,
-        "escalate": 23
+        "auto_accept": 6,
+        "escalate": 10970
       },
       "reason_counts": {
-        "confidence_lt_0.85": 6,
-        "sensitive_domain:family": 1,
-        "sensitive_domain:immigration": 4,
-        "sensitive_domain:tax": 15,
-        "sensitive_domain:welfare": 3
+        "confidence_lt_0.85": 10954,
+        "sensitive_domain:family": 470,
+        "sensitive_domain:immigration": 37,
+        "sensitive_domain:tax": 301,
+        "sensitive_domain:welfare": 10160
       }
+    },
+    {
+      "stage": "persona-check",
+      "candidate_count": 10976,
+      "duplicate_entry_id_count": 0,
+      "error_count": 0
     },
     {
       "stage": "pr-body",
       "path": "tooling/review-agent/reports/session1-draft-pr-body.md"
     }
-  ]
+  ],
+  "draft_pr_url": "https://github.com/ReliOptic/maintained-public-portal-genui-mcp/pull/1"
 }

@@ -15,7 +15,7 @@
     "초중등학교",
     "제적증명"
   ],
-  "content_fingerprint": "semantic:v1|certificate_issue|handoff|초중등학교 제적증명|nationwide|student",
+  "content_fingerprint": "gov24|portal_handoff|2435d67e3c5761a4",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13404000029"
   ],
@@ -71,5 +71,6 @@
       "승인 보장 없음"
     ]
   },
-  "last_verified_at": "2026-05-23"
+  "last_verified_at": "2026-05-23",
+  "semantic_fingerprint": "certificate_issue|handoff|초중등학교 제적증명|nationwide|student"
 }
