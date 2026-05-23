@@ -459,6 +459,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
     stopped_reason = "completed"
     last_page_attempted: int | None = None
     last_page_completed: int | None = None
+    companion_policy = "skip" if args.skip_companions else "fetch"
     operation_status_counts: dict[str, dict[str, int]] = {"serviceList": {}, "serviceDetail": {}, "supportConditions": {}}
     started = time.monotonic()
     progress_every = max(1, int(args.progress_every))
@@ -507,10 +508,16 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
             row_id = extract_row_id(registry, row)
             title = extract_title(registry, row)
             normalized = normalized_api_row(registry, row)
-            companions = {
-                "detail": fetch_gov24_companion(operations["serviceDetail"], key, row_id, timeout=args.companion_timeout),
-                "conditions": fetch_gov24_companion(operations["supportConditions"], key, row_id, timeout=args.companion_timeout),
-            }
+            if args.skip_companions:
+                companions = {
+                    "detail": {"fetch_status": "skipped", "attempts": [], "payload": None},
+                    "conditions": {"fetch_status": "skipped", "attempts": [], "payload": None},
+                }
+            else:
+                companions = {
+                    "detail": fetch_gov24_companion(operations["serviceDetail"], key, row_id, timeout=args.companion_timeout),
+                    "conditions": fetch_gov24_companion(operations["supportConditions"], key, row_id, timeout=args.companion_timeout),
+                }
             for op_name, companion_key in [("serviceDetail", "detail"), ("supportConditions", "conditions")]:
                 fetch_status = companions[companion_key]["fetch_status"]
                 operation_status_counts[op_name][fetch_status] = operation_status_counts[op_name].get(fetch_status, 0) + 1
@@ -604,6 +611,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
         "pages_fetched": pages_fetched,
         "rows_seen": rows_seen,
         "stopped_reason": stopped_reason,
+        "companion_policy": companion_policy,
         "operation_status_counts": operation_status_counts,
         "secret_persisted": False,
         "elapsed_sec": round(time.monotonic() - started, 3),
@@ -816,6 +824,7 @@ def main() -> None:
     ap.add_argument("--end-page", type=int, default=0, help="last gov24 page to fetch for sharded api-refresh; 0 means until empty")
     ap.add_argument("--api-timeout", type=int, default=20, help="seconds per gov24 HTTP request")
     ap.add_argument("--companion-timeout", type=int, default=20, help="seconds per gov24 companion-operation HTTP request")
+    ap.add_argument("--skip-companions", action="store_true", help="skip gov24 companion operations and ingest serviceList rows only")
     ap.add_argument("--progress-every", type=int, default=25, help="log progress every N rows within a page")
     args = ap.parse_args()
     if args.command == "api-refresh": result = api_refresh(args)

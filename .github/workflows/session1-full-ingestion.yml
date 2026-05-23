@@ -66,10 +66,10 @@ jobs:
           END=$(( ${{ matrix.shard }} * SHARD_SIZE ))
           if [ "${{ inputs.max_pages }}" = "0" ]; then
             echo "Running full shard ${{ matrix.shard }} pages ${START}-${END}"
-            python3 tooling/ingestion/run_pipeline.py api-refresh --start-page "$START" --end-page "$END" --api-timeout 20 --companion-timeout 10 --progress-every 25
+            python3 tooling/ingestion/run_pipeline.py api-refresh --start-page "$START" --end-page "$END" --api-timeout 20 --skip-companions --progress-every 25
           else
             echo "Running smoke shard pages 1-${{ inputs.max_pages }}"
-            python3 tooling/ingestion/run_pipeline.py api-refresh --start-page 1 --max-pages "${{ inputs.max_pages }}" --api-timeout 20 --companion-timeout 10 --progress-every 25
+            python3 tooling/ingestion/run_pipeline.py api-refresh --start-page 1 --max-pages "${{ inputs.max_pages }}" --api-timeout 20 --skip-companions --progress-every 25
           fi
 
       - name: Stage shard artifact payload
@@ -185,7 +185,7 @@ jobs:
               echo "Confidence: medium"
               echo "Scope-risk: broad"
               echo "Directive: Keep generated EntryCandidates as draft PR input until Review Agent and maintainer checks pass; do not publish a catalog tag from this workflow."
-              echo "Tested: sharded api-refresh; artifact merge; portal-refresh; evidence-refresh; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
+              echo "Tested: sharded serviceList api-refresh; artifact merge; portal-refresh; evidence-refresh; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
               echo "Not-tested: Catalog publish tag; Session 2 compiled-SQLite build."
             } > /tmp/session1-ingestion-commit-message
             git commit -F /tmp/session1-ingestion-commit-message
