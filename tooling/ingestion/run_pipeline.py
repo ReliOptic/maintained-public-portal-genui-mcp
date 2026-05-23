@@ -126,6 +126,12 @@ def redact_secret(value: Any, secret: str | None) -> Any:
     return value
 
 
+def redact_query_key(url: str, key_name: str) -> str:
+    parsed = urllib.parse.urlsplit(url)
+    query = [(k, v) for k, v in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True) if k != key_name]
+    return urllib.parse.urlunsplit(parsed._replace(query=urllib.parse.urlencode(query)))
+
+
 def registry_aliases(registry: dict[str, Any], field: str) -> list[str]:
     return list(registry.get("response_schema", {}).get("raw_key_aliases", {}).get(field, []))
 
@@ -158,7 +164,7 @@ def gov24_api_get_json(endpoint: str, key: str, params: dict[str, Any], timeout:
     safe_params = {k: v for k, v in params.items() if v not in {None, ""}}
     query = urllib.parse.urlencode({**safe_params, "serviceKey": key})
     status, final_url, body = fetch_url(endpoint + "?" + query, timeout=timeout)
-    safe_url = redact_secret(final_url, key)
+    safe_url = redact_query_key(redact_secret(final_url, key), "serviceKey")
     meta: dict[str, Any] = {"status": status, "endpoint": endpoint, "final_url": safe_url}
     if status != 200:
         meta["error_excerpt"] = redact_secret(body[:500], key)
