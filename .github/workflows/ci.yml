@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+      # Bootstrap: this branch introduces the workflow before it exists on main.
+      - session1-maintainer-ingestion
 
 permissions:
   contents: read
