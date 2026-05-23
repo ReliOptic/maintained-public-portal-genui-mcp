@@ -14,8 +14,8 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 ```json
 {
   ">=0.95": 1,
-  "0.85-0.95": 21,
-  "0.60-0.85": 10954,
+  "0.85-0.95": 26,
+  "0.60-0.85": 10949,
   "<0.60": 0
 }
 ```
@@ -221,8 +221,8 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 ```json
 {
-  "auto_accept": 6,
-  "escalate": 10970
+  "auto_accept": 8,
+  "escalate": 10968
 }
 ```
 
@@ -230,7 +230,7 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 ```json
 {
-  "confidence_lt_0.85": 10954,
+  "confidence_lt_0.85": 10949,
   "sensitive_domain:family": 470,
   "sensitive_domain:immigration": 37,
   "sensitive_domain:tax": 301,

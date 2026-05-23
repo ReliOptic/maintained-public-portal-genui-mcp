@@ -3410,7 +3410,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00A5MT8X3EK960KDS1.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:welfare"
       ]
     },

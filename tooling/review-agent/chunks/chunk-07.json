@@ -1859,10 +1859,8 @@
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005DT543SD02ADTRQX.json",
-      "decision": "escalate",
-      "reasons": [
-        "confidence_lt_0.85"
-      ]
+      "decision": "auto_accept",
+      "reasons": []
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005F27YKXCHEA0X16T.json",

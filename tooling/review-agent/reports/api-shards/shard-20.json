@@ -544,6 +544,6 @@
   ],
   "service_list_fallback_failures": [],
   "secret_persisted": false,
-  "elapsed_sec": 9.691,
+  "elapsed_sec": 24.584,
   "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope."
 }

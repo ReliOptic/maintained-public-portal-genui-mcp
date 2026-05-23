@@ -4,11 +4,11 @@
   "candidate_count": 10976,
   "processed_percent": 100,
   "decision_counts": {
-    "auto_accept": 6,
-    "escalate": 10970
+    "auto_accept": 8,
+    "escalate": 10968
   },
   "reason_counts": {
-    "confidence_lt_0.85": 10954,
+    "confidence_lt_0.85": 10949,
     "sensitive_domain:family": 470,
     "sensitive_domain:immigration": 37,
     "sensitive_domain:tax": 301,
@@ -11717,6 +11717,7 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN0046GXDPT9YG4K1S38.json",
       "decision": "escalate",
       "reasons": [
+        "confidence_lt_0.85",
         "sensitive_domain:tax"
       ]
     },
@@ -14903,10 +14904,8 @@
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005DT543SD02ADTRQX.json",
-      "decision": "escalate",
-      "reasons": [
-        "confidence_lt_0.85"
-      ]
+      "decision": "auto_accept",
+      "reasons": []
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005DZMCG9MW7PKF1A3.json",
@@ -15716,10 +15715,8 @@
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005QEMQP46XNXDHQ85.json",
-      "decision": "escalate",
-      "reasons": [
-        "confidence_lt_0.85"
-      ]
+      "decision": "auto_accept",
+      "reasons": []
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005QMRHJA9762S1WYK.json",
@@ -27265,7 +27262,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00A5MT8X3EK960KDS1.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:welfare"
       ]
     },
@@ -33417,7 +33413,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00CH7HE2K8QW5HGQHC.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:family"
       ]
     },
@@ -34073,7 +34068,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00CRHK6A12PZ3DX8HA.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:immigration"
       ]
     },
@@ -48325,7 +48319,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00J0T5PZA7GDMAAXNA.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:tax"
       ]
     },
@@ -57242,7 +57235,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00N17CF6HQBER3SZ80.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:welfare"
       ]
     },
@@ -71380,6 +71372,7 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00T67EMVCC8V46VKSS.json",
       "decision": "escalate",
       "reasons": [
+        "confidence_lt_0.85",
         "sensitive_domain:immigration"
       ]
     },

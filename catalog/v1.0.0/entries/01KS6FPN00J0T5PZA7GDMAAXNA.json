@@ -20,15 +20,15 @@
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B6%80%EA%B0%80%EA%B0%80%EC%B9%98%EC%84%B8%20%EC%8B%A0%EA%B3%A0"
   ],
   "stage1_capture": {
-    "fetch_status": "ERR",
+    "fetch_status": 200,
     "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B6%80%EA%B0%80%EA%B0%80%EC%B9%98%EC%84%B8%20%EC%8B%A0%EA%B3%A0",
-    "rendered_text_excerpt": "URLError(ConnectionResetError(104, 'Connection reset by peer'))",
+    "rendered_text_excerpt": "국세청 홈택스",
     "screenshot_ref": null,
     "observed_actions": []
   },
   "menu_path": "홈택스 > 세금신고 > 부가가치세 신고",
   "handoff": {
-    "tier": "tier3",
+    "tier": "tier1",
     "portal": "hometax",
     "url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B6%80%EA%B0%80%EA%B0%80%EC%B9%98%EC%84%B8%20%EC%8B%A0%EA%B3%A0",
     "menu_path": "홈택스 > 세금신고 > 부가가치세 신고"
@@ -57,11 +57,11 @@
   ],
   "seasonality_hint": "vat_jan",
   "intrinsic_ordinals": {
-    "actionability": "medium",
+    "actionability": "high",
     "evidence_value": "high",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.72,
+  "confidence_score": 0.88,
   "review_required": true,
   "review_reason": "sensitive_domain:tax",
   "card_title": "부가가치세 신고",

@@ -36,17 +36,6 @@
       "note": "Evidence JSON written from seed metadata; local data.go.kr page fetch may be unavailable outside maintainer CI."
     },
     {
-      "stage": "source-registry-check",
-      "passed": true,
-      "missing": [],
-      "errors": []
-    },
-    {
-      "stage": "dedup",
-      "merged": 0,
-      "secondary_attached": 0
-    },
-    {
       "stage": "review",
       "candidate_count": 10976,
       "processed_percent": 100,
@@ -71,6 +60,17 @@
     {
       "stage": "pr-body",
       "path": "tooling/review-agent/reports/session1-draft-pr-body.md"
+    },
+    {
+      "stage": "source-registry-check",
+      "passed": true,
+      "missing": [],
+      "errors": []
+    },
+    {
+      "stage": "dedup",
+      "merged": 0,
+      "secondary_attached": 0
     }
   ],
   "draft_pr_url": "https://github.com/ReliOptic/maintained-public-portal-genui-mcp/pull/1"

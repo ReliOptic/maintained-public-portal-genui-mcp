@@ -1962,10 +1962,8 @@
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005QEMQP46XNXDHQ85.json",
-      "decision": "escalate",
-      "reasons": [
-        "confidence_lt_0.85"
-      ]
+      "decision": "auto_accept",
+      "reasons": []
     },
     {
       "candidate": "catalog/v1.0.0/entries/01KS6FPN005R83DBB3A8YDA1DZ.json",
@@ -7155,7 +7153,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00N17CF6HQBER3SZ80.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:welfare"
       ]
     },
@@ -8922,6 +8919,7 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00T67EMVCC8V46VKSS.json",
       "decision": "escalate",
       "reasons": [
+        "confidence_lt_0.85",
         "sensitive_domain:immigration"
       ]
     },

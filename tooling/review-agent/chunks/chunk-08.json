@@ -1458,6 +1458,7 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN0046GXDPT9YG4K1S38.json",
       "decision": "escalate",
       "reasons": [
+        "confidence_lt_0.85",
         "sensitive_domain:tax"
       ]
     },

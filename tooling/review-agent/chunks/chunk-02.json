@@ -4181,7 +4181,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00CH7HE2K8QW5HGQHC.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:family"
       ]
     },
@@ -6041,7 +6040,6 @@
       "candidate": "catalog/v1.0.0/entries/01KS6FPN00J0T5PZA7GDMAAXNA.json",
       "decision": "escalate",
       "reasons": [
-        "confidence_lt_0.85",
         "sensitive_domain:tax"
       ]
     },
