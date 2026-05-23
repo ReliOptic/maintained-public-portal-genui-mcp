@@ -1,10 +1,14 @@
 import Database from "better-sqlite3";
 import { getRuntimeConfig } from "../config/runtime.js";
-import type { CatalogEntry, CatalogEvidence, EntryFilter, JsonObject, JsonValue } from "../types/catalog.js";
+import type { CatalogEntry, CatalogEvidence, CatalogFreshness, EntryFilter, JsonObject, JsonValue } from "../types/catalog.js";
 import { logJson } from "../utils/logger.js";
 
 interface DbRow {
   readonly payload_json: string;
+}
+
+interface FreshnessRow {
+  readonly latest_date: string | null;
 }
 
 export class CatalogError extends Error {
@@ -27,6 +31,15 @@ const parsePayload = <T extends JsonObject>(row: DbRow | undefined, label: strin
 const limitValue = (limit: number | undefined): number => {
   if (limit === undefined || !Number.isInteger(limit) || limit < 1) return 20;
   return Math.min(limit, 100);
+};
+
+const MILLIS_PER_DAY = 86_400_000;
+
+const dateAgeDays = (stamp: string | null, now: Date): number | null => {
+  if (!stamp) return null;
+  const parsed = Date.parse(stamp);
+  if (!Number.isFinite(parsed)) return null;
+  return Math.floor((now.getTime() - parsed) / MILLIS_PER_DAY);
 };
 
 export class CatalogStore {
@@ -81,6 +94,14 @@ export class CatalogStore {
     return { rows: rows.map((row) => JSON.parse(row.payload_json) as JsonValue) };
   }
 
+  public getFreshness(now = new Date(), thresholdDays = 30): CatalogFreshness {
+    const row = this.database.prepare("SELECT MAX(COALESCE(last_sync_at, last_verified_at)) AS latest_date FROM entries")
+      .get() as FreshnessRow | undefined;
+    const latest = typeof row?.latest_date === "string" ? row.latest_date : null;
+    const age = dateAgeDays(latest, now);
+    return { latest_entry_date: latest, age_days: age, stale: age === null || age > thresholdDays, threshold_days: thresholdDays };
+  }
+
   public close(): void {
     this.db?.close();
     this.db = undefined;
@@ -121,3 +142,4 @@ export const getEvidence = (evidenceId?: string): CatalogEvidence[] => getCatalo
 export const getTaxonomy = (): JsonObject => getCatalog().getTaxonomy();
 export const getWeights = (): JsonObject => getCatalog().getWeights();
 export const getFrameCopy = (): JsonObject => getCatalog().getFrameCopy();
+export const getCatalogFreshness = (): CatalogFreshness => getCatalog().getFreshness();

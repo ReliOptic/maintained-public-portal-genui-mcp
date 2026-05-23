@@ -27,4 +27,12 @@ describe("CatalogStore", () => {
     expect(entry).toBeDefined();
     expect(store.getEntry(String(entry?.entry_id))?.menu_path).toBeTruthy();
   });
+
+  it("reports bundled catalog freshness for startup warnings", () => {
+    const fresh = store.getFreshness(new Date("2026-05-24T00:00:00Z"));
+    expect(fresh.latest_entry_date).toBe("2026-05-23");
+    expect(fresh.age_days).toBe(1);
+    expect(fresh.stale).toBe(false);
+    expect(store.getFreshness(new Date("2026-06-24T00:00:00Z")).stale).toBe(true);
+  });
 });

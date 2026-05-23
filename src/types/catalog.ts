@@ -57,6 +57,13 @@ export interface EntryFilter {
 export type CatalogEntry = EntryRecord;
 export type CatalogEvidence = EvidenceRecord;
 
+export interface CatalogFreshness {
+  readonly latest_entry_date: string | null;
+  readonly age_days: number | null;
+  readonly stale: boolean;
+  readonly threshold_days: number;
+}
+
 export interface CatalogPayloads {
   readonly taxonomy: JsonObject;
   readonly weights: JsonObject;

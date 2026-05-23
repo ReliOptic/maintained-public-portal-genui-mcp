@@ -336,11 +336,13 @@ Three layers:
 
 Catalog freshness: `.mcpb` users get a new file from GitHub Releases each tag (and Claude Desktop's update UI surfaces it); npm users run `npm update -g`. Either way the server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
 
+The v0.1 launch is a **single bundled snapshot**, not a daily end-user update obligation. Update fatigue from frequent SQLite snapshots and a cloud DB / local DB two-track split are deferred to a v0.2 ADR after release telemetry; v0.1 stays local `.mcpb`-first with no runtime fetch, auth, or background update.
+
 This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working extension.
 
 ### Publish cadence
 
-PR merges to `main` do **not** themselves publish. Each merge is a staging-only update. Two automated jobs produce the published versions:
+PR merges to `main` do **not** themselves publish. Each merge is a staging-only update. After v0.1 launch, two automated jobs may produce published versions when maintainers enable the normal cadence:
 
 - **Daily `patch`** — every day at 00:00 KST, CI inspects diffs since the last tag. If only `patch`-level changes exist (copy fixes, tier1→tier2 [[Handoff]] downgrades, `last_sync_at` / `last_verified_at` updates, free_tag updates), CI tags `catalog@MAJOR.MINOR.PATCH+1`, builds the npm package, and publishes.
 - **Weekly `minor`** — on a fixed weekday, if Entries were added or removed since the last `minor` tag, CI bumps `MINOR`, resets `PATCH=0`, builds, publishes.
