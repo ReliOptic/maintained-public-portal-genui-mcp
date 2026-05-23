@@ -11,3 +11,12 @@ env_*
 __pycache__/
 *.py[cod]
 .pytest_cache/
+# Node/TypeScript build outputs.
+node_modules/
+dist/
+coverage/
+.nyc_output/
+
+# Generated runtime catalog artifact; source JSON remains canonical.
+catalog/compiled.sqlite
+catalog/compiled.sqlite-*
