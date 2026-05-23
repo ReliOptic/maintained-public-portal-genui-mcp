@@ -17,7 +17,7 @@
     "무료",
     "지원(차상위)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|401000000510",
+  "content_fingerprint": "semantic:v1|benefit_check|check|종량제 봉투 무료 지원 차상위|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

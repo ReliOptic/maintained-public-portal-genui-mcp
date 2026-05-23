@@ -17,7 +17,7 @@
     "주거취약계층을",
     "위한"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|650000001138",
+  "content_fingerprint": "semantic:v1|benefit_check|check|제주 청년 및 주거취약계층을 위한 주택 중개수수료 지원|jeju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

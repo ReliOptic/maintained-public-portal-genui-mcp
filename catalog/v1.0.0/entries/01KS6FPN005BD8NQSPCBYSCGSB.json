@@ -17,7 +17,7 @@
     "재활운동",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00100600001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|남원권 맞춤형 재활운동 서비스 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

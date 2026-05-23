@@ -40,6 +40,14 @@ ALLOW_HOSTS = {"hometax.go.kr", "www.gov.kr", "gov.kr", "plus.gov.kr", "www.data
 SENSITIVE_DOMAINS = {"tax", "welfare", "family", "immigration", "legal"}
 ORDINALS = {"low", "medium", "high"}
 FEATURE_CAPS = {"card_title": 40, "card_body": 120, "cta_label": 20}
+TASK_SOURCE_PRIORITY = {
+    "gov24-serviceList": 1,
+    "bokjiro-central": 2,
+    "bokjiro-regional": 3,
+    "worknet-supported-jobs": 4,
+}
+REQUIRED_TASK_SOURCE_REGISTRIES = tuple(TASK_SOURCE_PRIORITY)
+LIVE_CHECK_ENTRY_IDS = {"nts-business-status"}
 
 
 def load_yaml(path: Path) -> Any:
@@ -80,6 +88,69 @@ def ulid_from_seed(seed: str) -> str:
         chars.append(alphabet[n & 31])
         n >>= 5
     return "".join(reversed(chars))
+
+
+def normalize_fingerprint_text(value: Any) -> str:
+    text = str(value or "").casefold()
+    text = re.sub(r"[^0-9a-z가-힣_]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip() or "none"
+
+
+def fingerprint_scope(values: Any) -> str:
+    if not isinstance(values, list):
+        values = [] if values in {None, ""} else [values]
+    normalized = sorted({normalize_fingerprint_text(v) for v in values if normalize_fingerprint_text(v) != "none"})
+    return ",".join(normalized) or "none"
+
+
+def semantic_content_fingerprint(entry: dict[str, Any]) -> str:
+    """ADR-0001 v0.1 portal-free content fingerprint.
+
+    This is intentionally independent of source portal/API name. Source-specific
+    row identity stays in api_ref/source_urls; this field is only for detecting
+    the same Leaf Service across Task sources.
+    """
+    parts = [
+        normalize_fingerprint_text(entry.get("canonical_intent")),
+        normalize_fingerprint_text(entry.get("canonical_action_verb")),
+        normalize_fingerprint_text(entry.get("title")),
+        fingerprint_scope(entry.get("region_tags")),
+        fingerprint_scope(entry.get("persona_tags")),
+    ]
+    return "semantic:v1|" + "|".join(parts)
+
+
+def should_exclude_from_cross_source_dedup(entry: dict[str, Any]) -> bool:
+    return bool(entry.get("exclude_from_cross_source_dedup")) or entry.get("entry_id") in LIVE_CHECK_ENTRY_IDS
+
+
+def task_source_id(entry: dict[str, Any]) -> str:
+    api_ref = entry.get("api_ref") if isinstance(entry.get("api_ref"), dict) else {}
+    if api_ref.get("source_id"):
+        return str(api_ref["source_id"])
+    if entry.get("access_mode") == "portal_handoff":
+        return f"portal:{entry.get('portal', 'unknown')}"
+    return "unknown"
+
+
+def source_priority(entry: dict[str, Any]) -> int:
+    return TASK_SOURCE_PRIORITY.get(task_source_id(entry), 90)
+
+
+def secondary_source_descriptor(entry: dict[str, Any]) -> dict[str, Any]:
+    api_ref = entry.get("api_ref") if isinstance(entry.get("api_ref"), dict) else {}
+    return {
+        "source_id": task_source_id(entry),
+        "row_id": api_ref.get("row_id") or entry.get("entry_id"),
+        "entry_id": entry.get("entry_id"),
+        "access_mode": entry.get("access_mode"),
+        "title": entry.get("title"),
+        "fields": {
+            "api_payload_keys": entry.get("api_payload_keys", []),
+            "source_urls": entry.get("source_urls", []),
+            "evidence_refs": entry.get("evidence_refs", []),
+        },
+    }
 
 
 def read_taxonomy() -> dict[str, Any]:
@@ -382,7 +453,7 @@ def portal_entry_from_seed(row: dict[str, Any], capture: dict[str, Any]) -> dict
     entry_id = ulid_from_seed("portal-handoff|" + row["url"] + "|" + title)
     portal = row["portal"]
     source_host = urllib.parse.urlparse(row["url"]).hostname or ""
-    return {
+    entry = {
         "entry_id": entry_id,
         "catalog_version": "1.0.0",
         "status": "published",
@@ -396,7 +467,7 @@ def portal_entry_from_seed(row: dict[str, Any], capture: dict[str, Any]) -> dict
         "canonical_intent": intent,
         "canonical_action_verb": "handoff",
         "key_keywords": [k for k in re.split(r"\s+", title) if k][:4],
-        "content_fingerprint": f"{portal}|portal_handoff|{hashlib.sha1(row['url'].encode()).hexdigest()[:16]}",
+        "content_fingerprint": "",
         "source_urls": [row["url"]],
         "stage1_capture": {
             "fetch_status": capture["status"],
@@ -433,6 +504,8 @@ def portal_entry_from_seed(row: dict[str, Any], capture: dict[str, Any]) -> dict
         "safe_copy_audit": {"safe_copy_rule": "confirm_not_assert", "outcome": "pass", "checked_patterns": ["대상 단정 없음", "승인 보장 없음"]},
         "last_verified_at": today(),
     }
+    entry["content_fingerprint"] = semantic_content_fingerprint(entry)
+    return entry
 
 
 def portal_refresh(args: argparse.Namespace) -> dict[str, Any]:
@@ -620,7 +693,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "canonical_intent": inferred["task_intent"][0],
                 "canonical_action_verb": "check",
                 "key_keywords": [k for k in re.split(r"\s+", title) if k][:4] or [title[:20]],
-                "content_fingerprint": f"gov24|gov24-serviceList|{row_id}",
+                "content_fingerprint": "",
                 "source_urls": [operations[name]["endpoint"] for name in ["serviceList", "serviceDetail", "supportConditions"]],
                 "api_ref": {
                     "source_id": registry["source_id"],
@@ -659,6 +732,7 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "safe_copy_audit": {"safe_copy_rule": "confirm_not_assert", "outcome": "pass", "checked_patterns": ["대상 단정 없음", "승인 보장 없음", "금액 단정 없음"]},
                 "last_sync_at": today(),
             }
+            entry["content_fingerprint"] = semantic_content_fingerprint(entry)
             out = ENTRIES / f"{entry_id}.json"
             dump_json(out, entry)
             written.append(str(out.relative_to(ROOT)))
@@ -692,6 +766,113 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
         "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope.",
     }
     write_api_refresh_summary(summary)
+    return summary
+
+
+def source_registry_check(args: argparse.Namespace) -> dict[str, Any]:
+    registries = []
+    missing = []
+    for source_id in REQUIRED_TASK_SOURCE_REGISTRIES:
+        path = ROOT / "catalog" / "api-registry" / f"{source_id}.yaml"
+        if not path.exists():
+            missing.append(source_id)
+            continue
+        data = load_yaml(path)
+        registries.append({
+            "source_id": source_id,
+            "path": str(path.relative_to(ROOT)),
+            "role": data.get("role", "task_source" if source_id == "gov24-serviceList" else None),
+            "priority": data.get("priority", TASK_SOURCE_PRIORITY[source_id]),
+            "ingestion_status": data.get("ingestion_status", "active" if source_id == "gov24-serviceList" else "planned"),
+            "ci_stage": data.get("ci_stage", "full_ingestion" if source_id == "gov24-serviceList" else "registry_validated_only"),
+            "auth_env": data.get("auth", {}).get("env"),
+            "has_service_list_operation": "serviceList" in data.get("operations", {}),
+        })
+    errors = []
+    if missing:
+        errors.append("missing_task_source_registries:" + ",".join(missing))
+    for item in registries:
+        if item["source_id"] != "gov24-serviceList" and item["ci_stage"] != "registry_validated_only":
+            errors.append(f"planned_source_ci_stage:{item['source_id']}")
+        if not item["has_service_list_operation"]:
+            errors.append(f"missing_serviceList_operation:{item['source_id']}")
+    summary = {
+        "stage": "source-registry-check",
+        "required_task_sources": list(REQUIRED_TASK_SOURCE_REGISTRIES),
+        "registries": registries,
+        "missing": missing,
+        "errors": errors,
+        "passed": not errors,
+        "note": "Session 1 full ingestion only fetches gov24. Bokjiro/worknet registries are validated as Task-source contracts until their endpoint mappings and CI secrets are added.",
+    }
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    dump_json(REPORT_DIR / "session1-source-registry-check.json", summary)
+    if errors:
+        raise RuntimeError(";".join(errors))
+    return summary
+
+
+def apply_cross_source_dedup(args: argparse.Namespace) -> dict[str, Any]:
+    files = sorted(p for p in ENTRIES.glob("*.json") if not p.name.startswith("_example"))
+    entries: list[tuple[Path, dict[str, Any]]] = []
+    rewrote_fingerprints = 0
+    for path in files:
+        entry = load_json(path)
+        if not should_exclude_from_cross_source_dedup(entry):
+            next_fingerprint = semantic_content_fingerprint(entry)
+            if entry.get("content_fingerprint") != next_fingerprint:
+                entry["content_fingerprint"] = next_fingerprint
+                rewrote_fingerprints += 1
+        entries.append((path, entry))
+
+    groups: dict[str, list[tuple[Path, dict[str, Any]]]] = {}
+    for path, entry in entries:
+        if should_exclude_from_cross_source_dedup(entry):
+            continue
+        groups.setdefault(str(entry.get("content_fingerprint")), []).append((path, entry))
+
+    merged = 0
+    duplicate_groups = 0
+    for fingerprint, group in groups.items():
+        source_ids = {task_source_id(entry) for _, entry in group}
+        task_sources = {s for s in source_ids if s in TASK_SOURCE_PRIORITY}
+        # Do not collapse same-source duplicates here. The Session 1 contract is
+        # cross-source dedup: lower-priority Task sources enrich the winner.
+        if len(task_sources) < 2:
+            continue
+        duplicate_groups += 1
+        winner_path, winner = sorted(group, key=lambda item: (source_priority(item[1]), str(item[1].get("entry_id"))))[0]
+        secondary = winner.setdefault("secondary_sources", [])
+        seen_secondary = {(s.get("source_id"), s.get("row_id")) for s in secondary if isinstance(s, dict)}
+        for loser_path, loser in group:
+            if loser_path == winner_path:
+                continue
+            descriptor = secondary_source_descriptor(loser)
+            key = (descriptor["source_id"], descriptor["row_id"])
+            if key not in seen_secondary:
+                secondary.append(descriptor)
+                seen_secondary.add(key)
+            loser["merged_into"] = winner.get("entry_id")
+            loser["status"] = "merged"
+            merged += 1
+
+    written = []
+    for path, entry in entries:
+        dump_json(path, entry)
+        written.append(str(path.relative_to(ROOT)))
+
+    summary = {
+        "stage": "cross-source-dedup",
+        "semantic_fingerprint_version": "v1",
+        "entries_scanned": len(entries),
+        "fingerprints_rewritten": rewrote_fingerprints,
+        "cross_source_duplicate_groups": duplicate_groups,
+        "entries_marked_merged": merged,
+        "policy": "Only duplicates spanning two or more registered Task sources are collapsed; same-source repeats remain separate candidate rows for maintainer review.",
+        "excluded_entry_ids": sorted(LIVE_CHECK_ENTRY_IDS),
+    }
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    dump_json(REPORT_DIR / "session1-cross-source-dedup.json", summary)
     return summary
 
 
@@ -747,9 +928,14 @@ def review_candidate(path: Path, taxonomy: dict[str, Any], ev_ids: set[str], pat
     if e.get("access_mode") == "api_cached":
         if not e.get("api_ref") or not e.get("api_payload_keys") or not e.get("last_sync_at"):
             reasons.append("access_mode:api_cached_source_fields")
+        api_ref = e.get("api_ref") if isinstance(e.get("api_ref"), dict) else {}
+        if api_ref.get("source_id") in TASK_SOURCE_PRIORITY and not str(e.get("content_fingerprint", "")).startswith("semantic:v1|"):
+            reasons.append("dedup:non_semantic_content_fingerprint")
     if e.get("access_mode") in {"portal_handoff", "manual_check"}:
         if not e.get("source_urls") or not e.get("last_verified_at"):
             reasons.append("access_mode:portal_source_fields")
+        if not should_exclude_from_cross_source_dedup(e) and not str(e.get("content_fingerprint", "")).startswith("semantic:v1|"):
+            reasons.append("dedup:non_semantic_content_fingerprint")
     for ev in e.get("evidence_refs", []):
         if ev not in ev_ids:
             reasons.append(f"evidence_ref:{ev}")
@@ -805,6 +991,12 @@ def pr_body(args: argparse.Namespace) -> dict[str, Any]:
     if not summary_path.exists():
         raise SystemExit("run review first")
     summary = load_json(summary_path)
+    persona_path = REPORT_DIR / "persona-check.json"
+    persona_summary = load_json(persona_path) if persona_path.exists() else None
+    registry_path = REPORT_DIR / "session1-source-registry-check.json"
+    registry_summary = load_json(registry_path) if registry_path.exists() else None
+    dedup_path = REPORT_DIR / "session1-cross-source-dedup.json"
+    dedup_summary = load_json(dedup_path) if dedup_path.exists() else None
     entries = [load_json(p) for p in sorted(ENTRIES.glob("*.json")) if not p.name.startswith("_example")]
     conf = {">=0.95": 0, "0.85-0.95": 0, "0.60-0.85": 0, "<0.60": 0}
     sensitive = 0
@@ -838,6 +1030,13 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 - sensitive candidates: {sensitive}
 
+## Source registry and dedup
+
+- Task source registries validated: {len(registry_summary.get('registries', [])) if registry_summary else 'not run'}
+- Cross-source duplicate groups: {dedup_summary.get('cross_source_duplicate_groups', 'not run') if dedup_summary else 'not run'}
+- Entries marked merged by cross-source dedup: {dedup_summary.get('entries_marked_merged', 'not run') if dedup_summary else 'not run'}
+- Persona check findings: {persona_summary.get('finding_count', 'not run') if persona_summary else 'not run'}
+
 ## Review decisions
 
 ```json
@@ -855,8 +1054,12 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 - [ ] `GOV24_SERVICE_KEY` was supplied by GitHub Secrets, not by a committed file.
 - [ ] API refresh generated the full national + regional Gov24 candidate set; no local fake rows were used.
 - [ ] Portal handoff generated at least 30 EntryCandidates and every candidate has `menu_path`.
+- [ ] `bokjiro-central`, `bokjiro-regional`, and `worknet-supported-jobs` registry YAML files exist and are validated as planned Task sources.
+- [ ] `nts-business-status` exists as a hand-curated v0.1 Live Check Entry and remains excluded from cross-source dedup.
+- [ ] Cross-source dedup uses ADR-0001 `semantic:v1` content fingerprints; same-source repeats are not collapsed automatically.
 - [ ] Evidence metadata was refreshed for every seed dataset.
 - [ ] Review Agent ran with N={summary['parallel_instances']} chunks and `processed_percent` is `{summary['processed_percent']}`.
+- [ ] Persona check ran and produced `tooling/review-agent/reports/persona-check.json`.
 - [ ] Auto-accept / escalation counts and reason counts are included below.
 - [ ] Rubric violation counts are zero for taxonomy, menu_path, safe-copy, copy caps, ordinal sanity, access-mode/source fields, and evidence refs.
 - [ ] Reports and catalog artifacts contain no secret value and no report contains the API query-key literal.
@@ -878,9 +1081,11 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 def run_all(args: argparse.Namespace) -> dict[str, Any]:
     stages = []
+    stages.append(source_registry_check(args))
     stages.append(api_refresh(args))
     stages.append(portal_refresh(args))
     stages.append(evidence_refresh(args))
+    stages.append(apply_cross_source_dedup(args))
     stages.append(review(args))
     stages.append(pr_body(args))
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
@@ -890,7 +1095,7 @@ def run_all(args: argparse.Namespace) -> dict[str, Any]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["api-refresh", "portal-refresh", "evidence-refresh", "review", "pr-body", "all"])
+    ap.add_argument("command", choices=["api-refresh", "portal-refresh", "evidence-refresh", "source-registry-check", "dedup", "review", "pr-body", "all"])
     ap.add_argument("--parallel", type=int, default=8)
     ap.add_argument("--rate-delay", type=float, default=0.2)
     ap.add_argument("--max-pages", type=int, default=0, help="testing limit for gov24 api-refresh; 0 means all")
@@ -905,6 +1110,8 @@ def main() -> None:
     if args.command == "api-refresh": result = api_refresh(args)
     elif args.command == "portal-refresh": result = portal_refresh(args)
     elif args.command == "evidence-refresh": result = evidence_refresh(args)
+    elif args.command == "source-registry-check": result = source_registry_check(args)
+    elif args.command == "dedup": result = apply_cross_source_dedup(args)
     elif args.command == "review": result = review(args)
     elif args.command == "pr-body": result = pr_body(args)
     else: result = run_all(args)

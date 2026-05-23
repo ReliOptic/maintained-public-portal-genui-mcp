@@ -17,7 +17,7 @@
     "및",
     "태극기"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|558000000107",
+  "content_fingerprint": "semantic:v1|benefit_check|check|전입세대 지원금 및 태극기 지급|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

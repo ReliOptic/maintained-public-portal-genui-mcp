@@ -15,7 +15,7 @@
     "장학재단",
     "장학금(효행)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|405000000658",
+  "content_fingerprint": "semantic:v1|education_application|check|장학재단 장학금 효행|gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

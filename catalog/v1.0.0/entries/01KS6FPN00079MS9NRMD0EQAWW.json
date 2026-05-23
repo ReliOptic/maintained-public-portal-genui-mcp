@@ -17,7 +17,7 @@
     "학생",
     "학습나눔사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|305000000122",
+  "content_fingerprint": "semantic:v1|education_application|check|저소득층 초 중 고 학생 학습나눔사업|seoul|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

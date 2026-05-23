@@ -17,7 +17,7 @@
     "산전관리",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|347000000113",
+  "content_fingerprint": "semantic:v1|benefit_check|check|달서구 임산부 산전관리 및 검사 지원|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

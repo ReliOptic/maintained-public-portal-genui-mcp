@@ -16,7 +16,7 @@
     "늘봄(방과후)학교",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|800000000010",
+  "content_fingerprint": "semantic:v1|education_application|check|특수 늘봄 방과후 학교 지원|chungbuk,education_office|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

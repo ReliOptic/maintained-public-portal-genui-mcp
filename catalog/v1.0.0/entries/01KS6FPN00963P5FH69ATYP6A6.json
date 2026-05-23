@@ -17,7 +17,7 @@
     "제공",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55120200016",
+  "content_fingerprint": "semantic:v1|benefit_check|check|보훈휴양원 휴양시설 제공 서비스|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "어학자격시험",
     "응시료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|320000000298",
+  "content_fingerprint": "semantic:v1|benefit_check|check|관악 미취업청년 어학자격시험 응시료 지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

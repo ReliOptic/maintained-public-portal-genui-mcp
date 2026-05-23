@@ -15,7 +15,7 @@
     "결혼이민자",
     "통번역서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|WII000001240",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|결혼이민자 통번역서비스|central_government,nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

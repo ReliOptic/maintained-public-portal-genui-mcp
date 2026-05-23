@@ -17,7 +17,7 @@
     "역량강화",
     "단체멘토링"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00093000014",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소상공인 예비창업자 실전형 역량강화 단체멘토링|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "모범업소",
     "지정"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|452000000318",
+  "content_fingerprint": "semantic:v1|benefit_check|check|물가안정 모범업소 지정|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

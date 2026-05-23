@@ -17,7 +17,7 @@
     "검사",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|304000000172",
+  "content_fingerprint": "semantic:v1|benefit_check|check|갑상선 기능 검사 서비스|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

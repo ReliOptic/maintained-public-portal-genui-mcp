@@ -17,7 +17,7 @@
     "재가돌봄",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|631000000712",
+  "content_fingerprint": "semantic:v1|benefit_check|check|울산광역시 산모신생아 재가돌봄 서비스 지원|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "어학꿈나무",
     "키움사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00248600003",
+  "content_fingerprint": "semantic:v1|education_application|check|전북특별자치도 글로벌 어학꿈나무 키움사업|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

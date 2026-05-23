@@ -17,7 +17,7 @@
     "성장사다리",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|488000000116",
+  "content_fingerprint": "semantic:v1|benefit_check|check|고교졸업생 사회진출 성장사다리 지원|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

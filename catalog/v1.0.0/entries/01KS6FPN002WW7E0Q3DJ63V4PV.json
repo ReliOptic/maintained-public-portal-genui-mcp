@@ -16,7 +16,7 @@
     "여객선",
     "운임지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|WII000000060",
+  "content_fingerprint": "semantic:v1|benefit_check|check|도서민 여객선 운임지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

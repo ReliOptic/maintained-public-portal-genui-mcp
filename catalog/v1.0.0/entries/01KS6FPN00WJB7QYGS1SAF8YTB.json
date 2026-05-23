@@ -17,7 +17,7 @@
     "사업",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|627000000145",
+  "content_fingerprint": "semantic:v1|education_application|check|초등학생 치과주치의 사업 지원|daegu|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

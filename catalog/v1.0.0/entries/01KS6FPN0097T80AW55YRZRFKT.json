@@ -17,7 +17,7 @@
     "사회적",
     "취약계층"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SD0000005852",
+  "content_fingerprint": "semantic:v1|benefit_check|check|국가공무원 채용시험 사회적 취약계층 응시수수료 면제|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

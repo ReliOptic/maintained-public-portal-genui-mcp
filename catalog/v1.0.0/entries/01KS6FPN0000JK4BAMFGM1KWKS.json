@@ -16,7 +16,7 @@
     "장학금",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00081000001",
+  "content_fingerprint": "semantic:v1|education_application|check|부산사상구장학회 장학금 지급|busan,central_government|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

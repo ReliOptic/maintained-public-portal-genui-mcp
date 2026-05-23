@@ -17,7 +17,7 @@
     "고온",
     "스트레스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|646000000169",
+  "content_fingerprint": "semantic:v1|benefit_check|check|폭염 대비 고온 스트레스 완화제 지원|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

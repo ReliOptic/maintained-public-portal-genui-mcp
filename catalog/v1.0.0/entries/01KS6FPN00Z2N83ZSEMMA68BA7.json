@@ -16,7 +16,7 @@
     "등",
     "취업지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|138300000055",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|경력보유여성 등 취업지원|central_government,nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

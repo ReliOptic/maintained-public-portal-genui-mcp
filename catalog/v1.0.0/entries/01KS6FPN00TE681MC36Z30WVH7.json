@@ -17,7 +17,7 @@
     "숙박시설",
     "이용감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00010400003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|이천 농업테마공원 숙박시설 이용감면 제공|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

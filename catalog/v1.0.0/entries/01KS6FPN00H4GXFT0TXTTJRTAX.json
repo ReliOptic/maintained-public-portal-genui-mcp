@@ -16,7 +16,7 @@
     "전역예정군인",
     "전직컨설팅서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55346600003",
+  "content_fingerprint": "semantic:v1|education_application|check|중 장기복무 전역예정군인 전직컨설팅서비스|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

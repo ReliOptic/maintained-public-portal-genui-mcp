@@ -14,7 +14,7 @@
   "key_keywords": [
     "지역화폐(남원사랑상품권)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|470000000117",
+  "content_fingerprint": "semantic:v1|benefit_check|check|지역화폐 남원사랑상품권|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "국민기초생활수급자",
     "장례식장비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00045400028",
+  "content_fingerprint": "semantic:v1|benefit_check|check|국가유공자 및 국민기초생활수급자 장례식장비 감면|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "및",
     "근로자"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B49000100215",
+  "content_fingerprint": "semantic:v1|benefit_check|check|중소기업퇴직연금기금제도 푸른씨앗 사업주 및 근로자 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

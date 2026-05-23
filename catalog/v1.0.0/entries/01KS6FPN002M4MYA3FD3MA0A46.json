@@ -17,7 +17,7 @@
     "체험",
     "프로그램"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|484000000401",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년 행정인턴 체험 프로그램 제공|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

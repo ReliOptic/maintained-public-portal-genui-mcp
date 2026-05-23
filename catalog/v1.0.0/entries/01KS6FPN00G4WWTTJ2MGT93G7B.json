@@ -16,7 +16,7 @@
     "장애학생지원센터",
     "운영지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SD0000010494",
+  "content_fingerprint": "semantic:v1|education_application|check|대학의 장애학생지원센터 운영지원|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

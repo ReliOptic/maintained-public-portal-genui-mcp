@@ -17,7 +17,7 @@
     "참여",
     "국외체험"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|134200000010",
+  "content_fingerprint": "semantic:v1|education_application|check|장애학생 가족 참여 국외체험 연수 지원|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

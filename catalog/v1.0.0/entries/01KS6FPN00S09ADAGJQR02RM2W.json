@@ -16,7 +16,7 @@
     "꿈사다리",
     "장학사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|999000000014",
+  "content_fingerprint": "semantic:v1|education_application|check|복권기금 꿈사다리 장학사업|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "행복택시",
     "운행"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|489000000427",
+  "content_fingerprint": "semantic:v1|benefit_check|check|보성군 군민중심 행복택시 운행|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

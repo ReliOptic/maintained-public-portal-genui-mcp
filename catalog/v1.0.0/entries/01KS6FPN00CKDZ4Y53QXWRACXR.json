@@ -17,7 +17,7 @@
     "100원",
     "버스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|489000000424",
+  "content_fingerprint": "semantic:v1|education_application|check|보성군 초 중 고등학생 100원 버스|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

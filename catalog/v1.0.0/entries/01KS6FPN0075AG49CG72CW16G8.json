@@ -17,7 +17,7 @@
     "입주자",
     "자녀출산"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00030800001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|충남 꿈비채 입주자 자녀출산 시 임대료 감면|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

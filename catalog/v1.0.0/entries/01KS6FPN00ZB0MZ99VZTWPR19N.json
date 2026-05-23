@@ -17,7 +17,7 @@
     "및",
     "방과후활동"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|753000000222",
+  "content_fingerprint": "semantic:v1|education_application|check|특수교육학생 치료 및 방과후활동 지원|education_office,gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -14,7 +14,7 @@
   "key_keywords": [
     "방송통신고등학교"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B09002700003",
+  "content_fingerprint": "semantic:v1|education_application|check|방송통신고등학교|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

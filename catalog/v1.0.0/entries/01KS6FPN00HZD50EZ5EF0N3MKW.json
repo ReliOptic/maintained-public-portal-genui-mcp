@@ -17,7 +17,7 @@
     "부담금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|420000000145",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장기요양급여비용 지자체 부담금 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

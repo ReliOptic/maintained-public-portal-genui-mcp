@@ -17,7 +17,7 @@
     "지원(마을기업",
     "육성)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|174000000055",
+  "content_fingerprint": "semantic:v1|benefit_check|check|지역주민 출자법인 지원 마을기업 육성|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

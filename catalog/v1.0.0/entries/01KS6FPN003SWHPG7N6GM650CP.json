@@ -16,7 +16,7 @@
     "지원사업(찾아가는",
     "산부인과)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00114400007",
+  "content_fingerprint": "semantic:v1|benefit_check|check|분만취약지역 지원사업 찾아가는 산부인과|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

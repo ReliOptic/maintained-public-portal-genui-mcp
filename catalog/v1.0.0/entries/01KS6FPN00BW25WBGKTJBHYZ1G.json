@@ -16,7 +16,7 @@
     "이용요금",
     "감면(독산어르신체육센터)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00022800002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|체육시설 이용요금 감면 독산어르신체육센터|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

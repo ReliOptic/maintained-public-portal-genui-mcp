@@ -17,7 +17,7 @@
     "및",
     "다문화가족모국방문"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|423000000483",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|결혼이민자 운전면허취득 및 다문화가족모국방문 지원|gangwon|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

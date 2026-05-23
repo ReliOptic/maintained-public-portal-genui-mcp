@@ -17,7 +17,7 @@
     "공공시설",
     "이용료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|474100000037",
+  "content_fingerprint": "semantic:v1|benefit_check|check|무주군 전입세대 공공시설 이용료 면제|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

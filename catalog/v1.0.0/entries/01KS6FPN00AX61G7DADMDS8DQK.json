@@ -15,7 +15,7 @@
     "태안군",
     "보훈의료카드"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|462000000332",
+  "content_fingerprint": "semantic:v1|benefit_check|check|태안군 보훈의료카드|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

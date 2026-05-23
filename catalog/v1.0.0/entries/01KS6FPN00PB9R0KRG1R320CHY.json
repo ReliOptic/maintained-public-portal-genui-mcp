@@ -16,7 +16,7 @@
     "시간제보육",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|571000000142",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|청주시 시간제보육 지원|central_government,chungbuk|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

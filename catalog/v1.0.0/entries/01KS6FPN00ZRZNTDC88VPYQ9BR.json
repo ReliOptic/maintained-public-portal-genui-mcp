@@ -15,7 +15,7 @@
     "달서가족문화센터",
     "문화강좌"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00075300001",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|달서가족문화센터 문화강좌|nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

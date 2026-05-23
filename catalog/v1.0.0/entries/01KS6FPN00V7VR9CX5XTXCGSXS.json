@@ -17,7 +17,7 @@
     "해외",
     "전자상거래"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|484000000106",
+  "content_fingerprint": "semantic:v1|benefit_check|check|우수 농식품 해외 전자상거래 입점 지원|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

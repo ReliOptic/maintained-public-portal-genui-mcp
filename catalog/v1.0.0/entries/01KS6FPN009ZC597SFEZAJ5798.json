@@ -16,7 +16,7 @@
     "이용요금",
     "감면(인천북부교육문화센터)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00026700001",
+  "content_fingerprint": "semantic:v1|education_application|check|문화시설 이용요금 감면 인천북부교육문화센터|central_government,incheon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

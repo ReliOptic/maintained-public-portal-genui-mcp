@@ -16,7 +16,7 @@
     "주거환경",
     "정비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|544000000103",
+  "content_fingerprint": "semantic:v1|benefit_check|check|취약계층 주거환경 정비|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

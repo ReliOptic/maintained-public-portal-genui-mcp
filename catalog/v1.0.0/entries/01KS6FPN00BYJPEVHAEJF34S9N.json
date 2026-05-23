@@ -17,7 +17,7 @@
     "지원",
     "(구)다문화가족"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|611000000155",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|이주여성 건강관리 지원 구 다문화가족 출산 전후 돌봄서비스|seoul|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

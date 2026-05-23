@@ -17,7 +17,7 @@
     "지급(2026년",
     "천사지원금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|628000000756",
+  "content_fingerprint": "semantic:v1|benefit_check|check|2025년 천사지원금 지급 2026년 천사지원금 지급 페이지에서 신청해 주시기 바랍니다|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

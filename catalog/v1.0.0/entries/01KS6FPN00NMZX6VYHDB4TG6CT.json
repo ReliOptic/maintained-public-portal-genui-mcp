@@ -15,7 +15,7 @@
     "특수교육학생",
     "장애치료지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|875000000001",
+  "content_fingerprint": "semantic:v1|education_application|check|특수교육학생 장애치료지원|education_office,gyeongbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -1,0 +1,45 @@
+source_id: worknet-supported-jobs
+title: 워크넷 정부지원일자리
+role: task_source
+priority: 4
+source_org_scope:
+- national
+- regional
+source_org_scope_note: 정부지원일자리/고용지원성 채용정보 행을 employment-support Task Entry 후보로 수집하는 planned API source입니다.
+ingestion_status: planned
+ci_stage: registry_validated_only
+auth:
+  type: serviceKey
+  env: WORKNET_AUTH_KEY
+  placement: query.authKey
+operations:
+  serviceList:
+    method: GET
+    endpoint: null
+    official_reference: https://www.work24.go.kr/
+    purpose: 정부지원일자리성 채용/지원 행을 EntryCandidate의 기본 단위로 수집합니다.
+mapping_row_to_entry:
+  entry_id: stable hash of source_id + job_or_program_id
+  access_mode: api_cached
+  portal: worknet
+  domain: welfare
+  title: row.program_or_job_name
+  api_ref:
+    source_id: worknet-supported-jobs
+    operation: serviceList
+    row_id: row.job_or_program_id
+  handoff: tier3 menu_path from source row or 고용24/워크넷 > 정부지원일자리
+  persona_tags:
+  - job_seeker
+  task_intent:
+  - employment_support
+  life_event_tags:
+  - employment
+  evidence_refs: curated join by region/persona
+ttl_policy:
+  last_sync_at_plus_days: 60
+  expired_status: archived
+dedup_policy:
+  content_fingerprint: semantic_v1
+  primary_source_priority: 4
+  attach_as_secondary_when_duplicate: true

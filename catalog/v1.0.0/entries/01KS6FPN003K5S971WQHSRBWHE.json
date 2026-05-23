@@ -17,7 +17,7 @@
     "서비스",
     "제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|470000000121",
+  "content_fingerprint": "semantic:v1|benefit_check|check|취약가구 소식 안심 서비스 제공|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

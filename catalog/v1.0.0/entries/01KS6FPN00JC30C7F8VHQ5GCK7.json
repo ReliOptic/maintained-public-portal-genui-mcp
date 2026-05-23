@@ -15,7 +15,7 @@
     "거주자우선주차",
     "배점가산(모두의주차장)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00022600025",
+  "content_fingerprint": "semantic:v1|benefit_check|check|거주자우선주차 배점가산 모두의주차장|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

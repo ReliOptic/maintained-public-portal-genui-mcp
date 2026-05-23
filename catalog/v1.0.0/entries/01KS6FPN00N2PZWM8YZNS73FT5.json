@@ -17,7 +17,7 @@
     "주민",
     "상담심리"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|314000000265",
+  "content_fingerprint": "semantic:v1|benefit_check|check|양천구 공항소음피해지역 주민 상담심리 지원 상담서비스 제공|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

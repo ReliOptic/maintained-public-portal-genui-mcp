@@ -17,7 +17,7 @@
     "초등단체",
     "교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55100100002",
+  "content_fingerprint": "semantic:v1|education_application|check|독립기념관 임시정부 초등단체 교육|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

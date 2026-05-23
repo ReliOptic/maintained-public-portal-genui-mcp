@@ -17,7 +17,7 @@
     "대학생",
     "장학금(유공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|435000000137",
+  "content_fingerprint": "semantic:v1|education_application|check|고등 및 대학생 장학금 유공 및 저소득|gangwon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

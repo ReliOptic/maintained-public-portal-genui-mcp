@@ -15,7 +15,7 @@
     "서구인재육성재단",
     "장학금(성적우수)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|343000000101",
+  "content_fingerprint": "semantic:v1|education_application|check|서구인재육성재단 장학금 성적우수|daegu|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "외국인체류확인서",
     "발급"
   ],
-  "content_fingerprint": "gov24|portal_handoff|1318e67b232a9594",
+  "content_fingerprint": "semantic:v1|certificate_issue|handoff|외국인체류확인서 발급|nationwide|foreign_resident",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12700000115&HighCtgCD=A01010"
   ],

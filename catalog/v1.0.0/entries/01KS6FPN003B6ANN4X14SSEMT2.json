@@ -17,7 +17,7 @@
     "및",
     "견학"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00138400004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|대구도시철도 운전체험 및 견학|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

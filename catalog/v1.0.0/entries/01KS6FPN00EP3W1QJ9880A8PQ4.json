@@ -17,7 +17,7 @@
     "놀이·여가",
     "시설"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00004900006",
+  "content_fingerprint": "semantic:v1|benefit_check|check|광주시민 공공 놀이 여가 시설 이용료 감액|gwangju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

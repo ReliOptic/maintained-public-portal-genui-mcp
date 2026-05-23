@@ -17,7 +17,7 @@
     "프로그램",
     "참가"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|630000000686",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년만남지원사업 연in대전 프로그램 참가 안내|daejeon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

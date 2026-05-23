@@ -17,7 +17,7 @@
     "및",
     "훈련장려금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55201400002",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|구직자 직업훈련 취업지원 및 훈련장려금 지급 한국폴리텍대학|nationwide|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

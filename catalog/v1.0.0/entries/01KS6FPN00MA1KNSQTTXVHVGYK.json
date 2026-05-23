@@ -14,7 +14,7 @@
   "key_keywords": [
     "농지은행교육지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300000164",
+  "content_fingerprint": "semantic:v1|education_application|check|농지은행교육지원|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

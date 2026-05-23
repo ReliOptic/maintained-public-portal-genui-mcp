@@ -17,7 +17,7 @@
     "홍보판촉행사",
     "지원사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|515000000137",
+  "content_fingerprint": "semantic:v1|benefit_check|check|브랜드 쌀 홍보판촉행사 지원사업|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

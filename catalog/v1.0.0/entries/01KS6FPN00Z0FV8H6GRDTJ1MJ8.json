@@ -17,7 +17,7 @@
     "전문인력",
     "양성교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55353000218",
+  "content_fingerprint": "semantic:v1|education_application|check|에너지 기후변화 전문인력 양성교육|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "신생아·입양영아",
     "건강보험료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|519000000128",
+  "content_fingerprint": "semantic:v1|benefit_check|check|출산지원금 및 신생아 입양영아 건강보험료 지원|central_government,gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

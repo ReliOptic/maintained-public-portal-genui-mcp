@@ -16,7 +16,7 @@
     "공동생활가정(그룹홈)",
     "보호"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|626000000642",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|아동 공동생활가정 그룹홈 보호|busan,central_government|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

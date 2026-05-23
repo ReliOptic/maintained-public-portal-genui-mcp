@@ -16,7 +16,7 @@
     "미디어",
     "체험교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55350500001",
+  "content_fingerprint": "semantic:v1|education_application|check|상설 미디어 체험교육|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "방호장치",
     "보호구"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|149200000085",
+  "content_fingerprint": "semantic:v1|benefit_check|check|안전인증 대상 방호장치 보호구 제조업체 자금 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "희망",
     "장학금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00101000004",
+  "content_fingerprint": "semantic:v1|education_application|check|전북특별자치도 희망 장학금|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

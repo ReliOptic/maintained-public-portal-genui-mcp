@@ -17,7 +17,7 @@
     "우리",
     "집"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|386000000135",
+  "content_fingerprint": "semantic:v1|benefit_check|check|녹물 없는 우리 집 수도관 개량 지원 사업|central_government,gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

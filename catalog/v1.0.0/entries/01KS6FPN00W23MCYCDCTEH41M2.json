@@ -17,7 +17,7 @@
     "보행보조기",
     "지원사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|348000000432",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득 어르신 보행보조기 지원사업|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

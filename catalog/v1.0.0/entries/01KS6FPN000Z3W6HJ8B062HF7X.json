@@ -17,7 +17,7 @@
     "지원(농촌형",
     "워케이션)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300005043",
+  "content_fingerprint": "semantic:v1|benefit_check|check|농촌관계인구 형성 지원 농촌형 워케이션|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

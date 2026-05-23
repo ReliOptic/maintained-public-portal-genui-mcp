@@ -17,7 +17,7 @@
     "학습자등록",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55288100004",
+  "content_fingerprint": "semantic:v1|education_application|check|기초생활수급자 학점은행제 학습자등록 및 학점인정신청 수수료 면제|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

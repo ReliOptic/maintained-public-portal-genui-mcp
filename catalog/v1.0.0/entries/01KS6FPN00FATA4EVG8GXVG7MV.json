@@ -16,7 +16,7 @@
     "입영지원금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|439000000875",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년 입영지원금 지원|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

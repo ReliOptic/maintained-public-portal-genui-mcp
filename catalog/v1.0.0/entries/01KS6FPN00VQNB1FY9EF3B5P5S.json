@@ -17,7 +17,7 @@
     "재형저축",
     "사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|650000000279",
+  "content_fingerprint": "semantic:v1|benefit_check|check|제주청년 희망사다리 재형저축 사업|jeju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

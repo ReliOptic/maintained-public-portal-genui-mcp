@@ -15,7 +15,7 @@
     "K-water",
     "사랑샘터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B50000100003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|k water 사랑샘터|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

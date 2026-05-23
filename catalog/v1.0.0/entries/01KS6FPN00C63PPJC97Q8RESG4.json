@@ -17,7 +17,7 @@
     "수급가구",
     "명절위문금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|302000000115",
+  "content_fingerprint": "semantic:v1|benefit_check|check|기초 생계 의료급여 수급가구 명절위문금 지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

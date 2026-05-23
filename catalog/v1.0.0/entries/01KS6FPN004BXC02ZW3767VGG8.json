@@ -17,7 +17,7 @@
     "축하용품",
     "구입"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|470000000107",
+  "content_fingerprint": "semantic:v1|benefit_check|check|신생아 출산 축하용품 구입 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

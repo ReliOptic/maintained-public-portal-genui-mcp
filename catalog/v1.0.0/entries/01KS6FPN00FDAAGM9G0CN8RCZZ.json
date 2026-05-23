@@ -17,7 +17,7 @@
     "기숙사비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|753000000220",
+  "content_fingerprint": "semantic:v1|education_application|check|기숙형고 저소득층 기숙사비 지원|education_office,gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

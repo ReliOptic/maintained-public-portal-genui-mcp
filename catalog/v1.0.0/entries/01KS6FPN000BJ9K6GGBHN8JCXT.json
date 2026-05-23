@@ -14,7 +14,7 @@
   "key_keywords": [
     "교육문화서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00021200010",
+  "content_fingerprint": "semantic:v1|education_application|check|교육문화서비스|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

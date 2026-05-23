@@ -16,7 +16,7 @@
     "기숙사비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|459000000159",
+  "content_fingerprint": "semantic:v1|education_application|check|전입대학생 기숙사비 지원|central_government,chungnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

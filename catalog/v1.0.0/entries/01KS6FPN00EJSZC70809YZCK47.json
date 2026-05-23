@@ -17,7 +17,7 @@
     "및",
     "조선왕릉"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|155000000001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|4대궁 종묘 및 조선왕릉 관람료 할인|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

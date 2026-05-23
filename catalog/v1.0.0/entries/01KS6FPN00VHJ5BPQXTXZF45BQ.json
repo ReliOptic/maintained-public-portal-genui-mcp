@@ -17,7 +17,7 @@
     "동정",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55435200003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|생물자원 종 동정 서비스|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

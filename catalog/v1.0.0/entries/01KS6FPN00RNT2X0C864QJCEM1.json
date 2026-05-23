@@ -17,7 +17,7 @@
     "구입",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|474000000106",
+  "content_fingerprint": "semantic:v1|benefit_check|check|한우 수정란 구입 및 이식비 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

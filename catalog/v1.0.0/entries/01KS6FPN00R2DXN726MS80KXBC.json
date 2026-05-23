@@ -15,7 +15,7 @@
     "특수교육대상학생",
     "방과후학교지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|780000000012",
+  "content_fingerprint": "semantic:v1|education_application|check|특수교육대상학생 방과후학교지원|education_office,gangwon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

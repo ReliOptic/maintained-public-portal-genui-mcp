@@ -14,7 +14,7 @@
   "key_keywords": [
     "산림서비스도우미(산림복지일자리)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|GFO000000030",
+  "content_fingerprint": "semantic:v1|benefit_check|check|산림서비스도우미 산림복지일자리|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "(둘째자녀부터",
     "적용)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|409000000105",
+  "content_fingerprint": "semantic:v1|benefit_check|check|출산축하금 지원 둘째자녀부터 적용|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

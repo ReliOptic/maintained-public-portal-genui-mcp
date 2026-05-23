@@ -16,7 +16,7 @@
     "1인1나눔",
     "계좌갖기"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B46001400002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|사랑나눔실천 1인1나눔 계좌갖기|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

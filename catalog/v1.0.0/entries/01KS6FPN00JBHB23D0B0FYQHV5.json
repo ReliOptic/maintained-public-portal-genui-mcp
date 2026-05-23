@@ -17,7 +17,7 @@
     "교육",
     "신청(농업촬영"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|484000000413",
+  "content_fingerprint": "semantic:v1|education_application|check|농업인 크리에이터 교육 신청 농업촬영 기초반|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

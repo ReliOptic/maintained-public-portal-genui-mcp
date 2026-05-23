@@ -17,7 +17,7 @@
     "여성농업인",
     "영농작업비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|426000000133",
+  "content_fingerprint": "semantic:v1|benefit_check|check|고령 장애 여성농업인 영농작업비 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "종합심리평가",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00093800008",
+  "content_fingerprint": "semantic:v1|benefit_check|check|고위기 청소년 종합심리평가 지원|central_government,jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

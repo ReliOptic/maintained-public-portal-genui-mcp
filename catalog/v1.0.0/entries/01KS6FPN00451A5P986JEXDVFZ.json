@@ -17,7 +17,7 @@
     "이용료",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55371400001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|국유 산림복지시설 이용료 감면|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

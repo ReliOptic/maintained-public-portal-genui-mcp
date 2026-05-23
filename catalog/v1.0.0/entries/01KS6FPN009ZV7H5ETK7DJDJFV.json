@@ -14,7 +14,7 @@
   "key_keywords": [
     "소셜벤처임팩트보증"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55369400027",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소셜벤처임팩트보증|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

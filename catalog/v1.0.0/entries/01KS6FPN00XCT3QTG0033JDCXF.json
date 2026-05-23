@@ -15,7 +15,7 @@
     "체불근로자",
     "무료법률구조지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|PTR000051328",
+  "content_fingerprint": "semantic:v1|benefit_check|check|체불근로자 무료법률구조지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

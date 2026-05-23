@@ -14,7 +14,7 @@
   "key_keywords": [
     "전북시민대학"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00101000015",
+  "content_fingerprint": "semantic:v1|education_application|check|전북시민대학|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

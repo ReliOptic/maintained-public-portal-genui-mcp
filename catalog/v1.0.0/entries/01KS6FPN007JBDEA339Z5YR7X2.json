@@ -16,7 +16,7 @@
     "건강관리",
     "서비스(구미시)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|508000000695",
+  "content_fingerprint": "semantic:v1|benefit_check|check|생애초기 건강관리 서비스 구미시|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "생활문화공동체",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00053500002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|생활문화공동체 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

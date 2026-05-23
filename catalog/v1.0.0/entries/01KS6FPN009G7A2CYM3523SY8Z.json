@@ -16,7 +16,7 @@
     "방문건강관리",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|628000000140",
+  "content_fingerprint": "semantic:v1|benefit_check|check|i mom 방문건강관리 지원|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

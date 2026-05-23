@@ -14,7 +14,7 @@
   "key_keywords": [
     "다봄통번역서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|715000000204",
+  "content_fingerprint": "semantic:v1|education_application|check|다봄통번역서비스|busan,education_office|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

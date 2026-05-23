@@ -17,7 +17,7 @@
     "감면",
     "추진"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|119200000010",
+  "content_fingerprint": "semantic:v1|benefit_check|check|합작수산물 관세 감면 추진|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

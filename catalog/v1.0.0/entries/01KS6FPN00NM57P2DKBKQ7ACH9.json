@@ -15,7 +15,7 @@
     "주택임대차·상가건물임대차",
     "분쟁조정"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B27000100035",
+  "content_fingerprint": "semantic:v1|benefit_check|check|주택임대차 상가건물임대차 분쟁조정|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

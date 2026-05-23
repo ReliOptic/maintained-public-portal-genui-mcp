@@ -17,7 +17,7 @@
     "출생아",
     "건강보장보험료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|326000000154",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|셋째 이후 출생아 건강보장보험료 지원|busan,central_government|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

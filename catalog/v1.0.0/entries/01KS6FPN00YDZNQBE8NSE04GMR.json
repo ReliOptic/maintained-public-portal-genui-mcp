@@ -17,7 +17,7 @@
     "지원사업(핵심부품국산화,",
     "수출연계부품국산화,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|169000000009",
+  "content_fingerprint": "semantic:v1|benefit_check|check|무기체계 부품국산화개발 지원사업 핵심부품국산화 수출연계부품국산화 전략부품국산화|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "및",
     "심리검사"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|548000000121",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|아동학대 병원진료 및 심리검사 지원|gyeongnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

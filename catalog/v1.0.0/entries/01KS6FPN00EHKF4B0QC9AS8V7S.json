@@ -16,7 +16,7 @@
     "주차요금",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00005100002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|문화시설 주차요금 감면|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

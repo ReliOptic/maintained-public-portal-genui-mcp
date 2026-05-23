@@ -16,7 +16,7 @@
     "소송대리",
     "서비스(전시납북자가족)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B27000100001",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|무료 소송대리 서비스 전시납북자가족|nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "예술인ㆍ노무제공자",
     "출산전후급여등"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|149200005017",
+  "content_fingerprint": "semantic:v1|benefit_check|check|예술인 노무제공자 출산전후급여등|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

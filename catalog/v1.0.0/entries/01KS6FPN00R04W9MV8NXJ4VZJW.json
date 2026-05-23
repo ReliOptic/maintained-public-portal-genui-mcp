@@ -17,7 +17,7 @@
     "초·중·고",
     "입학준비금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|420100000007",
+  "content_fingerprint": "semantic:v1|benefit_check|check|2026년 강릉시 초 중 고 입학준비금 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

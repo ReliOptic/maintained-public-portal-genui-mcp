@@ -17,7 +17,7 @@
     "생활",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|567000000117",
+  "content_fingerprint": "semantic:v1|benefit_check|check|4 19혁명 국가유공자 생활 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "신청",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|127000000023",
+  "content_fingerprint": "semantic:v1|address_change|check|귀화허가 국적회복허가 신청 및 국적업무 증명서 발급 수수료 면제 안내|central_government,nationwide|foreign_resident",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

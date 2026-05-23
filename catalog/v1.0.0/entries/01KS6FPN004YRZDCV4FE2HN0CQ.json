@@ -14,7 +14,7 @@
   "key_keywords": [
     "부산청년만원+문화패스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|626000000636",
+  "content_fingerprint": "semantic:v1|benefit_check|check|부산청년만원 문화패스|busan,central_government|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

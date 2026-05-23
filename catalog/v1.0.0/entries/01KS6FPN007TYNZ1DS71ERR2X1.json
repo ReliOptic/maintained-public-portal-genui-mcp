@@ -16,7 +16,7 @@
     "맘&대디",
     "나눔가게"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|629000000813",
+  "content_fingerprint": "semantic:v1|benefit_check|check|출산 맘 대디 나눔가게|gwangju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

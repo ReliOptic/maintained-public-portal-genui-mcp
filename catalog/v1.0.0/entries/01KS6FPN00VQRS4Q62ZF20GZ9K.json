@@ -17,7 +17,7 @@
     "교통카드",
     "발급관리"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|627000000751",
+  "content_fingerprint": "semantic:v1|benefit_check|check|어르신 통합무임 교통카드 발급관리 시스템 운영|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "생산장려금",
     "지원사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|510000000126",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|친환경 농산물 생산장려금 지원사업|gyeongbuk|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "및",
     "현장학습비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|630000000139",
+  "content_fingerprint": "semantic:v1|education_application|check|저소득층 아동입소료 및 현장학습비 지원|daejeon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

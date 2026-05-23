@@ -17,7 +17,7 @@
     "자녀",
     "특기교육비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|407000000111",
+  "content_fingerprint": "semantic:v1|education_application|check|저소득 한부모가족 자녀 특기교육비 지원|gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

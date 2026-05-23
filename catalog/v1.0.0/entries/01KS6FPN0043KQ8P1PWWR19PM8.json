@@ -17,7 +17,7 @@
     "지원(초음파",
     "쿠폰"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|494000000227",
+  "content_fingerprint": "semantic:v1|benefit_check|check|임부 산전검진비 지원 초음파 쿠폰 제공|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

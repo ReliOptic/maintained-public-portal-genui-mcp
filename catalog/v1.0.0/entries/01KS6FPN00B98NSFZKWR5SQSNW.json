@@ -16,7 +16,7 @@
     "임신과",
     "출산교실"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|494000000224",
+  "content_fingerprint": "semantic:v1|benefit_check|check|행복한 임신과 출산교실|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

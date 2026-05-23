@@ -14,7 +14,7 @@
   "key_keywords": [
     "고용안정장려금지원(정규직전환지원)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|149200000093",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|고용안정장려금지원 정규직전환지원|central_government,nationwide|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

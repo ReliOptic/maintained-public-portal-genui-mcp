@@ -1,0 +1,77 @@
+{
+  "entry_id": "nts-business-status",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "hometax",
+  "domain": "tax",
+  "sensitive_domain": "tax",
+  "title": "사업자등록 상태 조회",
+  "canonical_intent": "status_inquiry",
+  "canonical_action_verb": "check",
+  "key_keywords": [
+    "사업자등록",
+    "상태",
+    "조회"
+  ],
+  "content_fingerprint": "nts-business-status|excluded-live-check",
+  "exclude_from_cross_source_dedup": true,
+  "live_check_role": "label_only_v0_1",
+  "source_urls": [
+    "https://www.hometax.go.kr/"
+  ],
+  "menu_path": "홈택스 > 조회/발급 > 사업자상태 > 사업자등록번호로 조회",
+  "handoff": {
+    "tier": "tier3",
+    "portal": "hometax",
+    "url": "https://www.hometax.go.kr/",
+    "menu_path": "홈택스 > 조회/발급 > 사업자상태 > 사업자등록번호로 조회"
+  },
+  "persona_tags": [
+    "self_employed",
+    "sole_proprietor",
+    "small_business_owner",
+    "corporation_operator"
+  ],
+  "task_intent": [
+    "status_inquiry"
+  ],
+  "life_event_tags": [
+    "startup",
+    "business_operation"
+  ],
+  "region_tags": [
+    "nationwide"
+  ],
+  "evidence_refs": [],
+  "free_tags": [
+    "nts",
+    "business_status",
+    "live_check_entry",
+    "label_only"
+  ],
+  "seasonality_hint": "jan",
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "medium",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.88,
+  "review_required": true,
+  "review_reason": "sensitive_domain:tax",
+  "card_title": "사업자등록 상태 조회",
+  "card_body": "사업자등록 상태 조회 경로를 홈택스에서 확인하세요. 결과와 이용 가능 여부는 공식 화면에서 확인해야 합니다.",
+  "cta_label": "홈택스에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "상태 단정 없음",
+      "실시간 조회 아님",
+      "승인 보장 없음"
+    ]
+  },
+  "last_verified_at": "2026-05-23"
+}

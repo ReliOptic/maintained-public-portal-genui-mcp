@@ -16,7 +16,7 @@
     "위탁",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00030500005",
+  "content_fingerprint": "semantic:v1|benefit_check|check|주거복지센터 위탁 서비스|jeju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -24,4 +24,6 @@ The v0.1 fingerprint formula in this ADR was `portal | canonical_intent | canoni
 
 Revised v0.1 fingerprint: `canonical_intent | canonical_action_verb | normalized_title | region_scope | persona_scope`. The original ADR-0001 fingerprint formula is the design-time policy; the v0.1 implementation uses this portal-free variant.
 
+Implementation binding: source-specific row identity such as `gov24-serviceList:{row_id}` belongs in `api_ref` / `secondary_sources`, not in `content_fingerprint`. The maintainer pipeline writes `semantic:v1|...` fingerprints and runs a cross-source dedup pass before Review Agent chunking. Same-source repeats are not automatically collapsed in Session 1; only duplicates spanning two or more registered Task sources are merged under the primary-source priority in CONTEXT.md.
+
 The hand-curated NTS Live Check Entry is **excluded from this dedup pool** — it does not come from the row stream and never participates in fingerprint matching.

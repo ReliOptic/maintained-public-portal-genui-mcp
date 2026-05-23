@@ -14,7 +14,7 @@
   "key_keywords": [
     "코리아스타트업센터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55400900017",
+  "content_fingerprint": "semantic:v1|benefit_check|check|코리아스타트업센터|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

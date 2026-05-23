@@ -16,7 +16,7 @@
     "귀가",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|417000000104",
+  "content_fingerprint": "semantic:v1|benefit_check|check|부랑인 귀가 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "관내",
     "이사지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|321000000110",
+  "content_fingerprint": "semantic:v1|benefit_check|check|서초구 기초생활수급자 관내 이사지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

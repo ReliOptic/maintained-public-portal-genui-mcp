@@ -17,7 +17,7 @@
     "자녀",
     "교육비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55271100009",
+  "content_fingerprint": "semantic:v1|education_application|check|건설근로자 중 고교생 자녀 교육비 지원|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

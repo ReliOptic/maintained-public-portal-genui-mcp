@@ -15,7 +15,7 @@
     "찾아가는",
     "문화복지공연"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00045000003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|찾아가는 문화복지공연|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "논산시학교밖청소년지원센터",
     "운영"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00110100001",
+  "content_fingerprint": "semantic:v1|education_application|check|논산시학교밖청소년지원센터 운영|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "설치",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|424000000163",
+  "content_fingerprint": "semantic:v1|benefit_check|check|연탄 보일러 설치 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

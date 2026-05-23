@@ -17,7 +17,7 @@
     "및",
     "교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00085500003",
+  "content_fingerprint": "semantic:v1|education_application|check|답십리영화미디어아트센터 운영 및 교육 제공|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

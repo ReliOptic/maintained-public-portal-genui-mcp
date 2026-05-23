@@ -16,7 +16,7 @@
     "이용요금",
     "감면(저공해차량)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00022600024",
+  "content_fingerprint": "semantic:v1|benefit_check|check|부설주차장 이용요금 감면 저공해차량|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

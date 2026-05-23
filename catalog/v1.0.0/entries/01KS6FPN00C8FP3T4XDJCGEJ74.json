@@ -17,7 +17,7 @@
     "사업",
     "안내"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|468100000015",
+  "content_fingerprint": "semantic:v1|education_application|check|다다익산 장학생 사업 안내|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "미취학‧학업중단학생",
     "학습지원(꿈이음)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B09002700001",
+  "content_fingerprint": "semantic:v1|education_application|check|의무교육단계 미취학 학업중단학생 학습지원 꿈이음|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

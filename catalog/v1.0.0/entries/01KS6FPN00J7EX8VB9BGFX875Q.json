@@ -17,7 +17,7 @@
     "복원",
     "시술비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|506000000140",
+  "content_fingerprint": "semantic:v1|benefit_check|check|김천시 정관 난관 복원 시술비 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

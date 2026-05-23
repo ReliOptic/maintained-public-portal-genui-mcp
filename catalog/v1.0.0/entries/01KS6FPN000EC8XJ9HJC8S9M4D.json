@@ -17,7 +17,7 @@
     "사업정리",
     "지원사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00045700008",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경기도 소상공인 사업정리 지원사업|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

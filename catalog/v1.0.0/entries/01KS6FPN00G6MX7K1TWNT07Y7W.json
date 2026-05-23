@@ -16,7 +16,7 @@
     "소농",
     "직불제"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|500000000120",
+  "content_fingerprint": "semantic:v1|benefit_check|check|어르신 소농 직불제|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

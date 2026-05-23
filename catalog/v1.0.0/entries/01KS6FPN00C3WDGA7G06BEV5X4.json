@@ -17,7 +17,7 @@
     "날",
     "기념"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|383000000137",
+  "content_fingerprint": "semantic:v1|benefit_check|check|안양시 청소년의 날 기념 9세 축하이용권 지급 청소년증 발급시|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

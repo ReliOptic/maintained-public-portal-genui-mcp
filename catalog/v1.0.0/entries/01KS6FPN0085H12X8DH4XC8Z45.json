@@ -16,7 +16,7 @@
     "인지자극",
     "운동교실)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|348000000394",
+  "content_fingerprint": "semantic:v1|benefit_check|check|노인운동교실 신바람 실버벨 인지자극 운동교실|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

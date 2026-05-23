@@ -17,7 +17,7 @@
     "광복절",
     "유족위로금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|476000000114",
+  "content_fingerprint": "semantic:v1|benefit_check|check|3 1절 현충일 광복절 유족위로금 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

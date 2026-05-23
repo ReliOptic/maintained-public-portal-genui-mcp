@@ -17,7 +17,7 @@
     "집)",
     "이용료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|646000000223",
+  "content_fingerprint": "semantic:v1|benefit_check|check|완도자연휴양림 숙박시설 숲속의 집 이용료 감면|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

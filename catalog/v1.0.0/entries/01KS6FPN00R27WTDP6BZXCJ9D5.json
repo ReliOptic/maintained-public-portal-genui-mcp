@@ -17,7 +17,7 @@
     "가정",
     "특별장학생)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00228500005",
+  "content_fingerprint": "semantic:v1|education_application|check|달성 장학금 북한이탈주민 가정 특별장학생|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

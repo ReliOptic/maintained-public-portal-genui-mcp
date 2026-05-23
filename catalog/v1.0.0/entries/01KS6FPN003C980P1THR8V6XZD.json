@@ -17,7 +17,7 @@
     "생애주기",
     "문화예술교육지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00113600001",
+  "content_fingerprint": "semantic:v1|education_application|check|생애주기 충북형 생애주기 문화예술교육지원|chungbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

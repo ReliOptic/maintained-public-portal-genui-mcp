@@ -16,7 +16,7 @@
     "주거비용",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|469100000004",
+  "content_fingerprint": "semantic:v1|education_application|check|전입대학생 주거비용 지원|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

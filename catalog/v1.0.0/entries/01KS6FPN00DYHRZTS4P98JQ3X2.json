@@ -16,7 +16,7 @@
     "축산분뇨처리장비(스키드로더)",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|559000000111",
+  "content_fingerprint": "semantic:v1|benefit_check|check|다용도 축산분뇨처리장비 스키드로더 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

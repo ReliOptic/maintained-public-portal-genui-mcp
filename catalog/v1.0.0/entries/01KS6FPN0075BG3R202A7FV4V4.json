@@ -17,7 +17,7 @@
     "안전관리(소방점검)",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|630000000657",
+  "content_fingerprint": "semantic:v1|benefit_check|check|대전 전세사기피해주택 안전관리 소방점검 지원|daejeon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "진로",
     "프로그램"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00056900002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|사회적배려 청소년 진로 프로그램 제공|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

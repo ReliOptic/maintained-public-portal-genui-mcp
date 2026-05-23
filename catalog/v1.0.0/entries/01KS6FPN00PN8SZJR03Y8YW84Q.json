@@ -17,7 +17,7 @@
     "장기연체자",
     "학자금상환"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|402000000146",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년 학자금대출 장기연체자 학자금상환 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

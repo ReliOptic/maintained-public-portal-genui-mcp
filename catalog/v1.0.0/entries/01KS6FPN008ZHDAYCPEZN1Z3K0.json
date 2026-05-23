@@ -17,7 +17,7 @@
     "및",
     "도시락"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|478000000119",
+  "content_fingerprint": "semantic:v1|benefit_check|check|무료경로식당 운영 및 도시락 배달|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

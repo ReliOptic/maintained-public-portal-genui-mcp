@@ -16,7 +16,7 @@
     "동·하계",
     "학생근로활동"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|571000000215",
+  "content_fingerprint": "semantic:v1|education_application|check|청주시 동 하계 학생근로활동|central_government,chungbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

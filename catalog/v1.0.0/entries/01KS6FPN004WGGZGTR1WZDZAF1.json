@@ -17,7 +17,7 @@
     "미술관",
     "활성화"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|611000000173",
+  "content_fingerprint": "semantic:v1|benefit_check|check|사립 박물관 미술관 활성화 사업|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

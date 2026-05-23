@@ -17,7 +17,7 @@
     "주차시설(거주자,",
     "공영주차장"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00023100007",
+  "content_fingerprint": "semantic:v1|benefit_check|check|동대문구 구립 주차시설 거주자 공영주차장 포함 사용료 감면|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "입점상인",
     "모집"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|455000000131",
+  "content_fingerprint": "semantic:v1|benefit_check|check|금산금빛시장 청년몰 입점상인 모집 및 운영|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

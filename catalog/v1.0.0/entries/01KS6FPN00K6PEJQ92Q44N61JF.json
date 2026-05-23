@@ -17,7 +17,7 @@
     "생활용품구입비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|457000000140",
+  "content_fingerprint": "semantic:v1|education_application|check|부여군 전입학생 생활용품구입비 지원|central_government,chungnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

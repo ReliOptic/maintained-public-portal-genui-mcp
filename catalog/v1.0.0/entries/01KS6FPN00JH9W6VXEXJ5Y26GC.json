@@ -17,7 +17,7 @@
     "통행료",
     "할인"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B50000400014",
+  "content_fingerprint": "semantic:v1|benefit_check|check|고속도로 경차 통행료 할인|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

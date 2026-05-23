@@ -17,7 +17,7 @@
     "농가",
     "확대"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|524000000163",
+  "content_fingerprint": "semantic:v1|benefit_check|check|친환경 인증 농가 확대 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

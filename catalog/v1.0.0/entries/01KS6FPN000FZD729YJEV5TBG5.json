@@ -15,7 +15,7 @@
     "노인용보조보행차",
     "본인부담비용지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|414000000108",
+  "content_fingerprint": "semantic:v1|benefit_check|check|노인용보조보행차 본인부담비용지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "애향장학생",
     "장학금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00104700001",
+  "content_fingerprint": "semantic:v1|education_application|check|애향장학생 장학금|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

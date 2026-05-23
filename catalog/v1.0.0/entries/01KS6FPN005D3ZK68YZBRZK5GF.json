@@ -17,7 +17,7 @@
     "위험간판",
     "무상철거"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|328000000115",
+  "content_fingerprint": "semantic:v1|benefit_check|check|주인없는 노후 위험간판 무상철거 사업|busan,central_government|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

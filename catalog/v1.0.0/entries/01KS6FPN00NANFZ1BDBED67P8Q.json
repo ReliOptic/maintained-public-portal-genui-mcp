@@ -17,7 +17,7 @@
     "서북구)난임부부",
     "시술비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|449000000508",
+  "content_fingerprint": "semantic:v1|benefit_check|check|충남 천안시 서북구 난임부부 시술비 원외약제비 지원|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

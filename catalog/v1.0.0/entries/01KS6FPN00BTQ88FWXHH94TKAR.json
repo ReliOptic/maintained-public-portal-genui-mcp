@@ -17,7 +17,7 @@
     "기획공연",
     "관람료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55285400001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|극장 용 기획공연 관람료 할인|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

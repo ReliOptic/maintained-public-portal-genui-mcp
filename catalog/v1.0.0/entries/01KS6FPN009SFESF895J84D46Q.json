@@ -17,7 +17,7 @@
     "외",
     "2종)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|537000000127",
+  "content_fingerprint": "semantic:v1|benefit_check|check|임산부 영양제 철분제 외 2종 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "대출기간",
     "연장서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00075600001",
+  "content_fingerprint": "semantic:v1|education_application|check|장애인 대출기간 연장서비스|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

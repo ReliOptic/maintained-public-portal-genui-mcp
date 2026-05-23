@@ -17,7 +17,7 @@
     "장학생",
     "선발"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|450000000126",
+  "content_fingerprint": "semantic:v1|education_application|check|공주시한마음장학회 성적우수 장학생 선발|central_government,chungnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

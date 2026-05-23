@@ -16,7 +16,7 @@
     "생활안정자금",
     "지원사업(전세자금)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00063100001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득주민 생활안정자금 지원사업 전세자금|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

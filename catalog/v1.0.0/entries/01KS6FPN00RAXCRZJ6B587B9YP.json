@@ -15,7 +15,7 @@
     "문화관광해설사",
     "역량강화지원사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|999000000035",
+  "content_fingerprint": "semantic:v1|benefit_check|check|문화관광해설사 역량강화지원사업|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

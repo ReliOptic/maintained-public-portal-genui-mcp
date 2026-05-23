@@ -15,7 +15,7 @@
     "24시간",
     "AI돌보미"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|627000000749",
+  "content_fingerprint": "semantic:v1|benefit_check|check|24시간 ai돌보미|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "대여",
     "서비스(수지구)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|405000000669",
+  "content_fingerprint": "semantic:v1|benefit_check|check|유축기 대여 서비스 수지구|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "유전자",
     "채취"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|129000000082",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|6 25전사자 미수습 유가족 유전자 채취 포상금 및 전사자 유해 소재 제보 포상금 지급 안내|central_government,nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

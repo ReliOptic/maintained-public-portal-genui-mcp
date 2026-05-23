@@ -17,7 +17,7 @@
     "대상",
     "수의사를"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300000039",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소규모 농가 대상 수의사를 통한 구제역 예방접종 시술 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "무상",
     "대여)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|568000000338",
+  "content_fingerprint": "semantic:v1|benefit_check|check|나래옷장 청년 정장 무상 대여|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

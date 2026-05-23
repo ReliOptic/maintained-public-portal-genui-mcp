@@ -17,7 +17,7 @@
     "마을세무사",
     "상담"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|452000000348",
+  "content_fingerprint": "semantic:v1|benefit_check|check|아산시 찾아가는 마을세무사 상담 지원|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

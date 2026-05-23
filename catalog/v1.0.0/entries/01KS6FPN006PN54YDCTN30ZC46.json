@@ -17,7 +17,7 @@
     "교통약자를",
     "위한"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00358700002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|노약자 등 교통약자를 위한 무료셔틀버스 운영|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "올해의",
     "K-스타트업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|999000000085",
+  "content_fingerprint": "semantic:v1|benefit_check|check|올해의 k 스타트업|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

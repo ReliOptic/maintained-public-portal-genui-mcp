@@ -17,7 +17,7 @@
     "선발",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|416000000115",
+  "content_fingerprint": "semantic:v1|education_application|check|가평군 장학생 선발 및 장학금 지원|gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

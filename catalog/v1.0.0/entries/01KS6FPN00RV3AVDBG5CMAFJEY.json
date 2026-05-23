@@ -16,7 +16,7 @@
     "군민안전보험",
     "가입"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|426000000142",
+  "content_fingerprint": "semantic:v1|benefit_check|check|횡성 군민안전보험 가입|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

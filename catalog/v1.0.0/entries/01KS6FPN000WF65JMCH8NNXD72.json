@@ -17,7 +17,7 @@
     "장려금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|473000000107",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|지역농산물 판매업체 장려금 지원|jeonbuk|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "측정기",
     "대여"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|449000000540",
+  "content_fingerprint": "semantic:v1|benefit_check|check|동남구 혈압 혈당 측정기 대여 서비스|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "장제비",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|533000000104",
+  "content_fingerprint": "semantic:v1|benefit_check|check|무연고 사망자 장제비 및 공영장례 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

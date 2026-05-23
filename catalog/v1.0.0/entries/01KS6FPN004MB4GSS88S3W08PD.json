@@ -17,7 +17,7 @@
     "교육(의료인,",
     "보건교사,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00037600007",
+  "content_fingerprint": "semantic:v1|education_application|check|보건의료인력대상 역량강화 교육 의료인 보건교사 119구급대원 요양시설 관계자 등|gangwon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "사업",
     "운영"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|319000000147",
+  "content_fingerprint": "semantic:v1|benefit_check|check|동작구민 건강주치의 사업 운영|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

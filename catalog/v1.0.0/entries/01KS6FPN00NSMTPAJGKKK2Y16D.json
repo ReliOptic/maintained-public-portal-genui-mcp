@@ -17,7 +17,7 @@
     "돌보미",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|414000000428",
+  "content_fingerprint": "semantic:v1|address_change|check|외국인여성 출산가사 돌보미 지원|gyeonggi|foreign_resident",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

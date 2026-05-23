@@ -15,7 +15,7 @@
     "인천대교",
     "희망장학금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00091000006",
+  "content_fingerprint": "semantic:v1|education_application|check|인천대교 희망장학금|incheon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

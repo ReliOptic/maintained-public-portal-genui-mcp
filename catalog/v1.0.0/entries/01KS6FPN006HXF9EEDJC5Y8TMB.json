@@ -17,7 +17,7 @@
     "영농자재",
     "등"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|440000000102",
+  "content_fingerprint": "semantic:v1|benefit_check|check|엽연초 재배농가 영농자재 등 지원|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

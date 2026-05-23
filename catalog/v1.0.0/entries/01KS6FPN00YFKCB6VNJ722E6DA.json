@@ -17,7 +17,7 @@
     "기반",
     "교육연구단"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|134200000007",
+  "content_fingerprint": "semantic:v1|education_application|check|대학원 학과 기반 교육연구단 연구장학금 등 지원 4단계 두뇌한국21 사업|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

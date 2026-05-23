@@ -17,7 +17,7 @@
     "쌀",
     "나눔행사"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|333000000373",
+  "content_fingerprint": "semantic:v1|benefit_check|check|해운대구 사랑의 쌀 나눔행사 지원|busan,central_government,daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

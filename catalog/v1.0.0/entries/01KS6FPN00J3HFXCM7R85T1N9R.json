@@ -16,7 +16,7 @@
     "사업화",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|142000000073",
+  "content_fingerprint": "semantic:v1|benefit_check|check|재창업기업 사업화 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

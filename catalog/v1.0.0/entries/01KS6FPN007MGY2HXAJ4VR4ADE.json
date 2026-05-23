@@ -17,7 +17,7 @@
     "기반",
     "조성"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|554000000155",
+  "content_fingerprint": "semantic:v1|benefit_check|check|지속가능한 양봉산업 기반 조성|gwangju,gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

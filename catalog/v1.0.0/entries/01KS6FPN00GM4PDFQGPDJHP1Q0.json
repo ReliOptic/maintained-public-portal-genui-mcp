@@ -17,7 +17,7 @@
     "선물",
     "지원서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|489000000102",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|가정위탁아동 생일 선물 지원서비스|jeonnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "이웃주민",
     "초청행사"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|482000000147",
+  "content_fingerprint": "semantic:v1|benefit_check|check|귀농인 이웃주민 초청행사|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

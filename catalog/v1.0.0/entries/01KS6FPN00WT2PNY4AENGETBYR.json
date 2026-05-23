@@ -17,7 +17,7 @@
     "지원(지주대,",
     "유인줄,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|476000000103",
+  "content_fingerprint": "semantic:v1|benefit_check|check|복숭아 생산기반시설 지원 지주대 유인줄 관수관비 관정|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

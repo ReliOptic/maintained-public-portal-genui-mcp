@@ -17,7 +17,7 @@
     "장학회",
     "장학생"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|362000000323",
+  "content_fingerprint": "semantic:v1|education_application|check|재 광주 북구 장학회 장학생 지원|gwangju|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "다자녀가족",
     "학습활동비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|477000000119",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|저소득 다문화 다자녀가족 학습활동비 지원|jeonbuk|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

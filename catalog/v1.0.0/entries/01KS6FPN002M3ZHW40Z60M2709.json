@@ -16,7 +16,7 @@
     "자활",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|481000000114",
+  "content_fingerprint": "semantic:v1|benefit_check|check|성매매피해자등의 자활 지원|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "무상우유급식",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|800000000001",
+  "content_fingerprint": "semantic:v1|education_application|check|초 중 고 특수 대안학생 무상우유급식 지원|chungbuk,education_office|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

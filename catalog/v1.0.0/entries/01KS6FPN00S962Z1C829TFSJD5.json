@@ -17,7 +17,7 @@
     "반환보증",
     "보증료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|534000000202",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경상남도 사천시 전세보증금 반환보증 보증료 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

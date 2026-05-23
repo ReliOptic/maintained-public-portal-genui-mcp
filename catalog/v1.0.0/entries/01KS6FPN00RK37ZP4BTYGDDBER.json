@@ -17,7 +17,7 @@
     "거동불편자",
     "우유"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|371000000102",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인 등 거동불편자 우유 지원|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

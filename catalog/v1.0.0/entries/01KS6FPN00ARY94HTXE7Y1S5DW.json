@@ -16,7 +16,7 @@
     "소송대리",
     "서비스(영세담배소매인)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B27000100038",
+  "content_fingerprint": "semantic:v1|benefit_check|check|무료 소송대리 서비스 영세담배소매인|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

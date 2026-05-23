@@ -17,7 +17,7 @@
     "치료",
     "지원(초1"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|929000000209",
+  "content_fingerprint": "semantic:v1|education_application|check|난독 난산 학생 치료 지원 초1 중3|education_office,jeju|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

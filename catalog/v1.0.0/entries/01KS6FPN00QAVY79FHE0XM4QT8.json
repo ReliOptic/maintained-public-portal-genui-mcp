@@ -17,7 +17,7 @@
     "융자",
     "지원(신성장기반자금)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SD0000004048",
+  "content_fingerprint": "semantic:v1|benefit_check|check|시설투자 중소기업 융자 지원 신성장기반자금|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

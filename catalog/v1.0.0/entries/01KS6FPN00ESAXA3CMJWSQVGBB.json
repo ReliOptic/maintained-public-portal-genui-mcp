@@ -17,7 +17,7 @@
     "출입",
     "통행로로"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|300000000137",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소상공인 영업소 출입 통행로로 사용하는 경우 도로점용료 감면 10|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

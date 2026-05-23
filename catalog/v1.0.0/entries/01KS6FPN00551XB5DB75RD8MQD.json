@@ -16,7 +16,7 @@
     "민생안정사업",
     "지원(어업용면세유일부지원)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|642000000671",
+  "content_fingerprint": "semantic:v1|benefit_check|check|어업인 민생안정사업 지원 어업용면세유일부지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

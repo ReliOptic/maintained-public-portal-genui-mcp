@@ -17,7 +17,7 @@
     "저소득층",
     "거동불편"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|430000000148",
+  "content_fingerprint": "semantic:v1|benefit_check|check|결식이 우려되는 저소득층 거동불편 노인 도시락 제공|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

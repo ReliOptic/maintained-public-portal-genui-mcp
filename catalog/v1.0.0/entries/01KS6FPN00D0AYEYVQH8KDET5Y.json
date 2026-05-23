@@ -17,7 +17,7 @@
     "월경통",
     "한방진료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|405000000649",
+  "content_fingerprint": "semantic:v1|benefit_check|check|용인시 청소년 월경통 한방진료 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

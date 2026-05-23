@@ -17,7 +17,7 @@
     "이용료",
     "할인"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|648000001114",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인 리조트 이용료 할인|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

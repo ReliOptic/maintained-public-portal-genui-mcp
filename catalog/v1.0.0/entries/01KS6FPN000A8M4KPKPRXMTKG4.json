@@ -17,7 +17,7 @@
     "책사랑",
     "운동"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|440000000150",
+  "content_fingerprint": "semantic:v1|benefit_check|check|아기와 함께하는 책사랑 운동|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "일반",
     "장학생"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00051300015",
+  "content_fingerprint": "semantic:v1|education_application|check|일반 장학생|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

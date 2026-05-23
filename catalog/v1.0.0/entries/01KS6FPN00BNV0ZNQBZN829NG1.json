@@ -17,7 +17,7 @@
     "악취저감제(미생물제제)",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|535000000187",
+  "content_fingerprint": "semantic:v1|benefit_check|check|양돈농가 분뇨 악취저감제 미생물제제 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "프로그램",
     "제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00087300007",
+  "content_fingerprint": "semantic:v1|education_application|check|ydp창의예술교육센터 문화예술교육 프로그램 제공|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

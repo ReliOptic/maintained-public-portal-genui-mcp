@@ -17,7 +17,7 @@
     "자녀",
     "학습비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|526000000102",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득 가정 자녀 학습비 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

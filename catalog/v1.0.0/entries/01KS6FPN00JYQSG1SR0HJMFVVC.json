@@ -15,7 +15,7 @@
     "무상급식",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|875000000007",
+  "content_fingerprint": "semantic:v1|education_application|check|무상급식 지원|education_office,gyeongbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

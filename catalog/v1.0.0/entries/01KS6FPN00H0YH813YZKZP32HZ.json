@@ -16,7 +16,7 @@
     "운영",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55291900005",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청소년자문단 운영 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

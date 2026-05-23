@@ -17,7 +17,7 @@
     "희망채용",
     "장려금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|646000000230",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|조선업 퇴직자 희망채용 장려금 지원|jeonnam|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

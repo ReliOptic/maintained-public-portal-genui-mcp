@@ -15,7 +15,7 @@
     "ICT융합",
     "방문건강관리서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|341000000110",
+  "content_fingerprint": "semantic:v1|benefit_check|check|ict융합 방문건강관리서비스|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

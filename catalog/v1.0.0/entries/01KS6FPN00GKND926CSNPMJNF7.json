@@ -17,7 +17,7 @@
     "(업종별",
     "중소기업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|142000000121",
+  "content_fingerprint": "semantic:v1|benefit_check|check|수출컨소시엄 지원 업종별 중소기업 해외전시회 참여|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

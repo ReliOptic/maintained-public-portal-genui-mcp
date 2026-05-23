@@ -17,7 +17,7 @@
     "북한이탈주민",
     "자녀"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55284200001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|탈북청소년 및 북한이탈주민 자녀 화상영어 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

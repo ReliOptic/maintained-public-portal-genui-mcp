@@ -15,7 +15,7 @@
     "지역인재육성",
     "장학금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|485000000129",
+  "content_fingerprint": "semantic:v1|education_application|check|지역인재육성 장학금|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

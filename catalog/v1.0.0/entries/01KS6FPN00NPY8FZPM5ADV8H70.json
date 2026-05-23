@@ -17,7 +17,7 @@
     "비용",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|546000000107",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|다문화가족 모국방문 비용 지원|gyeongnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

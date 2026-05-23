@@ -16,7 +16,7 @@
     "전문셀러",
     "양성사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|348000000421",
+  "content_fingerprint": "semantic:v1|benefit_check|check|오픈마켓 전문셀러 양성사업|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

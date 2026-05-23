@@ -17,7 +17,7 @@
     "사용료",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|650000000308",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청각 언어장애인 영상전화 사용료 지원|jeju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

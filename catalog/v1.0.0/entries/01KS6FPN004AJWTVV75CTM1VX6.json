@@ -16,7 +16,7 @@
     "고용종사자",
     "교육연수"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55258300007",
+  "content_fingerprint": "semantic:v1|education_application|check|장애인 고용종사자 교육연수|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

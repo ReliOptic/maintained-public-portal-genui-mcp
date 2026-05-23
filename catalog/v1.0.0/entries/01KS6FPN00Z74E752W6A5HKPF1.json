@@ -17,7 +17,7 @@
     "교육",
     "등"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|142000000085",
+  "content_fingerprint": "semantic:v1|education_application|check|중소기업 인식개선 교육 등|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

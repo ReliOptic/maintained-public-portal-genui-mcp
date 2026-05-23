@@ -17,7 +17,7 @@
     "상토",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|547000000108",
+  "content_fingerprint": "semantic:v1|benefit_check|check|벼 육묘용 상토 및 상자모 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

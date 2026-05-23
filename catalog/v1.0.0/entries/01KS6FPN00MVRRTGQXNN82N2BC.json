@@ -17,7 +17,7 @@
     "선도기업",
     "육성"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B37003100019",
+  "content_fingerprint": "semantic:v1|benefit_check|check|스포츠산업 예비 선도기업 육성 지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

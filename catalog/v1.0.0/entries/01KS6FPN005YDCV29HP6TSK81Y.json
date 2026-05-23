@@ -17,7 +17,7 @@
     "장애인학대,인신매매",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|127000000026",
+  "content_fingerprint": "semantic:v1|benefit_check|check|성폭력 아동학대 장애인학대 인신매매 및 스토킹범죄 피해자 국선변호사 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

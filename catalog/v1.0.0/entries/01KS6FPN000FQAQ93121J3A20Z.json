@@ -17,7 +17,7 @@
     "저항성",
     "토종벌)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|427000000206",
+  "content_fingerprint": "semantic:v1|benefit_check|check|양봉산업 육성 기자재 저항성 토종벌 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

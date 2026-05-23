@@ -17,7 +17,7 @@
     "원외처방",
     "약제비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|374000000559",
+  "content_fingerprint": "semantic:v1|benefit_check|check|수원시 난임부부 원외처방 약제비 지원 권선구|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

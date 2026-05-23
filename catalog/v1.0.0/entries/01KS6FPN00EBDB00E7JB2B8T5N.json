@@ -17,7 +17,7 @@
     "독립운동같이(가치)",
     "찾기)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55100100006",
+  "content_fingerprint": "semantic:v1|education_application|check|찾아가는 독립기념관 다문화정책학교 독립운동같이 가치 찾기|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

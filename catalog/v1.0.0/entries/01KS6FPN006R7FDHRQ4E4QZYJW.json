@@ -17,7 +17,7 @@
     "작은",
     "결혼식"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|626000000623",
+  "content_fingerprint": "semantic:v1|benefit_check|check|부산 공공예식장 작은 결혼식 지원|busan,central_government|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "스마트팜",
     "ICT융복합확산(시설보급-에너지절감시설)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300005010",
+  "content_fingerprint": "semantic:v1|benefit_check|check|스마트팜 ict융복합확산 시설보급 에너지절감시설|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

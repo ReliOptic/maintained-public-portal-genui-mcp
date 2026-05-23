@@ -16,7 +16,7 @@
     "퇴소청소년",
     "자립지원수당"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|138300000067",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청소년복지시설 퇴소청소년 자립지원수당|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

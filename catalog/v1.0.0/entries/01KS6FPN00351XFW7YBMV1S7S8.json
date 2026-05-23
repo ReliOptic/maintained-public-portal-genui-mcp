@@ -17,7 +17,7 @@
     "특별지원",
     "변경신청(세종시"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|569000000393",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년월세 한시 특별지원 변경신청 세종시 거주|sejong|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

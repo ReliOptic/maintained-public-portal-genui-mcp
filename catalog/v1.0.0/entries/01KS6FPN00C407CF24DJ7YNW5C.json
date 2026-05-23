@@ -17,7 +17,7 @@
     "건강상담서비스",
     "제공(근로자건강센터)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|149200000043",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소규모사업장 근로자 건강상담서비스 제공 근로자건강센터|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

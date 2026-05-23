@@ -16,7 +16,7 @@
     "장학금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00047800003",
+  "content_fingerprint": "semantic:v1|education_application|check|광주시민장학회 장학금 지원|gwangju|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

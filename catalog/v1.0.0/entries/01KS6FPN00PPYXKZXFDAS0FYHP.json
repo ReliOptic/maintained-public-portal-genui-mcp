@@ -15,7 +15,7 @@
     "희망을",
     "드려요(가족지원사업)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|404000000109",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|희망을 드려요 가족지원사업|gyeonggi|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

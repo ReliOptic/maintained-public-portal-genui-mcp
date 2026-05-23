@@ -17,7 +17,7 @@
     "퇴소자",
     "자립지원금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|405000000629",
+  "content_fingerprint": "semantic:v1|benefit_check|check|한부모가족 복지시설 퇴소자 자립지원금 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

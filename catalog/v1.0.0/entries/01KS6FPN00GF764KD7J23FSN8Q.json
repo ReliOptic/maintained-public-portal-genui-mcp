@@ -16,7 +16,7 @@
     "체육인",
     "교육지원금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|137100000235",
+  "content_fingerprint": "semantic:v1|education_application|check|장애 체육인 교육지원금|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

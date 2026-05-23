@@ -17,7 +17,7 @@
     "원스톱",
     "패키지"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|138300000054",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|고립 은둔 청소년 원스톱 패키지 지원|central_government,nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

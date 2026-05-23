@@ -17,7 +17,7 @@
     "어린이집",
     "3-5세"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|626000000123",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|기관보육료 지원 어린이집 3 5세 부모부담보육료 지원|busan,central_government|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "취업비용",
     "지원(면접정장"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|382000000152",
+  "content_fingerprint": "semantic:v1|benefit_check|check|의정부시 청년 취업비용 지원 면접정장 대여비 이력서 사진 촬영비|central_government,gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

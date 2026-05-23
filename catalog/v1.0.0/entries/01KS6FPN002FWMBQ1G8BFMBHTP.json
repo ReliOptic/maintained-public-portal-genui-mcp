@@ -15,7 +15,7 @@
     "중소기업",
     "경영·특화컨설팅"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B19001600004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|중소기업 경영 특화컨설팅|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

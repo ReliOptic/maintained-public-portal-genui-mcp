@@ -17,7 +17,7 @@
     "밖",
     "청소년"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000697",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경기도 가정 밖 청소년 자립두배통장|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

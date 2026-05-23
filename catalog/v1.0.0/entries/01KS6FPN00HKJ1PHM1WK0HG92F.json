@@ -17,7 +17,7 @@
     "및",
     "세척제"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|510000000125",
+  "content_fingerprint": "semantic:v1|benefit_check|check|젖소사육농가 깔짚 및 세척제 기자재 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

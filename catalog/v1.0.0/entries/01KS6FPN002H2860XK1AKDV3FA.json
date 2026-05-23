@@ -17,7 +17,7 @@
     "입학금",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|352000000107",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|한부모가족 고교생 입학금 및 수업료지원|incheon|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

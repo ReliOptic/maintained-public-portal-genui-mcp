@@ -16,7 +16,7 @@
     "아동돌봄사업",
     "안내"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|627000000716",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|대구광역시 아동돌봄사업 안내|daegu|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

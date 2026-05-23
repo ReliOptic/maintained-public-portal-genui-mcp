@@ -17,7 +17,7 @@
     "가입내역",
     "확인서"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55201500202",
+  "content_fingerprint": "semantic:v1|benefit_check|check|4대사회보험 가입자 가입내역 확인서|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

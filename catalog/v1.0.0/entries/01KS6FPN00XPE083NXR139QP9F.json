@@ -17,7 +17,7 @@
     "청년임대주택",
     "보급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|569000000402",
+  "content_fingerprint": "semantic:v1|benefit_check|check|세종형 쉐어하우스 청년임대주택 보급|sejong|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

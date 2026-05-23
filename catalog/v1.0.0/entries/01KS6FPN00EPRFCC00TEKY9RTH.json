@@ -14,7 +14,7 @@
   "key_keywords": [
     "공연티켓할인(문화누리카드)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00091100004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|공연티켓할인 문화누리카드|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

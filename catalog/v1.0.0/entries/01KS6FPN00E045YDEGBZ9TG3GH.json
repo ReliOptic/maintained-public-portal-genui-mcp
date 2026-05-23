@@ -16,7 +16,7 @@
     "미래인재",
     "육성지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00101000011",
+  "content_fingerprint": "semantic:v1|education_application|check|전북 미래인재 육성지원|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

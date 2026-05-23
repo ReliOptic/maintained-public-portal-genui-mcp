@@ -15,7 +15,7 @@
     "출생축하카드",
     "전달"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|343000000123",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|출생축하카드 전달|daegu|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "장학금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|534000000121",
+  "content_fingerprint": "semantic:v1|education_application|check|기초생활보장수급자 장학금 지원|gyeongnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

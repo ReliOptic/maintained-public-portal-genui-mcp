@@ -14,7 +14,7 @@
   "key_keywords": [
     "스포츠꿈나무특기장려금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B37003100018",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|스포츠꿈나무특기장려금|seoul|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

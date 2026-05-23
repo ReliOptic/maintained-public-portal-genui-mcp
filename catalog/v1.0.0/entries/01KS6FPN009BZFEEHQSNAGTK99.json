@@ -15,7 +15,7 @@
     "화장장려금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|487000000107",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|화장장려금 지원|jeonnam|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

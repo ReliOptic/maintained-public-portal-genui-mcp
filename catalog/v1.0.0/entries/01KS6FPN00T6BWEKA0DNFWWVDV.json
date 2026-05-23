@@ -17,7 +17,7 @@
     "입학준비금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|329000000106",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|한부모가족 신입생 입학준비금 지원|busan,central_government|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "국세",
     "납부"
   ],
-  "content_fingerprint": "hometax|portal_handoff|722b0046c7573c1a",
+  "content_fingerprint": "semantic:v1|tax_payment|handoff|국세 납부|nationwide|salary_worker",
   "source_urls": [
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EA%B5%AD%EC%84%B8%20%EB%82%A9%EB%B6%80"
   ],

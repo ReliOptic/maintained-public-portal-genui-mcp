@@ -17,7 +17,7 @@
     "유족",
     "명예수당"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|447000000134",
+  "content_fingerprint": "semantic:v1|benefit_check|check|참전유공자 및 유족 명예수당|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

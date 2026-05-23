@@ -15,7 +15,7 @@
     "한국외국어대학교",
     "영어체험교실"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|305000000151",
+  "content_fingerprint": "semantic:v1|education_application|check|한국외국어대학교 영어체험교실|seoul|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

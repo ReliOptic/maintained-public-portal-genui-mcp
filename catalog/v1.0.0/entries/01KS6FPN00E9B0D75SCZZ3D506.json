@@ -17,7 +17,7 @@
     "수강료",
     "감면(한부모가족)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|307000000195",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|성북구 평생학습센터 수강료 감면 한부모가족|seoul|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

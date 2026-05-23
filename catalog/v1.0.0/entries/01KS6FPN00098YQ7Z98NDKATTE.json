@@ -17,7 +17,7 @@
     "질환,",
     "소아암,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|731000000014",
+  "content_fingerprint": "semantic:v1|education_application|check|희귀 난치성 질환 소아암 심혈관 뇌혈관 질병에 대한 학생 치료비 지원|education_office,incheon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

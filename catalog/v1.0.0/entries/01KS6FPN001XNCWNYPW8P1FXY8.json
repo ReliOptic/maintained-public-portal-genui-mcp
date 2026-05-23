@@ -15,7 +15,7 @@
     "장애인",
     "활동지원(구비추가사업)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|311000000118",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인 활동지원 구비추가사업|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

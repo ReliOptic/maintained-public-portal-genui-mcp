@@ -16,7 +16,7 @@
     "특례협약보증",
     "이차보전"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|349000000116",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소상공인 특례협약보증 이차보전|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

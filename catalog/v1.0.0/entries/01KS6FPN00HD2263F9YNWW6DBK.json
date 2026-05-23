@@ -17,7 +17,7 @@
     "경영환경개선",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00089100006",
+  "content_fingerprint": "semantic:v1|benefit_check|check|울주군 소상공인 경영환경개선 및 디지털기기 지원 사업|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

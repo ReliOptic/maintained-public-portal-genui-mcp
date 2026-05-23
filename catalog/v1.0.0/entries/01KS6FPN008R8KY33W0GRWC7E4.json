@@ -14,7 +14,7 @@
   "key_keywords": [
     "국적취득비용(수수료)지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|362000000324",
+  "content_fingerprint": "semantic:v1|address_change|check|국적취득비용 수수료 지원|gwangju|foreign_resident",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

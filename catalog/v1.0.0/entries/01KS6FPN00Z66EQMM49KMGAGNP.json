@@ -17,7 +17,7 @@
     "기숙사",
     "임차비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000842",
+  "content_fingerprint": "semantic:v1|benefit_check|check|중소기업 노동자 기숙사 임차비 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "장학금",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|358000000101",
+  "content_fingerprint": "semantic:v1|education_application|check|옹진군인재육성재단 예체능특기 장학금 지급|incheon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

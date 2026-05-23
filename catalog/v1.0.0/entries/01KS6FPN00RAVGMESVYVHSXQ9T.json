@@ -17,7 +17,7 @@
     "국민건강·장기요양",
     "보험료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|558000000105",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득 주민 국민건강 장기요양 보험료 지원|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

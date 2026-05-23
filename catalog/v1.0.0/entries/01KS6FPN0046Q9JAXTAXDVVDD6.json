@@ -16,7 +16,7 @@
     "HACCP교육",
     "안내"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55374800008",
+  "content_fingerprint": "semantic:v1|education_application|check|축산물 haccp교육 안내|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

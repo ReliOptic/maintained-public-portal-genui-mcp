@@ -17,7 +17,7 @@
     "주관",
     "사회적"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|630000000677",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|대전광역시 가족센터 주관 사회적 관계망 형성 프로그램 안내|daejeon|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

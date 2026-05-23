@@ -17,7 +17,7 @@
     "예비창업자",
     "사이버교육(LMS)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00093000011",
+  "content_fingerprint": "semantic:v1|education_application|check|소상공인 및 예비창업자 사이버교육 lms|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

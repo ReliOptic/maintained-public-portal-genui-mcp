@@ -17,7 +17,7 @@
     "스마트IoT",
     "배회감지기"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|303000000333",
+  "content_fingerprint": "semantic:v1|benefit_check|check|성동구 장애인 스마트iot 배회감지기 보급|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "사양관리",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|558000000101",
+  "content_fingerprint": "semantic:v1|benefit_check|check|한우농가 사양관리 지원|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

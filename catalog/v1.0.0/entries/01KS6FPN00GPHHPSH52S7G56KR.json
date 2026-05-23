@@ -17,7 +17,7 @@
     "방과후학교",
     "자유수강권"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|743000000005",
+  "content_fingerprint": "semantic:v1|education_application|check|저소득층 학생 방과후학교 자유수강권 지원|daejeon,education_office|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

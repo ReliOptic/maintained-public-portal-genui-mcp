@@ -17,7 +17,7 @@
     "등)",
     "이용요금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00033300017",
+  "content_fingerprint": "semantic:v1|benefit_check|check|북부스포츠센터 체육시설 수영장 헬스장 축구장 등 이용요금 감면 50|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

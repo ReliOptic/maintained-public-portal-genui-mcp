@@ -17,7 +17,7 @@
     "피해자,",
     "피해자"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00045400026",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경기도 원자폭탄 피해자 피해자 후손 건강검진비 감면|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

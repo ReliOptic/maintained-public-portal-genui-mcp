@@ -17,7 +17,7 @@
     "아동복지시설",
     "예체능교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00102100003",
+  "content_fingerprint": "semantic:v1|education_application|check|지역아동센터 및 아동복지시설 예체능교육 지원|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

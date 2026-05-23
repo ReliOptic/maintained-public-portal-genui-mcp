@@ -17,7 +17,7 @@
     "공동체",
     "육성사업비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|119200000120",
+  "content_fingerprint": "semantic:v1|benefit_check|check|자율관리어업 우수 공동체 육성사업비|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "전문교육",
     "제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|119200000118",
+  "content_fingerprint": "semantic:v1|education_application|check|낚시 전문교육 제공|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "인증",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|143000000004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|중소기업 지식재산경영 인증 서비스 제공|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

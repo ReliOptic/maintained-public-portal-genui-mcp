@@ -16,7 +16,7 @@
     "학습자",
     "학자금대출"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55252900236",
+  "content_fingerprint": "semantic:v1|education_application|check|학점은행제 학습자 학자금대출|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

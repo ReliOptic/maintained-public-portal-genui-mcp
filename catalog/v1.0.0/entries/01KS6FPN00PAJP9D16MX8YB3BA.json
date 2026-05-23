@@ -17,7 +17,7 @@
     "체육복",
     "구입비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|901000000004",
+  "content_fingerprint": "semantic:v1|education_application|check|경상남도교육청 신입생 체육복 구입비 지원|education_office,gyeongnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

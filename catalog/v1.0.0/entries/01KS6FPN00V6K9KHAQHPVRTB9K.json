@@ -17,7 +17,7 @@
     "찾아가는",
     "성인권"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|450000000141",
+  "content_fingerprint": "semantic:v1|education_application|check|대상 맞춤형 찾아가는 성인권 교육|central_government,chungnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "우체국",
     "실손"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|171000000009",
+  "content_fingerprint": "semantic:v1|benefit_check|check|의료급여 수급권자 우체국 실손 의료보험료 할인|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

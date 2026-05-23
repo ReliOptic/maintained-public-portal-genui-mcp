@@ -17,7 +17,7 @@
     "키움",
     "서비스(저소득"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00049300006",
+  "content_fingerprint": "semantic:v1|benefit_check|check|다둥이 가치 키움 서비스 저소득 다자녀 가구 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

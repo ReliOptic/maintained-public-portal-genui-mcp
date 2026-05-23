@@ -17,7 +17,7 @@
     "평생교육이용권",
     "지원(마감)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00081600002",
+  "content_fingerprint": "semantic:v1|education_application|check|서울시 장애인 평생교육이용권 지원 마감|seoul|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "한약지원",
     "사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|650000001129",
+  "content_fingerprint": "semantic:v1|benefit_check|check|출산여성 한약지원 사업|jeju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

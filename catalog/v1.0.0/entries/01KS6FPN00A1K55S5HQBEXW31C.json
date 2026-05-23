@@ -15,7 +15,7 @@
     "다문화가족지원센터",
     "이용"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|138300000056",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|다문화가족지원센터 이용|central_government,nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

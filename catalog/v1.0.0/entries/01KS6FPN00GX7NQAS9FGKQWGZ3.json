@@ -16,7 +16,7 @@
     "출생축하용품",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|449000000141",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|신생아 출생축하용품 지급|central_government,chungnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "여성안심망",
     "「안심이」운영"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|311000000155",
+  "content_fingerprint": "semantic:v1|benefit_check|check|24시간 여성안심망 안심이 운영|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

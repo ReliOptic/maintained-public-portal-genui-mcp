@@ -16,7 +16,7 @@
     "사실증명서",
     "발급"
   ],
-  "content_fingerprint": "gov24|portal_handoff|8a13b5a4a582df74",
+  "content_fingerprint": "semantic:v1|certificate_issue|handoff|국적취득 사실증명서 발급|nationwide|naturalized_citizen",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=12700000103&tp_seq=01"
   ],

@@ -17,7 +17,7 @@
     "사망위로금",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|303000000330",
+  "content_fingerprint": "semantic:v1|benefit_check|check|성동구 국가보훈대상자 사망위로금 지급|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

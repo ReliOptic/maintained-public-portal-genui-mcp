@@ -17,7 +17,7 @@
     "취득",
     "장학금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00368400004",
+  "content_fingerprint": "semantic:v1|education_application|check|특성화고 자격증 취득 장학금|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

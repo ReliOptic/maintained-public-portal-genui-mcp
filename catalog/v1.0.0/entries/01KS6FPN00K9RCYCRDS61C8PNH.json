@@ -16,7 +16,7 @@
     "종량제봉투",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|505000000135",
+  "content_fingerprint": "semantic:v1|benefit_check|check|전입세대 종량제봉투 지급|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

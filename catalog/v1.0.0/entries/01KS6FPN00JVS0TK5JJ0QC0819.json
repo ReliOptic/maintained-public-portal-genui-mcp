@@ -17,7 +17,7 @@
     "신속",
     "보급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SD0000005098",
+  "content_fingerprint": "semantic:v1|benefit_check|check|신기술 영농현장 신속 보급 지원 신기술보급사업|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

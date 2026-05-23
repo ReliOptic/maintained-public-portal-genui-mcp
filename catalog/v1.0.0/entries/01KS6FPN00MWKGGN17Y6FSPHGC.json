@@ -16,7 +16,7 @@
     "종사자",
     "특별수당"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|464000000139",
+  "content_fingerprint": "semantic:v1|benefit_check|check|노인복지관 종사자 특별수당|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

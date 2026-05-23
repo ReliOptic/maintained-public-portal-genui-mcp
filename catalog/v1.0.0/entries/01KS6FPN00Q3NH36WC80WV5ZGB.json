@@ -17,7 +17,7 @@
     "현장체험학습비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|738000000003",
+  "content_fingerprint": "semantic:v1|education_application|check|수학여행 및 현장체험학습비 지원|education_office,gwangju|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

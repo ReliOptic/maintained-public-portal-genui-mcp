@@ -17,7 +17,7 @@
     "인프라",
     "구축"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55353000224",
+  "content_fingerprint": "semantic:v1|benefit_check|check|제로에너지 건축물 인프라 구축 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

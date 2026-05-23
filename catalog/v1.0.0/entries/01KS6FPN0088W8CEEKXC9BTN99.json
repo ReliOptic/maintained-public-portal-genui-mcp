@@ -17,7 +17,7 @@
     "로드맵",
     "제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|304000000151",
+  "content_fingerprint": "semantic:v1|benefit_check|check|체계적인 진학 대입 고입 로드맵 제공|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

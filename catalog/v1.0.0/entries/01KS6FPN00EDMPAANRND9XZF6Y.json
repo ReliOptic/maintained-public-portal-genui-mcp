@@ -17,7 +17,7 @@
     "진단서",
     "발급비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SPE000000030",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득장애인 장애심사용 진단서 발급비 및 검사비 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

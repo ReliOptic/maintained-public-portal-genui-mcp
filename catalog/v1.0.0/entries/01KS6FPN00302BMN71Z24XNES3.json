@@ -14,7 +14,7 @@
   "key_keywords": [
     "특별공급(노부모)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00019400015",
+  "content_fingerprint": "semantic:v1|benefit_check|check|특별공급 노부모|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

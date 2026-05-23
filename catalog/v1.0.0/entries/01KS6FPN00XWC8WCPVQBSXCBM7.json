@@ -17,7 +17,7 @@
     "맞춤운동",
     "지도서비스)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|631000000738",
+  "content_fingerprint": "semantic:v1|benefit_check|check|지역사회서비스 투자사업 건강증진 맞춤운동 지도서비스|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

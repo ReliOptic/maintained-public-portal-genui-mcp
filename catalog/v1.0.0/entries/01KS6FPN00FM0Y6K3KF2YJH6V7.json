@@ -17,7 +17,7 @@
     "이용요금",
     "감면(별마로천문대)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00001400004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|박물관 문화시설 이용요금 감면 별마로천문대|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

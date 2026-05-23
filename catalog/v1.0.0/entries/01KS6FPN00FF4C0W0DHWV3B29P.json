@@ -14,7 +14,7 @@
   "key_keywords": [
     "온가족보듬사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SD0000003474",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|온가족보듬사업|central_government,nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

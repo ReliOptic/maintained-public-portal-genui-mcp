@@ -17,7 +17,7 @@
     "노후하우스",
     "자재"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|523000000178",
+  "content_fingerprint": "semantic:v1|benefit_check|check|비가림시설 및 노후하우스 자재 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "마음건강지킴이",
     "사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|300000000166",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|학대피해아동 마음건강지킴이 사업|seoul|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

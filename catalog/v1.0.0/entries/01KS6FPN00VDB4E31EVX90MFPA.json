@@ -16,7 +16,7 @@
     "재택순회교육대상자",
     "급식비지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|930000000007",
+  "content_fingerprint": "semantic:v1|education_application|check|특수교육 재택순회교육대상자 급식비지원|education_office,sejong|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

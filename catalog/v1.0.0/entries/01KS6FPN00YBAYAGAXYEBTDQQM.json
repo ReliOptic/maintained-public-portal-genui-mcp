@@ -16,7 +16,7 @@
     "장학생",
     "선발(성적우수)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|489000000109",
+  "content_fingerprint": "semantic:v1|education_application|check|보성군장학재단 장학생 선발 성적우수|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

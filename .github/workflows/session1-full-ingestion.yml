@@ -148,14 +148,19 @@ jobs:
           print(json.dumps({k: aggregate[k] for k in ['shard_count','count','rows_seen','pages_fetched','skipped_shards','blocked_shards']}, ensure_ascii=False, indent=2))
           PY
 
+      - name: Validate planned non-Gov24 Task source registries
+        run: python3 tooling/ingestion/run_pipeline.py source-registry-check
+
       - name: Run portal and evidence refresh
         run: |
           python3 tooling/ingestion/run_pipeline.py portal-refresh
           python3 tooling/ingestion/run_pipeline.py evidence-refresh
+          python3 tooling/ingestion/run_pipeline.py dedup
 
-      - name: Run Review Agent chunks and draft PR body
+      - name: Run Review Agent chunks, persona check, and draft PR body
         run: |
           python3 tooling/review-agent/runner/run_review_chunks.py --parallel 8
+          python3 tooling/review-agent/runner/run_persona_check.py --fail-on-error
           python3 tooling/ingestion/run_pipeline.py pr-body
 
       - name: Verify generated reports do not contain credentials
@@ -185,7 +190,7 @@ jobs:
               echo "Confidence: medium"
               echo "Scope-risk: broad"
               echo "Directive: Keep generated EntryCandidates as draft PR input until Review Agent and maintainer checks pass; do not publish a catalog tag from this workflow."
-              echo "Tested: sharded serviceList api-refresh; artifact merge; portal-refresh; evidence-refresh; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
+              echo "Tested: sharded serviceList api-refresh; artifact merge; planned source-registry check; portal-refresh; evidence-refresh; cross-source dedup pass; persona check; Review Agent N=8; draft PR body generation; credential scan for secret value and serviceKey in reports."
               echo "Not-tested: Catalog publish tag; Session 2 compiled-SQLite build."
             } > /tmp/session1-ingestion-commit-message
             git commit -F /tmp/session1-ingestion-commit-message
@@ -199,7 +204,7 @@ jobs:
       - name: Comment CI completion summary
         if: ${{ inputs.commit_artifacts == 'true' }}
         run: |
-          gh pr comment "${{ inputs.pr_number }}" --body "Session 1 sharded full ingestion workflow completed on branch \`${{ github.ref_name }}\`. Gov24 API refresh used \`GOV24_SERVICE_KEY\` from GitHub Actions secrets and ran as page shards. Generated artifacts were committed back to the branch when changed; draft PR body was refreshed from \`tooling/review-agent/reports/session1-draft-pr-body.md\`."
+          gh pr comment "${{ inputs.pr_number }}" --body "Session 1 sharded full ingestion workflow completed on branch \`${{ github.ref_name }}\`. Gov24 API refresh used \`GOV24_SERVICE_KEY\` from GitHub Actions secrets and ran as page shards. Planned Bokjiro/Worknet Task source registries, semantic cross-source dedup, and persona checks were validated. Generated artifacts were committed back to the branch when changed; draft PR body was refreshed from \`tooling/review-agent/reports/session1-draft-pr-body.md\`."
 
       - name: Report smoke-only validation
         if: ${{ inputs.commit_artifacts != 'true' }}

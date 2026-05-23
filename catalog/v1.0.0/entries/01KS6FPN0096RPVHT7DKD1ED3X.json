@@ -15,7 +15,7 @@
     "의로운",
     "시민지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|629000000169",
+  "content_fingerprint": "semantic:v1|benefit_check|check|의로운 시민지원|gwangju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

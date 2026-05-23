@@ -14,7 +14,7 @@
   "key_keywords": [
     "축산관련종사자교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300000075",
+  "content_fingerprint": "semantic:v1|education_application|check|축산관련종사자교육|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

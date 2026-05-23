@@ -17,7 +17,7 @@
     "등에",
     "대한"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|131200000011",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|국가유공자 단체 등에 대한 지방세 감면|central_government,nationwide|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

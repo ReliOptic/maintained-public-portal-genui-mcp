@@ -17,7 +17,7 @@
     "연수",
     "공간"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00092100003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|2025 아트플러그 연수 공간 지원 사업 연수 체크인|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

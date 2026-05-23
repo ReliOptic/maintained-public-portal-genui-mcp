@@ -17,7 +17,7 @@
     "전·월세",
     "보증금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|392000000162",
+  "content_fingerprint": "semantic:v1|benefit_check|check|신혼부부 청년 전 월세 보증금 대출이자 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

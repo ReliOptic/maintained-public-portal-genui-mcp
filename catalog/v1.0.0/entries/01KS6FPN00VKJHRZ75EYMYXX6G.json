@@ -16,7 +16,7 @@
     "희망나눔",
     "교실/캠프"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55257000001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|태권도 희망나눔 교실 캠프|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

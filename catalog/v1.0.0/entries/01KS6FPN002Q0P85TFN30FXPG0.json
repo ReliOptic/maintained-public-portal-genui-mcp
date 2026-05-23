@@ -14,7 +14,7 @@
   "key_keywords": [
     "채소(배추,무)영농자재지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|524000000158",
+  "content_fingerprint": "semantic:v1|benefit_check|check|채소 배추 무 영농자재지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

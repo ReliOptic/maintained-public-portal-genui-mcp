@@ -17,7 +17,7 @@
     "시청",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|350000000108",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인 유료방송 시청 지원|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

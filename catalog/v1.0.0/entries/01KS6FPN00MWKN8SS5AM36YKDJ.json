@@ -17,7 +17,7 @@
     "입학축하금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|500000000143",
+  "content_fingerprint": "semantic:v1|education_application|check|진도군 초 중 고등학교 입학축하금 지원|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

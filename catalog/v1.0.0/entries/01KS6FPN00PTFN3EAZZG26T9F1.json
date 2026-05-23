@@ -17,7 +17,7 @@
     "신입생",
     "교복비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000129",
+  "content_fingerprint": "semantic:v1|education_application|check|경기도민 중고등 신입생 교복비 지원 대안교육기관 다른 시도|gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

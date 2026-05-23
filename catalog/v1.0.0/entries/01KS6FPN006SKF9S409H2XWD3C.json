@@ -14,7 +14,7 @@
   "key_keywords": [
     "채무자대리인(변호사)무료지원사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B27000100053",
+  "content_fingerprint": "semantic:v1|benefit_check|check|채무자대리인 변호사 무료지원사업|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

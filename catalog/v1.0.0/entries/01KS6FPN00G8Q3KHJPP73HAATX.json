@@ -15,7 +15,7 @@
     "경제활력",
     "챌린지"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00077300006",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경제활력 챌린지|daejeon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

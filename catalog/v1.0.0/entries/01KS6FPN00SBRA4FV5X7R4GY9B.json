@@ -17,7 +17,7 @@
     "초등학교",
     "입학준비금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|325000000249",
+  "content_fingerprint": "semantic:v1|education_application|check|부산 중구 초등학교 입학준비금 지원|busan,central_government|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

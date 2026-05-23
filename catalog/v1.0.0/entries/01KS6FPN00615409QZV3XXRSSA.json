@@ -14,7 +14,7 @@
   "key_keywords": [
     "도매유통활성화지원사업(공판장(청과)출하촉진)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300000082",
+  "content_fingerprint": "semantic:v1|benefit_check|check|도매유통활성화지원사업 공판장 청과 출하촉진|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

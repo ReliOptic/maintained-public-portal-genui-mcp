@@ -16,7 +16,7 @@
     "전세피해",
     "지원사업(소송수행경비)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|317000000368",
+  "content_fingerprint": "semantic:v1|benefit_check|check|금천구 전세피해 지원사업 소송수행경비|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "프로그램",
     "수강료"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00023400003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|북아현문화체육센터 체육 프로그램 수강료 감면|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

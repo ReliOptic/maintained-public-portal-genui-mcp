@@ -17,7 +17,7 @@
     "영유아",
     "영양플러스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|135200000005",
+  "content_fingerprint": "semantic:v1|benefit_check|check|임산부 및 영유아 영양플러스|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

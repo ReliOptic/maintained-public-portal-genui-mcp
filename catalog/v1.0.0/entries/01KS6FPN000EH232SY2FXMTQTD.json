@@ -15,7 +15,7 @@
     "보훈가족",
     "위문"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|366000000121",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|보훈가족 위문|daejeon|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

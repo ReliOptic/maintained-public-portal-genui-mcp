@@ -15,7 +15,7 @@
     "2025년",
     "임업기술전문교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|482000000149",
+  "content_fingerprint": "semantic:v1|education_application|check|2025년 임업기술전문교육|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -14,7 +14,7 @@
   "key_keywords": [
     "농산물공동출하확대지원(공동선별비지원)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300000079",
+  "content_fingerprint": "semantic:v1|benefit_check|check|농산물공동출하확대지원 공동선별비지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

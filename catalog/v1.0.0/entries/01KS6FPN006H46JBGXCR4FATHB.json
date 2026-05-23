@@ -17,7 +17,7 @@
     "이전지원",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|PTR000051411",
+  "content_fingerprint": "semantic:v1|benefit_check|check|유휴 저활용 연구시설장비 이전지원 서비스 제공 나눔장비 이전지원사업|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

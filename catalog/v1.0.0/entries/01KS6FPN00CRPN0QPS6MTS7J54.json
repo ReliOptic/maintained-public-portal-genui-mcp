@@ -17,7 +17,7 @@
     "이하의",
     "자녀를"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|440000000200",
+  "content_fingerprint": "semantic:v1|benefit_check|check|생후 36개월 이하의 자녀를 양육하는 가정 상수도요금 감면|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

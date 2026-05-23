@@ -14,7 +14,7 @@
   "key_keywords": [
     "신사업창업사관학교"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55307700009",
+  "content_fingerprint": "semantic:v1|education_application|check|신사업창업사관학교|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

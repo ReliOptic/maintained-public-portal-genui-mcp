@@ -17,7 +17,7 @@
     "자진반납",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|483000000127",
+  "content_fingerprint": "semantic:v1|benefit_check|check|고령운전자 운전면허 자진반납 지원|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

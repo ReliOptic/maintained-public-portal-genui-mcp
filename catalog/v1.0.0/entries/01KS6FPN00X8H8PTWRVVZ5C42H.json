@@ -17,7 +17,7 @@
     "및",
     "안전망"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|724000000018",
+  "content_fingerprint": "semantic:v1|education_application|check|교육복지 우선지원 및 안전망 지원|daegu,education_office|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

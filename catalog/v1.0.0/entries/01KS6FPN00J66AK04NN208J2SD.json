@@ -17,7 +17,7 @@
     "및",
     "토양"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|546000000123",
+  "content_fingerprint": "semantic:v1|benefit_check|check|산양삼 종자 및 토양 미생물제 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

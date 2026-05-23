@@ -17,7 +17,7 @@
     "전용",
     "미용실"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|305000000300",
+  "content_fingerprint": "semantic:v1|benefit_check|check|동대문구 장애인 전용 미용실 동행헤어 운영|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

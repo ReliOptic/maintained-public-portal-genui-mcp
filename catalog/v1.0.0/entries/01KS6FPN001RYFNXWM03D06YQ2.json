@@ -17,7 +17,7 @@
     "관람료",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00021200012",
+  "content_fingerprint": "semantic:v1|education_application|check|기장문화예절학교 한옥동 관람료 감면|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

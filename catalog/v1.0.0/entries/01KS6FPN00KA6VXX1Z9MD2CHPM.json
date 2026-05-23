@@ -17,7 +17,7 @@
     "저소득층",
     "아동"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|495000000414",
+  "content_fingerprint": "semantic:v1|education_application|check|초등학생 및 저소득층 아동 치과주치의 의료비 지원|jeonnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

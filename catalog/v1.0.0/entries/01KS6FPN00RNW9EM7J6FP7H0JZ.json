@@ -17,7 +17,7 @@
     "저체중",
     "출생아"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55092800042",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|조산아 및 저체중 출생아 외래진료비 본인부담률 경감|nationwide|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

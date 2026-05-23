@@ -17,7 +17,7 @@
     "공영주차장",
     "무료이용"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|481000000375",
+  "content_fingerprint": "semantic:v1|benefit_check|check|여수시 임산부 공영주차장 무료이용 차량변경 신청|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

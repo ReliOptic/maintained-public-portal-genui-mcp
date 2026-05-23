@@ -16,7 +16,7 @@
     "경쟁력",
     "강화"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|406000000120",
+  "content_fingerprint": "semantic:v1|benefit_check|check|가금농가 경쟁력 강화|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

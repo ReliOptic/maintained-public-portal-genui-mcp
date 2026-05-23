@@ -17,7 +17,7 @@
     "및",
     "부숙"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|535000000161",
+  "content_fingerprint": "semantic:v1|benefit_check|check|퇴비 처리 및 부숙 장비 스키드로더 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

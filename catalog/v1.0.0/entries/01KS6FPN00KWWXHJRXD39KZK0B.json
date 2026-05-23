@@ -17,7 +17,7 @@
     "강사매칭시스템",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55291900003",
+  "content_fingerprint": "semantic:v1|education_application|check|청소년 권리교육 강사매칭시스템 및 청소년 이러닝 교육|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

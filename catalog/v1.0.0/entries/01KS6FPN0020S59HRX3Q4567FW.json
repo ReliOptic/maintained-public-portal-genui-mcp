@@ -17,7 +17,7 @@
     "출생축하",
     "쌀케이크"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|449000000527",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|지역사회와 함께하는 출생축하 쌀케이크 지원 서비스 안내|central_government,chungnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

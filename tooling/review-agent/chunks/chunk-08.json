@@ -10963,6 +10963,13 @@
         "confidence_lt_0.85",
         "sensitive_domain:welfare"
       ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/nts-business-status.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
+      ]
     }
   ]
 }

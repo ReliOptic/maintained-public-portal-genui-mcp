@@ -17,7 +17,7 @@
     "학자금",
     "이자"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|648000001022",
+  "content_fingerprint": "semantic:v1|education_application|check|경상남도 대학생 학자금 이자 지원|gyeongnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

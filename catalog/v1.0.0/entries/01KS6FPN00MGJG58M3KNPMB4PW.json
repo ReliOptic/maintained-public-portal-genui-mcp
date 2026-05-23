@@ -16,7 +16,7 @@
     "주민장학금",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|358000000115",
+  "content_fingerprint": "semantic:v1|education_application|check|덕적면 주민장학금 지급|incheon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

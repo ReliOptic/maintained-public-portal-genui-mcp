@@ -16,7 +16,7 @@
     "(손)자녀",
     "생활지원금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|999000000061",
+  "content_fingerprint": "semantic:v1|benefit_check|check|독립유공자 손 자녀 생활지원금|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

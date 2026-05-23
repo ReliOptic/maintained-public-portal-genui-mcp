@@ -14,7 +14,7 @@
   "key_keywords": [
     "G-하우징"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00003000001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|g 하우징|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

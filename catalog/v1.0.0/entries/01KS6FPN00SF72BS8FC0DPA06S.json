@@ -17,7 +17,7 @@
     "감면",
     "단말기"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|628000000143",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인 하이패스 감면 단말기 무상 지원|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

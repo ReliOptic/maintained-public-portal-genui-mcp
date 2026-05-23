@@ -17,7 +17,7 @@
     "감면(공도저류지,",
     "금산동,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00007600009",
+  "content_fingerprint": "semantic:v1|benefit_check|check|주차시설 이용요금 감면 공도저류지 금산동 내리 석정동 동본동 원곡면 광덕 안성맞춤공감 아양2 아양3 안성제2산업단지 주차장|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

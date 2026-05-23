@@ -17,7 +17,7 @@
     "폐기물",
     "처리"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|648000001080",
+  "content_fingerprint": "semantic:v1|benefit_check|check|축산농가 감염성 폐기물 처리 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

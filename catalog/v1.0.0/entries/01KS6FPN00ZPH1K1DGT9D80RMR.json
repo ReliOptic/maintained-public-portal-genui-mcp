@@ -17,7 +17,7 @@
     "후",
     "원외약제비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|312000000318",
+  "content_fingerprint": "semantic:v1|benefit_check|check|서대문구 난임부부 지원 시술 후 원외약제비 청구|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "교육훈련비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|524000000119",
+  "content_fingerprint": "semantic:v1|education_application|check|귀농인 교육훈련비 지원|gyeongbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

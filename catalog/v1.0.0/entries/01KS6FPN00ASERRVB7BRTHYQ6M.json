@@ -16,7 +16,7 @@
     "주소이전지원금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|422000000118",
+  "content_fingerprint": "semantic:v1|education_application|check|전입고등학생 주소이전지원금 지원|gangwon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

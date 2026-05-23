@@ -16,7 +16,7 @@
     "진로심리검사(진로정보망",
     "커리어넷)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55462500002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|온라인 진로심리검사 진로정보망 커리어넷|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

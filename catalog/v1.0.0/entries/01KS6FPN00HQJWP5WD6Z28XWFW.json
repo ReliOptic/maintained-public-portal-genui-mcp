@@ -15,7 +15,7 @@
     "진료부작용자",
     "치료비(보상비)제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|449000000128",
+  "content_fingerprint": "semantic:v1|benefit_check|check|진료부작용자 치료비 보상비 제공|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

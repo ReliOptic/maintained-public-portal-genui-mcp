@@ -17,7 +17,7 @@
     "교육",
     "훈련비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|524000000146",
+  "content_fingerprint": "semantic:v1|education_application|check|농업용 드론 교육 훈련비 지원|gyeongbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

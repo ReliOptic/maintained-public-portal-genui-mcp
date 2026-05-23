@@ -17,7 +17,7 @@
     "국고",
     "학자금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55263500013",
+  "content_fingerprint": "semantic:v1|education_application|check|사립학교 교직원 국고 학자금 대여|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

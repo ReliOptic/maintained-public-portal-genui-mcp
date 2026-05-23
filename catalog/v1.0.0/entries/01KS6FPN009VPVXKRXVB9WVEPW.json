@@ -15,7 +15,7 @@
     "오피스텔구입",
     "자금융자"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|PTR000051706",
+  "content_fingerprint": "semantic:v1|benefit_check|check|오피스텔구입 자금융자|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

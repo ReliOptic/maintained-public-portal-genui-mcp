@@ -17,7 +17,7 @@
     "통증",
     "완화를"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|321000000128",
+  "content_fingerprint": "semantic:v1|benefit_check|check|재활 및 통증 완화를 위한 물리치료|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

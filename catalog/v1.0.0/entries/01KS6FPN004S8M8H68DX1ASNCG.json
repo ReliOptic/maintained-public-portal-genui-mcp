@@ -15,7 +15,7 @@
     "법인세",
     "신고"
   ],
-  "content_fingerprint": "hometax|portal_handoff|a56f0c0b3f06bd0e",
+  "content_fingerprint": "semantic:v1|tax_filing|handoff|법인세 신고|nationwide|corporation_operator",
   "source_urls": [
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EB%B2%95%EC%9D%B8%EC%84%B8%20%EC%8B%A0%EA%B3%A0"
   ],

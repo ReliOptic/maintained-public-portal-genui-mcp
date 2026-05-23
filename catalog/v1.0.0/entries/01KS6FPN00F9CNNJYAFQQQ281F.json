@@ -17,7 +17,7 @@
     "과의존",
     "예방"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55291900002",
+  "content_fingerprint": "semantic:v1|education_application|check|청소년 미디어 과의존 예방 및 치유를 위한 보호자 교육|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

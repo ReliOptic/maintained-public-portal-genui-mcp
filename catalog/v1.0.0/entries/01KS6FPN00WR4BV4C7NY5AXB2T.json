@@ -17,7 +17,7 @@
     "가입",
     "장려금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|644000000239",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|노란우산 공제 가입 장려금 지원|central_government,chungnam|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

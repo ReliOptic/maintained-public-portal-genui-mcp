@@ -16,7 +16,7 @@
     "취업플러스+",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|832000000007",
+  "content_fingerprint": "semantic:v1|education_application|check|직업계고 취업플러스 지원|education_office,jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

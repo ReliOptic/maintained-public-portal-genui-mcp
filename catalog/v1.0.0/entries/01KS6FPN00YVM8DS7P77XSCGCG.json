@@ -17,7 +17,7 @@
     "똑똑안부확인",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|304000000133",
+  "content_fingerprint": "semantic:v1|benefit_check|check|고독사 예방 똑똑안부확인 서비스 지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

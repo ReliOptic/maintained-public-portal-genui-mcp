@@ -15,7 +15,7 @@
     "일반용",
     "사용전점검"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55139800003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|일반용 사용전점검|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

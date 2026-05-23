@@ -17,7 +17,7 @@
     "및",
     "출산장려금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|505000000103",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|경주시 출산축하금 및 출산장려금 지원|gyeongbuk|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

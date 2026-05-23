@@ -17,7 +17,7 @@
     "고용조사",
     "통계조사원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|999000000064",
+  "content_fingerprint": "semantic:v1|address_change|check|이민자체류실태 및 고용조사 통계조사원 일자리 제공|nationwide|foreign_resident",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

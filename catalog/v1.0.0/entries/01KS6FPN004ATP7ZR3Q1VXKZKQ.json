@@ -17,7 +17,7 @@
     "생신",
     "방문"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|492000000101",
+  "content_fingerprint": "semantic:v1|benefit_check|check|홀로사는 어르신 생신 방문|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

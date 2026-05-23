@@ -16,7 +16,7 @@
     "장학금",
     "지원(특기)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|643000000124",
+  "content_fingerprint": "semantic:v1|education_application|check|충북인재 장학금 지원 특기|central_government,chungbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

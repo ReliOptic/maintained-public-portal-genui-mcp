@@ -15,7 +15,7 @@
     "치매",
     "안심병동"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00109200005",
+  "content_fingerprint": "semantic:v1|benefit_check|check|치매 안심병동|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

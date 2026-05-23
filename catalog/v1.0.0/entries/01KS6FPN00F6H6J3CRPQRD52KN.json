@@ -16,7 +16,7 @@
     "유지관리비용",
     "일부지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|323000000114",
+  "content_fingerprint": "semantic:v1|benefit_check|check|송파구 공동주택 유지관리비용 일부지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

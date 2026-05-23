@@ -16,7 +16,7 @@
     "임산부",
     "할인"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55391200001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|srt 임산부 할인|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

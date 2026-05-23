@@ -17,7 +17,7 @@
     "위한",
     "드론지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|475000000203",
+  "content_fingerprint": "semantic:v1|benefit_check|check|항공방제 확대를 위한 드론지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

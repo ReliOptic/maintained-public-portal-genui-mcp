@@ -17,7 +17,7 @@
     "약제비지원(시술",
     "후"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|440000000192",
+  "content_fingerprint": "semantic:v1|benefit_check|check|제천시 난임부부 약제비지원 시술 후 원외 약제비 신청|central_government,chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

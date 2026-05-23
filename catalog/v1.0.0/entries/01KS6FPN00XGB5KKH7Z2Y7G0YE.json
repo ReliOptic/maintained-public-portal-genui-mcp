@@ -17,7 +17,7 @@
     "패키지[취업사진",
     "촬영"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|403000000155",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년 취업 면접 지원 패키지 취업사진 촬영 및 헤어 메이크업 비용 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

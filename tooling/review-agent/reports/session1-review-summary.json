@@ -1,17 +1,17 @@
 {
   "reviewed_at": "2026-05-23",
   "parallel_instances": 8,
-  "candidate_count": 10975,
+  "candidate_count": 10976,
   "processed_percent": 100,
   "decision_counts": {
     "auto_accept": 5,
-    "escalate": 10970
+    "escalate": 10971
   },
   "reason_counts": {
     "confidence_lt_0.85": 10954,
     "sensitive_domain:family": 470,
     "sensitive_domain:immigration": 37,
-    "sensitive_domain:tax": 301,
+    "sensitive_domain:tax": 302,
     "sensitive_domain:welfare": 10160
   },
   "results": [
@@ -87780,6 +87780,13 @@
       "reasons": [
         "confidence_lt_0.85",
         "sensitive_domain:welfare"
+      ]
+    },
+    {
+      "candidate": "catalog/v1.0.0/entries/nts-business-status.json",
+      "decision": "escalate",
+      "reasons": [
+        "sensitive_domain:tax"
       ]
     }
   ]

@@ -14,7 +14,7 @@
   "key_keywords": [
     "축산업구조개선"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|515000000140",
+  "content_fingerprint": "semantic:v1|benefit_check|check|축산업구조개선|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

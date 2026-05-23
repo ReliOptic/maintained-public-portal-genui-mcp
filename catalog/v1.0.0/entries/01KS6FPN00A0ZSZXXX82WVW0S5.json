@@ -17,7 +17,7 @@
     "긴급",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|374000000120",
+  "content_fingerprint": "semantic:v1|address_change|check|외국인 주민 긴급 지원|gyeonggi|foreign_resident",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

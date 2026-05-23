@@ -15,7 +15,7 @@
     "친환경유기질비료",
     "지원(배방)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|452000000163",
+  "content_fingerprint": "semantic:v1|benefit_check|check|친환경유기질비료 지원 배방|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

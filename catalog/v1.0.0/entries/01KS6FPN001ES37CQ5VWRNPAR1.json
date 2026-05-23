@@ -17,7 +17,7 @@
     "법률서비스",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00105600001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|전주시금융복지상담소 빚대물림방지 법률서비스 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

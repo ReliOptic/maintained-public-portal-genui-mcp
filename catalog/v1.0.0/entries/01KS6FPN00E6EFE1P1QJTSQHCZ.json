@@ -16,7 +16,7 @@
     "자녀장학금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|644000000181",
+  "content_fingerprint": "semantic:v1|education_application|check|새마을지도자 자녀장학금 지원|central_government,chungnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

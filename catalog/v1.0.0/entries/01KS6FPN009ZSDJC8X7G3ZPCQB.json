@@ -17,7 +17,7 @@
     "장학금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|627000000126",
+  "content_fingerprint": "semantic:v1|education_application|check|대구광역시 저소득주민 장학금 지원|daegu|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

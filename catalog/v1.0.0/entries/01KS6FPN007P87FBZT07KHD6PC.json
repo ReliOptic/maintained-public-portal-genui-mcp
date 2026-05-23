@@ -17,7 +17,7 @@
     "이용료",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00021200014",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경로 식당 이용료 감면 및 무료급식 제공|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

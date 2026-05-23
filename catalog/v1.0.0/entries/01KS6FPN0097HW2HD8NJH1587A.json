@@ -17,7 +17,7 @@
     "현장",
     "배송"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55246800001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|안전보건 미디어 현장 배송 서비스|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

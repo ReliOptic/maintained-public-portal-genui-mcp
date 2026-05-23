@@ -16,7 +16,7 @@
     "가족지원",
     "프로그램"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|875000000005",
+  "content_fingerprint": "semantic:v1|education_application|check|재활승마 가족지원 프로그램|education_office,gyeongbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

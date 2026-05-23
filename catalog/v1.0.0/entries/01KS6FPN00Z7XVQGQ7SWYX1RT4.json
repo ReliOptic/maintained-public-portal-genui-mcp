@@ -16,7 +16,7 @@
     "일자리",
     "제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|541000000143",
+  "content_fingerprint": "semantic:v1|benefit_check|check|공공근로 일자리 제공|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

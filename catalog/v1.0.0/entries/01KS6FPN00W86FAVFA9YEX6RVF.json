@@ -17,7 +17,7 @@
     "생활",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|311000000225",
+  "content_fingerprint": "semantic:v1|benefit_check|check|1인가구 전입 생활 지원 은빛sol 라이프|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

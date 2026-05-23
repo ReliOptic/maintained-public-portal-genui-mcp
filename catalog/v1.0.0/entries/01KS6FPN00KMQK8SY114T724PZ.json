@@ -17,7 +17,7 @@
     "및",
     "편의시설"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00083700001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|주차장 요금감면 및 편의시설 무료이용|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

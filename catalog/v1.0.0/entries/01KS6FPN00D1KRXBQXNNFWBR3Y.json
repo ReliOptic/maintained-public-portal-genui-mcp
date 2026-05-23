@@ -16,7 +16,7 @@
     "생신",
     "챙겨드리기"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|492000000127",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|한부모가족 생신 챙겨드리기|jeonnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

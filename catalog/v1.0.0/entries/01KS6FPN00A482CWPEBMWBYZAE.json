@@ -17,7 +17,7 @@
     "생리용품",
     "보편지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000180",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경기도 여성청소년 생리용품 보편지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

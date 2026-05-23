@@ -15,7 +15,7 @@
     "수출바우처",
     "지원(중소벤처기업부)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|SD0000010879",
+  "content_fingerprint": "semantic:v1|benefit_check|check|수출바우처 지원 중소벤처기업부|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

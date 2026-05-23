@@ -17,7 +17,7 @@
     "고교",
     "교과서비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|743000000019",
+  "content_fingerprint": "semantic:v1|education_application|check|저소득층 학생 고교 교과서비 지원|daejeon,education_office|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

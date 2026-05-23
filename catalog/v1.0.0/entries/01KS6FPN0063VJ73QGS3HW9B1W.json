@@ -17,7 +17,7 @@
     "상점가",
     "시설"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|631000000136",
+  "content_fingerprint": "semantic:v1|benefit_check|check|전통시장 및 상점가 시설 현대화 지원|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

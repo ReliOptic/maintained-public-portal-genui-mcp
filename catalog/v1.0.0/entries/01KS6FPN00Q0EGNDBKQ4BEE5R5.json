@@ -17,7 +17,7 @@
     "화상영어",
     "학습센터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|348000000404",
+  "content_fingerprint": "semantic:v1|benefit_check|check|달성군 사이버 화상영어 학습센터 운영|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "및",
     "멀칭비닐)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|476000000156",
+  "content_fingerprint": "semantic:v1|benefit_check|check|양파재배 지원사업 종자 및 멀칭비닐|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

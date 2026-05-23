@@ -15,7 +15,7 @@
     "양도소득세",
     "신고"
   ],
-  "content_fingerprint": "hometax|portal_handoff|c6760143da785212",
+  "content_fingerprint": "semantic:v1|tax_filing|handoff|양도소득세 신고|nationwide|homeowner",
   "source_urls": [
     "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%96%91%EB%8F%84%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0"
   ],

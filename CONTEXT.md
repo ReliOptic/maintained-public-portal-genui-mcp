@@ -141,7 +141,9 @@ When the same [[content_fingerprint]] appears in multiple sources, the **primary
 
 `worknet-supported-jobs` uses a `last_sync_at + 60-day TTL`: rows not refreshed within 60 days are auto-marked `status=archived` and removed from the published Catalog. This handles the short-lived nature of job postings without inventing a new lifecycle.
 
-The single Live Check Entry (`nts-businessman-status`, NTS 사업자 상태조회) is not a bulk Task source — it is one curated Entry with `access_mode = portal_handoff`. **It is excluded from the cross-source [[content_fingerprint]] dedup pool**: it is hand-authored, lives outside the api-refresh-pipeline's row stream, and never merges into a secondary source. See [[ADR-0007]].
+The single Live Check Entry (`nts-business-status`, NTS 사업자 상태조회) is not a bulk Task source — it is one curated Entry with `access_mode = portal_handoff`. **It is excluded from the cross-source [[content_fingerprint]] dedup pool**: it is hand-authored, lives outside the api-refresh-pipeline's row stream, and never merges into a secondary source. See [[ADR-0007]].
+
+Session 1 implementation status: the three non-Gov24 Task sources have registry YAML contracts and are CI-validated as `registry_validated_only` until endpoint mappings and maintainer secrets are added. Gov24 remains the only full-ingestion source in the current GitHub Actions workflow; the workflow still runs the semantic fingerprint/dedup pass so later Bokjiro/Worknet rows attach as `secondary_sources` instead of creating duplicate Entries.
 
 ### merged_into
 
@@ -447,4 +449,3 @@ The fixed set of host names that may appear in any tier1 / tier2 URL or in any `
 | `api.odcloud.kr`  | gov24 / NTS / data.go.kr API endpoints (api_cached sync source) | no — internal source only; never surfaced as a card CTA |
 
 Any URL outside this allowlist is rejected at publish time. `api.odcloud.kr` is in the list because it is the canonical host for the API operations driving the api-refresh-pipeline; it is treated as an **internal source**, not as a user-facing CTA target. The composer never renders `api.odcloud.kr` URLs in card UI.
-

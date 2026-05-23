@@ -17,7 +17,7 @@
     "수리비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|474000000112",
+  "content_fingerprint": "semantic:v1|benefit_check|check|귀농 귀촌 귀향인 주택 수리비 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

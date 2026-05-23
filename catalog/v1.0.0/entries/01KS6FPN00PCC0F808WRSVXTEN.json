@@ -17,7 +17,7 @@
     "충청남도",
     "청년"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|644000000853",
+  "content_fingerprint": "semantic:v1|benefit_check|check|2026년 상반기 충청남도 청년 주택임차보증금 이자 지원 2025년 선정자 대상|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

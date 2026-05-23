@@ -16,7 +16,7 @@
     "무상점검",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55139800007",
+  "content_fingerprint": "semantic:v1|benefit_check|check|전기계측장비 무상점검 서비스|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "청소년",
     "지원센터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|WII000000810",
+  "content_fingerprint": "semantic:v1|education_application|check|학교 밖 청소년 지원센터 운영|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

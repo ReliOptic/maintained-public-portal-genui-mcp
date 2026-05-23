@@ -17,7 +17,7 @@
     "감면(천안축구센터",
     "축구장,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00033300009",
+  "content_fingerprint": "semantic:v1|benefit_check|check|체육시설 이용요금 감면 천안축구센터 축구장 풋살구장 세미나실|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

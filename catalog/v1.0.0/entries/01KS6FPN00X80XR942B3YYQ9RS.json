@@ -17,7 +17,7 @@
     "소독실",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|507000000744",
+  "content_fingerprint": "semantic:v1|benefit_check|check|축산농장 출입인 소독실 및 방역실 설치 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

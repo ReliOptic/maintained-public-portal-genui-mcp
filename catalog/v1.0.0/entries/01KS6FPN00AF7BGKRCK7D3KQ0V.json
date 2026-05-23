@@ -17,7 +17,7 @@
     "자녀",
     "재학자녀"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|537000000121",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|저소득 한부모가족 자녀 재학자녀 간식비 지원|gyeongnam|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "교육",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|PTR000054374",
+  "content_fingerprint": "semantic:v1|education_application|check|지식재산 디지털 교육 서비스 제공 ip academy|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

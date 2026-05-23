@@ -17,7 +17,7 @@
     "만원주택",
     "공급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00027400003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|전남개발공사 시지역 무안 광양 만원주택 공급|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

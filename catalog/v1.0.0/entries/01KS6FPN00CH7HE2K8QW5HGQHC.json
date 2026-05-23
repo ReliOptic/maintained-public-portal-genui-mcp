@@ -15,7 +15,7 @@
     "가정위탁보호확인서",
     "발급"
   ],
-  "content_fingerprint": "gov24|portal_handoff|78fbc757b0d45b69",
+  "content_fingerprint": "semantic:v1|certificate_issue|handoff|가정위탁보호확인서 발급|nationwide|parent_guardian",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13520000076"
   ],

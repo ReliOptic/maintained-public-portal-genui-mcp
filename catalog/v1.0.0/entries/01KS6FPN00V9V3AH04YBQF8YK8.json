@@ -17,7 +17,7 @@
     "및",
     "취업지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000743",
+  "content_fingerprint": "semantic:v1|education_application|check|숙련건설기능인력 교육훈련 및 취업지원|gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

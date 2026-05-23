@@ -17,7 +17,7 @@
     "등)",
     "설치"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|417000000123",
+  "content_fingerprint": "semantic:v1|benefit_check|check|축사 환기시설 환풍기 등 설치 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

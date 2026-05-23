@@ -17,7 +17,7 @@
     "고독사",
     "예방"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|305000000150",
+  "content_fingerprint": "semantic:v1|benefit_check|check|1인 가구 고독사 예방 안부확인 서비스|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

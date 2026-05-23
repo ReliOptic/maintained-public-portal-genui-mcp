@@ -16,7 +16,7 @@
     "소상공인)",
     "육성"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55307700025",
+  "content_fingerprint": "semantic:v1|benefit_check|check|라이콘 기업가형 소상공인 육성|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

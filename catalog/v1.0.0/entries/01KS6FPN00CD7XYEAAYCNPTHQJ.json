@@ -17,7 +17,7 @@
     "융복합",
     "확산사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|154300000337",
+  "content_fingerprint": "semantic:v1|benefit_check|check|축산분야 ict 융복합 확산사업 참여 안내|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

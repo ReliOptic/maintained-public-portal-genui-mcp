@@ -17,7 +17,7 @@
     "이용요금",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00000700005",
+  "content_fingerprint": "semantic:v1|benefit_check|check|동해시종합버스터미널 주차장 이용요금 감면|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

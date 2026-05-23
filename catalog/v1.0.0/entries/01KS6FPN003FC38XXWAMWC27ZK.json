@@ -17,7 +17,7 @@
     "소화기)",
     "보급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|611000019598",
+  "content_fingerprint": "semantic:v1|benefit_check|check|주택용 소방시설 주택화재경보기 소화기 보급 및 설치 지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

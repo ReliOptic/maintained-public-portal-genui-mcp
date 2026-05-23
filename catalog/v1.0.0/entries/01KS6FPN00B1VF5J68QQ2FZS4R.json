@@ -17,7 +17,7 @@
     "등",
     "고위기청소년"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00093800007",
+  "content_fingerprint": "semantic:v1|benefit_check|check|자살 자해 등 고위기청소년 집중심리클리닉|central_government,jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "곤충",
     "수정벌"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|523000000186",
+  "content_fingerprint": "semantic:v1|benefit_check|check|시설과채류 화분매개 곤충 수정벌 공급|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "감면",
     "제도"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55258300006",
+  "content_fingerprint": "semantic:v1|benefit_check|check|연계고용 부담금 감면 제도|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

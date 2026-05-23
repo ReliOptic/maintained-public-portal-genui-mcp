@@ -15,7 +15,7 @@
     "수산자원보호",
     "직접지불제"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|119200000194",
+  "content_fingerprint": "semantic:v1|benefit_check|check|수산자원보호 직접지불제|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

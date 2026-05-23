@@ -16,7 +16,7 @@
     "국적취득자",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|448000000675",
+  "content_fingerprint": "semantic:v1|address_change|check|다문화가족 국적취득자 지원|central_government,chungbuk|foreign_resident",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

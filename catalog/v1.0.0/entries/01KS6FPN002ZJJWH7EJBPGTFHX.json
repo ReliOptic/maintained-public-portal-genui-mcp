@@ -17,7 +17,7 @@
     "경영개선자금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|119200000053",
+  "content_fingerprint": "semantic:v1|benefit_check|check|tac 참여어업인 경영개선자금 지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

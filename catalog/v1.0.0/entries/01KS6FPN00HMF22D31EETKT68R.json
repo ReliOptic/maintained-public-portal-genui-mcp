@@ -15,7 +15,7 @@
     "입양축하금",
     "지급(장애아동)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|301000000130",
+  "content_fingerprint": "semantic:v1|benefit_check|check|입양축하금 지급 장애아동|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

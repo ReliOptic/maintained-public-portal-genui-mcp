@@ -14,7 +14,7 @@
   "key_keywords": [
     "세자녀이상가족진료비지원(모자보건)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|647000000108",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|세자녀이상가족진료비지원 모자보건|gyeongbuk|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

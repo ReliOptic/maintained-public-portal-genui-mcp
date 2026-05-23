@@ -17,7 +17,7 @@
     "서비스",
     "통합처리"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|174000000029",
+  "content_fingerprint": "semantic:v1|benefit_check|check|출산 관련 서비스 통합처리 신청 행복출산|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

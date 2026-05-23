@@ -17,7 +17,7 @@
     "LPG차량",
     "세금인상분"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|GPV000000390",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|국가유공자 등 lpg차량 세금인상분 지원|central_government,nationwide|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

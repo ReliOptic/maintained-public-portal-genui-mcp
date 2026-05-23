@@ -17,7 +17,7 @@
     "관정",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|524000000157",
+  "content_fingerprint": "semantic:v1|benefit_check|check|원예작물 중형 관정 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "축하용품",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|536000000606",
+  "content_fingerprint": "semantic:v1|benefit_check|check|출산 축하용품 지급|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

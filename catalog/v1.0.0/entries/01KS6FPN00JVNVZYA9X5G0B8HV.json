@@ -17,7 +17,7 @@
     "검사비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|654000000004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|난임 진단 검사비 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

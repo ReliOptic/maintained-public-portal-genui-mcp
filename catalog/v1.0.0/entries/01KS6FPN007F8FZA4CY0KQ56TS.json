@@ -16,7 +16,7 @@
     "감면혜택",
     "제공"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00027300002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|국민체육센터 감면혜택 제공|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

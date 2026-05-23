@@ -16,7 +16,7 @@
     "스마트팜",
     "기술연수"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|644000000859",
+  "content_fingerprint": "semantic:v1|benefit_check|check|청년농업인 스마트팜 기술연수|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

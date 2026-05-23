@@ -16,7 +16,7 @@
     "심성관리비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|630000000113",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|보호대상아동 심성관리비 지원|daejeon|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

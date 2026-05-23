@@ -17,7 +17,7 @@
     "기업",
     "기숙사"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|452000000327",
+  "content_fingerprint": "semantic:v1|benefit_check|check|아산시 관내 기업 기숙사 임차지원|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

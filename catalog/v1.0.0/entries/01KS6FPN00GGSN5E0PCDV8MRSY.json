@@ -16,7 +16,7 @@
     "고용유지조치",
     "근로자지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|149200000008",
+  "content_fingerprint": "semantic:v1|benefit_check|check|무급 고용유지조치 근로자지원|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

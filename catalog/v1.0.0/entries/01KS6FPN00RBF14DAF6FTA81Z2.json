@@ -15,7 +15,7 @@
     "어르신건강장려금(검진)",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|540000000124",
+  "content_fingerprint": "semantic:v1|tax_inquiry|check|어르신건강장려금 검진 지원|gyeongnam|salary_worker,self_employed",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

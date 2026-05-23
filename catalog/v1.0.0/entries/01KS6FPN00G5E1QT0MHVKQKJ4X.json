@@ -17,7 +17,7 @@
     "입학준비금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|554000000111",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|법정저소득층아동 어린이집 입학준비금 지원|gwangju,gyeonggi|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "수학여행비",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|468000000115",
+  "content_fingerprint": "semantic:v1|education_application|check|국민기초생활수급자 고등학생 수학여행비 지원|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

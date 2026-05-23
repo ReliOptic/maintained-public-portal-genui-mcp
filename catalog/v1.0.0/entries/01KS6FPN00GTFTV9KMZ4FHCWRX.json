@@ -17,7 +17,7 @@
     "이송·전원",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00037600001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|요양시설 중증응급환자 이송 전원 및 진료협력사업|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

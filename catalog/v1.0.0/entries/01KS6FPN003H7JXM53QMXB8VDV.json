@@ -17,7 +17,7 @@
     "체인지업",
     "사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|647000000163",
+  "content_fingerprint": "semantic:v1|benefit_check|check|소상공인 새바람 체인지업 사업|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

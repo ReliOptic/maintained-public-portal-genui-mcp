@@ -17,7 +17,7 @@
     "학교급식",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|476100000028",
+  "content_fingerprint": "semantic:v1|education_application|check|관내 유제품 학교급식 지원|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

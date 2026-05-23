@@ -15,7 +15,7 @@
     "장애인",
     "활동지원(추가)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|400000000110",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인 활동지원 추가|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

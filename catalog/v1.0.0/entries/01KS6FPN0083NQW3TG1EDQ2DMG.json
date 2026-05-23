@@ -16,7 +16,7 @@
     "창조기업",
     "지원센터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|142000000001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|1인 창조기업 지원센터|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

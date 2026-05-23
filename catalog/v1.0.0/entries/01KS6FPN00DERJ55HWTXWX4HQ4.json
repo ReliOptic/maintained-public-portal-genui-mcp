@@ -17,7 +17,7 @@
     "노인틀니·임플란트",
     "본인부담금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|409000000107",
+  "content_fingerprint": "semantic:v1|benefit_check|check|김포시 의료급여 노인틀니 임플란트 본인부담금 지원사업|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

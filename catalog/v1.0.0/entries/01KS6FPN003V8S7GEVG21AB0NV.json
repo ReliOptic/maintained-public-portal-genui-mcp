@@ -17,7 +17,7 @@
     "환아",
     "의료비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|452000000135",
+  "content_fingerprint": "semantic:v1|benefit_check|check|선천성 갑상선기능저하증 환아 의료비 지원|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "취업준비",
     "쿠폰"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|642000000712",
+  "content_fingerprint": "semantic:v1|benefit_check|check|강원특별자치도 청년 취업준비 쿠폰 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "축산",
     "환경개선"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|476000000106",
+  "content_fingerprint": "semantic:v1|benefit_check|check|축산 환경개선|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

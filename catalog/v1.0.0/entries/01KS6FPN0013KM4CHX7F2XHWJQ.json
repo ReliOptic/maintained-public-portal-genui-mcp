@@ -17,7 +17,7 @@
     "성실상환자",
     "대상"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000673",
+  "content_fingerprint": "semantic:v1|benefit_check|check|경기도 재도전론 채무조정 성실상환자 대상 소액금융지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

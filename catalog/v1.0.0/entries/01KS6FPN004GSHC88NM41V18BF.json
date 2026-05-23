@@ -17,7 +17,7 @@
     "중식",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|701000000206",
+  "content_fingerprint": "semantic:v1|education_application|check|학기중 평일 중식 지원|education_office,seoul|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

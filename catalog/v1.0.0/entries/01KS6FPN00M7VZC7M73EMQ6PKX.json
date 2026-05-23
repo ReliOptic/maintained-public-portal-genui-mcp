@@ -17,7 +17,7 @@
     "안부확인(음료배달)",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|304000000111",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득 독거어르신 안부확인 음료배달 서비스|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

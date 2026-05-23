@@ -16,7 +16,7 @@
     "확인서",
     "발급"
   ],
-  "content_fingerprint": "gov24|portal_handoff|b071ee145143ea65",
+  "content_fingerprint": "semantic:v1|certificate_issue|handoff|차상위계층 확인서 발급|nationwide|low_income_household",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13520000098&HighCtgCD=A05003"
   ],

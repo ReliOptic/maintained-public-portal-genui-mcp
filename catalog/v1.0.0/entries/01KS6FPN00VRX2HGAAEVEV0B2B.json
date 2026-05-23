@@ -15,7 +15,7 @@
     "교육부가급여금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|433000000140",
+  "content_fingerprint": "semantic:v1|education_application|check|교육부가급여금 지원|gangwon|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

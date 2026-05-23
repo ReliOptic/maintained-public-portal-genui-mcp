@@ -17,7 +17,7 @@
     "및",
     "장비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|650000000293",
+  "content_fingerprint": "semantic:v1|benefit_check|check|해녀 육성 보호 및 장비 지원|jeju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

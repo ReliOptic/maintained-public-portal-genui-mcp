@@ -16,7 +16,7 @@
     "장학금(예·체능대회",
     "입상자)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|541000000111",
+  "content_fingerprint": "semantic:v1|education_application|check|인재육성 장학금 예 체능대회 입상자|gyeongnam|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

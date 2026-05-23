@@ -1,0 +1,55 @@
+{
+  "stage": "source-registry-check",
+  "required_task_sources": [
+    "gov24-serviceList",
+    "bokjiro-central",
+    "bokjiro-regional",
+    "worknet-supported-jobs"
+  ],
+  "registries": [
+    {
+      "source_id": "gov24-serviceList",
+      "path": "catalog/api-registry/gov24-serviceList.yaml",
+      "role": "task_source",
+      "priority": 1,
+      "ingestion_status": "active",
+      "ci_stage": "full_ingestion",
+      "auth_env": "GOV24_SERVICE_KEY",
+      "has_service_list_operation": true
+    },
+    {
+      "source_id": "bokjiro-central",
+      "path": "catalog/api-registry/bokjiro-central.yaml",
+      "role": "task_source",
+      "priority": 2,
+      "ingestion_status": "planned",
+      "ci_stage": "registry_validated_only",
+      "auth_env": "BOKJIRO_SERVICE_KEY",
+      "has_service_list_operation": true
+    },
+    {
+      "source_id": "bokjiro-regional",
+      "path": "catalog/api-registry/bokjiro-regional.yaml",
+      "role": "task_source",
+      "priority": 3,
+      "ingestion_status": "planned",
+      "ci_stage": "registry_validated_only",
+      "auth_env": "BOKJIRO_SERVICE_KEY",
+      "has_service_list_operation": true
+    },
+    {
+      "source_id": "worknet-supported-jobs",
+      "path": "catalog/api-registry/worknet-supported-jobs.yaml",
+      "role": "task_source",
+      "priority": 4,
+      "ingestion_status": "planned",
+      "ci_stage": "registry_validated_only",
+      "auth_env": "WORKNET_AUTH_KEY",
+      "has_service_list_operation": true
+    }
+  ],
+  "missing": [],
+  "errors": [],
+  "passed": true,
+  "note": "Session 1 full ingestion only fetches gov24. Bokjiro/worknet registries are validated as Task-source contracts until their endpoint mappings and CI secrets are added."
+}

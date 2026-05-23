@@ -15,7 +15,7 @@
     "국가유공자",
     "보훈명예수당"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|543000000101",
+  "content_fingerprint": "semantic:v1|benefit_check|check|국가유공자 보훈명예수당|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "대학생",
     "등록금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|378000000167",
+  "content_fingerprint": "semantic:v1|education_application|check|성남시 다자녀가구 대학생 등록금 지원|gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

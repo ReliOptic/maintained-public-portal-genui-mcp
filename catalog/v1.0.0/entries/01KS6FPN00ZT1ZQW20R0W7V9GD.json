@@ -17,7 +17,7 @@
     "통합안내",
     "파일"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|402000000158",
+  "content_fingerprint": "semantic:v1|benefit_check|check|생애주기 인구정책 통합안내 파일 제공|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

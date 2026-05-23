@@ -15,7 +15,7 @@
     "교통사고사실확인원",
     "발급"
   ],
-  "content_fingerprint": "gov24|portal_handoff|ac53f07ddaeca9c1",
+  "content_fingerprint": "semantic:v1|certificate_issue|handoff|교통사고사실확인원 발급|nationwide|driver",
   "source_urls": [
     "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=13200000034&HighCtgCD=A08004"
   ],

@@ -17,7 +17,7 @@
     "기반",
     "구축"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|495000000428",
+  "content_fingerprint": "semantic:v1|benefit_check|check|과수 생산 기반 구축 지원사업|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

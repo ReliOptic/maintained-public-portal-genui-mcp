@@ -14,7 +14,7 @@
   "key_keywords": [
     "상호문화어울림장학금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00051900002",
+  "content_fingerprint": "semantic:v1|education_application|check|상호문화어울림장학금|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

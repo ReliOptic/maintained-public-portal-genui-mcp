@@ -15,7 +15,7 @@
     "결혼이민자농가",
     "농어촌진흥기금"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|515000000131",
+  "content_fingerprint": "semantic:v1|benefit_check|check|결혼이민자농가 농어촌진흥기금|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "날<구석구석",
     "문화배달>공연"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00113600034",
+  "content_fingerprint": "semantic:v1|benefit_check|check|2025문화가 있는 날 구석구석 문화배달 공연 제공|chungbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

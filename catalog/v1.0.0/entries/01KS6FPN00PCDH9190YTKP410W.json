@@ -17,7 +17,7 @@
     "백일해",
     "예방접종"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|631000000726",
+  "content_fingerprint": "semantic:v1|benefit_check|check|울산광역시 임신부부 백일해 예방접종 지원|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

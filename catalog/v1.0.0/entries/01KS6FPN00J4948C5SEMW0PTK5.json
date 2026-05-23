@@ -17,7 +17,7 @@
     "교복",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|753000000227",
+  "content_fingerprint": "semantic:v1|education_application|check|중 고등학교 신입생 교복 지원|education_office,gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

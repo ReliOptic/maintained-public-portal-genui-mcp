@@ -15,7 +15,7 @@
     "수산공익직접지불제도",
     "교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55396800002",
+  "content_fingerprint": "semantic:v1|education_application|check|수산공익직접지불제도 교육|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

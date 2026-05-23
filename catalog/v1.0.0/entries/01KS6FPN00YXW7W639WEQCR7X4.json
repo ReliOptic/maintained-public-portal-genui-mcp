@@ -17,7 +17,7 @@
     "및",
     "약제"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|522000000110",
+  "content_fingerprint": "semantic:v1|benefit_check|check|과실품질향상 기자재 및 약제 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

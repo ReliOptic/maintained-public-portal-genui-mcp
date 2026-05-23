@@ -1,0 +1,12 @@
+# Local credentials and maintainer-only environment files.
+.env
+.env.*
+env_*
+*SERVICE_KEY*
+*.pem
+*.key
+
+# Python/runtime noise.
+__pycache__/
+*.py[cod]
+.pytest_cache/

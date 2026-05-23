@@ -15,7 +15,7 @@
     "사이버",
     "직업능력개발훈련"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55258300005",
+  "content_fingerprint": "semantic:v1|benefit_check|check|사이버 직업능력개발훈련|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

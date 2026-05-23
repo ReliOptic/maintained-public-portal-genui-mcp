@@ -17,7 +17,7 @@
     "어려운",
     "세대"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|537000000105",
+  "content_fingerprint": "semantic:v1|benefit_check|check|사회복지시설 및 어려운 세대 위문품 지원|gyeongnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

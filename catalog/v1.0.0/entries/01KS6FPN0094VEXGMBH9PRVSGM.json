@@ -17,7 +17,7 @@
     "장애인",
     "평생교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00148800002",
+  "content_fingerprint": "semantic:v1|education_application|check|2026년 대구광역시 장애인 평생교육 이용권신청|daegu|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

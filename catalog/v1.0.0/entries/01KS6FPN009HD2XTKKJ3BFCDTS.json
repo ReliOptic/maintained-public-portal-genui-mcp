@@ -15,7 +15,7 @@
     "에너지효율시장",
     "조성사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55353000226",
+  "content_fingerprint": "semantic:v1|benefit_check|check|에너지효율시장 조성사업|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

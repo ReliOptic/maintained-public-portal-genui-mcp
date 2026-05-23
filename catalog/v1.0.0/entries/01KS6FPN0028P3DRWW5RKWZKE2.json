@@ -17,7 +17,7 @@
     "동포(H-2)",
     "취업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B49000700211",
+  "content_fingerprint": "semantic:v1|education_application|check|외국 국적 동포 h 2 취업 교육|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

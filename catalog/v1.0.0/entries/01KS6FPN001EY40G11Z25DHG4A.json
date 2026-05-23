@@ -16,7 +16,7 @@
     "TV수신료",
     "면제"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B11005300003",
+  "content_fingerprint": "semantic:v1|benefit_check|check|기초생활 생계 의료 수급자 tv수신료 면제|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

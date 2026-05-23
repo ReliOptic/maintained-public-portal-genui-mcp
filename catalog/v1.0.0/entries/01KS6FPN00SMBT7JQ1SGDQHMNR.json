@@ -15,7 +15,7 @@
     "손해금(지연배상금)",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55252900205",
+  "content_fingerprint": "semantic:v1|education_application|check|손해금 지연배상금 감면|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

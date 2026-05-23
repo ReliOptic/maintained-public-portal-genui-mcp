@@ -16,7 +16,7 @@
     "친정가족",
     "초청지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|476000000159",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|결혼이주여성 친정가족 초청지원|jeonbuk|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

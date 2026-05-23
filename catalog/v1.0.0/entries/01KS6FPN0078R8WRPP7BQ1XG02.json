@@ -17,7 +17,7 @@
     "친환경",
     "보일러"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|319000000107",
+  "content_fingerprint": "semantic:v1|benefit_check|check|동작구청 가정용 친환경 보일러 설치 지원|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

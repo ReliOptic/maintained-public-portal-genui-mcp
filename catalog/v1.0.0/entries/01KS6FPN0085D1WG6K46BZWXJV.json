@@ -17,7 +17,7 @@
     "새싹인재",
     "육성"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00101000009",
+  "content_fingerprint": "semantic:v1|education_application|check|예술 꿈나무 새싹인재 육성 지원|jeonbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

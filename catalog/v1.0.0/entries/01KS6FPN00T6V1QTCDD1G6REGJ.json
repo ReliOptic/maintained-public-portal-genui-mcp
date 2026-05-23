@@ -15,7 +15,7 @@
     "아동·청소년",
     "심리지원서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|316000000153",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|아동 청소년 심리지원서비스|seoul|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

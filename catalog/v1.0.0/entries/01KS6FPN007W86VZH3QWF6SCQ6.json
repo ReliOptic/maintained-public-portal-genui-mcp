@@ -17,7 +17,7 @@
     "고위험",
     "임산부"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|400000000128",
+  "content_fingerprint": "semantic:v1|benefit_check|check|35세 이상 고위험 임산부 기형아 검사비 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

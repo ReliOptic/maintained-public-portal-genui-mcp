@@ -17,7 +17,7 @@
     "B형감염외",
     "3종"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|518000000111",
+  "content_fingerprint": "semantic:v1|benefit_check|check|인플루엔자 및 b형감염외 3종 예방접종 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

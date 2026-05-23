@@ -16,7 +16,7 @@
     "중구",
     "구민안전보험"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|325000000245",
+  "content_fingerprint": "semantic:v1|benefit_check|check|부산광역시 중구 구민안전보험|busan,central_government|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

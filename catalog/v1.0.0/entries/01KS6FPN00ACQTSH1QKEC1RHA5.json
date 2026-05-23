@@ -16,7 +16,7 @@
     "참전명예수당",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|642000000711",
+  "content_fingerprint": "semantic:v1|benefit_check|check|강원특별자치도 참전명예수당 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

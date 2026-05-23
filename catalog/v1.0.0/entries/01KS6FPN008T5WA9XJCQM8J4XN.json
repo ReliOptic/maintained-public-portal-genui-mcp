@@ -17,7 +17,7 @@
     "활용",
     "중소ㆍ벤처기업,"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|630000000676",
+  "content_fingerprint": "semantic:v1|benefit_check|check|가명정보 데이터 활용 중소 벤처기업 1인창조 기업 지원|daejeon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

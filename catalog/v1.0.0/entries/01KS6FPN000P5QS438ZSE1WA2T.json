@@ -17,7 +17,7 @@
     "영유아",
     "등"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|473000000116",
+  "content_fingerprint": "semantic:v1|benefit_check|check|임산부 및 영유아 등 영양제 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

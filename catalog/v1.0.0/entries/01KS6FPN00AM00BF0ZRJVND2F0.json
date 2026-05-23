@@ -16,7 +16,7 @@
     "운구비",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|378000000151",
+  "content_fingerprint": "semantic:v1|benefit_check|check|국민기초생활수급자 운구비 지급|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

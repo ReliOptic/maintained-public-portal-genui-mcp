@@ -17,7 +17,7 @@
     "할인",
     "서비스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00046400019",
+  "content_fingerprint": "semantic:v1|benefit_check|check|공연장 대관료 할인 서비스|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

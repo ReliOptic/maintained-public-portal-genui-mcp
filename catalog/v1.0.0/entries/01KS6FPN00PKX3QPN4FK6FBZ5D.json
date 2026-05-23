@@ -16,7 +16,7 @@
     "다문화가족",
     "자활교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|443000000109",
+  "content_fingerprint": "semantic:v1|education_application|check|고국방문지원및 다문화가족 자활교육|central_government,chungbuk|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

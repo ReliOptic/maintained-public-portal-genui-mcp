@@ -16,7 +16,7 @@
     "바우처카드",
     "발급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|451000000143",
+  "content_fingerprint": "semantic:v1|benefit_check|check|다자녀가정 임신부 바우처카드 발급|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

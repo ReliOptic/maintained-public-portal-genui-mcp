@@ -15,7 +15,7 @@
     "어린이",
     "교통안전체험교육"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00007400005",
+  "content_fingerprint": "semantic:v1|education_application|check|어린이 교통안전체험교육|nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

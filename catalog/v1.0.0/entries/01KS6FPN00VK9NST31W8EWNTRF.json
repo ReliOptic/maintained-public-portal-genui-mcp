@@ -17,7 +17,7 @@
     "확대(임산부·영아·고령자",
     "바우처택시)"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|631000000719",
+  "content_fingerprint": "semantic:v1|benefit_check|check|교통약자 이동지원 확대 임산부 영아 고령자 바우처택시|ulsan|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

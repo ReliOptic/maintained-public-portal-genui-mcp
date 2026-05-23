@@ -17,7 +17,7 @@
     "안질환",
     "의료비"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|434000000106",
+  "content_fingerprint": "semantic:v1|benefit_check|check|저소득층 노인 안질환 의료비 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

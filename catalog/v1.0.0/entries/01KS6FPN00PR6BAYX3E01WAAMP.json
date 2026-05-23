@@ -15,7 +15,7 @@
     "논산맘",
     "산모사랑꾸러미"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|454000000116",
+  "content_fingerprint": "semantic:v1|benefit_check|check|논산맘 산모사랑꾸러미|central_government,chungnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

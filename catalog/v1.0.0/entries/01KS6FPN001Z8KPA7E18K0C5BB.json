@@ -17,7 +17,7 @@
     "역량강화",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|468000000119",
+  "content_fingerprint": "semantic:v1|benefit_check|check|익산시 소상공인 역량강화 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

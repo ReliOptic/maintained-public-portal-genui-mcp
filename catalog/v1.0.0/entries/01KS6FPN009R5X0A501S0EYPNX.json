@@ -16,7 +16,7 @@
     "교통약자",
     "이동지원센터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00004900004",
+  "content_fingerprint": "semantic:v1|benefit_check|check|광주시 교통약자 이동지원센터|gwangju|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

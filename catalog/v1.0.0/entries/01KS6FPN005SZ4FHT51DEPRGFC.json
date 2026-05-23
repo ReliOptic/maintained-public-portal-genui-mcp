@@ -16,7 +16,7 @@
     "구제급여",
     "지급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|482000000122",
+  "content_fingerprint": "semantic:v1|benefit_check|check|석면피해 구제급여 지급|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

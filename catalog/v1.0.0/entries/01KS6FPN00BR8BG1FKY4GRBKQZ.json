@@ -15,7 +15,7 @@
     "에너지복지요금",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55037300001",
+  "content_fingerprint": "semantic:v1|benefit_check|check|에너지복지요금 지원|nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

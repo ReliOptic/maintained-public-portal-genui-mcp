@@ -17,7 +17,7 @@
     "대량포획",
     "기술보급"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|348000000335",
+  "content_fingerprint": "semantic:v1|benefit_check|check|콩 노린재류 대량포획 기술보급 지원|daegu|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

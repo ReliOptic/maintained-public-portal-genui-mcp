@@ -15,7 +15,7 @@
     "지역사회서비스",
     "투자사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|471000000130",
+  "content_fingerprint": "semantic:v1|benefit_check|check|지역사회서비스 투자사업|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

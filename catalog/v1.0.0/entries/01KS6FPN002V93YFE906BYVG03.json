@@ -17,7 +17,7 @@
     "등",
     "학생교복"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|554000000130",
+  "content_fingerprint": "semantic:v1|education_application|check|비인가 대안교육기관 등 학생교복 지원|gwangju,gyeonggi|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

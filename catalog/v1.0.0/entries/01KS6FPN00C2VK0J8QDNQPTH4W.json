@@ -16,7 +16,7 @@
     "한의약",
     "건강관리사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|305000000163",
+  "content_fingerprint": "semantic:v1|benefit_check|check|어린이 한의약 건강관리사업|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -15,7 +15,7 @@
     "산재근로자",
     "직업훈련"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|149200000016",
+  "content_fingerprint": "semantic:v1|benefit_check|check|산재근로자 직업훈련|central_government,nationwide|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -17,7 +17,7 @@
     "배부",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|526000000109",
+  "content_fingerprint": "semantic:v1|benefit_check|check|복지사각지대 양곡 배부 지원|gyeongbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

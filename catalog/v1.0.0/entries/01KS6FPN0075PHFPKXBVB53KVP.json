@@ -17,7 +17,7 @@
     "시설퇴소아동",
     "등"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|443000000110",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|소년소녀가정 및 시설퇴소아동 등 자립지원|central_government,chungbuk|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

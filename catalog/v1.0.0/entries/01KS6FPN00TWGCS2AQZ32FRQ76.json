@@ -17,7 +17,7 @@
     "의료비",
     "플러스"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|484000000404",
+  "content_fingerprint": "semantic:v1|benefit_check|check|광양시 고령임부 의료비 플러스 사업|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

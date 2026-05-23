@@ -17,7 +17,7 @@
     "음료자판기",
     "우선임대"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00026100011",
+  "content_fingerprint": "semantic:v1|benefit_check|check|매점 및 음료자판기 우선임대|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

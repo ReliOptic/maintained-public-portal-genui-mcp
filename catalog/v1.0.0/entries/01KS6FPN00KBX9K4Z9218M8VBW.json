@@ -17,7 +17,7 @@
     "선정",
     "및"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|641000000834",
+  "content_fingerprint": "semantic:v1|benefit_check|check|유망 중소기업 선정 및 역량강화 지원|gyeonggi|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

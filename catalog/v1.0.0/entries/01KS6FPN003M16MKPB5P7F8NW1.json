@@ -15,7 +15,7 @@
     "여수시",
     "전입인센티브"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|481000000363",
+  "content_fingerprint": "semantic:v1|benefit_check|check|여수시 전입인센티브|jeonnam|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

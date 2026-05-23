@@ -16,7 +16,7 @@
     "개조",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|474100000029",
+  "content_fingerprint": "semantic:v1|benefit_check|check|장애인주택 개조 지원|jeonbuk|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

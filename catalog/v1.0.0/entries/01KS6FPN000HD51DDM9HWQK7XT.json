@@ -17,7 +17,7 @@
     "유모차",
     "대여"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|B55117700002",
+  "content_fingerprint": "semantic:v1|benefit_check|check|인천공항 내 유모차 대여 서비스 제공|incheon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "통합",
     "교육지원센터"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|306000000226",
+  "content_fingerprint": "semantic:v1|education_application|check|중랑구 통합 교육지원센터|seoul|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

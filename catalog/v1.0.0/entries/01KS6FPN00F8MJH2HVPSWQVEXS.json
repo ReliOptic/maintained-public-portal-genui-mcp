@@ -17,7 +17,7 @@
     "수강료",
     "감면(다둥이"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|307000000198",
+  "content_fingerprint": "semantic:v1|benefit_check|check|성북구 평생학습센터 수강료 감면 다둥이 행복카드 소지자|seoul|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

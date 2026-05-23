@@ -17,7 +17,7 @@
     "강좌",
     "감면"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00055000003",
+  "content_fingerprint": "semantic:v1|education_application|check|의왕시청소년수련관 교육 강좌 감면 서비스|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

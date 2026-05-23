@@ -17,7 +17,7 @@
     "농가",
     "포장재"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|428000000117",
+  "content_fingerprint": "semantic:v1|benefit_check|check|군수 품질인증 농가 포장재 지원|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

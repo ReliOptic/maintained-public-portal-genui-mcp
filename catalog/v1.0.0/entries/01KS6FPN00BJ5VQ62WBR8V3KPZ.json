@@ -17,7 +17,7 @@
     "장비",
     "사업"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|420000000172",
+  "content_fingerprint": "semantic:v1|benefit_check|check|연근해 채낚기어선 장비 사업 안내|gangwon|low_income_household",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

@@ -16,7 +16,7 @@
     "차액보육료",
     "지원"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|316000000101",
+  "content_fingerprint": "semantic:v1|certificate_issue|check|누리과정 차액보육료 지원|seoul|parent_guardian",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",

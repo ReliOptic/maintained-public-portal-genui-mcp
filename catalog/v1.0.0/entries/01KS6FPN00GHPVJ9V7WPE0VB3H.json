@@ -14,7 +14,7 @@
   "key_keywords": [
     "양평군장학재단"
   ],
-  "content_fingerprint": "gov24|gov24-serviceList|O00053300001",
+  "content_fingerprint": "semantic:v1|education_application|check|양평군장학재단|central_government,nationwide|parent_guardian,student",
   "source_urls": [
     "https://api.odcloud.kr/api/gov24/v3/serviceList",
     "https://api.odcloud.kr/api/gov24/v3/serviceDetail",
