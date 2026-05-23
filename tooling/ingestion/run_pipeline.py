@@ -13,6 +13,7 @@ import datetime as dt
 import hashlib
 import html
 import json
+import math
 import os
 import re
 import ssl
@@ -194,6 +195,66 @@ def payload_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
     if isinstance(data, dict):
         return [data]
     return []
+
+
+def fetch_service_list_page(
+    endpoint: str,
+    key: str,
+    page: int,
+    page_param: str,
+    per_page_param: str,
+    per_page: int,
+    args: argparse.Namespace,
+    operation_status_counts: dict[str, dict[str, int]],
+    depth: int = 0,
+) -> dict[str, Any]:
+    result = gov24_api_get_json(
+        endpoint,
+        key,
+        {page_param: page, per_page_param: per_page, "returnType": "JSON"},
+        timeout=args.api_timeout,
+    )
+    status_key = str(result["meta"].get("status"))
+    operation_status_counts["serviceList"][status_key] = operation_status_counts["serviceList"].get(status_key, 0) + 1
+    if result["ok"]:
+        return {
+            "ok": True,
+            "rows": payload_rows(result["data"] or {}),
+            "meta": result["meta"],
+            "fallbacks": [],
+            "fallback_failures": [],
+        }
+
+    if result["meta"].get("status") == 200 and per_page > args.min_per_page:
+        child_per_page = max(args.min_per_page, per_page // 2)
+        child_count = math.ceil(per_page / child_per_page)
+        offset = (page - 1) * per_page
+        rows: list[dict[str, Any]] = []
+        fallbacks = [{"page": page, "per_page": per_page, "child_per_page": child_per_page, "depth": depth, "meta": result["meta"]}]
+        failures: list[dict[str, Any]] = []
+        for child_index in range(child_count):
+            child_offset = offset + child_index * child_per_page
+            child_page = child_offset // child_per_page + 1
+            child = fetch_service_list_page(
+                endpoint,
+                key,
+                child_page,
+                page_param,
+                per_page_param,
+                child_per_page,
+                args,
+                operation_status_counts,
+                depth + 1,
+            )
+            rows.extend(child.get("rows", []))
+            fallbacks.extend(child.get("fallbacks", []))
+            failures.extend(child.get("fallback_failures", []))
+            if not child["ok"]:
+                failures.append({"page": child_page, "per_page": child_per_page, "meta": child["meta"]})
+        if rows:
+            return {"ok": True, "rows": rows, "meta": result["meta"], "fallbacks": fallbacks, "fallback_failures": failures}
+
+    return {"ok": False, "rows": [], "meta": result["meta"], "fallbacks": [], "fallback_failures": []}
 
 
 def infer_region_tags(normalized: dict[str, str]) -> list[str]:
@@ -461,6 +522,8 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
     last_page_completed: int | None = None
     companion_policy = "skip" if args.skip_companions else "fetch"
     operation_status_counts: dict[str, dict[str, int]] = {"serviceList": {}, "serviceDetail": {}, "supportConditions": {}}
+    service_list_fallbacks: list[dict[str, Any]] = []
+    service_list_fallback_failures: list[dict[str, Any]] = []
     started = time.monotonic()
     progress_every = max(1, int(args.progress_every))
 
@@ -473,10 +536,11 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
             break
         print(f"api-refresh page={page} start rows_seen={rows_seen} written={len(written)}", file=sys.stderr, flush=True)
         last_page_attempted = page
-        list_result = gov24_api_get_json(endpoint, key, {page_param: page, per_page_param: per_page, "returnType": "JSON"}, timeout=args.api_timeout)
-        status_key = str(list_result["meta"].get("status"))
-        operation_status_counts["serviceList"][status_key] = operation_status_counts["serviceList"].get(status_key, 0) + 1
-        if not list_result["ok"]:
+        list_page = fetch_service_list_page(endpoint, key, page, page_param, per_page_param, per_page, args, operation_status_counts)
+        status_key = str(list_page["meta"].get("status"))
+        service_list_fallbacks.extend(list_page.get("fallbacks", []))
+        service_list_fallback_failures.extend(list_page.get("fallback_failures", []))
+        if not list_page["ok"]:
             summary = {
                 "stage": "api-refresh",
                 "blocked": True,
@@ -490,14 +554,16 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
                 "pages_fetched": pages_fetched,
                 "rows_seen": rows_seen,
                 "operation_status_counts": operation_status_counts,
+                "service_list_fallbacks": service_list_fallbacks,
+                "service_list_fallback_failures": service_list_fallback_failures,
                 "secret_persisted": False,
-                "last_error": list_result["meta"],
+                "last_error": list_page["meta"],
             }
             write_api_refresh_summary(summary)
             raise RuntimeError(summary["reason"])
 
         pages_fetched += 1
-        rows = payload_rows(list_result["data"] or {})
+        rows = list_page["rows"]
         print(f"api-refresh page={page} status={status_key} rows={len(rows)}", file=sys.stderr, flush=True)
         if not rows:
             stopped_reason = "empty_page"
@@ -613,6 +679,8 @@ def api_refresh(args: argparse.Namespace) -> dict[str, Any]:
         "stopped_reason": stopped_reason,
         "companion_policy": companion_policy,
         "operation_status_counts": operation_status_counts,
+        "service_list_fallbacks": service_list_fallbacks,
+        "service_list_fallback_failures": service_list_fallback_failures,
         "secret_persisted": False,
         "elapsed_sec": round(time.monotonic() - started, 3),
         "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope.",
@@ -825,6 +893,7 @@ def main() -> None:
     ap.add_argument("--api-timeout", type=int, default=20, help="seconds per gov24 HTTP request")
     ap.add_argument("--companion-timeout", type=int, default=20, help="seconds per gov24 companion-operation HTTP request")
     ap.add_argument("--skip-companions", action="store_true", help="skip gov24 companion operations and ingest serviceList rows only")
+    ap.add_argument("--min-per-page", type=int, default=10, help="smallest fallback perPage when a gov24 serviceList JSON page is malformed")
     ap.add_argument("--progress-every", type=int, default=25, help="log progress every N rows within a page")
     args = ap.parse_args()
     if args.command == "api-refresh": result = api_refresh(args)
