@@ -19,3 +19,7 @@ Earlier grilling deferred features to "v0.2" liberally. The product reality is t
 - The Feature Dictionary, MCP Tool surface, `access_mode` enum, and other surfaces become smaller-but-final — no placeholder slots.
 - The phrase "v0.2 will fix it" is banned from planning documents in this codebase until the product demonstrates viability.
 - A feature that cannot be made Complete inside the v0.1 window is removed, not parked. Re-introduction requires a fresh ADR.
+
+## Subsequent amendments
+
+- [[ADR-0013]] — Replaces the implicit "≈10k Entries" / "10,972 entries" launch promise with an explicit taxonomy axis-coverage gate (N ≥ 20 published Entries per primary enum value; 100% maintainer-reviewed for sensitive-domain values) measured by `npm run coverage`. The single-shot SLC posture defined here is preserved; only the operational definition of "Complete" changes.

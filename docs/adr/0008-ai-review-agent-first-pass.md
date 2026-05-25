@@ -16,3 +16,7 @@ The original Review Queue assumed a single human maintainer would review every c
 - Every accept / escalate decision leaves a PR-comment audit trail, so rollback is precise.
 - If the Agent regresses, the `catalog_version` rollback path covers user-visible damage; the broken rubric is fixed in a separate PR under `tooling/`.
 - The parallel-runner concurrency level N is a tunable in `tooling/review-agent/runner/`, not a hard constant.
+
+## Subsequent amendments
+
+- [[ADR-0011]] — The Review Agent rubric's "intrinsic ordinal sanity" check now operates against the ordinal numerics in `weights/<weights_version>.json` (`score_ordinals`, `gate_ordinals`), not code constants. The rubric verifies per-Entry labels; the JSON file verifies the label→number mapping. A malformed mapping fails server startup rather than silently degrading rank.

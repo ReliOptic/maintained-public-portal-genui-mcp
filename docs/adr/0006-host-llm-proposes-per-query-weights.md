@@ -14,3 +14,8 @@ The earlier grilling-session Q9 fixed `W = clip(W_base + Σ_axis Δ_axis(req[axi
 - The Stage-1 safety gate ([[ADR-0005]]) is untouched: `confidence_score`, `merged_into`, and `sensitivity_risk` blocks survive because they are evaluated before the score is applied.
 - `explain_ranking` (deferred past v0.1) must surface the host's `weight_rationale` alongside the feature-score breakdown.
 - `weights/v1.0.0.json` (W_base + Δ_axis tables) is still authored, shipped, and version-tagged — it is the fallback, not dead code.
+
+## Subsequent amendments
+
+- [[ADR-0012]] — Tightens the host-W path with a per-feature `clip_cap = 0.40`, requires `weight_rationale` (≥ 8 non-whitespace characters) for any host proposal to be honoured, and replaces the previously-silent uniform-1/N fallback with the compositional fallback specified in this ADR. A `weight_source` tag (`host_proposed` / `compositional_no_rationale` / `compositional_no_override` / `compositional_total_zero`) is exposed when `include_debug=true`.
+- [[ADR-0014]] — Operationalises the rank cache referenced here. `weight_override_hash` is the hash of the **resolved** W (post-clip, post-renormalise), not the raw host input; `weight_rationale` is intentionally excluded from the cache key.

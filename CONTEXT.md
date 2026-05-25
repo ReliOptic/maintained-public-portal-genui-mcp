@@ -193,7 +193,7 @@ Two features are deliberately excluded — `sensitivity_risk` (safety gate, see 
 
 **Stage 4 — Top-K cut + slot assignment.** Sort by Q descending, take `top_k`, then assign `ui_slot` honouring the Stage-3 caps.
 
-Consequence: `explain_ranking` can answer "why not shown?" (Stage 1 reason) and "why this order?" (Stage 2 score breakdown) independently. The two questions never collapse into a single number.
+Consequence: `explain_ranking` can answer "why not shown?" (Stage 0 context miss / region exclusion, or Stage 1 safety reason) and "why this order?" (Stage 2 score breakdown) independently. The questions never collapse into a single number.
 
 ### Context extraction boundary
 
