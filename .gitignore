@@ -16,6 +16,7 @@ node_modules/
 dist/
 coverage/
 .nyc_output/
+coverage-report.json
 
 # Generated runtime catalog artifact; source JSON remains canonical.
 catalog/compiled.sqlite

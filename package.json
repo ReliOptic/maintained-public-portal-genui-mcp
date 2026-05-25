@@ -15,7 +15,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
     "test": "vitest run",
     "compile": "node --loader ts-node/esm scripts/compile-catalog.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "coverage": "node --loader ts-node/esm scripts/coverage-gate.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "latest",
