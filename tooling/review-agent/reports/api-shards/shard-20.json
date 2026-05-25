@@ -1,6 +1,12 @@
 {
   "stage": "api-refresh",
   "written": [
+    "catalog/v1.0.0/entries/01KS6FPN00K1TMWZA35Z4X5HPK.json",
+    "catalog/v1.0.0/entries/01KS6FPN00G4DBN100PBPZVR1J.json",
+    "catalog/v1.0.0/entries/01KS6FPN00SA1431PVZS2M19SK.json",
+    "catalog/v1.0.0/entries/01KS6FPN00G85CB46GWV7MY9JS.json",
+    "catalog/v1.0.0/entries/01KS6FPN006KPSX3SE5A6C2V7B.json",
+    "catalog/v1.0.0/entries/01KS6FPN00GETDF9HVV1ZW54WW.json",
     "catalog/v1.0.0/entries/01KS6FPN00KZA41S4DQJY5ZMYB.json",
     "catalog/v1.0.0/entries/01KS6FPN004DK4ZY1DWX05E7ZN.json",
     "catalog/v1.0.0/entries/01KS6FPN00WS0FB1WWC80KAFSX.json",
@@ -494,13 +500,7 @@
     "catalog/v1.0.0/entries/01KS6FPN00YJRM1K6JMAABJG26.json",
     "catalog/v1.0.0/entries/01KS6FPN00FP1N7WN82GKK86D0.json",
     "catalog/v1.0.0/entries/01KS6FPN00FQDF6ZD86ZJ0YP47.json",
-    "catalog/v1.0.0/entries/01KS6FPN00YXG7WS5D2P98X7R1.json",
-    "catalog/v1.0.0/entries/01KS6FPN00ZC0PFPSSFS19SPFJ.json",
-    "catalog/v1.0.0/entries/01KS6FPN00433DA1JSVVEGHWP1.json",
-    "catalog/v1.0.0/entries/01KS6FPN00P59K8C3D1HJNA6JC.json",
-    "catalog/v1.0.0/entries/01KS6FPN00PD3SD1F3VY9ZTN8D.json",
-    "catalog/v1.0.0/entries/01KS6FPN00ZGNARJ703E5VQRAV.json",
-    "catalog/v1.0.0/entries/01KS6FPN008VPMR98HSFCHCA54.json"
+    "catalog/v1.0.0/entries/01KS6FPN00YXG7WS5D2P98X7R1.json"
   ],
   "count": 500,
   "blocked": false,
@@ -538,12 +538,12 @@
         "status": 200,
         "endpoint": "https://api.odcloud.kr/api/gov24/v3/serviceList",
         "final_url": "https://api.odcloud.kr/api/gov24/v3/serviceList?page=96&perPage=100&returnType=JSON",
-        "error_excerpt": "json_decode:Unterminated string starting at: line 1 column 120760 (char 120759)"
+        "error_excerpt": "json_decode:Unterminated string starting at: line 1 column 120985 (char 120984)"
       }
     }
   ],
   "service_list_fallback_failures": [],
   "secret_persisted": false,
-  "elapsed_sec": 24.584,
+  "elapsed_sec": 12.258,
   "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope."
 }

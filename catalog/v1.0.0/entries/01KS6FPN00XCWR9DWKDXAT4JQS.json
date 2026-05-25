@@ -31,7 +31,7 @@
   },
   "source_api_fetch": {
     "serviceList": {
-      "page": 70,
+      "page": 71,
       "status": "200"
     },
     "serviceDetail": {
@@ -115,7 +115,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "아토피 천식 예방관리",
@@ -130,6 +130,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "benefit_check|check|아토피 천식 예방관리|gyeongnam|low_income_household"
 }

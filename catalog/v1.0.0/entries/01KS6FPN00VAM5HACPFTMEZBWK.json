@@ -118,7 +118,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "2025년 광주광역시 장애인 평생교육이용권 우수이용자 지원",
@@ -133,6 +133,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "education_application|check|2025년 광주광역시 장애인 평생교육이용권 우수이용자 지원|gwangju|parent_guardian,student"
 }

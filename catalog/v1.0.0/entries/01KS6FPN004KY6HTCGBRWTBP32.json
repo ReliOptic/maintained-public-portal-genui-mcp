@@ -116,7 +116,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "문화시설 입장료 면제(소래역사관)(소년소녀 가정)",
@@ -131,6 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "benefit_check|check|문화시설 입장료 면제 소래역사관 소년소녀 가정|nationwide|low_income_household"
 }

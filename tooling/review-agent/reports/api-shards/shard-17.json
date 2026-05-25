@@ -1,6 +1,11 @@
 {
   "stage": "api-refresh",
   "written": [
+    "catalog/v1.0.0/entries/01KS6FPN00YG6MF4KK1ZF1K771.json",
+    "catalog/v1.0.0/entries/01KS6FPN0089PD2VF28YTJAKH8.json",
+    "catalog/v1.0.0/entries/01KS6FPN00AB5RTNM993K9KAZT.json",
+    "catalog/v1.0.0/entries/01KS6FPN00RQ3SMAFKYS24FXAH.json",
+    "catalog/v1.0.0/entries/01KS6FPN00R4SKQV26D4BJ0B6P.json",
     "catalog/v1.0.0/entries/01KS6FPN00N6QTEW89QEF2RYQG.json",
     "catalog/v1.0.0/entries/01KS6FPN00FH83J0GSZ9TPR8MV.json",
     "catalog/v1.0.0/entries/01KS6FPN00TW42DMQDZCBTT5AG.json",
@@ -34,6 +39,7 @@
     "catalog/v1.0.0/entries/01KS6FPN00W2MVG9V1JZMJ6VES.json",
     "catalog/v1.0.0/entries/01KS6FPN00N5XJHVMRFV89BM75.json",
     "catalog/v1.0.0/entries/01KS6FPN00XD47YB64AE3Y6FFK.json",
+    "catalog/v1.0.0/entries/01KS6FPN00NTMSYDT4BQXDWE3M.json",
     "catalog/v1.0.0/entries/01KS6FPN00MZBJ98PB4DSEFV02.json",
     "catalog/v1.0.0/entries/01KS6FPN00AEDFJR8AZDP3QVXY.json",
     "catalog/v1.0.0/entries/01KS6FPN003GTZ4T599D7D4F04.json",
@@ -494,13 +500,7 @@
     "catalog/v1.0.0/entries/01KS6FPN002DFC267X19BN0FME.json",
     "catalog/v1.0.0/entries/01KS6FPN00PN5CKPNFED2GTTAG.json",
     "catalog/v1.0.0/entries/01KS6FPN00ER81BYJT56TSC9DW.json",
-    "catalog/v1.0.0/entries/01KS6FPN00TB691J2KGAN3D614.json",
-    "catalog/v1.0.0/entries/01KS6FPN00Z7CQJRYG4XDSAGJT.json",
-    "catalog/v1.0.0/entries/01KS6FPN0031ZDZYJPH98ZRRB4.json",
-    "catalog/v1.0.0/entries/01KS6FPN00DRG97CRTEJ9JT6RE.json",
-    "catalog/v1.0.0/entries/01KS6FPN00XHHDQMH1ZNPFPB28.json",
-    "catalog/v1.0.0/entries/01KS6FPN001HQHCQYTM09TPKR8.json",
-    "catalog/v1.0.0/entries/01KS6FPN00HE4D11G60NVFJ2G9.json"
+    "catalog/v1.0.0/entries/01KS6FPN00TB691J2KGAN3D614.json"
   ],
   "count": 500,
   "blocked": false,
@@ -531,6 +531,6 @@
   "service_list_fallbacks": [],
   "service_list_fallback_failures": [],
   "secret_persisted": false,
-  "elapsed_sec": 20.282,
+  "elapsed_sec": 8.874,
   "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope."
 }

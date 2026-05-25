@@ -1,8 +1,8 @@
 {
   "stage": "dedup",
   "semantic_fingerprint_version": "v1",
-  "entries_scanned": 10976,
-  "semantic_fingerprints_written": 10975,
+  "entries_scanned": 10986,
+  "semantic_fingerprints_written": 10985,
   "cross_source_duplicate_groups": 0,
   "merged": 0,
   "secondary_attached": 0,

@@ -4,7 +4,7 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 ## Scope
 
-- API refresh candidates: 10945
+- API refresh candidates: 10955
 - Portal handoff candidates: 31
 - Evidence records: 6
 - Review Agent parallelism: N=8
@@ -14,15 +14,15 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 ```json
 {
   ">=0.95": 1,
-  "0.85-0.95": 26,
-  "0.60-0.85": 10949,
+  "0.85-0.95": 10981,
+  "0.60-0.85": 4,
   "<0.60": 0
 }
 ```
 
 ## Sensitive-domain count
 
-- sensitive candidates: 10968
+- sensitive candidates: 10978
 
 ## Source registry and dedup
 
@@ -221,8 +221,8 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 ```json
 {
-  "auto_accept": 8,
-  "escalate": 10968
+  "auto_accept": 10963,
+  "escalate": 23
 }
 ```
 
@@ -230,11 +230,11 @@ Maintainer-side only. No catalog publish tag is part of this PR.
 
 ```json
 {
-  "confidence_lt_0.85": 10949,
-  "sensitive_domain:family": 470,
-  "sensitive_domain:immigration": 37,
-  "sensitive_domain:tax": 301,
-  "sensitive_domain:welfare": 10160
+  "confidence_lt_0.85": 4,
+  "sensitive_domain_maintainer:family": 1,
+  "sensitive_domain_maintainer:immigration": 4,
+  "sensitive_domain_maintainer:tax": 15,
+  "sensitive_domain_maintainer:welfare": 3
 }
 ```
 

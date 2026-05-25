@@ -120,7 +120,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:tax",
   "card_title": "고용창출장려금(일자리 함께하기, 국내복귀기업 지원, 신중년 적합직무 지원",
@@ -135,6 +135,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "tax_inquiry|check|고용창출장려금 일자리 함께하기 국내복귀기업 지원 신중년 적합직무 지원|central_government,nationwide|salary_worker,self_employed"
 }

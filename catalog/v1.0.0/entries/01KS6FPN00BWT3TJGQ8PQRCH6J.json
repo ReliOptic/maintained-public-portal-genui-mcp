@@ -118,7 +118,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:tax",
   "card_title": "장애인가정 출산장려금 지원",
@@ -133,6 +133,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "tax_inquiry|check|장애인가정 출산장려금 지원|jeonbuk|salary_worker,self_employed"
 }

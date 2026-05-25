@@ -1,6 +1,8 @@
 {
   "stage": "api-refresh",
   "written": [
+    "catalog/v1.0.0/entries/01KS6FPN000VYC8ZXJKEQXD9V3.json",
+    "catalog/v1.0.0/entries/01KS6FPN008HPJHC7FVXVB9PXC.json",
     "catalog/v1.0.0/entries/01KS6FPN00S109P3BGQGXMJ2HM.json",
     "catalog/v1.0.0/entries/01KS6FPN004BXC02ZW3767VGG8.json",
     "catalog/v1.0.0/entries/01KS6FPN00270QS6VRHS300Q00.json",
@@ -195,10 +197,12 @@
     "catalog/v1.0.0/entries/01KS6FPN00M8C7K2VZA76JVBBH.json",
     "catalog/v1.0.0/entries/01KS6FPN004HYPNN8MXG7STH96.json",
     "catalog/v1.0.0/entries/01KS6FPN005SZRMVFH2KQWTGJP.json",
+    "catalog/v1.0.0/entries/01KS6FPN00TSP1FMA5KG3H24PT.json",
     "catalog/v1.0.0/entries/01KS6FPN00CY4SPZWSVNWHS9SZ.json",
     "catalog/v1.0.0/entries/01KS6FPN00WMC6VR2VC57TRCZY.json",
     "catalog/v1.0.0/entries/01KS6FPN00DV8SP7NV8839G5QF.json",
     "catalog/v1.0.0/entries/01KS6FPN00N43RVPK013AMEZ6D.json",
+    "catalog/v1.0.0/entries/01KS6FPN00THXNTBG0NAWJKQPM.json",
     "catalog/v1.0.0/entries/01KS6FPN00GMRFR0R59B4XTHWA.json",
     "catalog/v1.0.0/entries/01KS6FPN0098P7CMEZJQBTS23Q.json",
     "catalog/v1.0.0/entries/01KS6FPN000QCH3RHSH3YR3Y93.json",
@@ -215,6 +219,7 @@
     "catalog/v1.0.0/entries/01KS6FPN00G1B9EST8AZGANVQW.json",
     "catalog/v1.0.0/entries/01KS6FPN00HPKEYB1YTNEWB7FW.json",
     "catalog/v1.0.0/entries/01KS6FPN00QE6TKBTVNPS3PP81.json",
+    "catalog/v1.0.0/entries/01KS6FPN009SADS08P39RVGJM1.json",
     "catalog/v1.0.0/entries/01KS6FPN00SZ0W66XMDAKS4F8S.json",
     "catalog/v1.0.0/entries/01KS6FPN00WT2PNY4AENGETBYR.json",
     "catalog/v1.0.0/entries/01KS6FPN00S1CWVQ54XCQXB1KA.json",
@@ -495,12 +500,7 @@
     "catalog/v1.0.0/entries/01KS6FPN00ZXFFF9FQJREX94FB.json",
     "catalog/v1.0.0/entries/01KS6FPN00W63EG88NAPKWY677.json",
     "catalog/v1.0.0/entries/01KS6FPN006VK4SJ2VNHNHBJT6.json",
-    "catalog/v1.0.0/entries/01KS6FPN00MB72SZJ9GJWNW1XE.json",
-    "catalog/v1.0.0/entries/01KS6FPN00JYWWD7CSMBHAMKM1.json",
-    "catalog/v1.0.0/entries/01KS6FPN00DH5Z91B2BFR1H22X.json",
-    "catalog/v1.0.0/entries/01KS6FPN00QTH4AD8FK5G0FD97.json",
-    "catalog/v1.0.0/entries/01KS6FPN00K1QRYAGJ1G2A7NPB.json",
-    "catalog/v1.0.0/entries/01KS6FPN00QWN7VYWMG3320YXZ.json"
+    "catalog/v1.0.0/entries/01KS6FPN00MB72SZJ9GJWNW1XE.json"
   ],
   "count": 500,
   "blocked": false,
@@ -531,6 +531,6 @@
   "service_list_fallbacks": [],
   "service_list_fallback_failures": [],
   "secret_persisted": false,
-  "elapsed_sec": 12.797,
+  "elapsed_sec": 8.435,
   "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope."
 }

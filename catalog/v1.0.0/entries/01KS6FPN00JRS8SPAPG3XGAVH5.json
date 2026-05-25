@@ -32,7 +32,7 @@
   },
   "source_api_fetch": {
     "serviceList": {
-      "page": 94,
+      "page": 95,
       "status": "200"
     },
     "serviceDetail": {
@@ -118,7 +118,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "장애인 창업 온라인 교육",
@@ -133,6 +133,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "education_application|check|장애인 창업 온라인 교육|nationwide|parent_guardian,student"
 }

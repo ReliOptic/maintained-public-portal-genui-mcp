@@ -117,7 +117,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "물류·화주기업, 개인운송사업자가 추진하는 에너지 효율화와 온실가스 감축 ",
@@ -132,6 +132,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "benefit_check|check|물류 화주기업 개인운송사업자가 추진하는 에너지 효율화와 온실가스 감축 사업 지원 녹색물류전환사업|central_government,nationwide|low_income_household"
 }

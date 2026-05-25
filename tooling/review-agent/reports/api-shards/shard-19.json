@@ -1,6 +1,12 @@
 {
   "stage": "api-refresh",
   "written": [
+    "catalog/v1.0.0/entries/01KS6FPN002QRP54WBGA71NFT2.json",
+    "catalog/v1.0.0/entries/01KS6FPN00Z9CBRSFTFCABB1NR.json",
+    "catalog/v1.0.0/entries/01KS6FPN00J4GWN49ETAZ5ZYSS.json",
+    "catalog/v1.0.0/entries/01KS6FPN00Y5Q085WJ4H4QXD9J.json",
+    "catalog/v1.0.0/entries/01KS6FPN00BZ6PNWY59W8NM8GT.json",
+    "catalog/v1.0.0/entries/01KS6FPN00E8EYZ9T14WKHAEKZ.json",
     "catalog/v1.0.0/entries/01KS6FPN00JH9W6VXEXJ5Y26GC.json",
     "catalog/v1.0.0/entries/01KS6FPN00GG0M24TT937GARZC.json",
     "catalog/v1.0.0/entries/01KS6FPN005AT7HH6M7C8W9JVH.json",
@@ -494,13 +500,7 @@
     "catalog/v1.0.0/entries/01KS6FPN002RQ065M84PE7XZ9W.json",
     "catalog/v1.0.0/entries/01KS6FPN00FM0Y6K3KF2YJH6V7.json",
     "catalog/v1.0.0/entries/01KS6FPN00K8VEBF738APRK3R0.json",
-    "catalog/v1.0.0/entries/01KS6FPN00Q3JT6X20ZWFKYB4T.json",
-    "catalog/v1.0.0/entries/01KS6FPN00K1TMWZA35Z4X5HPK.json",
-    "catalog/v1.0.0/entries/01KS6FPN00G4DBN100PBPZVR1J.json",
-    "catalog/v1.0.0/entries/01KS6FPN00SA1431PVZS2M19SK.json",
-    "catalog/v1.0.0/entries/01KS6FPN00G85CB46GWV7MY9JS.json",
-    "catalog/v1.0.0/entries/01KS6FPN006KPSX3SE5A6C2V7B.json",
-    "catalog/v1.0.0/entries/01KS6FPN00GETDF9HVV1ZW54WW.json"
+    "catalog/v1.0.0/entries/01KS6FPN00Q3JT6X20ZWFKYB4T.json"
   ],
   "count": 500,
   "blocked": false,
@@ -531,6 +531,6 @@
   "service_list_fallbacks": [],
   "service_list_fallback_failures": [],
   "secret_persisted": false,
-  "elapsed_sec": 16.329,
+  "elapsed_sec": 9.745,
   "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope."
 }

@@ -116,7 +116,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "태양광 주택(3kW 지붕태양광) 보급 지원",
@@ -131,6 +131,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "benefit_check|check|태양광 주택 3kw 지붕태양광 보급 지원|gyeonggi|low_income_household"
 }

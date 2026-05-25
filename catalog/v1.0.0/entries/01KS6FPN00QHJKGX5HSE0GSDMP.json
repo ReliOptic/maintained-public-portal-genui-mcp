@@ -117,7 +117,7 @@
     "evidence_value": "medium",
     "sensitivity_risk": "high"
   },
-  "confidence_score": 0.82,
+  "confidence_score": 0.85,
   "review_required": true,
   "review_reason": "sensitive_domain:welfare",
   "card_title": "일시적 경영애로 및 재해 피해기업 융자 지원(긴급경영안정자금)",
@@ -132,6 +132,6 @@
       "금액 단정 없음"
     ]
   },
-  "last_sync_at": "2026-05-23",
+  "last_sync_at": "2026-05-25",
   "semantic_fingerprint": "benefit_check|check|일시적 경영애로 및 재해 피해기업 융자 지원 긴급경영안정자금|central_government,nationwide|low_income_household"
 }
