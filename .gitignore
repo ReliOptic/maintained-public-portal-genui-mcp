@@ -1,0 +1,23 @@
+# Local credentials and maintainer-only environment files.
+.env
+.env.*
+env_GOV24 API.txt
+env_*
+*SERVICE_KEY*
+*.pem
+*.key
+
+# Python/runtime noise.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+# Node/TypeScript build outputs.
+node_modules/
+dist/
+coverage/
+.nyc_output/
+coverage-report.json
+
+# Generated runtime catalog artifact; source JSON remains canonical.
+catalog/compiled.sqlite
+catalog/compiled.sqlite-*

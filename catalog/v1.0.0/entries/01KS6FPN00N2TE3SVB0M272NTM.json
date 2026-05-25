@@ -1,0 +1,80 @@
+{
+  "entry_id": "01KS6FPN00N2TE3SVB0M272NTM",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "hometax",
+  "domain": "tax",
+  "sensitive_domain": "tax",
+  "title": "폐업 신고",
+  "canonical_intent": "business_closure",
+  "canonical_action_verb": "handoff",
+  "key_keywords": [
+    "폐업",
+    "신고"
+  ],
+  "content_fingerprint": "hometax|portal_handoff|f645a5d219ac2bce",
+  "source_urls": [
+    "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%ED%8F%90%EC%97%85%20%EC%8B%A0%EA%B3%A0"
+  ],
+  "stage1_capture": {
+    "fetch_status": 200,
+    "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%ED%8F%90%EC%97%85%20%EC%8B%A0%EA%B3%A0",
+    "rendered_text_excerpt": "국세청 홈택스",
+    "screenshot_ref": null,
+    "observed_actions": []
+  },
+  "menu_path": "홈택스 > 증명·등록·신청 > 폐업 신고",
+  "handoff": {
+    "tier": "tier1",
+    "portal": "hometax",
+    "url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%ED%8F%90%EC%97%85%20%EC%8B%A0%EA%B3%A0",
+    "menu_path": "홈택스 > 증명·등록·신청 > 폐업 신고"
+  },
+  "persona_tags": [
+    "self_employed"
+  ],
+  "task_intent": [
+    "business_closure"
+  ],
+  "life_event_tags": [
+    "startup",
+    "business_operation"
+  ],
+  "region_tags": [
+    "nationwide"
+  ],
+  "evidence_refs": [
+    "ev_nts_retirement_income_tenure",
+    "ev_nts_education_tax"
+  ],
+  "free_tags": [
+    "폐업 신고",
+    "hometax",
+    "pre_split_leaf"
+  ],
+  "seasonality_hint": "jan",
+  "intrinsic_ordinals": {
+    "actionability": "high",
+    "evidence_value": "high",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.88,
+  "review_required": true,
+  "review_reason": "sensitive_domain:tax",
+  "card_title": "폐업 신고",
+  "card_body": "폐업 신고 경로와 신청 안내를 공식 포털에서 확인하세요. 상황에 따라 요건과 서류가 달라질 수 있습니다.",
+  "cta_label": "홈택스에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "대상 단정 없음",
+      "승인 보장 없음"
+    ]
+  },
+  "last_verified_at": "2026-05-25",
+  "semantic_fingerprint": "business_closure|handoff|폐업 신고|nationwide|self_employed"
+}

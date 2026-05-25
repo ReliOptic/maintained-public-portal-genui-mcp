@@ -1,0 +1,83 @@
+{
+  "stage": "source-registry-check",
+  "required_task_sources": [
+    "gov24-serviceList",
+    "bokjiro-central",
+    "bokjiro-regional",
+    "worknet-supported-jobs"
+  ],
+  "registries": [
+    {
+      "source_id": "bokjiro-central",
+      "path": "catalog/api-registry/bokjiro-central.yaml",
+      "role": "task_source",
+      "primary_priority": 2,
+      "ingestion_status": "planned",
+      "ci_stage": "registry_validated_only",
+      "auth_env": "BOKJIRO_SERVICE_KEY",
+      "endpoint": "https://apis.data.go.kr/B460010/welfareQcpInfoService01/getWelfareQcpInfoList01",
+      "paging": {
+        "page_param": "pageNo",
+        "per_page_param": "numOfRows",
+        "per_page": 100,
+        "start_page": 1
+      },
+      "has_service_list_operation": true
+    },
+    {
+      "source_id": "bokjiro-regional",
+      "path": "catalog/api-registry/bokjiro-regional.yaml",
+      "role": "task_source",
+      "primary_priority": 3,
+      "ingestion_status": "planned",
+      "ci_stage": "registry_validated_only",
+      "auth_env": "BOKJIRO_SERVICE_KEY",
+      "endpoint": "https://apis.data.go.kr/B460010/welfareQcpInfoService02/getWelfareQcpInfoList02",
+      "paging": {
+        "page_param": "pageNo",
+        "per_page_param": "numOfRows",
+        "per_page": 100,
+        "start_page": 1
+      },
+      "has_service_list_operation": true
+    },
+    {
+      "source_id": "gov24-serviceList",
+      "path": "catalog/api-registry/gov24-serviceList.yaml",
+      "role": "task_source",
+      "primary_priority": 1,
+      "ingestion_status": "active",
+      "ci_stage": "full_ingestion",
+      "auth_env": "GOV24_SERVICE_KEY",
+      "endpoint": "https://api.odcloud.kr/api/gov24/v3/serviceList",
+      "paging": {
+        "page_param": "page",
+        "per_page_param": "perPage",
+        "per_page": 100,
+        "start_page": 1
+      },
+      "has_service_list_operation": true
+    },
+    {
+      "source_id": "worknet-supported-jobs",
+      "path": "catalog/api-registry/worknet-supported-jobs.yaml",
+      "role": "task_source",
+      "primary_priority": 4,
+      "ingestion_status": "planned",
+      "ci_stage": "registry_validated_only",
+      "auth_env": "WORKNET_SERVICE_KEY",
+      "endpoint": "https://openapi.work.go.kr/opi/opi/opia/wantedApi.do",
+      "paging": {
+        "page_param": "pageIndex",
+        "per_page_param": "display",
+        "per_page": 100,
+        "start_page": 1
+      },
+      "has_service_list_operation": true
+    }
+  ],
+  "missing": [],
+  "errors": [],
+  "passed": true,
+  "note": "Session 1 full ingestion only fetches gov24. Bokjiro/worknet registries are validated as Task-source contracts until their endpoint mappings and CI secrets are added."
+}

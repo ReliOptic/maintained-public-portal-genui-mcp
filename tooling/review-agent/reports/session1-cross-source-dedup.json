@@ -1,0 +1,11 @@
+{
+  "stage": "dedup",
+  "semantic_fingerprint_version": "v1",
+  "entries_scanned": 10986,
+  "semantic_fingerprints_written": 10985,
+  "cross_source_duplicate_groups": 0,
+  "merged": 0,
+  "secondary_attached": 0,
+  "policy": "Only duplicates spanning two or more registered Task sources are collapsed; same-source repeats remain separate candidate rows for maintainer review.",
+  "excluded_free_tag": "live_check_only"
+}

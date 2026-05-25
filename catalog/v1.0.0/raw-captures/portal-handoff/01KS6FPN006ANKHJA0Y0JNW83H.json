@@ -1,0 +1,10 @@
+{
+  "leaf_task": "국세 납부",
+  "source_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EA%B5%AD%EC%84%B8%20%EB%82%A9%EB%B6%80",
+  "status": 200,
+  "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EA%B5%AD%EC%84%B8%20%EB%82%A9%EB%B6%80",
+  "text_excerpt": "국세청 홈택스",
+  "screenshot_ref": null,
+  "observed_actions": [],
+  "capture_note": "Maintainer CI should replace text-only fetch with computer-use rendered DOM+screenshot when browser credentials are available."
+}

@@ -32,4 +32,10 @@ The four-stage pipeline shape stays. What changed is **where the weight vector `
 
 `sensitivity_risk` remains a Stage-1 / Stage-3 gate, not a score term — the host LLM cannot weight-engineer around it.
 
-The positive-feature count grows from 7 to **9** because the Feature Dictionary expanded to 11 in [[ADR-0002]]'s amendment (added `api_availability`, `official_handoff_need`, `freshness`; SR is still excluded from the score).
+The positive-feature count grows from 7 to **9**: the Feature Dictionary expanded to 11 in [[ADR-0002]]'s amendment, but two features stay out of the score. `sensitivity_risk` is excluded as a safety gate (Stage 1 / Stage 3 only). `official_handoff_need` is also excluded — it is handled by `access_mode`-driven CTA and handoff presentation policy, not by the primary ranking score. This avoids a zero-sum conflict with `api_availability` and keeps ranking focused on user relevance, urgency, actionability, evidence, and freshness. Resulting positive set: `IF, PF, LF, SE, UR, AC, EV, api_availability, freshness`.
+
+## Subsequent amendments
+
+- [[ADR-0015]] — Adds `insight_card` as a fourth `ui_slot` value. `portal: "data_go_kr"` Entries with intent overlapping `{data_search, dataset_download, api_application, policy_information}` are classified as [[Insight Entry]] and assigned `insight_card` at Stage 4. They participate in the same five-stage pipeline without modification; the slot value governs composer rendering only.
+- [[ADR-0010]] — Inserts a context-keyed **Stage 0** before the safety gate. The pipeline becomes five-stage: `context-filter → safety-gate → score → SR-shape → cut`. Stage 0 bounds the candidate set by `persona / intent / life_event` set-overlap and enforces strict `region` exclusion before scoring.
+- [[ADR-0014]] — Wraps the pipeline output with an in-process LRU rank cache, keyed exactly as CONTEXT.md `catalog_version` documents. Invalidation is by process restart only.

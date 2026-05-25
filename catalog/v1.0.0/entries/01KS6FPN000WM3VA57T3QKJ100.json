@@ -1,0 +1,80 @@
+{
+  "entry_id": "01KS6FPN000WM3VA57T3QKJ100",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "hometax",
+  "domain": "tax",
+  "sensitive_domain": "tax",
+  "title": "종합소득세 신고",
+  "canonical_intent": "tax_filing",
+  "canonical_action_verb": "handoff",
+  "key_keywords": [
+    "종합소득세",
+    "신고"
+  ],
+  "content_fingerprint": "hometax|portal_handoff|1b4d94fd1d9397fa",
+  "source_urls": [
+    "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0"
+  ],
+  "stage1_capture": {
+    "fetch_status": "ERR",
+    "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0",
+    "rendered_text_excerpt": "URLError(ConnectionResetError(104, 'Connection reset by peer'))",
+    "screenshot_ref": null,
+    "observed_actions": []
+  },
+  "menu_path": "홈택스 > 세금신고 > 종합소득세 신고",
+  "handoff": {
+    "tier": "tier3",
+    "portal": "hometax",
+    "url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%A2%85%ED%95%A9%EC%86%8C%EB%93%9D%EC%84%B8%20%EC%8B%A0%EA%B3%A0",
+    "menu_path": "홈택스 > 세금신고 > 종합소득세 신고"
+  },
+  "persona_tags": [
+    "freelancer"
+  ],
+  "task_intent": [
+    "tax_filing"
+  ],
+  "life_event_tags": [
+    "tax_season",
+    "income_change"
+  ],
+  "region_tags": [
+    "nationwide"
+  ],
+  "evidence_refs": [
+    "ev_nts_retirement_income_tenure",
+    "ev_nts_education_tax"
+  ],
+  "free_tags": [
+    "종합소득세 신고",
+    "hometax",
+    "pre_split_leaf"
+  ],
+  "seasonality_hint": "comprehensive_income_tax_may",
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.72,
+  "review_required": true,
+  "review_reason": "sensitive_domain:tax",
+  "card_title": "종합소득세 신고",
+  "card_body": "종합소득세 신고 경로와 신청 안내를 공식 포털에서 확인하세요. 상황에 따라 요건과 서류가 달라질 수 있습니다.",
+  "cta_label": "홈택스에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "대상 단정 없음",
+      "승인 보장 없음"
+    ]
+  },
+  "last_verified_at": "2026-05-25",
+  "semantic_fingerprint": "tax_filing|handoff|종합소득세 신고|nationwide|freelancer"
+}

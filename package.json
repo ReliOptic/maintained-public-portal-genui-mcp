@@ -1,0 +1,39 @@
+{
+  "name": "portal-genui-mcp",
+  "version": "0.1.0",
+  "description": "Maintained public portal GenUI MCP stdio server",
+  "type": "module",
+  "bin": "dist/index.js",
+  "files": [
+    "dist/",
+    "catalog/compiled.sqlite",
+    "manifest.json",
+    "skills/public-portal-interview.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "compile": "node --loader ts-node/esm scripts/compile-catalog.ts",
+    "start": "node dist/index.js",
+    "coverage": "node --loader ts-node/esm scripts/coverage-gate.ts",
+    "pack": "mcpb pack"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "latest",
+    "better-sqlite3": "latest",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "latest",
+    "ts-node": "latest",
+    "typescript": "latest",
+    "vitest": "latest",
+    "@anthropic-ai/mcpb": "latest"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "private": false
+}

@@ -1,0 +1,62 @@
+{
+  "manifest_version": "0.3",
+  "name": "maintained-public-portal-genui-mcp",
+  "display_name": "Maintained Public Portal GenUI",
+  "version": "0.1.0",
+  "description": "Offline Korean public-service catalog MCP for ranked portal cards, evidence rails, and reviewed handoff copy.",
+  "long_description": "Runs locally through stdio and reads the bundled compiled.sqlite catalog. The runtime server never fetches public APIs, compiles the catalog, or asks users for credentials.",
+  "author": {
+    "name": "ReliOptic"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ReliOptic/maintained-public-portal-genui-mcp.git"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "search_portal_entries",
+      "description": "공공포털 항목을 키워드로 검색합니다. 랭킹 없이 텍스트 매칭만 수행. persona·intent·region 없이 title/keyword 검색이 필요할 때 사용. Returns entries array."
+    },
+    {
+      "name": "rank_portal_entries",
+      "description": "persona/intent/life_event/region/season taxonomy 구조체로 공공서비스 항목을 랭킹합니다. 자연어 발화를 taxonomy로 변환한 뒤 호출. 핵심 추천 도구. Returns ranked entries with ui_slot."
+    },
+    {
+      "name": "get_entry_detail",
+      "description": "entry_id로 단일 항목의 전체 필드를 조회합니다. card_copy·handoff·evidence_refs 포함. rank 후 특정 항목 상세 확인 시 사용."
+    },
+    {
+      "name": "compose_genui_artifact",
+      "description": "entry_id 목록과 frame_segment로 GenUI artifact를 조합합니다. hero copy·action cards·insight rail·evidence rail·handoff_notice 포함. 최종 UI 렌더링 직전에 호출."
+    }
+  ],
+  "tools_generated": false,
+  "keywords": [
+    "korea",
+    "public-services",
+    "gov24",
+    "genui",
+    "mcp"
+  ],
+  "license": "MIT",
+  "compatibility": {
+    "claude_desktop": ">=1.0.0",
+    "platforms": [
+      "darwin",
+      "win32"
+    ],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  }
+}

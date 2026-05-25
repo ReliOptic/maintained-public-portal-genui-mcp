@@ -1,0 +1,25 @@
+name: Coverage Diagnostic
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  coverage-diagnostic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run compile
+      - name: Run coverage diagnostic
+        run: |
+          npm run coverage || {
+            echo "::warning::Full taxonomy axis saturation is not ready; v0.1 RC uses ADR-0018 scenario last-mile as the hard gate."
+            test -f coverage-report.json
+          }

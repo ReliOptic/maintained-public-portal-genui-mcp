@@ -33,7 +33,15 @@ A required field on every [[Entry]] that names **how this Task is fulfilled**. T
 
 ### Evidence Registry
 
-Public datasets and reference statistics (data.go.kr file/auto-OpenAPI rows, regional data, statistics) are **not** Entries — they are not Leaf Services. They live in a separate registry under `catalog/v1.0.0/evidence/*.json` with its own refresh cadence. Tasks reference them through an `Entry.evidence_refs: string[]` field; the composer resolves those references when assembling the §13 Evidence Rail.
+Public datasets and reference statistics (data.go.kr file/auto-OpenAPI rows, KOSIS statistics, regional data, 소상공인 상권정보) are **not** Entries — they are not Leaf Services. They live in a separate registry under `catalog/v1.0.0/evidence/*.json` with its own refresh cadence.
+
+**Domain-pool model.** Evidence records are curated at domain-axis granularity (e.g. "세무 통계", "복지 수혜 통계", "창업 상권 통계"), not per-Entry. Each major taxonomy axis (persona / intent / life_event) holds 1–3 nationwide datasets. A single Evidence record is reused across all Entries whose taxonomy tags intersect its `applies_to` set.
+
+**Build-time auto-matching.** `compile-catalog` resolves `evidence_refs` for every Entry at build time: it computes `(entry.persona_tags ∪ entry.task_intent ∪ entry.life_event_tags) ∩ evidence.applies_to` and attaches the top-3 matching Evidence IDs ranked by `evidence_role_priority` in `weights/v1.0.0.json`. Maintainer-authored `entry.evidence_refs` values are preserved as-is and take precedence over auto-matched results.
+
+**`applies_to` constraint.** All values in `evidence.applies_to` must be members of the taxonomy closed enum (persona, intent, or life_event axis values). Axis names (`"region"`) and free strings are invalid. `compile-catalog` emits a build warning for unknown values.
+
+**`region` scoping.** An Evidence record may carry `region: string[]` using taxonomy region axis values. When present, the auto-matcher additionally requires `entry.region_scope ∩ evidence.region ≠ ∅`. When absent, the record is eligible for all entries regardless of region.
 
 This separation keeps the [[Ranking pipeline]] semantically single-purposed ("how relevant is this Task to the user?") and avoids comparing a Task ("근로장려금 신청") against a dataset ("상권 통계") in the same score space.
 
@@ -69,8 +77,9 @@ Catalog ingestion is **two parallel pipelines**, both running in maintainer-oper
 
 **api-refresh-pipeline** (primary, automated):
 - Triggered nightly on a cron schedule (or manually).
-- For each registered API source (gov24 serviceList primary in v0.1; NTS, data.go.kr deferred), calls the API, paginates, normalises each row into an `EntryCandidate`, and runs LLM Annotation to produce taxonomy tags, intrinsic ordinals, and card_copy.
-- ADR-0001 (LLM Splitter) is **not** in this path — one API row = one Entry by definition.
+- For each registered Task API source (Gov24 serviceList primary in v0.1; 복지로 중앙부처/지자체 복지서비스 and 워크넷 채용정보/정부지원일자리 are future Task candidates), calls the API, paginates, normalises each row into an `EntryCandidate`, and runs LLM Annotation to produce taxonomy tags, intrinsic ordinals, and card_copy.
+- ADR-0001 (LLM Splitter) is **not** in this path — one Task API row = one Entry by definition.
+- General-purpose data APIs are excluded from bulk Entry generation: 공공데이터포털 목록조회/검색, KOSIS OpenAPI, and 소상공인 상권정보 feed the [[Evidence Registry]] or source registry, not Task cards. 국세청 사업자 상태조회 is a specific live-check source, not a bulk Task catalog source. **Exception**: a small set of curated `portal: "data_go_kr"` [[Insight Entry]] records (5–10 hand-authored, `portal_handoff`, `confidence_score = 1.0`) are added directly to `catalog/v1.0.0/entries/` to represent concrete user actions on data.go.kr (통합검색, 파일데이터 다운로드, 오픈API 활용신청 등). These are not pipeline-generated; they are maintainer-authored.
 - Output: a draft PR containing the diff of `catalog/v1.0.0/entries/*.json`. Often auto-mergeable (small `patch` bumps).
 
 **portal-refresh-pipeline** (secondary, manual-trigger):
@@ -79,6 +88,16 @@ Catalog ingestion is **two parallel pipelines**, both running in maintainer-oper
 - Lower cadence (≈ monthly), heavier review.
 
 Both pipelines converge on the same `catalog/v1.0.0/entries/*.json` and obey the same [[Human Review Queue]] gates. The `access_mode` field on each Entry records which pipeline produced it.
+
+### Insight Entry
+
+A [[Entry]] sourced from `portal: "data_go_kr"` whose primary purpose is providing evidence, regional context, or statistical reference — not completing an administrative task. Insight Entries participate in the same [[Ranking pipeline]] as Action Entries but are always assigned `ui_slot = "insight_card"` at Stage 4. They are `access_mode: "portal_handoff"` directing the user to the data.go.kr dataset or API page. `compose_genui_artifact` renders them in a separate Insight Rail section.
+
+Counter-examples (these are Insight Entries, not Action Entries):
+- "전국 상권현황 통계 조회" — data reference, not government task completion
+- "소상공인 상권정보 API 활용신청" — also an Insight Entry (task_intent: api_application)
+
+See [[ADR-0015]].
 
 ### EntryCandidate
 
@@ -96,6 +115,8 @@ Three tiers, in preference order:
 
 Therefore: tier1 and tier2 are upgrades to the user experience, not preconditions for publishing.
 
+For seeded portal handoffs, including HomeTax seed URLs, `handoff.tier` is determined during ingestion/browser validation from the rendered page and final URL. The seed URL alone does not guarantee tier1; `menu_path` remains the mandatory publish floor.
+
 The `handoff_ref` string in the architecture doc §6.2 is replaced by a structured `handoff` object: `{ tier, url?, menu_path, portal }`.
 
 ### entry_id
@@ -104,13 +125,43 @@ A registry-assigned ULID issued at the moment an [[EntryCandidate]] is promoted 
 
 ### content_fingerprint
 
-A deterministic hash used **only** for dedup between an incoming `EntryCandidate` and the existing Catalog. Inputs (in this order):
-`portal | canonical_intent | canonical_action_verb | key_keywords (sorted)`.
+A deterministic hash used **only** for dedup between an incoming `EntryCandidate` and the existing Catalog. v0.1 inputs (in this order):
+`canonical_intent | canonical_action_verb | normalized_title | region_scope | persona_scope`.
 
-All four inputs are drawn from fixed enums or normalized lemmas (see [[taxonomy]], TBD) — not free text — so the same Leaf Service produces the same fingerprint across LLM re-runs.
+**`portal` is deliberately not in the fingerprint** so that the same Leaf Service surfaced from multiple [[Task source]] APIs (e.g. "근로장려금 신청" from both gov24 service catalog and 복지로 central) collapses to a single Entry. All inputs are drawn from fixed enums or normalised lemmas (see [[Taxonomy]]) — never free text — so the same Leaf Service produces the same fingerprint across LLM re-runs and across sources.
 
-On match: the incoming candidate updates the existing Entry; **entry_id is preserved**.
+On match: the incoming candidate updates the existing Entry; **entry_id is preserved**, and the second source attaches to the Entry's `secondary_sources` array (see [[Task source]]).
 On miss: a new entry_id is issued.
+
+### API role
+
+Every external API integrated into this project is assigned exactly one of four roles. The role determines whether and how the API is wired into the pipeline — adding APIs is not a goal in itself; assigning each one a single role is.
+
+| role             | what it produces                                                  | v0.1 examples                                    | user-visible? |
+| ---------------- | ----------------------------------------------------------------- | ------------------------------------------------ | ------------- |
+| Task source      | rows that become catalog Entries (1 row = 1 Entry)                | gov24, 복지로 central/regional, 워크넷 정부지원일자리 | yes (as cards) |
+| Evidence source  | rows that become [[Evidence Registry]] entries (statistics, refs) | KOSIS, 소상공인 상권, hand-picked data.go.kr file rows | yes (as Evidence Rail) |
+| Live Check Entry | a single hand-curated Entry, label only — runs as `portal_handoff` in v0.1 | NTS 사업자 상태조회 | yes (as one card) |
+| Discovery tool   | metadata *about* other datasets — used by the maintainer to find Evidence candidates | 공공데이터포털 목록조회 / 검색서비스 | **no** — maintainer-side only, never in catalog |
+
+See [[ADR-0007]] for the binding decision.
+
+### Task source
+
+A registered API source whose rows produce candidate Entries. v0.1 has four Task sources, listed in **primary-source priority order** for cross-source dedup:
+
+1. `gov24-serviceList` (행정안전부 공공서비스 정보) — most authoritative for general public-service tasks.
+2. `bokjiro-central` (복지로 중앙부처복지서비스) — welfare-specialised, richer support-conditions.
+3. `bokjiro-regional` (복지로 지자체복지서비스) — regional welfare detail.
+4. `worknet-supported-jobs` (워크넷 정부지원일자리) — employment-support tasks.
+
+When the same [[content_fingerprint]] appears in multiple sources, the **primary source's row owns the Entry** — its `entry_id`, `title`, and `card_copy` win. Lower-priority sources are recorded on the Entry's `secondary_sources: { source_id, row_id, fields }[]` field; they enrich `api_payload`, `support_conditions`, `evidence_refs`, etc., but do **not** create a separate Entry.
+
+`worknet-supported-jobs` uses a `last_sync_at + 60-day TTL`: rows not refreshed within 60 days are auto-marked `status=archived` and removed from the published Catalog. This handles the short-lived nature of job postings without inventing a new lifecycle.
+
+The single Live Check Entry (`nts-business-status`, NTS 사업자 상태조회) is not a bulk Task source — it is one curated Entry with `access_mode = portal_handoff`. **It is excluded from the cross-source [[content_fingerprint]] dedup pool**: it is hand-authored, lives outside the api-refresh-pipeline's row stream, and never merges into a secondary source. See [[ADR-0007]].
+
+Session 1 implementation status: the three non-Gov24 Task sources have registry YAML contracts and are CI-validated as `registry_validated_only` until endpoint mappings and maintainer secrets are added. Gov24 remains the only full-ingestion source in the current GitHub Actions workflow; the workflow still runs the semantic fingerprint/dedup pass so later Bokjiro/Worknet rows attach as `secondary_sources` instead of creating duplicate Entries.
 
 ### merged_into
 
@@ -129,7 +180,19 @@ The taxonomy itself is exposed as an MCP Resource (`resource://taxonomy/v1.0`) s
 
 ### Ranking pipeline
 
-The ranking pipeline is **two-stage filter-then-score**, not a single weighted sum. Safety and confidence are gates, not score terms.
+The ranking pipeline is **five-stage context-filter / safety-gate / score / SR-shape / cut**, not a single weighted sum. Safety and confidence are gates, not score terms.
+
+**Stage 0 — Context-keyed candidate filter.** Bounds the candidate set to keep Stage 2 within a known cost envelope and to keep the rank result responsive to the request context. An Entry enters Stage 1 only if **at least one** of the following set overlaps is non-empty:
+
+- `entry.persona_tags ∩ req.persona`
+- `entry.task_intent ∩ req.intent` (also accepting `entry.canonical_intent` membership)
+- `entry.life_event_tags ∩ req.life_event`
+
+If the request carries **no taxonomy context at all** (the documented empty-payload fallback in [[Context extraction boundary]]), Stage 0 instead admits the top `N=500` Entries by `confidence_score DESC` as a deterministic baseline.
+
+`region` is treated as a **strict exclusion** at Stage 0: when the request specifies `region`, an Entry is dropped unless `entry.region` is `nationwide` or matches one of the requested regions. Region mismatch is administrative impossibility, not a relevance penalty, and must not survive into the score.
+
+Stage 0 is the only stage whose population depends on the request context. Subsequent stages operate only on the Stage-0 admitted set.
 
 **Stage 1 — Safety/quality gate.** An Entry is dropped from the candidate set if any of:
 - `confidence_score < 0.85`
@@ -137,17 +200,18 @@ The ranking pipeline is **two-stage filter-then-score**, not a single weighted s
 - `merged_into != null`
 - `menu_path` is missing (violates [[Handoff]] floor)
 
-**Stage 2 — Positive-feature score.** Only seven features participate:
-`IF, PF, LF, SE, UR, AC, EV` — `sensitivity_risk` is **excluded** from the score.
+**Stage 2 — Positive-feature score.** Nine of the eleven Feature Dictionary entries participate:
+`IF, PF, LF, SE, UR, AC, EV, api_availability, freshness`.
+Two features are deliberately excluded — `sensitivity_risk` (safety gate, see Stage 3) and `official_handoff_need` (handled by [[access_mode]]-driven CTA, not by the score; excluding it avoids a zero-sum conflict with `api_availability`).
 `Q(entry) = Σ_i  S_entry[i] × W_context[i]`, with `Σ W_context[i] = 1` (weights normalised per request).
 
 **Stage 3 — SR-driven adjustment.** `sensitivity_risk` shapes presentation, not score:
 - `SR ≥ 0.85` → `ui_slot` capped at `secondary_card` (never `primary_card`).
 - `SR ≥ 0.85` → `safe_copy_rule = "confirm_not_assert"` enforced.
 
-**Stage 4 — Top-K cut + slot assignment.** Sort by Q descending, take `top_k`, then assign `ui_slot` honouring the Stage-3 caps.
+**Stage 4 — Top-K cut + slot assignment.** Sort by Q descending, take `top_k`, then assign `ui_slot` honouring Stage-3 caps. `ui_slot` has four values: `primary_card` (default for high-scoring action entries), `secondary_card` (SR-capped or lower-scored), `insight_card` (any `portal: "data_go_kr"` Entry with `task_intent` overlapping `{data_search, dataset_download, api_application, policy_information}` — see [[Insight Entry]] and [[ADR-0015]]), `hidden`. Composer renders insight_card entries in a separate Insight Rail section, distinct from the Action card grid and the §13 Evidence Rail.
 
-Consequence: `explain_ranking` can answer "why not shown?" (Stage 1 reason) and "why this order?" (Stage 2 score breakdown) independently. The two questions never collapse into a single number.
+Consequence: `explain_ranking` can answer "why not shown?" (Stage 0 context miss / region exclusion, or Stage 1 safety reason) and "why this order?" (Stage 2 score breakdown) independently. The questions never collapse into a single number.
 
 ### Context extraction boundary
 
@@ -178,6 +242,13 @@ The Feature Dictionary v1.1 has **eleven** features produced in **four** ways. (
 
 Members: `actionability` (AC), `evidence_value` (EV), `sensitivity_risk` (SR).
 
+**Source of these numbers.** The mapping is **data**, not code. It lives in `catalog/<version>/weights/<weights_version>.json` under two siblings of `W_base`:
+
+- `score_ordinals` — keyed by `actionability`, `evidence_value`. Participates in Stage 2 Q.
+- `gate_ordinals` — keyed by `sensitivity_risk`. Consumed only by the Stage 3 `SR ≥ 0.85` cap and `safe_copy_rule` enforcement; never multiplied into Q.
+
+Changing any numeric here is a [[catalog_version]]-independent **[[weights_version]] patch** and requires an ADR. Loading is schema-validated at startup: a missing key or a non-`{low,medium,high}→number` shape throws on `CatalogStore.getWeights()`. The runtime is **not** permitted to fall back to defaults — a corrupted mapping must fail loudly, not silently drift the rank.
+
 (`api_reliability` and `link_stability` were considered and dropped — without operational telemetry they would be dead-weight in v0.1, violating SLC "complete". They may return in a later release once monitoring data exists.)
 
 **Intrinsic derived from `access_mode`.** Not stored — computed at Entry-load time from the [[access_mode]] field.
@@ -188,6 +259,8 @@ Members: `actionability` (AC), `evidence_value` (EV), `sensitivity_risk` (SR).
 | `api_live`       | 1.0              | 0.0                   |
 | `portal_handoff` | 0.0              | 1.0                   |
 | `manual_check`   | 0.0              | 1.0                   |
+
+Of these two, **`api_availability` participates in the [[Ranking pipeline]] Stage 2 score, while `official_handoff_need` does not**. The latter is consumed by the composer at presentation time — it drives `access_mode`-specific CTA wording and slot decisions — but is excluded from W_base to avoid a zero-sum conflict with `api_availability`. Both are still computed on every Entry so the composer and Stage 3 / safe_copy adjustments can reference them.
 
 **Match (derived at ranking time from set overlap).** `IF`, `PF`, `LF`, `SE` — same as before.
 
@@ -207,10 +280,18 @@ Extending the [[Taxonomy]] from v1.0 → v1.1 still does **not** require re-anno
 
 The per-request weight vector applied to the positive features in the [[Ranking pipeline]]. The host LLM produces W **as part of the same call that produces structured context** (see [[Context extraction boundary]]).
 
-Resolution order at request time:
+**Resolution order at request time.** The MCP server walks the list top-to-bottom and uses the first branch that yields a usable W. Every produced W carries a `weight_source` tag that is returned in `include_debug` responses.
 
-1. **Host-proposed W** *(primary path)* — the host LLM emits an explicit `weight_override: number[]` along with the structured context. Its rationale string is captured for [[explain_ranking]]. The MCP server clips negatives, renormalises to Σ = 1, and uses this W.
-2. **Compositional fallback** — if `weight_override` is missing, the MCP server falls back to `W = clip(W_base + Σ_axis Δ_axis(req[axis])) / Σ`. This guarantees a deterministic Top-K even when the host cannot or will not propose weights.
+1. **Host-proposed W** *(primary path; tag `host_proposed`)* — the host LLM emits both `weight_override: number[]` **and** a non-empty `weight_rationale: string` (≥ 8 non-whitespace characters). The server then:
+   - **Clips negatives.** Any `W[i] < 0` → 0.
+   - **Caps per-feature ceiling.** Any `W[i] > clip_cap` → `clip_cap`. `clip_cap` is data (`weights/<weights_version>.json.clip_cap`, default 0.40); changing it is a [[weights_version]] patch, not a code change.
+   - **Renormalises to Σ = 1.**
+   - The rationale string is persisted to the rank-request log for [[explain_ranking]] auditability.
+2. **Compositional fallback** *(tag `compositional_no_rationale`)* — if `weight_override` is present but `weight_rationale` is missing, empty, or shorter than 8 non-whitespace characters, **the host proposal is rejected** and W is computed from `clip(W_base + Σ_axis Δ_axis(req[axis])) / Σ`. The server does **not** silently accept a rationale-less proposal.
+3. **Compositional fallback** *(tag `compositional_no_override`)* — if `weight_override` is absent, the same compositional formula applies.
+4. **Compositional fallback** *(tag `compositional_total_zero`)* — if a host proposal passes (1)'s gates but reduces to all-zero after clipping (every component ≤ 0), the server falls back to compositional. **Uniform 1/N distribution is not a permitted W source** in v0.1 — it is the single behaviour from earlier code that contradicts this ADR and is removed.
+
+**Per-feature ceiling rationale.** `clip_cap = 0.40` is approximately `2 × max(W_base)` (the largest W_base entry is `IF = 0.20`). The intent is: the host LLM may double-emphasise any single feature relative to the catalog baseline, but cannot collapse the rank into a single-axis sort. Without this cap a host proposal of `IF = 0.99` would degenerate the [[Ranking pipeline]] Stage 2 into "highest intent overlap wins, nothing else matters", undoing the multi-feature value proposition.
 
 This reverses the earlier v0.1 decision to make compositional W canonical. Recorded in [[ADR-0006]]. The compositional path is retained as a baseline so that:
 
@@ -218,7 +299,9 @@ This reverses the earlier v0.1 decision to make compositional W canonical. Recor
 - Hosts without a proposal step (CI checks, debug clients, deterministic replay) still get reproducible rankings.
 - [[explain_ranking]] (deferred past v0.1) can compare host-proposed W against the compositional baseline to surface "why this LLM chose differently".
 
-Trade-offs adopted: per-query cache miss is the common case; rationale must be returned by the host for auditability; SR safety gate (Stage 1) is untouched — the LLM cannot weight its way around a `sensitivity_risk` block.
+Trade-offs adopted: per-query cache miss is the common case; rationale is **required** (not advisory) for any host proposal to be honoured; SR safety gate (Stage 1) is untouched — the LLM cannot weight its way around a `sensitivity_risk` block.
+
+**weight_source exposure.** The chosen tag (`host_proposed` / `compositional_no_rationale` / `compositional_no_override` / `compositional_total_zero`) is part of the rank response only when `include_debug=true`. It never appears in the default L2 payload (see [[Exposure level]]).
 
 ### Card copy
 
@@ -255,6 +338,14 @@ The coarse bucket that selects a [[Frame copy]] variant. v0.1 segments:
 
 Resolution is **first-match in the listed priority order**. The mapping table itself is data (`frame_copy_segments.json`) and PR-reviewable; new segments require a `minor` [[catalog_version]] bump.
 
+**Match-rule semantics (fixed).** A segment's `match` block may contain multiple condition keys (e.g. `intent_any`, `season_any`, `persona_any`, `life_event_any`):
+
+- **Across different keys: AND.** Every present key must match.
+- **Within a single `_any` array: OR.** Any one value in the array satisfies that key.
+- A `fallback: true` block matches unconditionally (used only by the `general` last-priority segment).
+
+Example: `tax_season` with `intent_any = [tax_filing, tax_inquiry]` and `season_any = [jan, may]` matches when `(intent contains tax_filing OR tax_inquiry) AND (season is jan OR may)`. This convention is the implementation contract for the composer's segment resolver.
+
 Consequence: v0.1 needs only ~6 × 4 ≈ 24 frame copy strings (and one segment mapping table), authorable by a single maintainer in one session.
 
 ### catalog_version
@@ -273,25 +364,64 @@ Every Catalog publish is **atomic**: staged build → atomic swap → previous v
 { catalog_version: "1.0.7", weights_version: "1.0.0", … }
 ```
 
-Cache key for the runtime ranking cache: `(input_hash, catalog_version, weights_version)`. A `patch` bump invalidates ranking cache; `weights_version` bumps invalidate it independently.
+v0.1 ships an **in-process LRU rank cache** (see [[ADR-0014]]). Key shape:
+
+```
+hash(
+  catalog_version, weights_version, taxonomy_version,
+  sorted(persona), sorted(intent), sorted(life_event), sorted(region),
+  season, access_mode, top_k,
+  weight_override_hash
+)
+```
+
+`weight_rationale` is intentionally **not** in the key — it does not change the result. The cache key carries the resolved W only, so all four `weight_source` outcomes (`host_proposed`, `compositional_no_rationale`, `compositional_no_override`, `compositional_total_zero` — see [[W_context]]) collapse to the same row whenever they produce identical W.
+
+**Invalidation is by process restart only.** In the v0.1 stdio transport model, a `.mcpb` update = new catalog/weights load = new process — the OS already guarantees invalidation. No version-change detection logic runs in the server. When [[MCP transport (v0.1)]] is eventually replaced by HTTP, the storage backend changes; the key shape above stays.
+
+`cache_lru_size` (default 1024) lives in `weights/<weights_version>.json` and is a [[weights_version]]-patch tunable, not a code constant.
 
 ### Catalog source of truth
 
-The Catalog is **JSON-in-git as source of truth, pre-compiled SQLite as runtime artifact shipped via npm**. The distribution model is fixed by the product reality: the MCP server runs locally inside Claude Desktop, installed once via `npm install -g portal-genui-mcp` (or equivalent). End users never clone the git repo and never compile anything.
+The Catalog is **JSON-in-git as source of truth, pre-compiled SQLite as runtime artifact shipped inside two distribution targets**. The distribution model is fixed by the product reality: the MCP server runs locally inside Claude Desktop, and the general user installs it through Claude Desktop's Extensions UI — not by running `npm`.
 
 Three layers:
 
 - **Source of truth (git, `catalog/<version>/*.json`)** — human- and AI-authored content; PR-reviewable; gated by the [[Review Queue]] and the [[Review Agent]]. This is where OSS contribution happens.
-- **Build artifact (npm publish CI, `compiled.sqlite`)** — generated automatically by the publish pipeline from the JSON source. Smaller, indexed, instant-load. Lives inside the npm package; never committed to git.
-- **Runtime form (end user's machine)** — the locally-installed npm package contains both the MCP server binary and `compiled.sqlite`. Server starts via stdio in <100ms. The MCP server never compiles or fetches at runtime.
+- **Build artifact (CI, `compiled.sqlite`)** — generated automatically by the publish pipeline from the JSON source. Smaller, indexed, instant-load. Bundled into both distribution targets below; never committed to git.
+- **Runtime form (end user's machine)** — the installed package (whichever distribution target) contains both the MCP server binary and `compiled.sqlite`. Server starts via stdio in <100ms. The MCP server never compiles or fetches at runtime.
 
-Catalog freshness: end users update by running `npm update -g portal-genui-mcp`. The server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
+**Two distribution targets:**
 
-This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working server.
+- **Primary — `.mcpb` Claude Desktop Extension** for general users. Three-click install in Claude Desktop's Extensions UI, no Node install, no JSON config, no env vars, no credentials. Bundles server + `compiled.sqlite` + `node_modules`. See [[Session 1.5]].
+- **Secondary — `npm install -g portal-genui-mcp`** for developers validating the server during iteration. Requires manual `claude_desktop_config.json` entry. Not advertised to general users.
+
+Catalog freshness: `.mcpb` users get a new file from GitHub Releases each tag (and Claude Desktop's update UI surfaces it); npm users run `npm update -g`. Either way the server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
+
+The v0.1 launch is a **single bundled snapshot**, not a daily end-user update obligation. Update fatigue from frequent SQLite snapshots and a cloud DB / local DB two-track split are deferred to a v0.2 ADR after release telemetry; v0.1 stays local `.mcpb`-first with no runtime fetch, auth, or background update.
+
+This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working extension.
+
+### Launch readiness gate
+
+**v0.1 RC amendment.** [[ADR-0018]] narrows the immediate release-candidate gate to Last Mile scenario coverage, package verification, and no-secret MCPB distribution. The full axis matrix below remains the long-term saturation diagnostic from [[ADR-0013]]. A local `npm run coverage` verdict of `NOT READY` means the project must not claim full taxonomy saturation; it does not by itself block the v0.1 RC when the scenario Last Mile gate passes.
+
+The following full axis-saturation gate defines the broader ADR-0013 product-quality target under the SLC "Complete" criterion of [[ADR-0009]]. For the immediate v0.1 RC, [[ADR-0018]] is the operative gate. The earlier implicit promise of "10,972 published Entries" is **replaced** by explicit evidence: scenario Last Mile for the RC, and axis coverage for later saturation claims. Absolute Entry count is now a by-product, not a target.
+
+**Full saturation coverage rule.** Every value in the primary closed enum of every [[Taxonomy]] axis must be covered by **N ≥ 20** `status="published"` Entries before maintainers claim full taxonomy coverage.
+
+- `persona`, `intent`, `life_event` — N = 20 each. ("Covered" means the enum value appears in the Entry's matching tag array; `confidence_score` ≥ Stage-1 gate is sufficient, no extra confidence inflation.)
+- `region` — N = 20 for the 17 광역시도 + `nationwide`. Sub-광역 시군구 values are **not** launch-gated; they accrete naturally post-launch.
+
+**Sensitive-domain reinforcement.** When the axis value is in `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`, **100 %** of its N Entries must carry a maintainer-recorded approval in the PR audit trail (`api_cached` rows escalated under [[Review Queue]] rules; `portal_handoff` rows already escalated unconditionally). This binds [[ADR-0008]]'s sensitive-domain policy to the launch gate so GIGO pressure cannot relax it.
+
+**Saturation readiness ≠ launch.** Meeting the full axis gate makes a future release *eligible* to claim full taxonomy coverage. The actual release is still a maintainer-triggered tag. Automation surfaces readiness; it does not pull the trigger.
+
+**Measurement.** For the full axis-saturation gate, a read-only `npm run coverage` script is the single source of truth for diagnostic status: per-axis × per-value `(published_count, sensitive_approval_ratio)` matrix printed to stdout, plus a one-line `READY / NOT READY` verdict. The script is itself PR-reviewable and is the only acceptable evidence when maintainers claim full ADR-0013 taxonomy saturation. Spreadsheets, manual counts, and "looks about right" are not.
 
 ### Publish cadence
 
-PR merges to `main` do **not** themselves publish. Each merge is a staging-only update. Two automated jobs produce the published versions:
+PR merges to `main` do **not** themselves publish. Each merge is a staging-only update. After v0.1 launch, two automated jobs may produce published versions when maintainers enable the normal cadence:
 
 - **Daily `patch`** — every day at 00:00 KST, CI inspects diffs since the last tag. If only `patch`-level changes exist (copy fixes, tier1→tier2 [[Handoff]] downgrades, `last_sync_at` / `last_verified_at` updates, free_tag updates), CI tags `catalog@MAJOR.MINOR.PATCH+1`, builds the npm package, and publishes.
 - **Weekly `minor`** — on a fixed weekday, if Entries were added or removed since the last `minor` tag, CI bumps `MINOR`, resets `PATCH=0`, builds, publishes.
@@ -317,10 +447,10 @@ Confidence-driven routing of automation output:
 | confidence_score        | route                                                              |
 | ----------------------- | ------------------------------------------------------------------ |
 | `≥ 0.85`                | auto-accepted by [[Review Agent]] if rubric passes; surfaces in draft PR |
-| `[0.60, 0.85)`          | [[Review Agent]] applies full rubric; passes → auto-accept, fails → escalate to maintainer |
+| `[0.60, 0.85)`          | [[Review Agent]] applies full rubric and posts findings; not auto-accepted until confidence reaches 0.85 |
 | `< 0.60`                | escalate to maintainer; agent provides a structured analysis but cannot accept |
 
-**Sensitive-domain hard gate.** Independent of `confidence_score`, every Entry whose `domain ∈ sensitive_domains` is forced into maintainer review (the Review Agent may pre-analyse but cannot accept). v0.1 `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`. Schema-enforced, not policy-enforced.
+**Sensitive-domain review gate is access-mode-aware.** v0.1 `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`. Sensitive `portal_handoff` / `manual_check` Entries are forced into maintainer review because the source record depends on LLM/interpreter reading of a portal screen and the card copy may encode that interpretation. Sensitive `api_cached` Entries are not automatically maintainer-blocked when they come from a structured official API row: the Review Agent may auto-accept them only if confidence is ≥ 0.85, the rubric passes, `safe_copy_rule = "confirm_not_assert"`, and safe-copy lint/audit pass. Otherwise they escalate. Schema enforces the fields; policy decides the route.
 
 **Bot auto-merge** is limited to pure data corrections: tier1→tier2 [[Handoff]] downgrades from health-check, `last_verified_at` / `last_sync_at` refreshes, formatting-only changes. Anything touching `card_title`, `card_body`, `cta_label`, taxonomy tags, intrinsic ordinals, or `access_mode` goes through the Review Agent + maintainer-as-needed path.
 
@@ -336,8 +466,8 @@ An AI agent (Claude Code, Codex, or equivalent) tasked with first-pass review of
 4. Intrinsic ordinal sanity (e.g. an Entry tagged `sensitive_domain=tax` must have `sensitivity_risk ≥ medium`).
 5. `access_mode` matches the source pipeline (api_cached candidates must carry `api_ref`; portal_handoff must carry tier-resolved [[Handoff]] object).
 
-On rubric pass + non-sensitive domain + confidence ≥ 0.60: agent posts an approval comment and the PR is auto-mergeable.
-On rubric fail or sensitive domain or confidence < 0.60: agent posts a structured findings comment and tags the maintainer.
+On rubric pass + confidence ≥ 0.85 + either non-sensitive domain or sensitive `api_cached` with `confirm_not_assert` audit pass: agent posts an approval comment and the PR is auto-mergeable.
+On rubric fail, confidence < 0.85, or sensitive `portal_handoff` / `manual_check`: agent posts a structured findings comment and tags the maintainer.
 
 The Review Agent's prompt + rubric checklist itself is versioned in `tooling/review-agent/` and PR-reviewable; changing it is a separate concern from `catalog_version`.
 
@@ -388,7 +518,27 @@ Schema-level string-length limits enforced at Catalog publish time (rejected at 
 
 These caps make the L2 / L3 / L4 byte caps achievable without runtime trimming.
 
+### Interview Skill
+
+The host-side Claude Code skill (`skills/public-portal-interview.md`) that fulfils the [[Context extraction boundary]] contract on behalf of the user. Its sole job is translating a natural-language public-service request into the structured `(persona[], intent[], life_event[], region?, season?)` payload — plus an optional `weight_override` + `weight_rationale` pair — required by [[MCP Tool: rank_portal_entries]].
+
+The Interview Skill is **not** part of the MCP server. It runs entirely in the host LLM layer. It asks the user at most two clarification questions when the first utterance lacks enough context to populate both an `intent` signal and at least one of `persona` or `life_event`. Questions are constructed from the enum values returned by `resource://taxonomy/v1.0` at runtime — the skill contains no hard-coded enum values. See [[ADR-0016]].
+
+The Interview Skill produces one of three bounded `weight_override` profiles based on the user's declared purpose: action/filing mode (↑ AC, IF, freshness), comparison/exploration mode (↑ EV, PF, LF), or data/evidence mode (↑ EV, IF, freshness while choosing data/evidence intent values from the taxonomy resource). Each profile may bump at most three positive ranking features and must include a `weight_rationale`; the server still enforces `clip_cap`, normalisation, and fallback. When the purpose is unclear after two questions, the skill omits the override entirely and calls `rank_portal_entries` with whatever partial taxonomy it has.
+
+The Interview Skill may use a host-native question transport such as `AskUserQuestion` when the host exposes one, but the MCP server never activates or depends on that UI. The same bounded questions must work as plain chat fallback.
+
+The Interview Skill never performs applications, logins, or eligibility determinations, and never generates handoff URLs. It only calls MCP tools and conveys their output to the user.
+
 ### Handoff allowlist
 
-The fixed set of host names that may appear in any tier1/tier2 URL. Currently: `hometax.go.kr`, `gov.kr`, `data.go.kr`. Any URL outside this allowlist is rejected at publish time, satisfying the architecture doc §9 "Allowlist-based external links" constraint.
+The fixed set of host names that may appear in any tier1 / tier2 URL or in any `api_ref` endpoint. Currently:
 
+| host              | role                                                            | user-facing? |
+| ----------------- | --------------------------------------------------------------- | ------------ |
+| `hometax.go.kr`   | tier1 / tier2 [[Handoff]] target for tax actions                | yes          |
+| `gov.kr`          | tier1 / tier2 [[Handoff]] target for civic-service actions      | yes          |
+| `data.go.kr`      | dataset metadata pages referenced in [[Evidence Registry]]      | yes          |
+| `api.odcloud.kr`  | gov24 / NTS / data.go.kr API endpoints (api_cached sync source) | no — internal source only; never surfaced as a card CTA |
+
+Any URL outside this allowlist is rejected at publish time. `api.odcloud.kr` is in the list because it is the canonical host for the API operations driving the api-refresh-pipeline; it is treated as an **internal source**, not as a user-facing CTA target. The composer never renders `api.odcloud.kr` URLs in card UI.

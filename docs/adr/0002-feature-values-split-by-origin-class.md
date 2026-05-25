@@ -23,3 +23,7 @@ The split now has **four origin classes, not three**, and the Feature Dictionary
 - Considered-and-cut: `api_reliability`, `link_stability`. They would be intrinsic-stored ordinals like AC/EV/SR, but v0.1 has no operational telemetry to assign them — they would be dead weight. Reintroduction requires a fresh ADR once monitoring exists.
 
 Resulting tally: intrinsic stored (AC, EV, SR) = 3; intrinsic derived from access_mode = 2; match derived (IF, PF, LF, SE) = 4; time-derived (UR, freshness) = 2. Total 11.
+
+## Subsequent amendments
+
+- [[ADR-0011]] — Ordinal mapping numeric values (AC/EV/SR low/medium/high → number) move from code constants into `weights/<weights_version>.json` (`score_ordinals`, `gate_ordinals`). The split into origin classes defined here is preserved; only the storage location of the per-label multiplier changes.

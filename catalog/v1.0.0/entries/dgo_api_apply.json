@@ -1,0 +1,74 @@
+{
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "maintainer_seed",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "data_go_kr",
+  "domain": "public_data",
+  "sensitive_domain": false,
+  "confidence_score": 1.0,
+  "review_required": false,
+  "region_tags": [
+    "nationwide"
+  ],
+  "seasonality_hint": "always",
+  "source_urls": [
+    "https://www.data.go.kr/search/index.do"
+  ],
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "low"
+  },
+  "safe_copy_audit": {
+    "rule": "standard",
+    "safe_copy_rule": "standard",
+    "audited_at": "2026-05-25",
+    "auditor": "maintainer"
+  },
+  "last_sync_at": "2026-05-25T00:00:00Z",
+  "last_verified_at": "2026-05-25T00:00:00Z",
+  "entry_id": "dgo_openapi_application",
+  "title": "오픈API 활용 신청",
+  "canonical_intent": "api_application",
+  "canonical_action_verb": "apply",
+  "key_keywords": [
+    "오픈API 활용 신청",
+    "공공데이터",
+    "data.go.kr"
+  ],
+  "content_fingerprint": "data_go_kr|portal_handoff|dgo_openapi_application",
+  "menu_path": "공공데이터포털 > 데이터찾기 > 오픈API > 활용신청",
+  "handoff": {
+    "portal": "data_go_kr",
+    "tier": "tier2",
+    "url": "https://www.data.go.kr/search/index.do",
+    "menu_path": "공공데이터포털 > 데이터찾기 > 오픈API > 활용신청",
+    "tier2": "https://www.data.go.kr/search/index.do",
+    "tier3": "공공데이터포털 > 데이터찾기 > 오픈API > 활용신청"
+  },
+  "persona_tags": [
+    "data_user",
+    "startup_founder"
+  ],
+  "task_intent": [
+    "api_application"
+  ],
+  "life_event_tags": [
+    "startup",
+    "public_data_project"
+  ],
+  "evidence_refs": [],
+  "free_tags": [
+    "data_go_kr",
+    "portal_handoff",
+    "api_application",
+    "data_user",
+    "startup_founder"
+  ],
+  "card_title": "오픈API 활용 신청",
+  "card_body": "오픈API 명세와 활용신청 절차를 공공데이터포털에서 확인합니다.",
+  "cta_label": "API 신청 보기",
+  "semantic_fingerprint": "api_application|apply|오픈API 활용 신청|nationwide|data_user,startup_founder"
+}

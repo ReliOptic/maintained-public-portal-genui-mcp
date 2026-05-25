@@ -1,0 +1,40 @@
+# Keep MCPB release bundles runtime-only and credential-free.
+.github/
+.git/
+.omc/
+.omx/
+coverage/
+coverage-report.json
+docs/
+memory/
+scripts/
+src/
+tests/
+tooling/
+tsconfig*.json
+
+# Maintainer credentials and local environment files.
+.env
+.env.*
+env_*
+*SERVICE_KEY*
+*.pem
+*.key
+
+# Catalog source/review artifacts are not runtime inputs; bundle only SQLite.
+catalog/*
+!catalog/compiled.sqlite
+catalog/compiled.sqlite-*
+catalog/compiled.sqlite-shm
+catalog/compiled.sqlite-wal
+
+# Local/generated bundles.
+*.mcpb
+
+# Keep root planning context and dependency-local state out of user bundles.
+CONTEXT.md
+node_modules/.vite/
+node_modules/**/.claude/
+node_modules/**/settings.local.json
+node_modules/**/.cache/
+.DS_Store

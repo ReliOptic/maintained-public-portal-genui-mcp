@@ -1021,5 +1021,49 @@
     }
   },
   "authoring_note": "LLM first draft for deterministic fallback when host LLM weight_override is missing.",
-  "maintainer_review_note": "Reviewed for API-first ADR-0007/0009: SR is excluded, freshness is included, access_mode deltas are sparse, and W_base sums exactly to 1.0."
+  "maintainer_review_note": "Reviewed for API-first ADR-0007/0009: SR is excluded, freshness is included, access_mode deltas are sparse, and W_base sums exactly to 1.0.",
+  "score_ordinals": {
+    "actionability": {
+      "low": 0.2,
+      "medium": 0.5,
+      "high": 0.85
+    },
+    "evidence_value": {
+      "low": 0.2,
+      "medium": 0.5,
+      "high": 0.85
+    }
+  },
+  "gate_ordinals": {
+    "sensitivity_risk": {
+      "low": 0.1,
+      "medium": 0.5,
+      "high": 0.9
+    }
+  },
+  "clip_cap": 0.4,
+  "stage0_empty_context_top_n": 500,
+  "cache_lru_size": 1024,
+  "evidence_role_priority": [
+    "welfare_program_context",
+    "tax_statistics_context",
+    "tax_income_statistics_context",
+    "household_income_regional_context",
+    "startup_business_market_context",
+    "regional_commercial_area_context"
+  ],
+  "insight_intent_set": [
+    "data_search",
+    "dataset_download",
+    "api_application",
+    "policy_information"
+  ],
+  "insight_portal_set": [
+    "data_go_kr"
+  ],
+  "handoff_allowlist": [
+    "gov.kr",
+    "hometax.go.kr",
+    "data.go.kr"
+  ]
 }

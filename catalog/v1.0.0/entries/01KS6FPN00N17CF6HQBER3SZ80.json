@@ -1,0 +1,81 @@
+{
+  "entry_id": "01KS6FPN00N17CF6HQBER3SZ80",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "gov24",
+  "domain": "welfare",
+  "sensitive_domain": "welfare",
+  "title": "정부24 보조금24 맞춤안내 조회",
+  "canonical_intent": "benefit_check",
+  "canonical_action_verb": "handoff",
+  "key_keywords": [
+    "정부24",
+    "보조금24",
+    "맞춤안내",
+    "조회"
+  ],
+  "content_fingerprint": "gov24|portal_handoff|c79a50b9e69f3121",
+  "source_urls": [
+    "https://www.gov.kr/portal/rcvfvrSvc/main"
+  ],
+  "stage1_capture": {
+    "fetch_status": "ERR",
+    "final_url": "https://www.gov.kr/portal/rcvfvrSvc/main",
+    "rendered_text_excerpt": "URLError(TimeoutError('timed out'))",
+    "screenshot_ref": null,
+    "observed_actions": []
+  },
+  "menu_path": "정부24 > 보조금24 > 맞춤안내 조회",
+  "handoff": {
+    "tier": "tier3",
+    "portal": "gov24",
+    "url": "https://www.gov.kr/portal/rcvfvrSvc/main",
+    "menu_path": "정부24 > 보조금24 > 맞춤안내 조회"
+  },
+  "persona_tags": [
+    "low_income_household"
+  ],
+  "task_intent": [
+    "benefit_check"
+  ],
+  "life_event_tags": [
+    "income_change"
+  ],
+  "region_tags": [
+    "nationwide"
+  ],
+  "evidence_refs": [
+    "ev_local_welfare_services",
+    "ev_household_income_incheon"
+  ],
+  "free_tags": [
+    "정부24 보조금24 맞춤안내 조회",
+    "gov24",
+    "pre_split_leaf"
+  ],
+  "seasonality_hint": "jan",
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.72,
+  "review_required": true,
+  "review_reason": "sensitive_domain:welfare",
+  "card_title": "정부24 보조금24 맞춤안내 조회",
+  "card_body": "정부24 보조금24 맞춤안내 조회 경로와 신청 안내를 공식 포털에서 확인하세요. 상황에 따라 요건과 서류가 달라질 수 있습니다.",
+  "cta_label": "정부24에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "대상 단정 없음",
+      "승인 보장 없음"
+    ]
+  },
+  "last_verified_at": "2026-05-25",
+  "semantic_fingerprint": "benefit_check|handoff|정부24 보조금24 맞춤안내 조회|nationwide|low_income_household"
+}

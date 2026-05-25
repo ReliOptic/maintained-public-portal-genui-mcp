@@ -1,6 +1,24 @@
 # API-first ingestion with access_mode discrimination
 
-The original architecture treated every Entry as portal-crawled. Real Korean public services split into two camps: (a) structured data exposed through stable REST APIs — gov24 service catalog, NTS businessman status, data.go.kr datasets — and (b) actions that still terminate on portal screens (홈택스 신고, 정부24 신청류). We pivot the Catalog to **API-first**: every Entry carries an `access_mode` field in `{api_cached, portal_handoff, manual_check}` (v0.1 subset), and the Refresh pipeline splits into two parallel tracks — `api-refresh-pipeline` (automated, nightly) for API-sourced Entries and `portal-refresh-pipeline` (manual-trigger) for hand-curated handoff URLs. One API row becomes one Entry; "search" or "discovery" itself is never an Entry. Datasets are not Entries — they live in a separate Evidence Registry referenced by Entries via `evidence_refs`.
+The original architecture treated every Entry as portal-crawled. Real Korean public services split into two camps: (a) structured data exposed through stable REST APIs — gov24 service catalog, 복지로 welfare catalogs, 워크넷 jobs, NTS live checks, data.go.kr/KOSIS datasets — and (b) actions that still terminate on portal screens (홈택스 신고, 정부24 신청류). We pivot the Catalog to **API-first**: every Entry carries an `access_mode` field in `{api_cached, portal_handoff, manual_check}` (v0.1 subset), and the Refresh pipeline splits into two parallel tracks — `api-refresh-pipeline` (automated, nightly) for API-sourced Task Entries and `portal-refresh-pipeline` (manual-trigger) for hand-curated handoff URLs. One Task API row becomes one Entry; "search" or "discovery" itself is never an Entry. Datasets are not Entries — they live in a separate Evidence Registry referenced by Entries via `evidence_refs`.
+
+## API role taxonomy
+
+Generic public APIs exist, but v0.1 correctness depends on assigning each API to the right role rather than attaching every API as an Entry source:
+
+| API family | Catalog role | Rationale |
+| --- | --- | --- |
+| Gov24 공공서비스 정보 | Task Entry candidates | Service rows describe user-facing public-service tasks. |
+| 복지로 중앙부처복지서비스 / 지자체복지서비스 | Task Entry candidates | Welfare-service rows map to benefits/tasks users can check or apply for. |
+| 워크넷 채용정보 / 정부지원일자리 | Task Entry candidates | Job/support rows map to employment-support tasks. |
+| 공공데이터포털 목록조회 / 검색서비스 | Discovery tool (maintainer only) | Returns metadata *about* other datasets, not data itself. Helps the maintainer find new Evidence candidates; **not wired into the v0.1 catalog pipeline** and never surfaced to end users. Lives in `tooling/discover/` if implemented at all. |
+| KOSIS OpenAPI | Evidence Registry | Statistics support Evidence Rail context and confidence, not Task cards. |
+| 소상공인 상권정보 API | Evidence Registry | Commercial-area facts support small-business evidence and ranking context. |
+| 국세청 사업자 상태조회 | Live Check Entry | A narrow runtime check for a specific business-status task, not a bulk catalog source. |
+
+Therefore: general-purpose APIs are available, but the architecture's consistency comes from separating API roles into four surfaces — **Task Entry** (catalog rows that user can act on), **Evidence Registry** (reference statistics referenced by Tasks), **Live Check Entry** (a single curated Entry, label only — runs as `portal_handoff` in v0.1), and **Discovery tool** (maintainer-side only, never user-visible). Adding more APIs is not a goal by itself.
+
+**Live Check Entry is a role label, not a new `access_mode`.** In v0.1 the single Live Check Entry (NTS 사업자 상태조회) is published with `access_mode = portal_handoff` and a `menu_path` to 홈택스 / 정부24's status screen. The MCP server does **not** call the NTS API at runtime — there are no credentials on user machines and the `.mcpb` distribution promises `env = {}`. Reviving live API calls is deferred to v1.0+ behind a credential proxy and is recorded as such; until then, the user experience for a Live Check is identical to any other `portal_handoff` Entry.
 
 ## Considered options
 

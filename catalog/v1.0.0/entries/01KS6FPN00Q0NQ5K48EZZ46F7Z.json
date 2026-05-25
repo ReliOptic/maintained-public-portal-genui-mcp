@@ -1,0 +1,79 @@
+{
+  "entry_id": "01KS6FPN00Q0NQ5K48EZZ46F7Z",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "hometax",
+  "domain": "tax",
+  "sensitive_domain": "tax",
+  "title": "자녀장려금 신청",
+  "canonical_intent": "benefit_application",
+  "canonical_action_verb": "handoff",
+  "key_keywords": [
+    "자녀장려금",
+    "신청"
+  ],
+  "content_fingerprint": "hometax|portal_handoff|d7abdb7b7b05b37d",
+  "source_urls": [
+    "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%9E%90%EB%85%80%EC%9E%A5%EB%A0%A4%EA%B8%88%20%EC%8B%A0%EC%B2%AD"
+  ],
+  "stage1_capture": {
+    "fetch_status": 200,
+    "final_url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%9E%90%EB%85%80%EC%9E%A5%EB%A0%A4%EA%B8%88%20%EC%8B%A0%EC%B2%AD",
+    "rendered_text_excerpt": "국세청 홈택스",
+    "screenshot_ref": null,
+    "observed_actions": []
+  },
+  "menu_path": "홈택스 > 장려금·연말정산 > 자녀장려금 신청",
+  "handoff": {
+    "tier": "tier1",
+    "portal": "hometax",
+    "url": "https://hometax.go.kr/websquare/websquare.html?w2xPath=/ui/pp/index_pp.xml&searchKeyword=%EC%9E%90%EB%85%80%EC%9E%A5%EB%A0%A4%EA%B8%88%20%EC%8B%A0%EC%B2%AD",
+    "menu_path": "홈택스 > 장려금·연말정산 > 자녀장려금 신청"
+  },
+  "persona_tags": [
+    "parent_guardian"
+  ],
+  "task_intent": [
+    "benefit_application"
+  ],
+  "life_event_tags": [
+    "income_change"
+  ],
+  "region_tags": [
+    "nationwide"
+  ],
+  "evidence_refs": [
+    "ev_nts_retirement_income_tenure",
+    "ev_nts_education_tax"
+  ],
+  "free_tags": [
+    "자녀장려금 신청",
+    "hometax",
+    "pre_split_leaf"
+  ],
+  "seasonality_hint": "comprehensive_income_tax_may",
+  "intrinsic_ordinals": {
+    "actionability": "high",
+    "evidence_value": "high",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.88,
+  "review_required": true,
+  "review_reason": "sensitive_domain:tax",
+  "card_title": "자녀장려금 신청",
+  "card_body": "자녀장려금 신청 경로와 신청 안내를 공식 포털에서 확인하세요. 상황에 따라 요건과 서류가 달라질 수 있습니다.",
+  "cta_label": "홈택스에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "대상 단정 없음",
+      "승인 보장 없음"
+    ]
+  },
+  "last_verified_at": "2026-05-25",
+  "semantic_fingerprint": "benefit_application|handoff|자녀장려금 신청|nationwide|parent_guardian"
+}

@@ -1,0 +1,10 @@
+{
+  "leaf_task": "선박국적증서 영역서 발급",
+  "source_url": "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000185",
+  "status": "ERR",
+  "final_url": "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000185",
+  "text_excerpt": "URLError(TimeoutError('timed out'))",
+  "screenshot_ref": null,
+  "observed_actions": [],
+  "capture_note": "Maintainer CI should replace text-only fetch with computer-use rendered DOM+screenshot when browser credentials are available."
+}

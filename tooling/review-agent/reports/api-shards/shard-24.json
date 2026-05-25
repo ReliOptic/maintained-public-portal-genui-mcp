@@ -1,0 +1,31 @@
+{
+  "stage": "api-refresh",
+  "written": [],
+  "count": 0,
+  "blocked": false,
+  "source_id": "gov24-serviceList",
+  "source_org_scope": [
+    "national",
+    "regional"
+  ],
+  "page_start": 116,
+  "page_end": 120,
+  "last_page_attempted": 116,
+  "last_page_completed": null,
+  "pages_fetched": 1,
+  "rows_seen": 0,
+  "stopped_reason": "empty_page",
+  "companion_policy": "skip",
+  "operation_status_counts": {
+    "serviceList": {
+      "200": 1
+    },
+    "serviceDetail": {},
+    "supportConditions": {}
+  },
+  "service_list_fallbacks": [],
+  "service_list_fallback_failures": [],
+  "secret_persisted": false,
+  "elapsed_sec": 1.442,
+  "coverage_note": "serviceList rows include national, regional, public institution, and education office records per registry source_org_scope."
+}

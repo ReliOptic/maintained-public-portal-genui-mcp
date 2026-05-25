@@ -1,0 +1,77 @@
+{
+  "entry_id": "01KS6FPN00CRHK6A12PZ3DX8HA",
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "entry_candidate",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "gov24",
+  "domain": "immigration",
+  "sensitive_domain": "immigration",
+  "title": "선박국적증서 영역서 발급",
+  "canonical_intent": "certificate_issue",
+  "canonical_action_verb": "handoff",
+  "key_keywords": [
+    "선박국적증서",
+    "영역서",
+    "발급"
+  ],
+  "content_fingerprint": "gov24|portal_handoff|5e458357d7c476ae",
+  "source_urls": [
+    "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000185"
+  ],
+  "stage1_capture": {
+    "fetch_status": "ERR",
+    "final_url": "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000185",
+    "rendered_text_excerpt": "URLError(TimeoutError('timed out'))",
+    "screenshot_ref": null,
+    "observed_actions": []
+  },
+  "menu_path": "정부24 > 민원서비스 > 선박국적증서 영역서 발급",
+  "handoff": {
+    "tier": "tier3",
+    "portal": "gov24",
+    "url": "https://www.gov.kr/mw/AA020InfoCappView.do?CappBizCD=15200000185",
+    "menu_path": "정부24 > 민원서비스 > 선박국적증서 영역서 발급"
+  },
+  "persona_tags": [
+    "fisher"
+  ],
+  "task_intent": [
+    "certificate_issue"
+  ],
+  "life_event_tags": [
+    "immigration"
+  ],
+  "region_tags": [
+    "nationwide"
+  ],
+  "evidence_refs": [],
+  "free_tags": [
+    "선박국적증서 영역서 발급",
+    "gov24",
+    "pre_split_leaf"
+  ],
+  "seasonality_hint": "jan",
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "high"
+  },
+  "confidence_score": 0.72,
+  "review_required": true,
+  "review_reason": "sensitive_domain:immigration",
+  "card_title": "선박국적증서 영역서 발급",
+  "card_body": "선박국적증서 영역서 발급 경로와 신청 안내를 공식 포털에서 확인하세요. 상황에 따라 요건과 서류가 달라질 수 있습니다.",
+  "cta_label": "정부24에서 확인",
+  "safe_copy_audit": {
+    "safe_copy_rule": "confirm_not_assert",
+    "outcome": "pass",
+    "checked_patterns": [
+      "대상 단정 없음",
+      "승인 보장 없음"
+    ]
+  },
+  "last_verified_at": "2026-05-25",
+  "semantic_fingerprint": "certificate_issue|handoff|선박국적증서 영역서 발급|nationwide|fisher"
+}
