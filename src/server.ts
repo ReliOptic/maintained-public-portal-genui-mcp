@@ -18,6 +18,7 @@ const rankSchema = {
   access_mode: z.string().optional(),
   top_k: z.number().int().min(1).max(50).optional(),
   weight_override: weightOverride,
+  weight_rationale: z.string().optional(),
   include_debug: z.boolean().optional(),
 };
 
@@ -49,6 +50,7 @@ const toRankInput = (input: z.infer<z.ZodObject<typeof rankSchema>>): RankInput 
   if (input.include_debug) result.include_debug = input.include_debug;
   const override = asWeightOverride(input.weight_override);
   if (override !== undefined) result.weight_override = override;
+  if (input.weight_rationale !== undefined) result.weight_rationale = input.weight_rationale;
   return result as RankInput;
 };
 

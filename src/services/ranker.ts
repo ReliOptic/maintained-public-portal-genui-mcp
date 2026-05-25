@@ -1,6 +1,8 @@
 import type { CatalogEntry, JsonObject, JsonValue } from "../types/catalog.js";
-import { FEATURE_KEYS, type FeatureKey, type FeatureVector, type RankedEntry, type RankRequest, type WeightSnapshot } from "../types/ranking.js";
+import { FEATURE_KEYS, type FeatureVector, type RankedEntry, type RankRequest, type WeightSnapshot } from "../types/ranking.js";
 import type { GateOrdinals, OrdinalScale, ScoreOrdinals, WeightConfig } from "../types/weights.types.js";
+import { resolveWeights } from "./weight-resolver.js";
+import type { WeightResolution } from "../types/weight-resolution.types.js";
 
 const SEASON_MONTHS: Readonly<Record<string, number>> = {
   jan: 1,
@@ -103,56 +105,6 @@ const freshnessScore = (entry: CatalogEntry, now: Date): number => {
   return 0.5 - ((days - 30) / 150) * 0.4;
 };
 
-const normalizeWeights = (weights: Partial<Record<FeatureKey, number>>): WeightSnapshot => {
-  const next = emptyWeights();
-  for (const key of FEATURE_KEYS) next[key] = Math.max(0, weights[key] ?? 0);
-  const total = FEATURE_KEYS.reduce((sum, key) => sum + next[key], 0);
-  if (total <= 0) return Object.fromEntries(FEATURE_KEYS.map((key) => [key, 1 / FEATURE_KEYS.length])) as WeightSnapshot;
-  for (const key of FEATURE_KEYS) next[key] /= total;
-  return next;
-};
-
-const isOverrideVector = (value: RankRequest["weight_override"]): value is readonly number[] => Array.isArray(value);
-
-const weightsFromOverride = (override: RankRequest["weight_override"]): WeightSnapshot | undefined => {
-  if (!override) return undefined;
-  if (isOverrideVector(override)) return normalizeWeights(Object.fromEntries(FEATURE_KEYS.map((key, index) => [key, override[index] ?? 0])));
-  return normalizeWeights(override);
-};
-
-const baseWeights = (config: WeightConfig): WeightSnapshot => {
-  const raw = isObject(config.W_base) ? config.W_base : {};
-  const values: Partial<Record<FeatureKey, number>> = {};
-  for (const key of FEATURE_KEYS) values[key] = isObject(raw[key]) ? asNumber(raw[key].weight) ?? 0 : 0;
-  return normalizeWeights(values);
-};
-
-const addDelta = (weights: WeightSnapshot, delta: JsonObject | undefined): void => {
-  if (!delta) return;
-  for (const key of FEATURE_KEYS) weights[key] += asNumber(delta[key]) ?? 0;
-};
-
-const requestAxisValues = (request: RankRequest): Readonly<Record<string, readonly string[]>> => ({
-  persona: request.persona ?? [],
-  intent: request.intent ?? [],
-  life_event: request.life_event ?? [],
-  season: request.season ? [request.season] : [],
-  region: request.region ?? [],
-  access_mode: request.access_mode ? [request.access_mode] : [],
-});
-
-export const resolveWeights = (config: WeightConfig, request: RankRequest = {}): WeightSnapshot => {
-  const override = weightsFromOverride(request.weight_override);
-  if (override) return override;
-  const weights = baseWeights(config);
-  const deltaAxis = isObject(config.delta_axis) ? config.delta_axis : {};
-  for (const [axis, values] of Object.entries(requestAxisValues(request))) {
-    const bucket = isObject(deltaAxis[axis]) ? deltaAxis[axis] : {};
-    for (const value of values) addDelta(weights, isObject(bucket[value]) && isObject(bucket[value].delta) ? bucket[value].delta : undefined);
-  }
-  return normalizeWeights(weights);
-};
-
 const featureVector = (entry: CatalogEntry, config: WeightConfig, request: RankRequest, now: Date): FeatureVector => ({
   IF: overlapScore([...asStringArray(entry.task_intent), asString(entry.canonical_intent) ?? ""], request.intent),
   PF: overlapScore(asStringArray(entry.persona_tags), request.persona),
@@ -184,8 +136,14 @@ const assignSlots = (ranked: readonly RankedEntry[]): RankedEntry[] => {
   });
 };
 
-export const rankEntries = (entries: readonly CatalogEntry[], config: WeightConfig, request: RankRequest = {}, now = new Date()): RankedEntry[] => {
-  const weights = resolveWeights(config, request);
+export const rankEntries = (
+  entries: readonly CatalogEntry[],
+  config: WeightConfig,
+  request: RankRequest = {},
+  now = new Date(),
+  resolution: WeightResolution = resolveWeights(config, request),
+): RankedEntry[] => {
+  const weights = resolution.weights;
   const limit = Math.max(1, Math.min(request.top_k ?? 10, 50));
   const ranked = entries.filter(passesRankGate).map((entry) => rankedEntry(entry, scoreEntry(entry, config, weights, request, now), weights, config));
   ranked.sort((left, right) => right.score - left.score || String(left.entry.entry_id).localeCompare(String(right.entry.entry_id)));

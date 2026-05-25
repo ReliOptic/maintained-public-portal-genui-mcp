@@ -3,6 +3,7 @@ import type { RankRequest } from "../types/ranking.js";
 import { CatalogStore } from "./catalog.js";
 import { composeGenUiArtifact } from "./composer.js";
 import { rankEntries } from "./ranker.js";
+import { resolveWeights } from "./weight-resolver.js";
 
 export interface SearchInput {
   readonly query?: string;
@@ -52,6 +53,7 @@ const rankRequest = (input: RankInput): RankRequest => ({
   ...(input.access_mode ? { access_mode: input.access_mode } : {}),
   ...(input.top_k ? { top_k: input.top_k } : {}),
   ...(input.weight_override ? { weight_override: input.weight_override } : {}),
+  ...(input.weight_rationale !== undefined ? { weight_rationale: input.weight_rationale } : {}),
 });
 
 export const searchPortalEntries = (store: CatalogStore, input: SearchInput = {}): JsonObject => {
@@ -69,8 +71,13 @@ export const rankPortalEntries = (store: CatalogStore, input: RankInput = {}): J
   const config = store.getWeights();
   const request = rankRequest(input);
   const candidates = store.queryStage0Admitted(request, config.stage0_empty_context_top_n);
-  const ranked = rankEntries(candidates, config, request);
-  return { entries: publicRanked(ranked, input.include_debug), count: ranked.length };
+  const resolution = resolveWeights(config, request);
+  const ranked = rankEntries(candidates, config, request, new Date(), resolution);
+  return {
+    entries: publicRanked(ranked, input.include_debug),
+    count: ranked.length,
+    ...(input.include_debug ? { weight_source: resolution.weight_source } : {}),
+  };
 };
 
 export const getEntryDetail = (store: CatalogStore, input: DetailInput): JsonObject => {
@@ -89,7 +96,12 @@ export const composeGenuiArtifact = (store: CatalogStore, input: ComposeInput = 
   const request = rankRequest(input);
   const top_k = input.entry_ids?.length ?? request.top_k;
   const entries = composeEntries(store, input, request, config.stage0_empty_context_top_n);
-  const ranked = rankEntries(entries, config, { ...request, ...(top_k ? { top_k } : {}) });
+  const nextRequest = { ...request, ...(top_k ? { top_k } : {}) };
+  const resolution = resolveWeights(config, nextRequest);
+  const ranked = rankEntries(entries, config, nextRequest, new Date(), resolution);
   const frame = frameRows(store.getFrameCopy());
-  return { artifact: composeGenUiArtifact(ranked, request, frame.copy, frame.segments, store.getEvidence(), input.frame_segment) as unknown as JsonObject };
+  return {
+    artifact: composeGenUiArtifact(ranked, request, frame.copy, frame.segments, store.getEvidence(), input.frame_segment) as unknown as JsonObject,
+    ...(input.include_debug ? { weight_source: resolution.weight_source } : {}),
+  };
 };

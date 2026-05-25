@@ -26,6 +26,7 @@ export interface RankRequest {
   readonly access_mode?: string;
   readonly top_k?: number;
   readonly weight_override?: Partial<Record<FeatureKey, number>> | readonly number[];
+  readonly weight_rationale?: string;
 }
 
 export interface RankedEntry {
