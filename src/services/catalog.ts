@@ -13,6 +13,10 @@ interface FreshnessRow {
   readonly latest_date: string | null;
 }
 
+interface VersionRow {
+  readonly version: string | null;
+}
+
 export class CatalogError extends Error {
   public constructor(message: string, public readonly cause?: unknown) {
     super(message);
@@ -131,6 +135,13 @@ export class CatalogStore {
     return parseWeightConfig(this.singleton("weights", "weights_id", "v1.0.0"));
   }
 
+  public getCatalogVersion(): string {
+    const row = this.database.prepare("SELECT json_extract(payload_json, '$.catalog_version') AS version FROM entries LIMIT 1")
+      .get() as VersionRow | undefined;
+    if (typeof row?.version === "string" && row.version.length > 0) return row.version;
+    throw new CatalogError("catalog_version not found in compiled catalog");
+  }
+
   public getFrameCopy(): JsonObject {
     const rows = this.database.prepare("SELECT payload_json FROM frame_copy ORDER BY frame_key").all() as DbRow[];
     return { rows: rows.map((row) => JSON.parse(row.payload_json) as JsonValue) };
@@ -185,3 +196,4 @@ export const getTaxonomy = (): JsonObject => getCatalog().getTaxonomy();
 export const getWeights = (): WeightConfig => getCatalog().getWeights();
 export const getFrameCopy = (): JsonObject => getCatalog().getFrameCopy();
 export const getCatalogFreshness = (): CatalogFreshness => getCatalog().getFreshness();
+export const getCatalogVersion = (): string => getCatalog().getCatalogVersion();
