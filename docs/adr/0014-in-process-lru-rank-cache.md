@@ -1,0 +1,19 @@
+# In-process LRU rank cache
+
+CONTEXT.md's `catalog_version` section had documented a runtime ranking cache keyed on `(input_hash, catalog_version, weights_version)`, and [[ADR-0006]] had refined the key to include `weight_override_hash`. The implementation shipped without any rank cache; `mcp-tools.ts` called `store.queryEntries` and `rankEntries` per request. We close that gap in v0.1 by introducing an **in-process LRU cache** in the MCP server. Storage is in-process only — no SQLite cache table, no external store. The cache key combines (`catalog_version`, `weights_version`, `taxonomy_version`, sorted `persona` / `intent` / `life_event` / `region` arrays, `season`, `access_mode`, `top_k`, `weight_override_hash`). `weight_rationale` is **not** in the key — it does not affect the result. Capacity defaults to `1024` entries and is a [[weights_version]]-shipped tunable (`weights/<version>.json.cache_lru_size`). Invalidation is by **process restart only**: in the v0.1 stdio transport model, `.dxt` update = new catalog/weights load = process restart, which the OS already guarantees. The cache therefore needs no version-change detection logic — the simplest correct invalidation strategy available.
+
+## Considered options
+
+- **Ship v0.1 with no cache (defer until measured).** Rejected (after consideration): the rank function is deterministic over a bounded enum input space — its cache-friendliness is structural, not opportunistic. The conditions under which "no cache" is defensible (per-user stdio, low repeat rate, undocumented latency budget) all change the moment HTTP transport, [[explain_ranking]], or a 100k-Entry catalog arrives. Shipping caching now means the migration to any of those surfaces is a backend swap, not a re-design.
+- **SQLite-backed persistent cache.** Rejected: persistence across process restart has near-zero value in a stdio-per-user model, while invalidation gains real complexity (must detect catalog/weights change between restarts). Migration to persistent cache becomes natural at HTTP transport.
+- **LRU + TTL.** Rejected: in v0.1 the TTL upper bound is process lifetime (because `catalog_version` is fixed at process start). A TTL shorter than process lifetime would deliberately throw away valid data for no invalidation benefit.
+- **Cache the Stage 0 admitted set only.** Rejected: leaves the dominant Stage 2 cost uncached. The full result is what users see, and that is what the cache must protect.
+
+## Consequences
+
+- `mcp-tools.ts` (or a new `services/rank-cache.ts`) implements an LRU bounded by `cache_lru_size`. The cache wraps `rank_portal_entries` and `compose_genui_artifact`; `search_portal_entries` and `get_entry_detail` are not cached (different access patterns and lower marginal cost).
+- Response carries `processing_ms`, `candidates_in` (Stage 0 admitted count), `candidates_out` (post-Stage-1), and `weight_source` (see [[ADR-0012]]) **only when `include_debug = true`**. These four fields are the foundation of any future "is the cache worth keeping?" analysis.
+- `catalog_version` and `weights_version` are present on every response **regardless of** `include_debug` — they are debugging and trust signals, not exposure-gated content. Their absolute size is < 30 bytes.
+- Structured stderr logging is emitted on every rank call: `{ event: "rank_done", details: { ms, candidates_in, candidates_out, weight_source, cache: "hit"|"miss" } }`. Personally identifiable strings are never logged (only taxonomy enum keys appear in the rank inputs by [[Context extraction boundary]]).
+- The cache key intentionally **does not** include `weight_rationale` — different rationales producing the same resolved W produce the same key. This is the desired behaviour: cache holds resolved outputs, not host metadata.
+- Migration to HTTP transport will swap the storage backend (in-process → shared store) without changing the key shape. The key shape is the durable contract.

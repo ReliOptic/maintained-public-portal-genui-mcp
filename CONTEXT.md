@@ -162,7 +162,19 @@ The taxonomy itself is exposed as an MCP Resource (`resource://taxonomy/v1.0`) s
 
 ### Ranking pipeline
 
-The ranking pipeline is **two-stage filter-then-score**, not a single weighted sum. Safety and confidence are gates, not score terms.
+The ranking pipeline is **five-stage context-filter / safety-gate / score / SR-shape / cut**, not a single weighted sum. Safety and confidence are gates, not score terms.
+
+**Stage 0 — Context-keyed candidate filter.** Bounds the candidate set to keep Stage 2 within a known cost envelope and to keep the rank result responsive to the request context. An Entry enters Stage 1 only if **at least one** of the following set overlaps is non-empty:
+
+- `entry.persona_tags ∩ req.persona`
+- `entry.task_intent ∩ req.intent` (also accepting `entry.canonical_intent` membership)
+- `entry.life_event_tags ∩ req.life_event`
+
+If the request carries **no taxonomy context at all** (the documented empty-payload fallback in [[Context extraction boundary]]), Stage 0 instead admits the top `N=500` Entries by `confidence_score DESC` as a deterministic baseline.
+
+`region` is treated as a **strict exclusion** at Stage 0: when the request specifies `region`, an Entry is dropped unless `entry.region` is `nationwide` or matches one of the requested regions. Region mismatch is administrative impossibility, not a relevance penalty, and must not survive into the score.
+
+Stage 0 is the only stage whose population depends on the request context. Subsequent stages operate only on the Stage-0 admitted set.
 
 **Stage 1 — Safety/quality gate.** An Entry is dropped from the candidate set if any of:
 - `confidence_score < 0.85`
@@ -212,6 +224,13 @@ The Feature Dictionary v1.1 has **eleven** features produced in **four** ways. (
 
 Members: `actionability` (AC), `evidence_value` (EV), `sensitivity_risk` (SR).
 
+**Source of these numbers.** The mapping is **data**, not code. It lives in `catalog/<version>/weights/<weights_version>.json` under two siblings of `W_base`:
+
+- `score_ordinals` — keyed by `actionability`, `evidence_value`. Participates in Stage 2 Q.
+- `gate_ordinals` — keyed by `sensitivity_risk`. Consumed only by the Stage 3 `SR ≥ 0.85` cap and `safe_copy_rule` enforcement; never multiplied into Q.
+
+Changing any numeric here is a [[catalog_version]]-independent **[[weights_version]] patch** and requires an ADR. Loading is schema-validated at startup: a missing key or a non-`{low,medium,high}→number` shape throws on `CatalogStore.getWeights()`. The runtime is **not** permitted to fall back to defaults — a corrupted mapping must fail loudly, not silently drift the rank.
+
 (`api_reliability` and `link_stability` were considered and dropped — without operational telemetry they would be dead-weight in v0.1, violating SLC "complete". They may return in a later release once monitoring data exists.)
 
 **Intrinsic derived from `access_mode`.** Not stored — computed at Entry-load time from the [[access_mode]] field.
@@ -243,10 +262,18 @@ Extending the [[Taxonomy]] from v1.0 → v1.1 still does **not** require re-anno
 
 The per-request weight vector applied to the positive features in the [[Ranking pipeline]]. The host LLM produces W **as part of the same call that produces structured context** (see [[Context extraction boundary]]).
 
-Resolution order at request time:
+**Resolution order at request time.** The MCP server walks the list top-to-bottom and uses the first branch that yields a usable W. Every produced W carries a `weight_source` tag that is returned in `include_debug` responses.
 
-1. **Host-proposed W** *(primary path)* — the host LLM emits an explicit `weight_override: number[]` along with the structured context. Its rationale string is captured for [[explain_ranking]]. The MCP server clips negatives, renormalises to Σ = 1, and uses this W.
-2. **Compositional fallback** — if `weight_override` is missing, the MCP server falls back to `W = clip(W_base + Σ_axis Δ_axis(req[axis])) / Σ`. This guarantees a deterministic Top-K even when the host cannot or will not propose weights.
+1. **Host-proposed W** *(primary path; tag `host_proposed`)* — the host LLM emits both `weight_override: number[]` **and** a non-empty `weight_rationale: string` (≥ 8 non-whitespace characters). The server then:
+   - **Clips negatives.** Any `W[i] < 0` → 0.
+   - **Caps per-feature ceiling.** Any `W[i] > clip_cap` → `clip_cap`. `clip_cap` is data (`weights/<weights_version>.json.clip_cap`, default 0.40); changing it is a [[weights_version]] patch, not a code change.
+   - **Renormalises to Σ = 1.**
+   - The rationale string is persisted to the rank-request log for [[explain_ranking]] auditability.
+2. **Compositional fallback** *(tag `compositional_no_rationale`)* — if `weight_override` is present but `weight_rationale` is missing, empty, or shorter than 8 non-whitespace characters, **the host proposal is rejected** and W is computed from `clip(W_base + Σ_axis Δ_axis(req[axis])) / Σ`. The server does **not** silently accept a rationale-less proposal.
+3. **Compositional fallback** *(tag `compositional_no_override`)* — if `weight_override` is absent, the same compositional formula applies.
+4. **Compositional fallback** *(tag `compositional_total_zero`)* — if a host proposal passes (1)'s gates but reduces to all-zero after clipping (every component ≤ 0), the server falls back to compositional. **Uniform 1/N distribution is not a permitted W source** in v0.1 — it is the single behaviour from earlier code that contradicts this ADR and is removed.
+
+**Per-feature ceiling rationale.** `clip_cap = 0.40` is approximately `2 × max(W_base)` (the largest W_base entry is `IF = 0.20`). The intent is: the host LLM may double-emphasise any single feature relative to the catalog baseline, but cannot collapse the rank into a single-axis sort. Without this cap a host proposal of `IF = 0.99` would degenerate the [[Ranking pipeline]] Stage 2 into "highest intent overlap wins, nothing else matters", undoing the multi-feature value proposition.
 
 This reverses the earlier v0.1 decision to make compositional W canonical. Recorded in [[ADR-0006]]. The compositional path is retained as a baseline so that:
 
@@ -254,7 +281,9 @@ This reverses the earlier v0.1 decision to make compositional W canonical. Recor
 - Hosts without a proposal step (CI checks, debug clients, deterministic replay) still get reproducible rankings.
 - [[explain_ranking]] (deferred past v0.1) can compare host-proposed W against the compositional baseline to surface "why this LLM chose differently".
 
-Trade-offs adopted: per-query cache miss is the common case; rationale must be returned by the host for auditability; SR safety gate (Stage 1) is untouched — the LLM cannot weight its way around a `sensitivity_risk` block.
+Trade-offs adopted: per-query cache miss is the common case; rationale is **required** (not advisory) for any host proposal to be honoured; SR safety gate (Stage 1) is untouched — the LLM cannot weight its way around a `sensitivity_risk` block.
+
+**weight_source exposure.** The chosen tag (`host_proposed` / `compositional_no_rationale` / `compositional_no_override` / `compositional_total_zero`) is part of the rank response only when `include_debug=true`. It never appears in the default L2 payload (see [[Exposure level]]).
 
 ### Card copy
 
@@ -317,7 +346,22 @@ Every Catalog publish is **atomic**: staged build → atomic swap → previous v
 { catalog_version: "1.0.7", weights_version: "1.0.0", … }
 ```
 
-Cache key for the runtime ranking cache: `(input_hash, catalog_version, weights_version)`. A `patch` bump invalidates ranking cache; `weights_version` bumps invalidate it independently.
+v0.1 ships an **in-process LRU rank cache** (see [[ADR-0014]]). Key shape:
+
+```
+hash(
+  catalog_version, weights_version, taxonomy_version,
+  sorted(persona), sorted(intent), sorted(life_event), sorted(region),
+  season, access_mode, top_k,
+  weight_override_hash
+)
+```
+
+`weight_rationale` is intentionally **not** in the key — it does not change the result. The cache key carries the resolved W only, so all four `weight_source` outcomes (`host_proposed`, `compositional_no_rationale`, `compositional_no_override`, `compositional_total_zero` — see [[W_context]]) collapse to the same row whenever they produce identical W.
+
+**Invalidation is by process restart only.** In the v0.1 stdio transport model, a `.dxt` update = new catalog/weights load = new process — the OS already guarantees invalidation. No version-change detection logic runs in the server. When [[MCP transport (v0.1)]] is eventually replaced by HTTP, the storage backend changes; the key shape above stays.
+
+`cache_lru_size` (default 1024) lives in `weights/<weights_version>.json` and is a [[weights_version]]-patch tunable, not a code constant.
 
 ### Catalog source of truth
 
@@ -331,14 +375,29 @@ Three layers:
 
 **Two distribution targets:**
 
-- **Primary — `.mcpb` Claude Desktop Extension** for general users. Three-click install in Claude Desktop's Extensions UI, no Node install, no JSON config, no env vars, no credentials. Bundles server + `compiled.sqlite` + `node_modules`. See [[Session 1.5]].
+- **Primary — `.dxt` Claude Desktop Extension** for general users. Three-click install in Claude Desktop's Extensions UI, no Node install, no JSON config, no env vars, no credentials. Bundles server + `compiled.sqlite` + `node_modules`. See [[Session 1.5]].
 - **Secondary — `npm install -g portal-genui-mcp`** for developers validating the server during iteration. Requires manual `claude_desktop_config.json` entry. Not advertised to general users.
 
-Catalog freshness: `.mcpb` users get a new file from GitHub Releases each tag (and Claude Desktop's update UI surfaces it); npm users run `npm update -g`. Either way the server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
+Catalog freshness: `.dxt` users get a new file from GitHub Releases each tag (and Claude Desktop's update UI surfaces it); npm users run `npm update -g`. Either way the server prints a stderr warning at start-up if its bundled `catalog_version` is older than ~30 days. No silent auto-update.
 
-The v0.1 launch is a **single bundled snapshot**, not a daily end-user update obligation. Update fatigue from frequent SQLite snapshots and a cloud DB / local DB two-track split are deferred to a v0.2 ADR after release telemetry; v0.1 stays local `.mcpb`-first with no runtime fetch, auth, or background update.
+The v0.1 launch is a **single bundled snapshot**, not a daily end-user update obligation. Update fatigue from frequent SQLite snapshots and a cloud DB / local DB two-track split are deferred to a v0.2 ADR after release telemetry; v0.1 stays local `.dxt`-first with no runtime fetch, auth, or background update.
 
 This makes the JSON / SQLite split **transparent to both contributors and end users** — contributors see only JSON, end users see only a working extension.
+
+### Launch readiness gate
+
+The set of conditions that mark v0.1 as ready to ship under the SLC "Complete" criterion of [[ADR-0009]]. The earlier implicit promise of "10,972 published Entries" is **replaced** by an explicit **axis coverage** definition. Absolute Entry count is now a by-product, not a target.
+
+**Coverage rule.** Every value in the primary closed enum of every [[Taxonomy]] axis must be covered by **N ≥ 20** `status="published"` Entries.
+
+- `persona`, `intent`, `life_event` — N = 20 each. ("Covered" means the enum value appears in the Entry's matching tag array; `confidence_score` ≥ Stage-1 gate is sufficient, no extra confidence inflation.)
+- `region` — N = 20 for the 17 광역시도 + `nationwide`. Sub-광역 시군구 values are **not** launch-gated; they accrete naturally post-launch.
+
+**Sensitive-domain reinforcement.** When the axis value is in `sensitive_domains = ["tax", "welfare", "family", "immigration", "legal"]`, **100 %** of its N Entries must carry a maintainer-recorded approval in the PR audit trail (`api_cached` rows escalated under [[Review Queue]] rules; `portal_handoff` rows already escalated unconditionally). This binds [[ADR-0008]]'s sensitive-domain policy to the launch gate so GIGO pressure cannot relax it.
+
+**Readiness ≠ launch.** Meeting the gate makes v0.1 *eligible* to ship. The actual release is still a maintainer-triggered tag. Automation surfaces readiness; it does not pull the trigger.
+
+**Measurement.** A read-only `npm run coverage` script is the single source of truth for gate status: per-axis × per-value `(published_count, sensitive_approval_ratio)` matrix printed to stdout, plus a one-line `READY / NOT READY` verdict. The script is itself PR-reviewable and is the only acceptable evidence in launch checklists. Spreadsheets, manual counts, and "looks about right" are not.
 
 ### Publish cadence
 

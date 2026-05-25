@@ -1,8 +1,7 @@
 import type { CatalogEntry, JsonObject, JsonValue } from "../types/catalog.js";
 import { FEATURE_KEYS, type FeatureKey, type FeatureVector, type RankedEntry, type RankRequest, type WeightSnapshot } from "../types/ranking.js";
+import type { GateOrdinals, OrdinalScale, ScoreOrdinals, WeightConfig } from "../types/weights.types.js";
 
-const ORDINALS = { low: 0.2, medium: 0.5, high: 0.85 } as const;
-const SENSITIVITY = { low: 0.1, medium: 0.5, high: 0.9 } as const;
 const SEASON_MONTHS: Readonly<Record<string, number>> = {
   jan: 1,
   january: 1,
@@ -74,16 +73,24 @@ const urgencyScore = (hint: string | undefined, now: Date): number => {
   return 0.4;
 };
 
-const ordinalScore = (entry: CatalogEntry, key: "actionability" | "evidence_value"): number => {
-  const ordinals = isObject(entry.intrinsic_ordinals) ? entry.intrinsic_ordinals : {};
-  const value = asString(ordinals[key]);
-  return value === "low" || value === "medium" || value === "high" ? ORDINALS[value] : 0;
+const ordinalValue = (scale: OrdinalScale, value: string | undefined): number => {
+  if (value === "low" || value === "medium" || value === "high") return scale[value];
+  return 0;
 };
 
-const sensitivityScore = (entry: CatalogEntry): number => {
-  const ordinals = isObject(entry.intrinsic_ordinals) ? entry.intrinsic_ordinals : {};
-  const value = asString(ordinals.sensitivity_risk);
-  return value === "low" || value === "medium" || value === "high" ? SENSITIVITY[value] : 0;
+type ScoreOrdinalKey = "actionability" | "evidence_value";
+
+const ordinalScale = (ordinals: ScoreOrdinals, key: ScoreOrdinalKey): OrdinalScale =>
+  key === "actionability" ? ordinals.actionability : ordinals.evidence_value;
+
+const ordinalScore = (entry: CatalogEntry, key: ScoreOrdinalKey, ordinals: ScoreOrdinals): number => {
+  const values = isObject(entry.intrinsic_ordinals) ? entry.intrinsic_ordinals : {};
+  return ordinalValue(ordinalScale(ordinals, key), asString(values[key]));
+};
+
+const sensitivityScore = (entry: CatalogEntry, ordinals: GateOrdinals): number => {
+  const values = isObject(entry.intrinsic_ordinals) ? entry.intrinsic_ordinals : {};
+  return ordinalValue(ordinals.sensitivity_risk, asString(values.sensitivity_risk));
 };
 
 const freshnessScore = (entry: CatalogEntry, now: Date): number => {
@@ -113,8 +120,8 @@ const weightsFromOverride = (override: RankRequest["weight_override"]): WeightSn
   return normalizeWeights(override);
 };
 
-const baseWeights = (weightsPayload: JsonObject): WeightSnapshot => {
-  const raw = isObject(weightsPayload.W_base) ? weightsPayload.W_base : {};
+const baseWeights = (config: WeightConfig): WeightSnapshot => {
+  const raw = isObject(config.W_base) ? config.W_base : {};
   const values: Partial<Record<FeatureKey, number>> = {};
   for (const key of FEATURE_KEYS) values[key] = isObject(raw[key]) ? asNumber(raw[key].weight) ?? 0 : 0;
   return normalizeWeights(values);
@@ -134,11 +141,11 @@ const requestAxisValues = (request: RankRequest): Readonly<Record<string, readon
   access_mode: request.access_mode ? [request.access_mode] : [],
 });
 
-export const resolveWeights = (weightsPayload: JsonObject, request: RankRequest = {}): WeightSnapshot => {
+export const resolveWeights = (config: WeightConfig, request: RankRequest = {}): WeightSnapshot => {
   const override = weightsFromOverride(request.weight_override);
   if (override) return override;
-  const weights = baseWeights(weightsPayload);
-  const deltaAxis = isObject(weightsPayload.delta_axis) ? weightsPayload.delta_axis : {};
+  const weights = baseWeights(config);
+  const deltaAxis = isObject(config.delta_axis) ? config.delta_axis : {};
   for (const [axis, values] of Object.entries(requestAxisValues(request))) {
     const bucket = isObject(deltaAxis[axis]) ? deltaAxis[axis] : {};
     for (const value of values) addDelta(weights, isObject(bucket[value]) && isObject(bucket[value].delta) ? bucket[value].delta : undefined);
@@ -146,25 +153,25 @@ export const resolveWeights = (weightsPayload: JsonObject, request: RankRequest 
   return normalizeWeights(weights);
 };
 
-const featureVector = (entry: CatalogEntry, request: RankRequest, now: Date): FeatureVector => ({
+const featureVector = (entry: CatalogEntry, config: WeightConfig, request: RankRequest, now: Date): FeatureVector => ({
   IF: overlapScore([...asStringArray(entry.task_intent), asString(entry.canonical_intent) ?? ""], request.intent),
   PF: overlapScore(asStringArray(entry.persona_tags), request.persona),
   LF: overlapScore(asStringArray(entry.life_event_tags), request.life_event),
   SE: seasonScore(asString(entry.seasonality_hint), request.season, now),
   UR: urgencyScore(asString(entry.seasonality_hint), now),
-  AC: ordinalScore(entry, "actionability"),
-  EV: ordinalScore(entry, "evidence_value"),
+  AC: ordinalScore(entry, "actionability", config.score_ordinals),
+  EV: ordinalScore(entry, "evidence_value", config.score_ordinals),
   api_availability: asString(entry.access_mode) === "api_cached" ? 1 : 0,
   freshness: freshnessScore(entry, now),
 });
 
-export const scoreEntry = (entry: CatalogEntry, weights: WeightSnapshot, request: RankRequest = {}, now = new Date()): number => {
-  const vector = featureVector(entry, request, now);
+export const scoreEntry = (entry: CatalogEntry, config: WeightConfig, weights: WeightSnapshot, request: RankRequest = {}, now = new Date()): number => {
+  const vector = featureVector(entry, config, request, now);
   return FEATURE_KEYS.reduce((sum, key) => sum + weights[key] * vector[key], 0);
 };
 
-const rankedEntry = (entry: CatalogEntry, score: number, weights: WeightSnapshot): RankedEntry => {
-  const sensitive = sensitivityScore(entry) >= 0.85;
+const rankedEntry = (entry: CatalogEntry, score: number, weights: WeightSnapshot, config: WeightConfig): RankedEntry => {
+  const sensitive = sensitivityScore(entry, config.gate_ordinals) >= 0.85;
   return { entry, score, ui_slot: sensitive ? "secondary_card" : "primary_card", safe_copy_rule: sensitive ? "confirm_not_assert" : "standard", weight_snapshot: weights };
 };
 
@@ -177,10 +184,10 @@ const assignSlots = (ranked: readonly RankedEntry[]): RankedEntry[] => {
   });
 };
 
-export const rankEntries = (entries: readonly CatalogEntry[], weightsPayload: JsonObject, request: RankRequest = {}, now = new Date()): RankedEntry[] => {
-  const weights = resolveWeights(weightsPayload, request);
+export const rankEntries = (entries: readonly CatalogEntry[], config: WeightConfig, request: RankRequest = {}, now = new Date()): RankedEntry[] => {
+  const weights = resolveWeights(config, request);
   const limit = Math.max(1, Math.min(request.top_k ?? 10, 50));
-  const ranked = entries.filter(passesRankGate).map((entry) => rankedEntry(entry, scoreEntry(entry, weights, request, now), weights));
+  const ranked = entries.filter(passesRankGate).map((entry) => rankedEntry(entry, scoreEntry(entry, config, weights, request, now), weights, config));
   ranked.sort((left, right) => right.score - left.score || String(left.entry.entry_id).localeCompare(String(right.entry.entry_id)));
   return assignSlots(ranked.slice(0, limit));
 };

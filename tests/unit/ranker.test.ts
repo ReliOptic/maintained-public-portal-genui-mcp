@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { parseWeightConfig } from "../../src/services/weights-loader.js";
 import { passesRankGate, rankEntries, resolveWeights, scoreEntry } from "../../src/services/ranker.js";
 import type { EntryRecord, JsonObject } from "../../src/types/catalog.js";
 import type { RankRequest } from "../../src/types/ranking.js";
 
-const weights: JsonObject = {
+const weightsPayload: JsonObject = {
+  weights_version: "1.0.0",
+  feature_order: ["IF", "PF", "LF", "SE", "UR", "AC", "EV", "api_availability", "freshness"],
   W_base: {
     IF: { weight: 0.2 },
     PF: { weight: 0.15 },
@@ -16,7 +19,17 @@ const weights: JsonObject = {
     freshness: { weight: 0.05 },
   },
   delta_axis: { persona: { freelancer: { delta: { PF: 0.1 } } } },
+  score_ordinals: {
+    actionability: { low: 0.2, medium: 0.5, high: 0.85 },
+    evidence_value: { low: 0.2, medium: 0.5, high: 0.85 },
+  },
+  gate_ordinals: { sensitivity_risk: { low: 0.1, medium: 0.5, high: 0.9 } },
+  clip_cap: 0.4,
+  stage0_empty_context_top_n: 500,
+  cache_lru_size: 1024,
 };
+
+const config = parseWeightConfig(weightsPayload);
 
 const entry: EntryRecord = {
   entry_id: "entry-a",
@@ -54,18 +67,19 @@ describe("ranker", () => {
   });
 
   it("scores Q from feature weights", () => {
-    const override = resolveWeights(weights, { weight_override: { IF: 1 } });
-    expect(scoreEntry(entry, override, request, new Date("2026-05-20T00:00:00Z"))).toBe(1);
+    const override = resolveWeights(config, { weight_override: { IF: 1 } });
+    expect(scoreEntry(entry, config, override, request, new Date("2026-05-20T00:00:00Z"))).toBe(1);
   });
 
   it("caps high sensitivity entries into secondary cards", () => {
-    const [ranked] = rankEntries([{ ...entry, intrinsic_ordinals: { actionability: "high", evidence_value: "high", sensitivity_risk: "high" } }], weights, request);
+    const highRisk = { ...entry, intrinsic_ordinals: { actionability: "high", evidence_value: "high", sensitivity_risk: "high" } };
+    const [ranked] = rankEntries([highRisk], config, request);
     expect(ranked?.ui_slot).toBe("secondary_card");
     expect(ranked?.safe_copy_rule).toBe("confirm_not_assert");
   });
 
   it("clips and normalizes override weights", () => {
-    const resolved = resolveWeights(weights, { weight_override: { IF: -1, PF: 3, LF: 1 } });
+    const resolved = resolveWeights(config, { weight_override: { IF: -1, PF: 3, LF: 1 } });
     const sum = Object.values(resolved).reduce((total, value) => total + value, 0);
     expect(resolved.IF).toBe(0);
     expect(resolved.PF).toBeCloseTo(0.75);

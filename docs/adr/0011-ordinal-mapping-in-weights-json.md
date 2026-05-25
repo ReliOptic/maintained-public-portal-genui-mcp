@@ -1,0 +1,17 @@
+# Ordinal mapping lives in weights JSON, not in code
+
+[[ADR-0002]] split feature values into origin classes and assigned `actionability`, `evidence_value`, `sensitivity_risk` to the "intrinsic stored ordinal" class, mapped from `{low, medium, high}` labels to numeric values at ranking time. The mapping table (`AC, EV: 0.20 / 0.50 / 0.85`; `SR: 0.10 / 0.50 / 0.90`) appeared in CONTEXT.md as documentation but lived as **TypeScript module constants** in `src/services/ranker.ts` (`ORDINALS`, `SENSITIVITY`). [[ADR-0008]]'s [[Weights bootstrap]] procedure only authored `W_base` and `Δ_axis` into `weights/<version>.json`; the ordinal mapping was silently outside that loop. Consequence: numeric values that **multiply directly into Stage 2 Q** were not under [[weights_version]] discipline, were not in the runtime cache key, and could be edited as a code patch without a corresponding [[catalog_version]] or [[weights_version]] bump. We move the mapping to `weights/<weights_version>.json` under two sibling sections of `W_base`: `score_ordinals` keyed by `actionability` and `evidence_value` (used in Stage 2 Q), and `gate_ordinals` keyed by `sensitivity_risk` (used only by Stage 3's `SR ≥ 0.85` cap and `safe_copy_rule` enforcement; never multiplied into Q). Loading is zod-validated at startup; a missing key or a non-`{low, medium, high} → number` shape throws and the server refuses to start. Numeric values themselves are **frozen until v0.1 ships**; any change after launch requires a fresh ADR plus a [[weights_version]] patch.
+
+## Considered options
+
+- **Keep the mapping as code constants.** Rejected: changes invisible to [[catalog_version]] / [[weights_version]], invisible to the cache key, invisible to PR review of `catalog/**`. Silent drift of user-visible rank.
+- **Move the mapping to `weights/<version>.json` and simplify `sensitivity_risk` to boolean.** Rejected: the SR scale is currently a gate at `≥ 0.85` (only `high` actually toggles), which suggests boolean is enough. But collapsing SR loses a future option to lift SR into the Stage 2 score with a different rubric, and creates an asymmetric class membership (the only "intrinsic ordinal" with one fewer label). Defer that simplification to a post-launch ADR once logs justify it.
+- **Move mapping + immediately retune numeric values.** Rejected: SLC framing in [[ADR-0009]] is single-shot launch; perturbing user-visible numerics without A/B or log data is exactly the regression risk the framing was meant to prevent. Freezing the v0.1.0 numbers preserves Lovable.
+
+## Consequences
+
+- `weights/v1.0.0.json` gains `score_ordinals` and `gate_ordinals` sections (and the `clip_cap` from [[ADR-0012]] and `stage0_empty_context_top_n` from [[ADR-0010]]).
+- [[Review Agent]]'s "intrinsic ordinal sanity" rubric check now reads a single source of truth — both for the per-Entry label and the numeric mapping that turns the label into Q.
+- Cache key (see [[ADR-0014]]) includes `weights_version`, so any mapping change is automatically a cache invalidation event.
+- The runtime is **not permitted to fall back to defaults** when the file is malformed. A silent default would hide a publish-time corruption that would drift the user-visible rank.
+- Future tuning paths (LLM-proposed adjustment + maintainer review, A/B from logs, RL) all land in the same file under the same [[Weights bootstrap]] discipline. No new authoring surface.

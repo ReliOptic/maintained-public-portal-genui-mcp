@@ -1,6 +1,8 @@
 import Database from "better-sqlite3";
 import { getRuntimeConfig } from "../config/runtime.js";
 import type { CatalogEntry, CatalogEvidence, CatalogFreshness, EntryFilter, JsonObject, JsonValue } from "../types/catalog.js";
+import type { WeightConfig } from "../types/weights.types.js";
+import { parseWeightConfig } from "./weights-loader.js";
 import { logJson } from "../utils/logger.js";
 
 interface DbRow {
@@ -85,8 +87,8 @@ export class CatalogStore {
     return this.singleton("taxonomy", "taxonomy_id", "v1.0");
   }
 
-  public getWeights(): JsonObject {
-    return this.singleton("weights", "weights_id", "v1.0.0");
+  public getWeights(): WeightConfig {
+    return parseWeightConfig(this.singleton("weights", "weights_id", "v1.0.0"));
   }
 
   public getFrameCopy(): JsonObject {
@@ -140,6 +142,6 @@ export const queryEntries = (filter?: EntryFilter): CatalogEntry[] => getCatalog
 export const getEntry = (entryId: string): CatalogEntry | undefined => getCatalog().getEntry(entryId);
 export const getEvidence = (evidenceId?: string): CatalogEvidence[] => getCatalog().getEvidence(evidenceId);
 export const getTaxonomy = (): JsonObject => getCatalog().getTaxonomy();
-export const getWeights = (): JsonObject => getCatalog().getWeights();
+export const getWeights = (): WeightConfig => getCatalog().getWeights();
 export const getFrameCopy = (): JsonObject => getCatalog().getFrameCopy();
 export const getCatalogFreshness = (): CatalogFreshness => getCatalog().getFreshness();
