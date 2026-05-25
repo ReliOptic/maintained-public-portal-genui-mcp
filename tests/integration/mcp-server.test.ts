@@ -35,6 +35,8 @@ describe("MCP stdio server", () => {
       "rank_portal_entries",
       "search_portal_entries",
     ]);
+    const resources = await client.listResources();
+    expect(resources.resources.map((resource) => resource.uri).sort()).toContain("resource://evidence/v1.0");
     const resource = await client.readResource({ uri: "resource://taxonomy/v1.0" });
     expect(resource.contents[0]?.mimeType).toBe("application/json");
   });

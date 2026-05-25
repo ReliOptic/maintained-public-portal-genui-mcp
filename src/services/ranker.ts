@@ -1,5 +1,5 @@
 import type { CatalogEntry, JsonObject, JsonValue } from "../types/catalog.js";
-import { FEATURE_KEYS, type FeatureVector, type RankedEntry, type RankRequest, type WeightSnapshot } from "../types/ranking.js";
+import { FEATURE_KEYS, type FeatureVector, type RankedEntry, type RankRequest, type UiSlot, type WeightSnapshot } from "../types/ranking.js";
 import type { GateOrdinals, OrdinalScale, ScoreOrdinals, WeightConfig } from "../types/weights.types.js";
 import { resolveWeights } from "./weight-resolver.js";
 import type { WeightResolution } from "../types/weight-resolution.types.js";
@@ -122,14 +122,29 @@ export const scoreEntry = (entry: CatalogEntry, config: WeightConfig, weights: W
   return FEATURE_KEYS.reduce((sum, key) => sum + weights[key] * vector[key], 0);
 };
 
+const isInsightEntry = (entry: CatalogEntry, config: WeightConfig): boolean => {
+  const portal = asString(entry.portal);
+  if (!portal) return false;
+  const insightPortals = new Set(config.insight_portal_set);
+  if (!insightPortals.has(portal)) return false;
+  const insightIntents = new Set(config.insight_intent_set);
+  return asStringArray(entry.task_intent).some((intent) => insightIntents.has(intent));
+};
+
+const slotForEntry = (entry: CatalogEntry, sensitive: boolean, config: WeightConfig): UiSlot => {
+  if (isInsightEntry(entry, config)) return "insight_card";
+  return sensitive ? "secondary_card" : "primary_card";
+};
+
 const rankedEntry = (entry: CatalogEntry, score: number, weights: WeightSnapshot, config: WeightConfig): RankedEntry => {
   const sensitive = sensitivityScore(entry, config.gate_ordinals) >= 0.85;
-  return { entry, score, ui_slot: sensitive ? "secondary_card" : "primary_card", safe_copy_rule: sensitive ? "confirm_not_assert" : "standard", weight_snapshot: weights };
+  return { entry, score, ui_slot: slotForEntry(entry, sensitive, config), safe_copy_rule: sensitive ? "confirm_not_assert" : "standard", weight_snapshot: weights };
 };
 
 const assignSlots = (ranked: readonly RankedEntry[]): RankedEntry[] => {
   let primaryAssigned = false;
   return ranked.map((item) => {
+    if (item.ui_slot === "insight_card" || item.ui_slot === "hidden") return item;
     if (item.ui_slot === "secondary_card" || primaryAssigned) return { ...item, ui_slot: "secondary_card" };
     primaryAssigned = true;
     return item;

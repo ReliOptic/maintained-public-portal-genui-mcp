@@ -29,10 +29,16 @@ describe("CatalogStore", () => {
   });
 
   it("reports bundled catalog freshness for startup warnings", () => {
-    const fresh = store.getFreshness(new Date("2026-05-24T00:00:00Z"));
-    expect(fresh.latest_entry_date).toBe("2026-05-23");
-    expect(fresh.age_days).toBe(1);
+    const baseline = store.getFreshness(new Date("2026-05-24T00:00:00Z"));
+    const latest = baseline.latest_entry_date;
+    expect(latest).toMatch(/^\d{4}-\d{2}-\d{2}/u);
+    const latestTime = Date.parse(String(latest));
+    expect(Number.isFinite(latestTime)).toBe(true);
+    const freshNow = new Date(latestTime);
+    const staleNow = new Date(freshNow.getTime() + 31 * 86_400_000);
+    const fresh = store.getFreshness(freshNow);
+    expect(fresh.age_days).toBe(0);
     expect(fresh.stale).toBe(false);
-    expect(store.getFreshness(new Date("2026-06-24T00:00:00Z")).stale).toBe(true);
+    expect(store.getFreshness(staleNow).stale).toBe(true);
   });
 });

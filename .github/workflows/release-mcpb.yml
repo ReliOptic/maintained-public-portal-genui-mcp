@@ -1,0 +1,40 @@
+name: Release MCPB
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run compile
+      - name: Verify package and manifest versions match
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          MANIFEST_VERSION=$(node -p "require('./manifest.json').version")
+          test "$VERSION" = "$MANIFEST_VERSION"
+      - name: Prune development dependencies before packaging
+        run: npm prune --omit=dev
+      - name: Pack MCPB
+        run: npx --yes @anthropic-ai/mcpb@latest pack
+      - name: Create release notes
+        run: echo "Automated release from CI." > RELEASE-NOTES.md
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION=$(node -p "require('./package.json').version")
+          gh release create "$TAG" --title "v$VERSION" --notes-file RELEASE-NOTES.md ./*.mcpb

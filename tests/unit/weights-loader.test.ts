@@ -15,6 +15,9 @@ const validPayload = (): JsonObject => ({
   clip_cap: 0.4,
   stage0_empty_context_top_n: 500,
   cache_lru_size: 1024,
+  insight_intent_set: ["data_search", "dataset_download", "api_application", "policy_information"],
+  insight_portal_set: ["data_go_kr"],
+  handoff_allowlist: ["gov.kr", "hometax.go.kr", "data.go.kr"],
 });
 
 describe("parseWeightConfig", () => {

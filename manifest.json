@@ -17,33 +17,44 @@
     "entry_point": "dist/index.js",
     "mcp_config": {
       "command": "node",
-      "args": ["${__dirname}/dist/index.js"]
+      "args": [
+        "${__dirname}/dist/index.js"
+      ]
     }
   },
   "tools": [
     {
       "name": "search_portal_entries",
-      "description": "Search published public portal entries without ranking."
+      "description": "공공포털 항목을 키워드로 검색합니다. 랭킹 없이 텍스트 매칭만 수행. persona·intent·region 없이 title/keyword 검색이 필요할 때 사용. Returns entries array."
     },
     {
       "name": "rank_portal_entries",
-      "description": "Rank entries from structured taxonomy context."
+      "description": "persona/intent/life_event/region/season taxonomy 구조체로 공공서비스 항목을 랭킹합니다. 자연어 발화를 taxonomy로 변환한 뒤 호출. 핵심 추천 도구. Returns ranked entries with ui_slot."
     },
     {
       "name": "get_entry_detail",
-      "description": "Return one explicit entry record by entry_id."
+      "description": "entry_id로 단일 항목의 전체 필드를 조회합니다. card_copy·handoff·evidence_refs 포함. rank 후 특정 항목 상세 확인 시 사용."
     },
     {
       "name": "compose_genui_artifact",
-      "description": "Assemble reviewed GenUI cards, handoff copy, and evidence rail."
+      "description": "entry_id 목록과 frame_segment로 GenUI artifact를 조합합니다. hero copy·action cards·insight rail·evidence rail·handoff_notice 포함. 최종 UI 렌더링 직전에 호출."
     }
   ],
   "tools_generated": false,
-  "keywords": ["korea", "public-services", "gov24", "genui", "mcp"],
+  "keywords": [
+    "korea",
+    "public-services",
+    "gov24",
+    "genui",
+    "mcp"
+  ],
   "license": "MIT",
   "compatibility": {
     "claude_desktop": ">=1.0.0",
-    "platforms": ["darwin", "win32"],
+    "platforms": [
+      "darwin",
+      "win32"
+    ],
     "runtimes": {
       "node": ">=20.0.0"
     }

@@ -14,6 +14,8 @@ const segments: JsonObject = {
   ],
 };
 
+const allowedHosts = ["gov.kr", "hometax.go.kr", "data.go.kr"];
+
 const frameCopy: JsonObject = {
   tax_season: { hero: { title: "세무" }, handoff_notice: "홈택스 확인", evidence_rail: { label: "세무 근거" } },
   general: { hero: { title: "일반" }, handoff_notice: "공식 확인", evidence_rail: { label: "추천 근거" } },
@@ -57,10 +59,22 @@ describe("composer", () => {
   it("assembles reviewed copy and evidence without internal API URLs", () => {
     const artifact = composeGenUiArtifact([ranked], { intent: ["tax_inquiry"], season: "may" }, frameCopy, segments, [
       { evidence_id: "ev-tax", title: "세무 근거", role: "registry" },
-    ]);
+    ], allowedHosts);
     expect(artifact.segment).toBe("tax_season");
     expect(artifact.cards[0]?.title).toBe("국세 납부 확인");
     expect(artifact.cards[0]?.handoff.url).toBeUndefined();
     expect(artifact.evidence_rail.items[0]?.evidence_id).toBe("ev-tax");
+  });
+
+
+  it("separates insight cards from action cards", () => {
+    const insightRanked: RankedEntry = {
+      ...ranked,
+      entry: { ...entry, entry_id: "dgo", card_title: "공공데이터", evidence_refs: [] },
+      ui_slot: "insight_card",
+    };
+    const artifact = composeGenUiArtifact([ranked, insightRanked], {}, frameCopy, segments, [], allowedHosts);
+    expect(artifact.insight_rail.map((card) => card.entry_id)).toEqual(["dgo"]);
+    expect(artifact.cards.map((card) => card.entry_id)).not.toContain("dgo");
   });
 });

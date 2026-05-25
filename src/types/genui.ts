@@ -7,6 +7,7 @@ export interface GenUiCard {
   readonly body: string;
   readonly cta_label: string;
   readonly access_mode: string;
+  readonly portal: string;
   readonly ui_slot: UiSlot;
   readonly safe_copy_rule: SafeCopyRule;
   readonly score: number;
@@ -26,4 +27,5 @@ export interface GenUiArtifact {
   readonly handoff_notice: string;
   readonly evidence_rail: { readonly label: string; readonly items: readonly EvidenceRailItem[] };
   readonly cards: readonly GenUiCard[];
+  readonly insight_rail: readonly GenUiCard[];
 }

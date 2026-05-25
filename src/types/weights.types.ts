@@ -26,4 +26,7 @@ export interface WeightConfig extends JsonObject {
   readonly clip_cap: number;
   readonly stage0_empty_context_top_n: number;
   readonly cache_lru_size: number;
+  readonly insight_intent_set: string[];
+  readonly insight_portal_set: string[];
+  readonly handoff_allowlist: string[];
 }

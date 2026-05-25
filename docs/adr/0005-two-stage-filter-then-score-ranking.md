@@ -36,5 +36,6 @@ The positive-feature count grows from 7 to **9**: the Feature Dictionary expande
 
 ## Subsequent amendments
 
+- [[ADR-0015]] — Adds `insight_card` as a fourth `ui_slot` value. `portal: "data_go_kr"` Entries with intent overlapping `{data_search, dataset_download, api_application, policy_information}` are classified as [[Insight Entry]] and assigned `insight_card` at Stage 4. They participate in the same five-stage pipeline without modification; the slot value governs composer rendering only.
 - [[ADR-0010]] — Inserts a context-keyed **Stage 0** before the safety gate. The pipeline becomes five-stage: `context-filter → safety-gate → score → SR-shape → cut`. Stage 0 bounds the candidate set by `persona / intent / life_event` set-overlap and enforces strict `region` exclusion before scoring.
 - [[ADR-0014]] — Wraps the pipeline output with an in-process LRU rank cache, keyed exactly as CONTEXT.md `catalog_version` documents. Invalidation is by process restart only.

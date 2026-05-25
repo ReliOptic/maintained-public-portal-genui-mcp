@@ -1,0 +1,76 @@
+{
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "maintainer_seed",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "data_go_kr",
+  "domain": "public_data",
+  "sensitive_domain": false,
+  "confidence_score": 1.0,
+  "review_required": false,
+  "region_tags": [
+    "nationwide"
+  ],
+  "seasonality_hint": "always",
+  "source_urls": [
+    "https://www.data.go.kr/search/index.do"
+  ],
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "low"
+  },
+  "safe_copy_audit": {
+    "rule": "standard",
+    "safe_copy_rule": "standard",
+    "audited_at": "2026-05-25",
+    "auditor": "maintainer"
+  },
+  "last_sync_at": "2026-05-25T00:00:00Z",
+  "last_verified_at": "2026-05-25T00:00:00Z",
+  "entry_id": "dgo_sbiz_market_api",
+  "title": "소상공인 상권정보 API",
+  "canonical_intent": "api_application",
+  "canonical_action_verb": "apply",
+  "key_keywords": [
+    "소상공인 상권정보 API",
+    "공공데이터",
+    "data.go.kr"
+  ],
+  "content_fingerprint": "data_go_kr|portal_handoff|dgo_sbiz_market_api",
+  "menu_path": "공공데이터포털 > 소상공인시장진흥공단 상가(상권)정보 API",
+  "handoff": {
+    "portal": "data_go_kr",
+    "tier": "tier2",
+    "url": "https://www.data.go.kr/search/index.do",
+    "menu_path": "공공데이터포털 > 소상공인시장진흥공단 상가(상권)정보 API",
+    "tier2": "https://www.data.go.kr/search/index.do",
+    "tier3": "공공데이터포털 > 소상공인시장진흥공단 상가(상권)정보 API"
+  },
+  "persona_tags": [
+    "small_business_owner",
+    "startup_founder"
+  ],
+  "task_intent": [
+    "api_application",
+    "data_search"
+  ],
+  "life_event_tags": [
+    "startup",
+    "business_operation"
+  ],
+  "evidence_refs": [],
+  "free_tags": [
+    "data_go_kr",
+    "portal_handoff",
+    "api_application",
+    "data_search",
+    "small_business_owner",
+    "startup_founder"
+  ],
+  "card_title": "소상공인 상권정보 API",
+  "card_body": "상권 분석에 필요한 소상공인 상가정보 API 안내를 확인합니다.",
+  "cta_label": "상권 API 보기",
+  "semantic_fingerprint": "api_application|apply|소상공인 상권정보 API|nationwide|small_business_owner,startup_founder"
+}

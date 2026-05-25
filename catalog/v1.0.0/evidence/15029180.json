@@ -6,8 +6,8 @@
   "data_go_kr_url": "https://www.data.go.kr/data/15029180/openapi.do",
   "role": "regional_commercial_area_context",
   "applies_to": [
-    "startup_business",
-    "region"
+    "startup",
+    "business_operation"
   ],
   "refresh_hint": "quarterly_or_provider_update",
   "metadata_fetch": {

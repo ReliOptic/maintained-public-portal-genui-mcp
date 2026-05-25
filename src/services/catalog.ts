@@ -39,7 +39,6 @@ const limitValue = (limit: number | undefined): number => {
   return Math.min(limit, 100);
 };
 
-
 const cleanValues = (values: readonly string[] | undefined): string[] =>
   [...new Set((values ?? []).filter((value) => value.length > 0))];
 
@@ -68,7 +67,7 @@ const dateAgeDays = (stamp: string | null, now: Date): number | null => {
 
 export class CatalogStore {
   private db: Database.Database | undefined;
-
+  private evidenceRegistry: CatalogEvidence[] | undefined;
   public constructor(private readonly dbPath = getRuntimeConfig().catalogPath) {}
 
   public get database(): Database.Database {
@@ -92,7 +91,6 @@ export class CatalogStore {
     const rows = this.database.prepare(sql).all(params) as DbRow[];
     return rows.map((row) => parsePayload<CatalogEntry>(row, "entry"));
   }
-
 
   public queryStage0Admitted(filter: Stage0Filter = {}, emptyContextLimit = 500): CatalogEntry[] {
     const params: Record<string, string | number> = { limit: Math.max(1, Math.floor(emptyContextLimit)) };
@@ -126,6 +124,8 @@ export class CatalogStore {
     const row = this.database.prepare("SELECT payload_json FROM evidence WHERE evidence_id = ?").get(evidenceId) as DbRow | undefined;
     return row ? [parsePayload<CatalogEvidence>(row, "evidence")] : [];
   }
+
+  public getEvidenceRegistry(): CatalogEvidence[] { this.evidenceRegistry ??= this.getEvidence(); return this.evidenceRegistry; }
 
   public getTaxonomy(): JsonObject {
     return this.singleton("taxonomy", "taxonomy_id", "v1.0");

@@ -33,6 +33,9 @@ const weightConfigSchema = z.object({
   clip_cap: z.number().positive(),
   stage0_empty_context_top_n: z.number().int().positive(),
   cache_lru_size: z.number().int().positive(),
+  insight_intent_set: z.array(z.string().min(1)),
+  insight_portal_set: z.array(z.string().min(1)),
+  handoff_allowlist: z.array(z.string().min(1)),
 }).passthrough();
 
 export const parseWeightConfig = (payload: JsonObject): WeightConfig =>

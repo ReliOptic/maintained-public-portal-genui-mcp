@@ -28,6 +28,9 @@ const weightsPayload: JsonObject = {
   clip_cap: 0.4,
   stage0_empty_context_top_n: 500,
   cache_lru_size: 1024,
+  insight_intent_set: ["data_search", "dataset_download", "api_application", "policy_information"],
+  insight_portal_set: ["data_go_kr"],
+  handoff_allowlist: ["gov.kr", "hometax.go.kr", "data.go.kr"],
 };
 
 const config = parseWeightConfig(weightsPayload);
@@ -78,6 +81,28 @@ describe("ranker", () => {
     const highRisk = { ...entry, intrinsic_ordinals: { actionability: "high", evidence_value: "high", sensitivity_risk: "high" } };
     const [ranked] = rankEntries([highRisk], config, request);
     expect(ranked?.ui_slot).toBe("secondary_card");
+    expect(ranked?.safe_copy_rule).toBe("confirm_not_assert");
+  });
+
+  it("assigns data.go.kr insight cards from configured insight intents", () => {
+    const dataEntry = { ...entry, portal: "data_go_kr", task_intent: ["data_search"], canonical_intent: "data_search" };
+    const [ranked] = rankEntries([dataEntry], config, { intent: ["data_search"] });
+    expect(ranked?.ui_slot).toBe("insight_card");
+  });
+
+  it("does not assign insight cards without matching portal and intent", () => {
+    const dataTax = { ...entry, portal: "data_go_kr", task_intent: ["tax_filing"], canonical_intent: "tax_filing" };
+    const govData = { ...entry, portal: "gov24", task_intent: ["data_search"], canonical_intent: "data_search" };
+    const [rankedDataTax] = rankEntries([dataTax], config, { intent: ["tax_filing"] });
+    const [rankedGovData] = rankEntries([govData], config, { intent: ["data_search"] });
+    expect(rankedDataTax?.ui_slot).not.toBe("insight_card");
+    expect(rankedGovData?.ui_slot).not.toBe("insight_card");
+  });
+
+  it("keeps sensitive data.go.kr insight entries in insight slot", () => {
+    const highRisk = { ...entry, portal: "data_go_kr", task_intent: ["data_search"], canonical_intent: "data_search", intrinsic_ordinals: { actionability: "high", evidence_value: "high", sensitivity_risk: "high" } };
+    const [ranked] = rankEntries([highRisk], config, { intent: ["data_search"] });
+    expect(ranked?.ui_slot).toBe("insight_card");
     expect(ranked?.safe_copy_rule).toBe("confirm_not_assert");
   });
 });

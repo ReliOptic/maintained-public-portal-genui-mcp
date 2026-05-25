@@ -1,0 +1,73 @@
+{
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "maintainer_seed",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "data_go_kr",
+  "domain": "public_data",
+  "sensitive_domain": false,
+  "confidence_score": 1.0,
+  "review_required": false,
+  "region_tags": [
+    "nationwide"
+  ],
+  "seasonality_hint": "always",
+  "source_urls": [
+    "https://www.data.go.kr/search/index.do"
+  ],
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "low"
+  },
+  "safe_copy_audit": {
+    "rule": "standard",
+    "safe_copy_rule": "standard",
+    "audited_at": "2026-05-25",
+    "auditor": "maintainer"
+  },
+  "last_sync_at": "2026-05-25T00:00:00Z",
+  "last_verified_at": "2026-05-25T00:00:00Z",
+  "entry_id": "dgo_file_data_download",
+  "title": "파일데이터 다운로드",
+  "canonical_intent": "dataset_download",
+  "canonical_action_verb": "download",
+  "key_keywords": [
+    "파일데이터 다운로드",
+    "공공데이터",
+    "data.go.kr"
+  ],
+  "content_fingerprint": "data_go_kr|portal_handoff|dgo_file_data_download",
+  "menu_path": "공공데이터포털 > 데이터찾기 > 데이터목록 > 파일데이터",
+  "handoff": {
+    "portal": "data_go_kr",
+    "tier": "tier2",
+    "url": "https://www.data.go.kr/search/index.do",
+    "menu_path": "공공데이터포털 > 데이터찾기 > 데이터목록 > 파일데이터",
+    "tier2": "https://www.data.go.kr/search/index.do",
+    "tier3": "공공데이터포털 > 데이터찾기 > 데이터목록 > 파일데이터"
+  },
+  "persona_tags": [
+    "data_user",
+    "public_official"
+  ],
+  "task_intent": [
+    "dataset_download"
+  ],
+  "life_event_tags": [
+    "public_data_project"
+  ],
+  "evidence_refs": [],
+  "free_tags": [
+    "data_go_kr",
+    "portal_handoff",
+    "dataset_download",
+    "data_user",
+    "public_official"
+  ],
+  "card_title": "파일데이터 다운로드",
+  "card_body": "공식 포털의 파일데이터 목록에서 내려받을 자료를 확인합니다.",
+  "cta_label": "파일데이터 보기",
+  "semantic_fingerprint": "dataset_download|download|파일데이터 다운로드|nationwide|data_user,public_official"
+}

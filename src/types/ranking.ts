@@ -14,7 +14,7 @@ export const FEATURE_KEYS = [
 
 export type FeatureKey = (typeof FEATURE_KEYS)[number];
 export type WeightSnapshot = Record<FeatureKey, number>;
-export type UiSlot = "primary_card" | "secondary_card";
+export type UiSlot = "primary_card" | "secondary_card" | "insight_card" | "hidden";
 export type SafeCopyRule = "standard" | "confirm_not_assert";
 
 export interface RankRequest {

@@ -6,7 +6,7 @@
   "data_go_kr_url": "https://www.data.go.kr/data/15012005/openapi.do",
   "role": "startup_business_market_context",
   "applies_to": [
-    "startup_business",
+    "startup",
     "small_business_owner"
   ],
   "refresh_hint": "real_time_or_provider_update",

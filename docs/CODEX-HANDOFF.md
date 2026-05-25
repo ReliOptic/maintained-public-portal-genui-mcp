@@ -98,7 +98,7 @@ Re-run `npm run compile` so `catalog/compiled.sqlite` carries the new `weights` 
 ### Task 6 — README + RELEASE-CHECKLIST sync (ADR-0013)
 
 - **README §1**: change "v0.1 catalog target is 10,972 entries." to a sentence that describes scope (e.g. "v0.1 ingests Gov24 national + regional public-service rows, ≈11k source rows. Launch readiness is gated by taxonomy axis coverage, not by absolute Entry count — see ADR-0013.") Do not promise the absolute number.
-- **docs/RELEASE-CHECKLIST.md**: insert a new first step before "Download `.dxt`": "0. Run `npm run coverage` and confirm READY." Renumber the rest.
+- **docs/RELEASE-CHECKLIST.md**: insert a new first step before "Download `.mcpb`": "0. Run `npm run coverage` and confirm READY." Renumber the rest.
 
 ## Acceptance criteria (entire handoff)
 

@@ -45,15 +45,16 @@ export const resolveFrameSegment = (request: RankRequest, segmentsPayload: JsonO
   return asString(matched?.segment) ?? "general";
 };
 
-const allowedUserUrl = (value: string | undefined): string | undefined => {
+const allowedUserUrl = (value: string | undefined, allowedHosts: readonly string[]): string | undefined => {
   if (!value) return undefined;
   const host = new URL(value).hostname.replace(/^www\./u, "");
-  return host === "gov.kr" || host === "hometax.go.kr" || host === "data.go.kr" ? value : undefined;
+  const allowed = allowedHosts.some((item) => host === item || host.endsWith(`.${item}`));
+  return allowed ? value : undefined;
 };
 
-const handoffPayload = (entry: CatalogEntry): JsonObject => {
+const handoffPayload = (entry: CatalogEntry, allowedHosts: readonly string[]): JsonObject => {
   const handoff = isObject(entry.handoff) ? entry.handoff : {};
-  const url = allowedUserUrl(asString(handoff.url));
+  const url = allowedUserUrl(asString(handoff.url), allowedHosts);
   return {
     portal: text(handoff.portal, text(entry.access_mode, "portal")),
     tier: text(handoff.tier, "tier3"),
@@ -62,18 +63,20 @@ const handoffPayload = (entry: CatalogEntry): JsonObject => {
   };
 };
 
-const cardFromRanked = (ranked: RankedEntry): GenUiCard => {
+const cardFromRanked = (ranked: RankedEntry, allowedHosts: readonly string[]): GenUiCard => {
   const entry = ranked.entry;
+  const handoff = handoffPayload(entry, allowedHosts);
   return {
     entry_id: text(entry.entry_id, ""),
     title: text(entry.card_title, text(entry.title, "공공서비스")),
     body: text(entry.card_body, "공식 포털에서 최신 안내를 확인하세요."),
     cta_label: text(entry.cta_label, "공식 포털에서 확인"),
     access_mode: text(entry.access_mode, "portal_handoff"),
+    portal: text(entry.portal, text(handoff.portal, "portal")),
     ui_slot: ranked.ui_slot,
     safe_copy_rule: ranked.safe_copy_rule,
     score: Number(ranked.score.toFixed(6)),
-    handoff: handoffPayload(entry),
+    handoff,
     evidence_refs: asStringArray(entry.evidence_refs),
   };
 };
@@ -98,17 +101,21 @@ export const composeGenUiArtifact = (
   frameCopy: JsonObject,
   segments: JsonObject,
   evidence: readonly CatalogEvidence[],
+  allowedHosts: readonly string[],
   segmentOverride?: string,
 ): GenUiArtifact => {
   const segment = segmentOverride ?? resolveFrameSegment(request, segments);
   const frame = frameForSegment(frameCopy, segment);
   const rail = isObject(frame.evidence_rail) ? frame.evidence_rail : {};
-  const cards = ranked.map(cardFromRanked);
+  const visible = ranked.filter((item) => item.ui_slot !== "hidden");
+  const actionCards = visible.filter((item) => item.ui_slot !== "insight_card").map((item) => cardFromRanked(item, allowedHosts));
+  const insightCards = visible.filter((item) => item.ui_slot === "insight_card").map((item) => cardFromRanked(item, allowedHosts));
   return {
     segment,
     hero: isObject(frame.hero) ? frame.hero : {},
     handoff_notice: text(frame.handoff_notice, "공식 포털에서 최신 안내를 확인하세요."),
-    evidence_rail: { label: text(rail.label, "추천 근거"), items: evidenceItems(cards, evidence) },
-    cards,
+    evidence_rail: { label: text(rail.label, "추천 근거"), items: evidenceItems([...actionCards, ...insightCards], evidence) },
+    cards: actionCards,
+    insight_rail: insightCards,
   };
 };

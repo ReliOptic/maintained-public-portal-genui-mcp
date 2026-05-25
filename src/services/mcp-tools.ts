@@ -154,7 +154,7 @@ export const composeGenuiArtifact = (store: CatalogStore, input: ComposeInput = 
   return {
     catalog_version: run.catalog_version,
     weights_version: run.weights_version,
-    artifact: composeGenUiArtifact(run.ranked, request, frame.copy, frame.segments, store.getEvidence(), input.frame_segment) as unknown as JsonObject,
+    artifact: composeGenUiArtifact(run.ranked, request, frame.copy, frame.segments, store.getEvidence(), config.handoff_allowlist, input.frame_segment) as unknown as JsonObject,
     ...debugMeta(run, input.include_debug),
   };
 };

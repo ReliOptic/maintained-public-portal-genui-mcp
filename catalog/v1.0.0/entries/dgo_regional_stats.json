@@ -1,0 +1,75 @@
+{
+  "catalog_version": "1.0.0",
+  "status": "published",
+  "candidate_state": "maintainer_seed",
+  "merged_into": null,
+  "access_mode": "portal_handoff",
+  "portal": "data_go_kr",
+  "domain": "public_data",
+  "sensitive_domain": false,
+  "confidence_score": 1.0,
+  "review_required": false,
+  "region_tags": [
+    "nationwide"
+  ],
+  "seasonality_hint": "always",
+  "source_urls": [
+    "https://www.data.go.kr/search/index.do"
+  ],
+  "intrinsic_ordinals": {
+    "actionability": "medium",
+    "evidence_value": "high",
+    "sensitivity_risk": "low"
+  },
+  "safe_copy_audit": {
+    "rule": "standard",
+    "safe_copy_rule": "standard",
+    "audited_at": "2026-05-25",
+    "auditor": "maintainer"
+  },
+  "last_sync_at": "2026-05-25T00:00:00Z",
+  "last_verified_at": "2026-05-25T00:00:00Z",
+  "entry_id": "dgo_regional_statistics",
+  "title": "지역 통계 자료 조회",
+  "canonical_intent": "data_search",
+  "canonical_action_verb": "search",
+  "key_keywords": [
+    "지역 통계 자료 조회",
+    "공공데이터",
+    "data.go.kr"
+  ],
+  "content_fingerprint": "data_go_kr|portal_handoff|dgo_regional_statistics",
+  "menu_path": "공공데이터포털 > 데이터찾기 > 데이터목록 (지역 필터)",
+  "handoff": {
+    "portal": "data_go_kr",
+    "tier": "tier2",
+    "url": "https://www.data.go.kr/search/index.do",
+    "menu_path": "공공데이터포털 > 데이터찾기 > 데이터목록 (지역 필터)",
+    "tier2": "https://www.data.go.kr/search/index.do",
+    "tier3": "공공데이터포털 > 데이터찾기 > 데이터목록 (지역 필터)"
+  },
+  "persona_tags": [
+    "data_user",
+    "public_official"
+  ],
+  "task_intent": [
+    "data_search",
+    "policy_information"
+  ],
+  "life_event_tags": [
+    "public_data_project"
+  ],
+  "evidence_refs": [],
+  "free_tags": [
+    "data_go_kr",
+    "portal_handoff",
+    "data_search",
+    "policy_information",
+    "data_user",
+    "public_official"
+  ],
+  "card_title": "지역 통계 자료 조회",
+  "card_body": "지역 기준 공공데이터와 통계 자료를 공식 포털에서 탐색합니다.",
+  "cta_label": "지역자료 보기",
+  "semantic_fingerprint": "data_search|search|지역 통계 자료 조회|nationwide|data_user,public_official"
+}

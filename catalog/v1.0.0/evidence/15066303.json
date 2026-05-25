@@ -5,10 +5,10 @@
   "data_go_kr_dataset_id": "15066303",
   "data_go_kr_url": "https://www.data.go.kr/data/15066303/fileData.do",
   "role": "household_income_regional_context",
+  "region": ["incheon"],
   "applies_to": [
     "benefit_check",
-    "low_income_household",
-    "region"
+    "low_income_household"
   ],
   "refresh_hint": "annual_or_provider_update",
   "metadata_fetch": {
