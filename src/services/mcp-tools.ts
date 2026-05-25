@@ -66,7 +66,10 @@ export const searchPortalEntries = (store: CatalogStore, input: SearchInput = {}
 };
 
 export const rankPortalEntries = (store: CatalogStore, input: RankInput = {}): JsonObject => {
-  const ranked = rankEntries(store.queryEntries({ status: "published", limit: 100 }), store.getWeights(), rankRequest(input));
+  const config = store.getWeights();
+  const request = rankRequest(input);
+  const candidates = store.queryStage0Admitted(request, config.stage0_empty_context_top_n);
+  const ranked = rankEntries(candidates, config, request);
   return { entries: publicRanked(ranked, input.include_debug), count: ranked.length };
 };
 
@@ -76,15 +79,17 @@ export const getEntryDetail = (store: CatalogStore, input: DetailInput): JsonObj
   return { entry };
 };
 
-const composeEntries = (store: CatalogStore, input: ComposeInput): CatalogEntry[] => {
-  if (!input.entry_ids || input.entry_ids.length === 0) return store.queryEntries({ status: "published", limit: 100 });
+const composeEntries = (store: CatalogStore, input: ComposeInput, request: RankRequest, fallbackLimit: number): CatalogEntry[] => {
+  if (!input.entry_ids || input.entry_ids.length === 0) return store.queryStage0Admitted(request, fallbackLimit);
   return input.entry_ids.map((entryId) => store.getEntry(entryId)).filter((entry): entry is CatalogEntry => entry !== undefined);
 };
 
 export const composeGenuiArtifact = (store: CatalogStore, input: ComposeInput = {}): JsonObject => {
+  const config = store.getWeights();
   const request = rankRequest(input);
   const top_k = input.entry_ids?.length ?? request.top_k;
-  const ranked = rankEntries(composeEntries(store, input), store.getWeights(), { ...request, ...(top_k ? { top_k } : {}) });
+  const entries = composeEntries(store, input, request, config.stage0_empty_context_top_n);
+  const ranked = rankEntries(entries, config, { ...request, ...(top_k ? { top_k } : {}) });
   const frame = frameRows(store.getFrameCopy());
   return { artifact: composeGenUiArtifact(ranked, request, frame.copy, frame.segments, store.getEvidence(), input.frame_segment) as unknown as JsonObject };
 };

@@ -54,6 +54,13 @@ export interface EntryFilter {
   readonly limit?: number;
 }
 
+export interface Stage0Filter {
+  readonly intent?: readonly string[];
+  readonly persona?: readonly string[];
+  readonly life_event?: readonly string[];
+  readonly region?: readonly string[];
+}
+
 export type CatalogEntry = EntryRecord;
 export type CatalogEvidence = EvidenceRecord;
 

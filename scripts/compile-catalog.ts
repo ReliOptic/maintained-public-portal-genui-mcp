@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import type { CompileCounts, EntryRecord, EvidenceRecord, JsonObject, JsonValue, SqlParams } from "../src/types/catalog.js";
+import { createTermIndexSchema, insertEntryTerms } from "./catalog-term-index.js";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(SCRIPT_DIR, "..");
@@ -114,6 +115,7 @@ const createSchema = (db: Database.Database): void => {
     CREATE INDEX idx_entries_access_mode ON entries(access_mode);
     CREATE INDEX idx_entries_canonical_intent ON entries(canonical_intent);
   `);
+  createTermIndexSchema(db);
 };
 
 const insertEntries = (db: Database.Database): Pick<CompileCounts, "entries_seen" | "entries_inserted"> => {
@@ -135,6 +137,7 @@ const insertEntries = (db: Database.Database): Pick<CompileCounts, "entries_seen
     validateEntry(value, filePath);
     if (shouldCompileEntry(value)) {
       insert.run(entryParams(value));
+      insertEntryTerms(db, value);
       inserted += 1;
     }
   }

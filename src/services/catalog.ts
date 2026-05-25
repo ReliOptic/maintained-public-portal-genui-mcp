@@ -1,6 +1,6 @@
 import Database from "better-sqlite3";
 import { getRuntimeConfig } from "../config/runtime.js";
-import type { CatalogEntry, CatalogEvidence, CatalogFreshness, EntryFilter, JsonObject, JsonValue } from "../types/catalog.js";
+import type { CatalogEntry, CatalogEvidence, CatalogFreshness, EntryFilter, JsonObject, JsonValue, Stage0Filter } from "../types/catalog.js";
 import type { WeightConfig } from "../types/weights.types.js";
 import { parseWeightConfig } from "./weights-loader.js";
 import { logJson } from "../utils/logger.js";
@@ -35,6 +35,24 @@ const limitValue = (limit: number | undefined): number => {
   return Math.min(limit, 100);
 };
 
+
+const cleanValues = (values: readonly string[] | undefined): string[] =>
+  [...new Set((values ?? []).filter((value) => value.length > 0))];
+
+const addValueParams = (params: Record<string, string | number>, prefix: string, values: readonly string[]): string => {
+  const names = values.map((value, index) => {
+    const name = `${prefix}_${index}`;
+    params[name] = value;
+    return `@${name}`;
+  });
+  return names.join(", ");
+};
+
+const termClause = (axis: string, prefix: string, values: readonly string[], params: Record<string, string | number>): string | undefined => {
+  if (values.length === 0) return undefined;
+  return `entry_id IN (SELECT entry_id FROM entry_terms WHERE axis = '${axis}' AND value IN (${addValueParams(params, prefix, values)}))`;
+};
+
 const MILLIS_PER_DAY = 86_400_000;
 
 const dateAgeDays = (stamp: string | null, now: Date): number | null => {
@@ -67,6 +85,28 @@ export class CatalogStore {
     if (filter.query) params.query = `%${filter.query}%`;
     const where = clauses.length > 0 ? `WHERE ${clauses.join(" AND ")}` : "";
     const sql = `SELECT payload_json FROM entries ${where} ORDER BY confidence_score DESC, entry_id LIMIT @limit`;
+    const rows = this.database.prepare(sql).all(params) as DbRow[];
+    return rows.map((row) => parsePayload<CatalogEntry>(row, "entry"));
+  }
+
+
+  public queryStage0Admitted(filter: Stage0Filter = {}, emptyContextLimit = 500): CatalogEntry[] {
+    const params: Record<string, string | number> = { limit: Math.max(1, Math.floor(emptyContextLimit)) };
+    const persona = cleanValues(filter.persona);
+    const intent = cleanValues(filter.intent);
+    const lifeEvent = cleanValues(filter.life_event);
+    const region = cleanValues(filter.region);
+    const overlap = [
+      termClause("persona", "persona", persona, params),
+      termClause("intent", "intent", intent, params),
+      termClause("life_event", "life_event", lifeEvent, params),
+    ].filter((clause): clause is string => clause !== undefined);
+    const clauses = overlap.length > 0 ? [`(${overlap.join(" OR ")})`] : [];
+    const regionClause = termClause("region", "region", ["nationwide", ...region], params);
+    if (region.length > 0 && regionClause) clauses.push(regionClause);
+    const where = clauses.length > 0 ? `WHERE ${clauses.join(" AND ")}` : "";
+    const limit = overlap.length === 0 ? "LIMIT @limit" : "";
+    const sql = `SELECT payload_json FROM entries ${where} ORDER BY confidence_score DESC, entry_id ${limit}`;
     const rows = this.database.prepare(sql).all(params) as DbRow[];
     return rows.map((row) => parsePayload<CatalogEntry>(row, "entry"));
   }
