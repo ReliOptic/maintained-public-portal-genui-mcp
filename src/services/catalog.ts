@@ -4,28 +4,22 @@ import type { CatalogEntry, CatalogEvidence, CatalogFreshness, EntryFilter, Json
 import type { WeightConfig } from "../types/weights.types.js";
 import { parseWeightConfig } from "./weights-loader.js";
 import { logJson } from "../utils/logger.js";
+import { parseAdapterRegistry } from "./adapter-registry.js";
+import type { AdapterRegistration, DataRecord } from "../types/adapter.types.js";
 
 interface DbRow {
   readonly payload_json: string;
 }
 
-interface FreshnessRow {
-  readonly latest_date: string | null;
-}
-
-interface VersionRow {
-  readonly version: string | null;
-}
+interface FreshnessRow { readonly latest_date: string | null }
+interface VersionRow { readonly version: string | null }
+interface DataRecordRow { readonly record_id: string; readonly adapter_id: string; readonly region: string; readonly period: string; readonly payload_json: string }
 
 export class CatalogError extends Error {
-  public constructor(message: string, public readonly cause?: unknown) {
-    super(message);
-    this.name = "CatalogError";
-  }
+  public constructor(message: string, public readonly cause?: unknown) { super(message); this.name = "CatalogError"; }
 }
 
-const isObject = (value: unknown): value is JsonObject =>
-  typeof value === "object" && value !== null && !Array.isArray(value);
+const isObject = (value: unknown): value is JsonObject => typeof value === "object" && value !== null && !Array.isArray(value);
 
 const parsePayload = <T extends JsonObject>(row: DbRow | undefined, label: string): T => {
   if (!row) throw new CatalogError(`${label} not found`);
@@ -34,13 +28,8 @@ const parsePayload = <T extends JsonObject>(row: DbRow | undefined, label: strin
   return value as T;
 };
 
-const limitValue = (limit: number | undefined): number => {
-  if (limit === undefined || !Number.isInteger(limit) || limit < 1) return 20;
-  return Math.min(limit, 100);
-};
-
-const cleanValues = (values: readonly string[] | undefined): string[] =>
-  [...new Set((values ?? []).filter((value) => value.length > 0))];
+const limitValue = (limit: number | undefined): number => limit === undefined || !Number.isInteger(limit) || limit < 1 ? 20 : Math.min(limit, 100);
+const cleanValues = (values: readonly string[] | undefined): string[] => [...new Set((values ?? []).filter((value) => value.length > 0))];
 
 const addValueParams = (params: Record<string, string | number>, prefix: string, values: readonly string[]): string => {
   const names = values.map((value, index) => {
@@ -68,12 +57,10 @@ const dateAgeDays = (stamp: string | null, now: Date): number | null => {
 export class CatalogStore {
   private db: Database.Database | undefined;
   private evidenceRegistry: CatalogEvidence[] | undefined;
+  private adapterRegistry: AdapterRegistration[] | undefined;
   public constructor(private readonly dbPath = getRuntimeConfig().catalogPath) {}
 
-  public get database(): Database.Database {
-    if (!this.db) this.db = this.open();
-    return this.db;
-  }
+  public get database(): Database.Database { if (!this.db) this.db = this.open(); return this.db; }
 
   public queryEntries(filter: EntryFilter = {}): CatalogEntry[] {
     const clauses: string[] = [];
@@ -127,12 +114,24 @@ export class CatalogStore {
 
   public getEvidenceRegistry(): CatalogEvidence[] { this.evidenceRegistry ??= this.getEvidence(); return this.evidenceRegistry; }
 
-  public getTaxonomy(): JsonObject {
-    return this.singleton("taxonomy", "taxonomy_id", "v1.0");
+  public getTaxonomy(): JsonObject { return this.singleton("taxonomy", "taxonomy_id", "v1.0"); }
+  public getWeights(): WeightConfig { return parseWeightConfig(this.singleton("weights", "weights_id", "v1.0.0")); }
+
+  public getAdapterRegistry(): AdapterRegistration[] {
+    this.adapterRegistry ??= [...parseAdapterRegistry(this.singleton("adapters", "adapters_version", "1.0.0")).adapters];
+    return this.adapterRegistry;
   }
 
-  public getWeights(): WeightConfig {
-    return parseWeightConfig(this.singleton("weights", "weights_id", "v1.0.0"));
+  public getDataRecords(adapterId: string, region: string | undefined, limit: number | undefined): DataRecord[] {
+    const params = { adapter_id: adapterId, region: region ?? "nationwide", limit: limitValue(limit) };
+    const sql = `SELECT record_id, adapter_id, region, period, payload_json FROM data_records
+      WHERE adapter_id = @adapter_id AND (region = @region OR region = 'nationwide')
+      ORDER BY region = @region DESC, record_id LIMIT @limit`;
+    const rows = this.database.prepare(sql).all(params) as DataRecordRow[];
+    return rows.map((row) => ({
+      record_id: row.record_id, adapter_id: row.adapter_id, region: row.region, period: row.period,
+      payload: JSON.parse(row.payload_json) as Record<string, string | number | null>,
+    }));
   }
 
   public getCatalogVersion(): string {
@@ -155,10 +154,7 @@ export class CatalogStore {
     return { latest_entry_date: latest, age_days: age, stale: age === null || age > thresholdDays, threshold_days: thresholdDays };
   }
 
-  public close(): void {
-    this.db?.close();
-    this.db = undefined;
-  }
+  public close(): void { this.db?.close(); this.db = undefined; }
 
   private singleton(table: string, idColumn: string, id: string): JsonObject {
     const row = this.database.prepare(`SELECT payload_json FROM ${table} WHERE ${idColumn} = ?`).get(id) as DbRow | undefined;
@@ -184,10 +180,7 @@ export class CatalogStore {
 
 let singletonStore: CatalogStore | undefined;
 
-export const getCatalog = (): CatalogStore => {
-  singletonStore ??= new CatalogStore();
-  return singletonStore;
-};
+export const getCatalog = (): CatalogStore => { singletonStore ??= new CatalogStore(); return singletonStore; };
 
 export const queryEntries = (filter?: EntryFilter): CatalogEntry[] => getCatalog().queryEntries(filter);
 export const getEntry = (entryId: string): CatalogEntry | undefined => getCatalog().getEntry(entryId);

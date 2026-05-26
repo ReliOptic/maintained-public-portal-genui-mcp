@@ -1,4 +1,5 @@
 import type { CatalogEntry, CatalogEvidence, JsonObject, JsonValue } from "../types/catalog.js";
+import type { DataSection } from "../types/adapter.types.js";
 import type { GenUiArtifact, GenUiCard } from "../types/genui.js";
 import type { RankedEntry, RankRequest } from "../types/ranking.js";
 
@@ -103,6 +104,7 @@ export const composeGenUiArtifact = (
   evidence: readonly CatalogEvidence[],
   allowedHosts: readonly string[],
   segmentOverride?: string,
+  dataSections: readonly DataSection[] = [],
 ): GenUiArtifact => {
   const segment = segmentOverride ?? resolveFrameSegment(request, segments);
   const frame = frameForSegment(frameCopy, segment);
@@ -117,5 +119,6 @@ export const composeGenUiArtifact = (
     evidence_rail: { label: text(rail.label, "추천 근거"), items: evidenceItems([...actionCards, ...insightCards], evidence) },
     cards: actionCards,
     insight_rail: insightCards,
+    data_sections: dataSections,
   };
 };

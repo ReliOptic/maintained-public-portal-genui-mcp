@@ -87,12 +87,16 @@ const toolResult = (payload: JsonObject) => ({
 
 export const createServer = (store = new CatalogStore()): McpServer => {
   store.getEvidenceRegistry();
+  store.getAdapterRegistry();
   const server = new McpServer({ name: "portal-genui-mcp", version: "0.1.0" });
   server.registerResource("taxonomy", "resource://taxonomy/v1.0", { mimeType: "application/json" }, () => ({
     contents: [{ uri: "resource://taxonomy/v1.0", mimeType: "application/json", text: JSON.stringify(store.getTaxonomy()) }],
   }));
   server.registerResource("evidence", "resource://evidence/v1.0", { mimeType: "application/json" }, () => ({
     contents: [{ uri: "resource://evidence/v1.0", mimeType: "application/json", text: JSON.stringify(store.getEvidenceRegistry()) }],
+  }));
+  server.registerResource("adapters", "resource://adapters/v1", { mimeType: "application/json" }, () => ({
+    contents: [{ uri: "resource://adapters/v1", mimeType: "application/json", text: JSON.stringify(store.getAdapterRegistry()) }],
   }));
   server.registerTool("search_portal_entries", {
     description: "Search published public portal entries without running ranking.",

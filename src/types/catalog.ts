@@ -44,6 +44,7 @@ export interface CompileCounts {
   readonly taxonomy_inserted: number;
   readonly weights_inserted: number;
   readonly frame_copy_inserted: number;
+  readonly adapters_inserted: number;
 }
 
 export interface EntryFilter {

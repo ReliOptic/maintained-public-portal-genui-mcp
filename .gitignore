@@ -21,3 +21,6 @@ coverage-report.json
 # Generated runtime catalog artifact; source JSON remains canonical.
 catalog/compiled.sqlite
 catalog/compiled.sqlite-*
+
+# Generated scheduled adapter snapshots; compiled.sqlite is the runtime artifact.
+catalog/v1.0.0/adapters/*-records.json

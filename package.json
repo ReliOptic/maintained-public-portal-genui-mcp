@@ -14,7 +14,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
     "test": "vitest run",
-    "compile": "node --loader ts-node/esm scripts/compile-catalog.ts",
+    "compile": "node --loader ts-node/esm scripts/compile-catalog.ts && node --loader ts-node/esm scripts/compile-adapters.ts",
     "start": "node dist/index.js",
     "coverage": "node --loader ts-node/esm scripts/coverage-gate.ts",
     "pack": "mcpb pack"

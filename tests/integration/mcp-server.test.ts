@@ -27,7 +27,7 @@ describe("MCP stdio server", () => {
     await client.close();
   });
 
-  it("lists the four v0.1 tools and taxonomy resource", async () => {
+  it("lists the four v0.1 tools and taxonomy/adapters resources", async () => {
     const tools = await client.listTools();
     expect(tools.tools.map((tool) => tool.name).sort()).toEqual([
       "compose_genui_artifact",
@@ -36,7 +36,9 @@ describe("MCP stdio server", () => {
       "search_portal_entries",
     ]);
     const resources = await client.listResources();
-    expect(resources.resources.map((resource) => resource.uri).sort()).toContain("resource://evidence/v1.0");
+    const resourceUris = resources.resources.map((resource) => resource.uri).sort();
+    expect(resourceUris).toContain("resource://evidence/v1.0");
+    expect(resourceUris).toContain("resource://adapters/v1");
     const resource = await client.readResource({ uri: "resource://taxonomy/v1.0" });
     expect(resource.contents[0]?.mimeType).toBe("application/json");
   });
@@ -48,6 +50,8 @@ describe("MCP stdio server", () => {
     expect(entryId).toBeTruthy();
     expect(payload(await client.callTool({ name: "rank_portal_entries", arguments: { intent: ["certificate_issue"], top_k: 2 } })).count).toBe(2);
     expect(payload(await client.callTool({ name: "get_entry_detail", arguments: { entry_id: entryId } })).entry).toBeDefined();
-    expect(payload(await client.callTool({ name: "compose_genui_artifact", arguments: { entry_ids: [entryId], frame_segment: "general" } })).artifact).toBeDefined();
+    const compose = payload(await client.callTool({ name: "compose_genui_artifact", arguments: { entry_ids: [entryId], frame_segment: "general" } }));
+    expect(compose.artifact).toBeDefined();
+    expect((compose.artifact as Record<string, unknown>).data_sections).toEqual([]);
   });
 });
