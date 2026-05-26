@@ -1,6 +1,6 @@
 {
   "name": "portal-genui-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Maintained public portal GenUI MCP stdio server",
   "type": "module",
   "bin": "dist/index.js",
