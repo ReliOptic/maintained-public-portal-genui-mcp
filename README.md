@@ -51,7 +51,22 @@ v0.2는 기존 카탈로그 랭킹 위에 **공공 OpenAPI 어댑터** 레이어
 
 > **참고**: 이 서버는 **stdio 전용**입니다. Claude.ai 웹은 지원하지 않습니다. Claude Desktop · Cursor · Windsurf · Claude Code 등 로컬 MCP 클라이언트에서 사용하세요.
 
-### 방법 1: Claude Desktop
+### 방법 1: Claude Code 플러그인 (가장 쉬움) ⚡
+
+Claude Code를 쓴다면 두 줄이면 끝납니다:
+
+```
+/plugin marketplace add ReliOptic/maintained-public-portal-genui-mcp
+/plugin install maintained-public-portal-genui-mcp@maintained-public-portal-genui-mcp-marketplace
+```
+
+업데이트:
+
+```
+/plugin marketplace update maintained-public-portal-genui-mcp-marketplace
+```
+
+### 방법 2: Claude Desktop
 
 설정 파일 위치: `~/Library/Application Support/Claude/claude_desktop_config.json` (Mac) / `%APPDATA%\Claude\claude_desktop_config.json` (Windows)
 
@@ -68,7 +83,7 @@ v0.2는 기존 카탈로그 랭킹 위에 **공공 OpenAPI 어댑터** 레이어
 
 저장 후 Claude Desktop 재시작. 채팅에서 바로 사용합니다.
 
-### 방법 2: Cursor / Windsurf / Zed
+### 방법 3: Cursor / Windsurf / Zed
 
 프로젝트 폴더 `.cursor/mcp.json` 또는 `.windsurf/mcp.json`:
 
@@ -83,7 +98,7 @@ v0.2는 기존 카탈로그 랭킹 위에 **공공 OpenAPI 어댑터** 레이어
 }
 ```
 
-### 방법 3: Claude Code
+### 방법 4: Claude Code (수동 설정)
 
 터미널에서 한 줄로 추가합니다:
 
@@ -93,7 +108,7 @@ claude mcp add portal-genui -- npx -y portal-genui-mcp
 
 또는 `~/.claude.json`의 `mcpServers`에 방법 1과 동일하게 추가합니다.
 
-### 방법 4: 로컬 직접 설치 (개발자)
+### 방법 5: 로컬 직접 설치 (개발자)
 
 ```bash
 npm install -g portal-genui-mcp

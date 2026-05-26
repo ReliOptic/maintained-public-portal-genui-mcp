@@ -24,3 +24,6 @@ catalog/compiled.sqlite-*
 
 # Generated scheduled adapter snapshots; compiled.sqlite is the runtime artifact.
 catalog/v1.0.0/adapters/*-records.json
+
+# mcpb packed artifact; attached to GitHub Releases, not committed.
+*.mcpb

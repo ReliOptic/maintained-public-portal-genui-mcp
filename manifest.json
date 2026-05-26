@@ -2,9 +2,9 @@
   "manifest_version": "0.3",
   "name": "maintained-public-portal-genui-mcp",
   "display_name": "Maintained Public Portal GenUI",
-  "version": "0.1.0",
-  "description": "Offline Korean public-service catalog MCP for ranked portal cards, evidence rails, and reviewed handoff copy.",
-  "long_description": "Runs locally through stdio and reads the bundled compiled.sqlite catalog. The runtime server never fetches public APIs, compiles the catalog, or asks users for credentials.",
+  "version": "0.2.0",
+  "description": "Korean public-service catalog MCP — ranked portal cards, evidence rails, and public OpenAPI data sections.",
+  "long_description": "Runs locally through stdio and reads the bundled compiled.sqlite catalog. 10,000개 이상의 공공서비스를 persona·intent·region taxonomy로 랭킹하고, v0.2 ApiAdapter 플러그인으로 공공 OpenAPI 실시간 데이터를 data_sections에 추가합니다. 서버는 사용자 자격증명을 요구하지 않으며 포털을 크롤링하지 않습니다.",
   "author": {
     "name": "ReliOptic"
   },
@@ -29,7 +29,7 @@
     },
     {
       "name": "rank_portal_entries",
-      "description": "persona/intent/life_event/region/season taxonomy 구조체로 공공서비스 항목을 랭킹합니다. 자연어 발화를 taxonomy로 변환한 뒤 호출. 핵심 추천 도구. Returns ranked entries with ui_slot."
+      "description": "persona/intent/life_event/region/season taxonomy 구조체로 공공서비스 항목을 랭킹합니다. 자연어 발화를 taxonomy로 변환한 뒤 호출. 핵심 추천 도구. 매칭된 ApiAdapter의 data_sections 포함. Returns ranked entries with ui_slot."
     },
     {
       "name": "get_entry_detail",
@@ -37,7 +37,7 @@
     },
     {
       "name": "compose_genui_artifact",
-      "description": "entry_id 목록과 frame_segment로 GenUI artifact를 조합합니다. hero copy·action cards·insight rail·evidence rail·handoff_notice 포함. 최종 UI 렌더링 직전에 호출."
+      "description": "entry_id 목록과 frame_segment로 GenUI artifact를 조합합니다. hero copy·action cards·insight rail·evidence rail·handoff_notice·data_sections 포함. 최종 UI 렌더링 직전에 호출."
     }
   ],
   "tools_generated": false,
@@ -46,7 +46,9 @@
     "public-services",
     "gov24",
     "genui",
-    "mcp"
+    "mcp",
+    "welfare",
+    "adapter"
   ],
   "license": "MIT",
   "compatibility": {
