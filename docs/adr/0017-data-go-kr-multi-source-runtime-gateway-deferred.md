@@ -37,7 +37,7 @@ Adding these now would weaken the v0.1 value proposition: three-click local MCPB
 
 ## v0.2 candidate shape
 
-If pursued, v0.2 should be a separate capability layer named `data_go_kr_runtime_gateway` or equivalent, with an ADR and tests before implementation.
+[[ADR-0019]] supersedes the earlier "separate gateway" shape. If pursued, v0.2 should extend the existing MCP server with an `ApiAdapter` plugin layer discovered through `resource://adapters/v1`, with tests before implementation.
 
 Candidate MVP constraints:
 
@@ -46,7 +46,8 @@ Candidate MVP constraints:
 3. define a normalized row/source/error schema before UI work;
 4. ship mock responses and cache behavior from day one;
 5. keep service keys outside end-user local MCPB unless a credential proxy is designed;
-6. keep current catalog/evidence/insight behavior as the default when live calls fail or are disabled.
+6. keep current catalog/evidence/insight behavior as the default when live calls fail or are disabled;
+7. start with at least one `refresh_mode: "scheduled"` adapter before enabling any `on_demand` adapter.
 
 ## Relationship to current architecture
 
@@ -59,10 +60,10 @@ catalog JSON → CI compile → compiled.sqlite → local MCPB → ranked Action
 v0.2 candidate:
 
 ```text
-structured user context → runtime OpenAPI gateway → normalized rows/sources/errors → GenUI tables/charts/cards
+structured user context → ApiAdapter plugin → normalized DataRecords/SourceManifest → GenUI DataSections
 ```
 
-The two should compose, not replace each other. v0.1 catalog ranking decides which official tasks and evidence rails matter; v0.2 live gateway may enrich a subset with fresh tables, charts, or regional data.
+The two should compose, not replace each other. v0.1 catalog ranking decides which official tasks and evidence rails matter; the v0.2 ApiAdapter layer may enrich a subset with fresh tables, charts, or regional data.
 
 ## Non-goals for v0.1 RC
 

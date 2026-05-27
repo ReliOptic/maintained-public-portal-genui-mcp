@@ -1,0 +1,20 @@
+{
+  "adapters_version": "1.0.0",
+  "adapters": [
+    {
+      "adapter_id": "welfare-facility-kr",
+      "name": "복지시설 현황",
+      "refresh_mode": "scheduled",
+      "trigger_intents": ["benefit_check", "benefit_application"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "period": { "type": "YYYY-MM" },
+        "domain_filter": {
+          "type": "enum",
+          "values": ["노인복지관", "장애인복지관", "아동복지시설", "사회복지관", "정신건강복지센터"]
+        },
+        "limit": { "type": "integer", "default": 20 }
+      }
+    }
+  ]
+}

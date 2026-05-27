@@ -90,6 +90,11 @@ const createSchema = (db: Database.Database): void => {
     CREATE TABLE taxonomy (taxonomy_id TEXT PRIMARY KEY, payload_json TEXT NOT NULL);
     CREATE TABLE weights (weights_id TEXT PRIMARY KEY, payload_json TEXT NOT NULL);
     CREATE TABLE frame_copy (frame_key TEXT PRIMARY KEY, payload_json TEXT NOT NULL);
+    CREATE TABLE adapters (adapters_version TEXT PRIMARY KEY, payload_json TEXT NOT NULL);
+    CREATE TABLE data_records (record_id TEXT NOT NULL, adapter_id TEXT NOT NULL, region TEXT NOT NULL,
+      period TEXT NOT NULL, last_fetched_at TEXT NOT NULL, call_status TEXT NOT NULL, payload_json TEXT NOT NULL,
+      PRIMARY KEY (adapter_id, record_id));
+    CREATE INDEX idx_data_records_adapter_region ON data_records(adapter_id, region);
     CREATE INDEX idx_entries_status_confidence ON entries(status, confidence_score);
     CREATE INDEX idx_entries_access_mode ON entries(access_mode);
     CREATE INDEX idx_entries_canonical_intent ON entries(canonical_intent);
@@ -159,6 +164,7 @@ export const compileCatalog = (outputPath = OUT): CompileCounts => {
       weights_inserted: insertPayload(db, "weights", "v1.0.0", weights),
       frame_copy_inserted: insertPayload(db, "frame_copy", "copy", readJson(path.join(CATALOG, "frame_copy.json"))) +
         insertPayload(db, "frame_copy", "segments", readJson(path.join(CATALOG, "frame_copy_segments.json"))),
+      adapters_inserted: insertPayload(db, "adapters", "1.0.0", readJson(path.join(CATALOG, "adapters", "adapters.json"))),
     };
   });
   const counts = tx() as CompileCounts;

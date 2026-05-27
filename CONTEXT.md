@@ -530,6 +530,8 @@ The Interview Skill may use a host-native question transport such as `AskUserQue
 
 The Interview Skill never performs applications, logins, or eligibility determinations, and never generates handoff URLs. It only calls MCP tools and conveys their output to the user.
 
+**v0.2 extension.** The extracted taxonomy context implicitly determines whether a live [[ApiAdapter]] is activated — no additional modality question is asked. An adapter is activated when `req.intent ∩ adapter.trigger_intents ≠ ∅` (see `resource://adapters/v1`). The Interview Skill's two-question ceiling and AskUserQuestion transport are unchanged; adapter routing is a server-side concern invisible to the skill.
+
 ### Handoff allowlist
 
 The fixed set of host names that may appear in any tier1 / tier2 URL or in any `api_ref` endpoint. Currently:
@@ -542,3 +544,49 @@ The fixed set of host names that may appear in any tier1 / tier2 URL or in any `
 | `api.odcloud.kr`  | gov24 / NTS / data.go.kr API endpoints (api_cached sync source) | no — internal source only; never surfaced as a card CTA |
 
 Any URL outside this allowlist is rejected at publish time. `api.odcloud.kr` is in the list because it is the canonical host for the API operations driving the api-refresh-pipeline; it is treated as an **internal source**, not as a user-facing CTA target. The composer never renders `api.odcloud.kr` URLs in card UI.
+
+### ApiAdapter
+
+The plugin interface that a v0.2 public-data source implements inside the existing MCP server. v0.2 is a server extension, not a separate public-data server. Each `ApiAdapter` is responsible for one logical source bundle (e.g. 생활·안전, 지역·복지, 경제·무역). The MCP server discovers available adapters through `resource://adapters/v1`; it never hardcodes adapter names or source IDs in application code.
+
+Every `ApiAdapter` exposes exactly three operations:
+
+- **`fetch(params)`** — calls the upstream public API using credentials held outside the user's machine (GitHub Secrets + CI bot in v0.2). Input params follow the standard: `region` (시도/시군구/좌표), `period` (일/월/연도), `domain_filter`, `limit/sort/page`.
+- **`normalize(rawResponse)`** — converts XML or JSON response to `DataRecord[]`. Field names, units, and descriptions are standardised here; callers never parse raw API responses.
+- **`sourceManifest()`** — returns a [[SourceManifest]] describing the adapter: 기관명, API명, 갱신주기, 호출 상태, 인증 방식.
+
+Adapters are registered in `resource://adapters/v1`. This resource is the adapter discovery path for both the server and host LLM, mirroring the `resource://taxonomy/v1.0` pattern — the full schema is exposed so adapter activation and parameters can be validated without a second discovery round-trip:
+
+- `adapter_id: string` — stable identifier; primary key in the `data_records` SQLite table.
+- `name: string` — human-readable label.
+- `trigger_intents: string[]` — taxonomy closed-enum values; the adapter activates when `req.intent ∩ trigger_intents ≠ ∅`.
+- `refresh_mode: "scheduled" | "on_demand"` — declares the execution environment. `scheduled` adapters run in CI and bundle output into `compiled.sqlite`; `on_demand` adapters run per-request through a credential proxy. Application code branches only on `refresh_mode`, never on adapter identity. See [[ADR-0019]].
+- `fetch_params` — full parameter schema: `region` (taxonomy region enum), `period` (format string e.g. `"YYYY-MM"`), `domain_filter` (adapter-specific closed enum maintained by the adapter's maintainer), `limit` (integer with default). Complete param schema lives here so no separate discovery call is needed.
+
+MVP first `scheduled` adapter: **복지시설 현황** (`trigger_intents: ["benefit_check", "benefit_application"]`). Augments existing Entry ranking cards with a DataSection table of local facility listings.
+
+Adapters never receive raw user utterances — only structured params derived from the [[Interview Skill]] output.
+
+### DataRecord
+
+The atomic unit returned by a live [[ApiAdapter]] call at runtime. A **DataRecord** is a single normalized row from a public OpenAPI response — e.g. one daily air-quality measurement, one customs trade-statistics row, one welfare-facility entry from a live API.
+
+A DataRecord is **not** an [[Entry]]: it carries no `persona_tags`, no `confidence_score`, no `menu_path`, and does not pass through the [[Ranking pipeline]]. It is **not** an [[Evidence]] record: Evidence lives in a build-time registry; DataRecords are fetched per-request at runtime.
+
+DataRecords are produced by an [[ApiAdapter]] and consumed by the [[DataRecord composer]] to render live sections (tables, charts, metric cards) within a v0.2 GenUI response. Source metadata (기관명, API명, 갱신일, 호출 상태) travels alongside every DataRecord batch as a [[SourceManifest]].
+
+### DataSection
+
+A rendered unit of [[DataRecord]] output within a [[GenUiArtifact]]. A `DataSection` represents one logical slice of live data — e.g. "오늘 부산 대기질 현황" (MetricCards), "최근 3개월 수출입 추이" (Chart), "인근 복지시설 목록" (DataTable). Each `DataSection` carries:
+
+- `type`: one of `metric_cards | data_table | chart | source_list`
+- `title`: human-readable section heading
+- `rows`: the underlying `DataRecord[]`
+- `source`: the [[SourceManifest]] of the producing adapter
+- `error?`: structured error when the adapter call failed (non-blocking; other sections still render)
+
+`DataSection[]` is added to `GenUiArtifact` as a `data_sections` field alongside the existing `cards`, `insight_rail`, and `evidence_rail`. This extends `compose_genui_artifact`; it does not introduce a separate live-data composition tool for the MVP. The host LLM never constructs `DataSection` objects directly — `compose_genui_artifact` assembles them from adapter output.
+
+### SourceManifest
+
+Metadata that accompanies every [[DataRecord]] batch returned by an [[ApiAdapter]]. Fields: `adapter_id`, `agency` (기관명), `api_name` (API명), `last_updated` (갱신일), `call_status` (`ok | timeout | error | mock`), `auth_type` (`public | key_required`). Rendered in the `source_list` [[DataSection]] and the `sources` panel described in the proposal. The MCP server never suppresses `SourceManifest` — partial or failed data must be disclosed to the user.

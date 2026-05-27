@@ -1,4 +1,5 @@
 import type { JsonObject } from "./catalog.js";
+import type { DataSection } from "./adapter.types.js";
 import type { SafeCopyRule, UiSlot } from "./ranking.js";
 
 export interface GenUiCard {
@@ -28,4 +29,5 @@ export interface GenUiArtifact {
   readonly evidence_rail: { readonly label: string; readonly items: readonly EvidenceRailItem[] };
   readonly cards: readonly GenUiCard[];
   readonly insight_rail: readonly GenUiCard[];
+  readonly data_sections: readonly DataSection[];
 }

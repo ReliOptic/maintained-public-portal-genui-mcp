@@ -6,6 +6,8 @@ import { passesRankGate, rankEntries } from "./ranker.js";
 import { resolveWeights } from "./weight-resolver.js";
 import { createRankCacheKey, getCachedRank, hashResolvedWeights } from "./rank-cache.js";
 import { logJson } from "../utils/logger.js";
+import { dataSectionFor, matchingAdapters } from "./adapter-registry.js";
+import type { DataSection } from "../types/adapter.types.js";
 import type { WeightConfig } from "../types/weights.types.js";
 import type { CacheState } from "../types/rank-cache.types.js";
 
@@ -107,6 +109,14 @@ const rankRequest = (input: RankInput): RankRequest => ({
   ...(input.weight_rationale !== undefined ? { weight_rationale: input.weight_rationale } : {}),
 });
 
+const adapterDataSections = (store: CatalogStore, request: RankRequest, limit: number | undefined): DataSection[] =>
+  matchingAdapters(store.getAdapterRegistry(), request.intent ?? []).flatMap((registration) => {
+    if (registration.refresh_mode !== "scheduled") return [];
+    const batch = store.getDataRecords(registration.adapter_id, request.region?.[0], limit);
+    const section = dataSectionFor(registration, batch.rows, batch.call_status);
+    return section ? [section] : [];
+  });
+
 export const searchPortalEntries = (store: CatalogStore, input: SearchInput = {}): JsonObject => {
   const entries = store.queryEntries({
     status: "published",
@@ -127,6 +137,7 @@ export const rankPortalEntries = (store: CatalogStore, input: RankInput = {}): J
     catalog_version: run.catalog_version,
     weights_version: run.weights_version,
     entries: publicRanked(run.ranked, input.include_debug),
+    data_sections: adapterDataSections(store, request, request.top_k) as unknown as JsonValue,
     count: run.ranked.length,
     ...debugMeta(run, input.include_debug),
   };
@@ -151,10 +162,11 @@ export const composeGenuiArtifact = (store: CatalogStore, input: ComposeInput = 
   const nextRequest = { ...request, ...(top_k ? { top_k } : {}) };
   const run = runRank(store, config, nextRequest, entries, !input.entry_ids || input.entry_ids.length === 0);
   const frame = frameRows(store.getFrameCopy());
+  const dataSections = adapterDataSections(store, request, top_k);
   return {
     catalog_version: run.catalog_version,
     weights_version: run.weights_version,
-    artifact: composeGenUiArtifact(run.ranked, request, frame.copy, frame.segments, store.getEvidence(), config.handoff_allowlist, input.frame_segment) as unknown as JsonObject,
+    artifact: composeGenUiArtifact(run.ranked, request, frame.copy, frame.segments, store.getEvidence(), config.handoff_allowlist, input.frame_segment, dataSections) as unknown as JsonObject,
     ...debugMeta(run, input.include_debug),
   };
 };
