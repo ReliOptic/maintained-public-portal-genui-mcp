@@ -15,6 +15,10 @@ describe("adapter registry", () => {
     expect(() => validateAdapterRegistration({ ...welfare, adapter_id: "live", refresh_mode: "on_demand" })).toThrow(/proxy_url/u);
   });
 
+  it("rejects invalid refresh_mode instead of defaulting execution path", () => {
+    expect(() => validateAdapterRegistration({ ...welfare, refresh_mode: "scheduld" })).toThrow(/refresh_mode/u);
+  });
+
   it("matches adapters by taxonomy trigger_intents", () => {
     expect(matchingAdapters([welfare], ["benefit_check"])).toEqual([welfare]);
   });

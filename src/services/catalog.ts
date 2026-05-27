@@ -5,7 +5,7 @@ import type { WeightConfig } from "../types/weights.types.js";
 import { parseWeightConfig } from "./weights-loader.js";
 import { logJson } from "../utils/logger.js";
 import { parseAdapterRegistry } from "./adapter-registry.js";
-import type { AdapterRegistration, DataRecord } from "../types/adapter.types.js";
+import type { AdapterRegistration, DataRecord, SourceManifest } from "../types/adapter.types.js";
 
 interface DbRow {
   readonly payload_json: string;
@@ -13,7 +13,8 @@ interface DbRow {
 
 interface FreshnessRow { readonly latest_date: string | null }
 interface VersionRow { readonly version: string | null }
-interface DataRecordRow { readonly record_id: string; readonly adapter_id: string; readonly region: string; readonly period: string; readonly payload_json: string }
+interface DataRecordRow { readonly record_id: string; readonly adapter_id: string; readonly region: string; readonly period: string; readonly call_status: SourceManifest["call_status"]; readonly payload_json: string }
+export interface DataRecordBatch { readonly rows: readonly DataRecord[]; readonly call_status: SourceManifest["call_status"] }
 
 export class CatalogError extends Error {
   public constructor(message: string, public readonly cause?: unknown) { super(message); this.name = "CatalogError"; }
@@ -52,6 +53,10 @@ const dateAgeDays = (stamp: string | null, now: Date): number | null => {
   const parsed = Date.parse(stamp);
   if (!Number.isFinite(parsed)) return null;
   return Math.floor((now.getTime() - parsed) / MILLIS_PER_DAY);
+};
+const batchStatus = (rows: readonly DataRecordRow[]): SourceManifest["call_status"] => {
+  const statuses = rows.map((row) => row.call_status);
+  return statuses.includes("error") ? "error" : statuses.includes("timeout") ? "timeout" : statuses.includes("mock") ? "mock" : "ok";
 };
 
 export class CatalogStore {
@@ -122,16 +127,19 @@ export class CatalogStore {
     return this.adapterRegistry;
   }
 
-  public getDataRecords(adapterId: string, region: string | undefined, limit: number | undefined): DataRecord[] {
+  public getDataRecords(adapterId: string, region: string | undefined, limit: number | undefined): DataRecordBatch {
     const params = { adapter_id: adapterId, region: region ?? "nationwide", limit: limitValue(limit) };
-    const sql = `SELECT record_id, adapter_id, region, period, payload_json FROM data_records
+    const sql = `SELECT record_id, adapter_id, region, period, call_status, payload_json FROM data_records
       WHERE adapter_id = @adapter_id AND (region = @region OR region = 'nationwide')
       ORDER BY region = @region DESC, record_id LIMIT @limit`;
     const rows = this.database.prepare(sql).all(params) as DataRecordRow[];
-    return rows.map((row) => ({
-      record_id: row.record_id, adapter_id: row.adapter_id, region: row.region, period: row.period,
-      payload: JSON.parse(row.payload_json) as Record<string, string | number | null>,
-    }));
+    return {
+      call_status: batchStatus(rows),
+      rows: rows.map((row) => ({
+        record_id: row.record_id, adapter_id: row.adapter_id, region: row.region, period: row.period,
+        payload: JSON.parse(row.payload_json) as Record<string, string | number | null>,
+      })),
+    };
   }
 
   public getCatalogVersion(): string {

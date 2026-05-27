@@ -4,7 +4,7 @@
   "display_name": "Maintained Public Portal GenUI",
   "version": "0.2.0",
   "description": "Korean public-service catalog MCP — ranked portal cards, evidence rails, and public OpenAPI data sections.",
-  "long_description": "Runs locally through stdio and reads the bundled compiled.sqlite catalog. 10,000개 이상의 공공서비스를 persona·intent·region taxonomy로 랭킹하고, v0.2 ApiAdapter 플러그인으로 공공 OpenAPI 실시간 데이터를 data_sections에 추가합니다. 서버는 사용자 자격증명을 요구하지 않으며 포털을 크롤링하지 않습니다.",
+  "long_description": "Runs locally through stdio and reads the bundled compiled.sqlite catalog. 10,000개 이상의 공공서비스를 persona·intent·region taxonomy로 랭킹하고, v0.2 ApiAdapter 플러그인으로 CI가 미리 가져온 공공 OpenAPI snapshot을 data_sections에 추가합니다. 서버는 사용자 자격증명을 요구하지 않으며 포털을 크롤링하지 않습니다.",
   "author": {
     "name": "ReliOptic"
   },

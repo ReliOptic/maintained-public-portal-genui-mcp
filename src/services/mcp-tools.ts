@@ -112,8 +112,8 @@ const rankRequest = (input: RankInput): RankRequest => ({
 const adapterDataSections = (store: CatalogStore, request: RankRequest, limit: number | undefined): DataSection[] =>
   matchingAdapters(store.getAdapterRegistry(), request.intent ?? []).flatMap((registration) => {
     if (registration.refresh_mode !== "scheduled") return [];
-    const rows = store.getDataRecords(registration.adapter_id, request.region?.[0], limit);
-    const section = dataSectionFor(registration, rows);
+    const batch = store.getDataRecords(registration.adapter_id, request.region?.[0], limit);
+    const section = dataSectionFor(registration, batch.rows, batch.call_status);
     return section ? [section] : [];
   });
 

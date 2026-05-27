@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { compileAdapters } from "../../scripts/compile-adapters.js";
+import { CatalogStore } from "../../src/services/catalog.js";
 import type { AdapterFetchParams, ApiAdapter, DataRecord, SourceManifest } from "../../src/types/adapter.types.js";
 
 const roots: string[] = [];
@@ -49,6 +50,12 @@ describe("compile-adapters", () => {
     const { root, dbPath } = makeRoot();
     await expect(compileAdapters({ catalogRoot: root, dbPath, adapters: [adapter("error")], logger: () => undefined })).resolves.toBeDefined();
     expect(rows(dbPath).map((row) => row.call_status)).toEqual(["error", "error"]);
+    const store = new CatalogStore(dbPath);
+    try {
+      expect(store.getDataRecords("test-adapter", "seoul", 2).call_status).toBe("error");
+    } finally {
+      store.close();
+    }
   });
 
   it("round-trips successful payload_json rows", async () => {
