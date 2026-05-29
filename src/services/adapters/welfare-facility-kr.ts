@@ -79,8 +79,13 @@ export const welfareFacilityKrAdapter: ApiAdapter = {
     adapter_id: ADAPTER_ID,
     name: API_NAME,
     refresh_mode: "scheduled",
+    availability: "available",
+    output_section_id: ADAPTER_ID,
     trigger_intents: ["benefit_check", "benefit_application"],
+    data_sections: [ADAPTER_ID],
     fetch_params: { region: { type: "taxonomy_region_enum" }, period: { type: "YYYY-MM" }, limit: { type: "integer", default: 20 } },
+    source: { agency: AGENCY, api_name: API_NAME, auth_type: "key_required", status: "live", url: ENDPOINT },
+    credential_boundary: "none",
   },
   async fetch(params) {
     const key = getRuntimeConfig().welfareApiKey;

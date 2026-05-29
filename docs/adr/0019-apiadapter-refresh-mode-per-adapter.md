@@ -22,6 +22,14 @@ Each `ApiAdapter` declares `refresh_mode: "scheduled" | "on_demand"` in its regi
 
 The adapter identity describes source semantics only. It never decides execution routing.
 
+Adapters also declare `availability: "available" | "unavailable" | "parked"`:
+
+- `available`: eligible for taxonomy-triggered data sections.
+- `unavailable`: discoverable but not routed; used for sources that need proxy/failure UX before activation.
+- `parked`: discoverable but not routed; used for human decision gates such as legal-evidence integration.
+
+An `on_demand` adapter may omit `proxy_url` only while it is `unavailable` or `parked`. An `available` on-demand adapter still requires a maintainer proxy URL before the server will accept the registration.
+
 ## Confirmed v0.2 design decisions
 
 1. **Existing server extension, not a separate server.** v0.2 adds an `ApiAdapter` plugin layer inside the current MCP server and preserves the existing catalog/ranking/tool surface.
@@ -45,6 +53,7 @@ A single `resource://adapters/v1` manifest lists adapter registrations:
     {
       "adapter_id": "customs_trade_statistics",
       "refresh_mode": "scheduled",
+      "availability": "available",
       "trigger_intents": ["policy_information", "data_search"],
       "fetch_params": {
         "region": { "type": "taxonomy_region_enum" },
@@ -73,6 +82,7 @@ Each adapter implements the three-method interface documented in `CONTEXT.md`:
 - `compiled.sqlite` gains adapter storage for scheduled output, such as a `data_records` table keyed by adapter, region, and period.
 - The existing `compose_genui_artifact` implementation becomes the integration point for DataSections; a new top-level MCP tool is not required for MVP.
 - `resource://adapters/v1` becomes a contract and needs fixture tests before the first adapter implementation.
+- `availability` lets hosts inspect planned or blocked adapters without letting unfinished integrations participate in request routing.
 - On-demand adapters require explicit proxy, timeout, retry, cache, and failure-disclosure design before activation.
 - v0.2 can ship an MVP with one scheduled adapter without committing to live request-time infrastructure.
 

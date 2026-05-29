@@ -131,7 +131,7 @@ v0.2의 복지시설 Data Sections는 런타임 실시간 호출이 아니라 `n
 WELFARE_API_KEY=... npm run compile
 ```
 
-`data_sections[].source.call_status`는 `ok`, `mock`, `timeout`, `error` 중 하나로 공개되어 host/user가 snapshot 상태를 구분할 수 있습니다.
+`data_sections[].source.call_status`는 `ok`, `mock`, `timeout`, `error` 중 하나로 공개되어 host/user가 snapshot 상태를 구분할 수 있습니다. `resource://adapters/v1`의 `availability`는 `available`, `unavailable`, `parked` 중 하나이며, `unavailable`/`parked` 어댑터는 discovery에는 보이지만 taxonomy routing에는 참여하지 않습니다.
 
 ---
 

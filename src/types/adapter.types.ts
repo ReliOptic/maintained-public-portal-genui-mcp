@@ -14,6 +14,14 @@ export interface SourceManifest {
   readonly auth_type: "public" | "key_required";
 }
 
+export interface AdapterSource {
+  readonly agency: string;
+  readonly api_name: string;
+  readonly auth_type: SourceManifest["auth_type"];
+  readonly status?: "live" | "fixture" | "unavailable";
+  readonly url?: string;
+}
+
 export interface DataRecord {
   readonly record_id: string;
   readonly adapter_id: string;
@@ -40,10 +48,19 @@ export interface AdapterParamSchema {
 export interface AdapterRegistration {
   readonly adapter_id: string;
   readonly name: string;
+  readonly description?: string;
   readonly refresh_mode: "scheduled" | "on_demand";
+  readonly availability?: "available" | "unavailable" | "parked";
+  readonly output_section_id?: string;
   readonly trigger_intents: readonly string[];
+  readonly data_sections?: readonly string[];
+  readonly supported_regions?: readonly string[];
   readonly fetch_params: AdapterParamSchema;
   readonly proxy_url?: string;
+  readonly source?: AdapterSource;
+  readonly credential_boundary?: "none" | "server_proxy_required" | "decision_required";
+  readonly status_reason?: string;
+  readonly adr_reference?: string;
 }
 
 export interface ApiAdapter {

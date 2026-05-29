@@ -46,6 +46,9 @@ const implementationFor = (registration: AdapterRegistration, injected: Map<stri
   return adapter;
 };
 
+const compileRegionsFor = (registration: AdapterRegistration, regions: readonly string[]): readonly string[] =>
+  registration.supported_regions && registration.supported_regions.length > 0 ? registration.supported_regions : regions;
+
 const statusFromRecord = (record: DataRecord): SourceManifest["call_status"] => {
   const status = record.payload.call_status;
   return status === "mock" || status === "timeout" || status === "error" ? status : "ok";
@@ -82,10 +85,10 @@ export const compileAdapters = async (options: CompileAdapterOptions = {}): Prom
   const db = new Database(options.dbPath ?? OUT);
   let inserted = 0;
   try {
-    for (const registration of registry.adapters.filter((item) => item.refresh_mode === "scheduled")) {
+    for (const registration of registry.adapters.filter((item) => item.refresh_mode === "scheduled" && (item.availability ?? "available") === "available")) {
       const adapter = implementationFor(registration, injected);
       const fetchedRecords: DataRecord[] = [];
-      for (const region of regions) {
+      for (const region of compileRegionsFor(registration, regions)) {
         const limit = asNumber(registration.fetch_params.limit?.default) ?? 20;
         try {
           const rows = await adapter.fetch({ region, limit });

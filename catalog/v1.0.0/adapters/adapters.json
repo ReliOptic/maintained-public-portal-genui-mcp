@@ -5,7 +5,9 @@
       "adapter_id": "welfare-facility-kr",
       "name": "복지시설 현황",
       "refresh_mode": "scheduled",
+      "availability": "available",
       "trigger_intents": ["benefit_check", "benefit_application"],
+      "data_sections": ["welfare-facility-kr"],
       "fetch_params": {
         "region": { "type": "taxonomy_region_enum" },
         "period": { "type": "YYYY-MM" },
@@ -14,7 +16,179 @@
           "values": ["노인복지관", "장애인복지관", "아동복지시설", "사회복지관", "정신건강복지센터"]
         },
         "limit": { "type": "integer", "default": 20 }
-      }
+      },
+      "source": {
+        "agency": "보건복지부",
+        "api_name": "사회복지시설 현황",
+        "auth_type": "key_required",
+        "status": "live",
+        "url": "https://api.odcloud.kr/api/15001848/v1/uddi"
+      },
+      "credential_boundary": "none"
+    },
+    {
+      "adapter_id": "apt-rent-price-kr",
+      "name": "아파트 전월세 실거래",
+      "description": "대전 유성구 아파트 전월세 실거래 fixture snapshot입니다.",
+      "refresh_mode": "scheduled",
+      "availability": "available",
+      "output_section_id": "apt-rent-price-kr",
+      "trigger_intents": ["policy_information", "address_change"],
+      "data_sections": ["apt-rent-price-kr"],
+      "supported_regions": ["daejeon"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "period": { "type": "YYYY-MM" },
+        "limit": { "type": "integer", "default": 20 }
+      },
+      "source": {
+        "agency": "국토교통부",
+        "api_name": "아파트 전월세 실거래자료",
+        "auth_type": "key_required",
+        "status": "fixture",
+        "url": "https://www.data.go.kr/data/15126474/openapi.do"
+      },
+      "credential_boundary": "none"
+    },
+    {
+      "adapter_id": "population-stats-kr",
+      "name": "주민등록 인구 현황",
+      "description": "대전 유성구 주민등록 인구/세대 fixture snapshot입니다.",
+      "refresh_mode": "scheduled",
+      "availability": "available",
+      "output_section_id": "population-stats-kr",
+      "trigger_intents": ["data_search", "dataset_download", "policy_information"],
+      "data_sections": ["population-stats-kr"],
+      "supported_regions": ["daejeon"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "period": { "type": "YYYY-MM" },
+        "limit": { "type": "integer", "default": 20 }
+      },
+      "source": {
+        "agency": "행정안전부",
+        "api_name": "주민등록 인구 및 세대현황",
+        "auth_type": "key_required",
+        "status": "fixture",
+        "url": "https://www.data.go.kr/data/15108071/openapi.do"
+      },
+      "credential_boundary": "none"
+    },
+    {
+      "adapter_id": "parking-info-kr",
+      "name": "주차장 현황",
+      "description": "대전 유성구 주차장 fixture snapshot입니다.",
+      "refresh_mode": "scheduled",
+      "availability": "available",
+      "output_section_id": "parking-info-kr",
+      "trigger_intents": ["data_search", "policy_information"],
+      "data_sections": ["parking-info-kr"],
+      "supported_regions": ["daejeon"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "period": { "type": "YYYY-MM" },
+        "limit": { "type": "integer", "default": 20 }
+      },
+      "source": {
+        "agency": "대전광역시 유성구",
+        "api_name": "주차장 정보",
+        "auth_type": "public",
+        "status": "fixture",
+        "url": "https://www.data.go.kr/data/15110051/fileData.do"
+      },
+      "credential_boundary": "none"
+    },
+    {
+      "adapter_id": "cctv-status-kr",
+      "name": "CCTV 설치 현황",
+      "description": "대전 유성구 CCTV 설치 fixture snapshot입니다.",
+      "refresh_mode": "scheduled",
+      "availability": "available",
+      "output_section_id": "cctv-status-kr",
+      "trigger_intents": ["data_search", "policy_information"],
+      "data_sections": ["cctv-status-kr"],
+      "supported_regions": ["daejeon"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "period": { "type": "YYYY-MM" },
+        "limit": { "type": "integer", "default": 20 }
+      },
+      "source": {
+        "agency": "대전광역시 유성구",
+        "api_name": "CCTV 설치 현황",
+        "auth_type": "public",
+        "status": "fixture",
+        "url": "https://www.data.go.kr/data/15108837/fileData.do"
+      },
+      "credential_boundary": "none"
+    },
+    {
+      "adapter_id": "population-by-dong-kr",
+      "name": "행정동 인구 현황",
+      "description": "대전 유성구 행정동별 인구 fixture snapshot입니다.",
+      "refresh_mode": "scheduled",
+      "availability": "available",
+      "output_section_id": "population-by-dong-kr",
+      "trigger_intents": ["data_search", "dataset_download", "policy_information"],
+      "data_sections": ["population-by-dong-kr"],
+      "supported_regions": ["daejeon"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "period": { "type": "YYYY-MM" },
+        "limit": { "type": "integer", "default": 20 }
+      },
+      "source": {
+        "agency": "행정안전부",
+        "api_name": "행정동별 주민등록 인구",
+        "auth_type": "key_required",
+        "status": "fixture",
+        "url": "https://www.data.go.kr/data/15108071/openapi.do"
+      },
+      "credential_boundary": "none"
+    },
+    {
+      "adapter_id": "ev-chargers-kr",
+      "name": "전기차 충전소 실시간 상태",
+      "description": "on-demand proxy와 실패 공개 UX가 구현될 때까지 비활성화된 어댑터입니다.",
+      "refresh_mode": "on_demand",
+      "availability": "unavailable",
+      "output_section_id": "ev-chargers-kr",
+      "trigger_intents": ["data_search", "api_application", "policy_information"],
+      "data_sections": ["ev-chargers-kr"],
+      "supported_regions": ["daejeon"],
+      "fetch_params": {
+        "region": { "type": "taxonomy_region_enum" },
+        "limit": { "type": "integer", "default": 20 }
+      },
+      "source": {
+        "agency": "한국환경공단",
+        "api_name": "전기차 충전소 상태정보",
+        "auth_type": "key_required",
+        "status": "unavailable",
+        "url": "https://www.data.go.kr/data/15076352/openapi.do"
+      },
+      "credential_boundary": "server_proxy_required",
+      "status_reason": "실시간 충전소 상태는 서버 측 인증키 경계와 명시적 unavailable UX가 필요합니다."
+    },
+    {
+      "adapter_id": "korean-law-evidence",
+      "name": "한국 법령 근거 조회",
+      "description": "법령 근거의 역할과 안전 경계가 승인될 때까지 parked 상태로 공개합니다.",
+      "refresh_mode": "on_demand",
+      "availability": "parked",
+      "trigger_intents": ["policy_information"],
+      "data_sections": [],
+      "supported_regions": [],
+      "fetch_params": {},
+      "source": {
+        "agency": "Korean law MCP",
+        "api_name": "Legal evidence lookup",
+        "auth_type": "key_required",
+        "status": "unavailable"
+      },
+      "credential_boundary": "decision_required",
+      "status_reason": "법령 근거 조회는 live integration 전에 별도 human decision gate가 필요합니다.",
+      "adr_reference": "ADR-0022"
     }
   ]
 }

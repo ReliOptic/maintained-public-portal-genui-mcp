@@ -64,6 +64,23 @@ describe("compile-adapters", () => {
     expect(rows(dbPath).map((row) => JSON.parse(row.payload_json))).toEqual([{ value: 1 }, { value: 1 }]);
   });
 
+  it("limits scheduled compilation to supported_regions when declared", async () => {
+    const { root, dbPath } = makeRoot();
+    fs.writeFileSync(path.join(root, "adapters", "adapters.json"), JSON.stringify({
+      adapters_version: "1.0.0",
+      adapters: [{
+        adapter_id: "test-adapter",
+        name: "Test",
+        refresh_mode: "scheduled",
+        trigger_intents: ["benefit_check"],
+        supported_regions: ["seoul"],
+        fetch_params: { region: { type: "taxonomy_region_enum" }, limit: { type: "integer", default: 2 } },
+      }],
+    }));
+    await compileAdapters({ catalogRoot: root, dbPath, adapters: [adapter("ok")], logger: () => undefined });
+    expect(rows(dbPath).map((row) => JSON.parse(row.payload_json))).toEqual([{ value: 1 }]);
+  });
+
   it("throws for unknown adapter_id in adapters.json", async () => {
     const { root, dbPath } = makeRoot("missing-adapter");
     await expect(compileAdapters({ catalogRoot: root, dbPath, adapters: [], logger: () => undefined })).rejects.toThrow(/unknown adapter_id/u);
