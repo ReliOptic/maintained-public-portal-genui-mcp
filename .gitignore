@@ -3,6 +3,7 @@ dist
 .turbo
 .vite
 coverage
+.omx
 *.db
 *.db-shm
 *.db-wal
