@@ -1,0 +1,306 @@
+{
+  "$ref": "#/definitions/AdapterDiscoveryResponse",
+  "definitions": {
+    "AdapterDiscoveryResponse": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "const": "resource://adapters/v1"
+        },
+        "adapters": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "refreshMode": {
+                    "type": "string",
+                    "enum": [
+                      "scheduled",
+                      "on_demand"
+                    ]
+                  },
+                  "triggerIntents": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "housing",
+                        "local",
+                        "mobility",
+                        "safety",
+                        "policy_information",
+                        "legal_reference"
+                      ]
+                    },
+                    "default": []
+                  },
+                  "dataSections": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "default": []
+                  },
+                  "supportedRegions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "default": []
+                  },
+                  "source": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "status": {
+                        "type": "string",
+                        "const": "fixture"
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "status"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "availability": {
+                    "type": "string",
+                    "const": "available"
+                  },
+                  "outputSectionId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "credentialBoundary": {
+                    "type": "string",
+                    "const": "none"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "description",
+                  "refreshMode",
+                  "source",
+                  "availability",
+                  "outputSectionId",
+                  "credentialBoundary"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/id"
+                  },
+                  "title": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/title"
+                  },
+                  "description": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/description"
+                  },
+                  "refreshMode": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/refreshMode"
+                  },
+                  "triggerIntents": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/triggerIntents"
+                  },
+                  "dataSections": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/dataSections"
+                  },
+                  "supportedRegions": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/supportedRegions"
+                  },
+                  "source": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/id"
+                      },
+                      "name": {
+                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/name"
+                      },
+                      "status": {
+                        "type": "string",
+                        "const": "unavailable"
+                      },
+                      "url": {
+                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/url"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "status"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "availability": {
+                    "type": "string",
+                    "const": "unavailable"
+                  },
+                  "outputSectionId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "credentialBoundary": {
+                    "type": "string",
+                    "const": "server_proxy_required"
+                  },
+                  "statusReason": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "description",
+                  "refreshMode",
+                  "source",
+                  "availability",
+                  "credentialBoundary",
+                  "statusReason"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/id"
+                  },
+                  "title": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/title"
+                  },
+                  "description": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/description"
+                  },
+                  "refreshMode": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/refreshMode"
+                  },
+                  "triggerIntents": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/triggerIntents"
+                  },
+                  "dataSections": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 0,
+                    "maxItems": 0,
+                    "default": []
+                  },
+                  "supportedRegions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 0,
+                    "maxItems": 0,
+                    "default": []
+                  },
+                  "source": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/id"
+                      },
+                      "name": {
+                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/name"
+                      },
+                      "status": {
+                        "type": "string",
+                        "const": "unavailable"
+                      },
+                      "url": {
+                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/url"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "status"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "availability": {
+                    "type": "string",
+                    "const": "parked"
+                  },
+                  "credentialBoundary": {
+                    "type": "string",
+                    "const": "decision_required"
+                  },
+                  "statusReason": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "adrReference": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "description",
+                  "refreshMode",
+                  "source",
+                  "availability",
+                  "credentialBoundary",
+                  "statusReason",
+                  "adrReference"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "resourceUri",
+        "adapters",
+        "generatedAt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

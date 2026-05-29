@@ -32,6 +32,91 @@ export const EvidenceSchema = z.object({
   explanation: z.string()
 });
 
+export const DataSectionSourceSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  status: z.enum(["fixture", "unavailable"]),
+  url: z.string().url().optional()
+});
+
+export const DataMetricSchema = z.object({
+  label: z.string().min(1),
+  value: z.union([z.string(), z.number()]),
+  unit: z.string().optional()
+});
+
+export const DataSectionSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  region: z.string().min(1),
+  source: DataSectionSourceSchema,
+  metrics: z.array(DataMetricSchema).default([]),
+  rows: z.array(z.record(z.union([z.string(), z.number(), z.boolean(), z.null()]))).default([]),
+  generatedAt: z.string().datetime()
+});
+
+export const AdapterRefreshModeSchema = z.enum(["scheduled", "on_demand"]);
+export const AdapterAvailabilitySchema = z.enum(["available", "unavailable", "parked"]);
+export const AdapterCredentialBoundarySchema = z.enum(["none", "server_proxy_required", "decision_required"]);
+export const AdapterTriggerIntentSchema = z.enum([
+  "housing",
+  "local",
+  "mobility",
+  "safety",
+  "policy_information",
+  "legal_reference"
+]);
+
+const AdapterDescriptorBaseSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().min(1),
+  refreshMode: AdapterRefreshModeSchema,
+  triggerIntents: z.array(AdapterTriggerIntentSchema).default([]),
+  dataSections: z.array(z.string().min(1)).default([]),
+  supportedRegions: z.array(z.string().min(1)).default([]),
+  source: DataSectionSourceSchema
+});
+
+export const AvailableAdapterDescriptorSchema = AdapterDescriptorBaseSchema.extend({
+  availability: z.literal("available"),
+  outputSectionId: z.string().min(1),
+  source: DataSectionSourceSchema.extend({ status: z.literal("fixture") }),
+  credentialBoundary: z.literal("none")
+});
+
+export const UnavailableAdapterDescriptorSchema = AdapterDescriptorBaseSchema.extend({
+  availability: z.literal("unavailable"),
+  outputSectionId: z.string().min(1).optional(),
+  source: DataSectionSourceSchema.extend({ status: z.literal("unavailable") }),
+  credentialBoundary: z.literal("server_proxy_required"),
+  statusReason: z.string().min(1)
+});
+
+export const ParkedAdapterDescriptorSchema = AdapterDescriptorBaseSchema.extend({
+  availability: z.literal("parked"),
+  source: DataSectionSourceSchema.extend({ status: z.literal("unavailable") }),
+  credentialBoundary: z.literal("decision_required"),
+  statusReason: z.string().min(1).optional(),
+  adrReference: z.string().min(1)
+}).extend({
+  statusReason: z.string().min(1),
+  dataSections: z.array(z.string().min(1)).length(0).default([]),
+  supportedRegions: z.array(z.string().min(1)).length(0).default([])
+});
+
+export const AdapterDescriptorSchema = z.discriminatedUnion("availability", [
+  AvailableAdapterDescriptorSchema,
+  UnavailableAdapterDescriptorSchema,
+  ParkedAdapterDescriptorSchema
+]);
+
+export const AdapterDiscoveryResponseSchema = z.object({
+  resourceUri: z.literal("resource://adapters/v1"),
+  adapters: z.array(AdapterDescriptorSchema),
+  generatedAt: z.string().datetime()
+});
+
 export const BenefitSummarySchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
@@ -93,6 +178,7 @@ export const BenefitSearchResponseSchema = z.object({
   query: z.string(),
   profile: UserProfileSchema,
   results: z.array(BenefitSummarySchema),
+  dataSections: z.array(DataSectionSchema).default([]),
   generatedAt: z.string().datetime()
 });
 
@@ -125,6 +211,15 @@ export const ChangeLogResponseSchema = z.object({
 export type BenefitCategory = z.infer<typeof BenefitCategorySchema>;
 export type RecommendationStatus = z.infer<typeof RecommendationStatusSchema>;
 export type UserProfile = z.infer<typeof UserProfileSchema>;
+export type DataSectionSource = z.infer<typeof DataSectionSourceSchema>;
+export type DataMetric = z.infer<typeof DataMetricSchema>;
+export type DataSection = z.infer<typeof DataSectionSchema>;
+export type AdapterRefreshMode = z.infer<typeof AdapterRefreshModeSchema>;
+export type AdapterAvailability = z.infer<typeof AdapterAvailabilitySchema>;
+export type AdapterCredentialBoundary = z.infer<typeof AdapterCredentialBoundarySchema>;
+export type AdapterTriggerIntent = z.infer<typeof AdapterTriggerIntentSchema>;
+export type AdapterDescriptor = z.infer<typeof AdapterDescriptorSchema>;
+export type AdapterDiscoveryResponse = z.infer<typeof AdapterDiscoveryResponseSchema>;
 export type BenefitSummary = z.infer<typeof BenefitSummarySchema>;
 export type BenefitDetail = z.infer<typeof BenefitDetailSchema>;
 export type BenefitRecord = z.infer<typeof BenefitRecordSchema>;

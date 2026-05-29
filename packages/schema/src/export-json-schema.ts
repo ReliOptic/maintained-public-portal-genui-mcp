@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { zodToJsonSchema } from "zod-to-json-schema";
 import {
+  AdapterDiscoveryResponseSchema,
   ApplicationGuideResponseSchema,
   BenefitDetailSchema,
   BenefitSearchRequestSchema,
@@ -11,6 +12,7 @@ import {
 } from "./index.js";
 
 const schemas = {
+  AdapterDiscoveryResponse: AdapterDiscoveryResponseSchema,
   BenefitSearchRequest: BenefitSearchRequestSchema,
   BenefitSearchResponse: BenefitSearchResponseSchema,
   BenefitDetail: BenefitDetailSchema,
