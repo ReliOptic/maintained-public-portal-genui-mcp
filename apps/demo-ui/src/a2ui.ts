@@ -7,7 +7,7 @@ export type A2UIBlock =
       type: "adapter-discovery";
       id: string;
       title: string;
-      resourceUri: string;
+      resource_uri: string;
       adapters: AdapterDiscoveryResponse["adapters"];
     }
   | { type: "data-section"; id: string; title: string; region: string; source: string; metrics: DataSection["metrics"] }
@@ -32,7 +32,7 @@ export function benefitSearchToA2UI(
             type: "adapter-discovery" as const,
             id: "adapter-discovery",
             title: "Adapter discovery",
-            resourceUri: adapterDiscovery.resourceUri,
+            resource_uri: adapterDiscovery.resource_uri,
             adapters: adapterDiscovery.adapters
           }
         ]

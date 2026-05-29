@@ -60,108 +60,163 @@ describe("BenefitSearchRequestSchema", () => {
 
   it("parses adapter discovery with available, unavailable, and parked states", () => {
     const parsed = AdapterDiscoveryResponseSchema.parse({
-      resourceUri: "resource://adapters/v1",
+      resource_uri: "resource://adapters/v1",
+      adapters_version: "v1",
       adapters: [
         {
-          id: "apt-rent-price-kr",
-          title: "Apartment rent transaction adapter",
+          adapter_id: "apt-rent-price-kr",
+          name: "Apartment rent transaction adapter",
           description: "Fixture-backed scheduled rent section.",
-          refreshMode: "scheduled",
+          refresh_mode: "scheduled",
           availability: "available",
-          outputSectionId: "apt-rent-price-kr",
-          triggerIntents: ["housing"],
-          dataSections: ["apt-rent-price-kr"],
-          supportedRegions: ["daejeon_yuseong"],
-          source: { id: "apt-rent-price-kr", name: "MOLIT apartment rent transactions", status: "fixture" },
-          credentialBoundary: "none"
+          output_section_id: "apt-rent-price-kr",
+          trigger_intents: ["housing"],
+          data_sections: ["apt-rent-price-kr"],
+          supported_regions: ["daejeon_yuseong"],
+          fetch_params: { region: { type: "taxonomy_region_enum" }, limit: { type: "integer", default: 20 } },
+          source: {
+            agency: "Ministry of Land, Infrastructure and Transport",
+            api_name: "Apartment rent transactions",
+            auth_type: "key_required",
+            status: "fixture"
+          },
+          credential_boundary: "none"
         },
         {
-          id: "korean-law-evidence",
-          title: "Korean law evidence adapter",
+          adapter_id: "korean-law-evidence",
+          name: "Korean law evidence adapter",
           description: "Parked until the legal-evidence role is accepted.",
-          refreshMode: "on_demand",
+          refresh_mode: "on_demand",
           availability: "parked",
-          triggerIntents: ["policy_information"],
-          dataSections: [],
-          supportedRegions: [],
-          source: { id: "korean-law-evidence", name: "Korean law MCP", status: "unavailable" },
-          credentialBoundary: "decision_required",
-          statusReason: "ADR-0022 Option A/B/C decision required.",
-          adrReference: "ADR-0022"
+          trigger_intents: ["policy_information"],
+          data_sections: [],
+          supported_regions: [],
+          fetch_params: {},
+          source: {
+            agency: "Korean law MCP",
+            api_name: "Legal evidence lookup",
+            auth_type: "key_required",
+            status: "unavailable"
+          },
+          credential_boundary: "decision_required",
+          status_reason: "ADR-0022 Option A/B/C decision required.",
+          adr_reference: "ADR-0022"
         }
       ],
-      generatedAt: "2026-05-29T00:00:00.000Z"
+      generated_at: "2026-05-29T00:00:00.000Z"
     });
 
     expect(parsed.adapters.map((adapter) => adapter.availability)).toEqual(["available", "parked"]);
     expect(() =>
       AdapterDiscoveryResponseSchema.parse({
-        resourceUri: "resource://adapters/v1",
+        resource_uri: "resource://adapters/v1",
+        adapters_version: "v1",
         adapters: [
           {
-            id: "invalid",
-            title: "Invalid",
+            adapter_id: "invalid",
+            name: "Invalid",
             description: "Invalid state.",
-            refreshMode: "scheduled",
+            refresh_mode: "scheduled",
             availability: "maybe",
-            source: { id: "invalid", name: "Invalid", status: "fixture" },
-            credentialBoundary: "none"
+            source: { agency: "Invalid", api_name: "Invalid", auth_type: "public", status: "fixture" },
+            credential_boundary: "none"
           }
         ],
-        generatedAt: "2026-05-29T00:00:00.000Z"
+        generated_at: "2026-05-29T00:00:00.000Z"
       })
     ).toThrow();
     expect(() =>
       AdapterDiscoveryResponseSchema.parse({
-        resourceUri: "resource://adapters/v1",
+        resource_uri: "resource://adapters/v1",
+        adapters_version: "v1",
         adapters: [
           {
-            id: "missing-output",
-            title: "Missing output",
+            adapter_id: "missing-output",
+            name: "Missing output",
             description: "Available adapters must expose an output section.",
-            refreshMode: "scheduled",
+            refresh_mode: "scheduled",
             availability: "available",
-            source: { id: "missing-output", name: "Missing output", status: "fixture" },
-            credentialBoundary: "none"
+            source: { agency: "Missing output", api_name: "Missing output", auth_type: "public", status: "fixture" },
+            credential_boundary: "none"
           }
         ],
-        generatedAt: "2026-05-29T00:00:00.000Z"
+        generated_at: "2026-05-29T00:00:00.000Z"
       })
     ).toThrow();
     expect(() =>
       AdapterDiscoveryResponseSchema.parse({
-        resourceUri: "resource://adapters/v1",
+        resource_uri: "resource://adapters/v1",
+        adapters_version: "v1",
         adapters: [
           {
-            id: "missing-reason",
-            title: "Missing reason",
+            adapter_id: "missing-reason",
+            name: "Missing reason",
             description: "Unavailable adapters must explain the gate.",
-            refreshMode: "on_demand",
+            refresh_mode: "on_demand",
             availability: "unavailable",
-            source: { id: "missing-reason", name: "Missing reason", status: "unavailable" },
-            credentialBoundary: "server_proxy_required"
+            source: { agency: "Missing reason", api_name: "Missing reason", auth_type: "key_required", status: "unavailable" },
+            credential_boundary: "server_proxy_required"
           }
         ],
-        generatedAt: "2026-05-29T00:00:00.000Z"
+        generated_at: "2026-05-29T00:00:00.000Z"
       })
     ).toThrow();
     expect(() =>
       AdapterDiscoveryResponseSchema.parse({
-        resourceUri: "resource://adapters/v1",
+        resource_uri: "resource://adapters/v1",
+        adapters_version: "v1",
         adapters: [
           {
-            id: "invalid-intent",
-            title: "Invalid intent",
+            adapter_id: "invalid-intent",
+            name: "Invalid intent",
             description: "Invalid intent should fail.",
-            refreshMode: "scheduled",
+            refresh_mode: "scheduled",
             availability: "available",
-            triggerIntents: ["free_text_intent"],
-            source: { id: "invalid-intent", name: "Invalid intent", status: "fixture" },
-            credentialBoundary: "none"
+            trigger_intents: ["free_text_intent"],
+            source: { agency: "Invalid intent", api_name: "Invalid intent", auth_type: "public", status: "fixture" },
+            credential_boundary: "none"
           }
         ],
-        generatedAt: "2026-05-29T00:00:00.000Z"
+        generated_at: "2026-05-29T00:00:00.000Z"
       })
     ).toThrow();
+  });
+
+  it("parses the ADR-0019 adapter manifest field names", () => {
+    const parsed = AdapterDiscoveryResponseSchema.parse({
+      adapters_version: "v1",
+      adapters: [
+        {
+          adapter_id: "customs_trade_statistics",
+          name: "Customs trade statistics",
+          description: "Scheduled customs trade statistics adapter.",
+          refresh_mode: "scheduled",
+          availability: "available",
+          output_section_id: "customs_trade_statistics",
+          trigger_intents: ["policy_information"],
+          data_sections: ["customs_trade_statistics"],
+          supported_regions: ["nationwide"],
+          fetch_params: {
+            region: { type: "taxonomy_region_enum" },
+            period: { type: "YYYY-MM" },
+            domain_filter: { type: "enum", values: ["export", "import"] },
+            limit: { type: "integer", default: 50 }
+          },
+          source: {
+            agency: "관세청",
+            api_name: "수출입 통계",
+            auth_type: "key_required"
+          },
+          credential_boundary: "none"
+        }
+      ]
+    });
+
+    expect(parsed.resource_uri).toBe("resource://adapters/v1");
+    expect(parsed.adapters[0]).toMatchObject({
+      adapter_id: "customs_trade_statistics",
+      refresh_mode: "scheduled",
+      trigger_intents: ["policy_information"]
+    });
   });
 });

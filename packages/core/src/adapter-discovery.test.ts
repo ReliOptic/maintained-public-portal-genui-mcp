@@ -6,8 +6,9 @@ describe("adapter discovery catalog", () => {
   it("publishes fixture-backed regional adapters and explicit gated states", () => {
     const discovery = AdapterDiscoveryResponseSchema.parse(getAdapterDiscovery());
 
-    expect(discovery.resourceUri).toBe("resource://adapters/v1");
-    expect(discovery.adapters.map((adapter) => adapter.id)).toEqual([
+    expect(discovery.resource_uri).toBe("resource://adapters/v1");
+    expect(discovery.adapters_version).toBe("v1");
+    expect(discovery.adapters.map((adapter) => adapter.adapter_id)).toEqual([
       "apt-rent-price-kr",
       "population-stats-kr",
       "parking-info-kr",
@@ -17,16 +18,16 @@ describe("adapter discovery catalog", () => {
       "korean-law-evidence"
     ]);
     expect(discovery.adapters.filter((adapter) => adapter.availability === "available")).toHaveLength(5);
-    expect(discovery.adapters.find((adapter) => adapter.id === "ev-chargers-kr")).toMatchObject({
+    expect(discovery.adapters.find((adapter) => adapter.adapter_id === "ev-chargers-kr")).toMatchObject({
       availability: "unavailable",
-      credentialBoundary: "server_proxy_required",
-      source: { status: "unavailable" }
+      credential_boundary: "server_proxy_required",
+      source: { agency: "Korea Environment Corporation", status: "unavailable" }
     });
-    expect(discovery.adapters.find((adapter) => adapter.id === "korean-law-evidence")).toMatchObject({
+    expect(discovery.adapters.find((adapter) => adapter.adapter_id === "korean-law-evidence")).toMatchObject({
       availability: "parked",
-      credentialBoundary: "decision_required",
-      dataSections: [],
-      adrReference: "ADR-0022"
+      credential_boundary: "decision_required",
+      data_sections: [],
+      adr_reference: "ADR-0022"
     });
   });
 
@@ -34,10 +35,10 @@ describe("adapter discovery catalog", () => {
     const discovery = getAdapterDiscovery();
     const availableAdapters = discovery.adapters.filter((adapter) => adapter.availability === "available");
 
-    expect(availableAdapters.every((adapter) => adapter.outputSectionId && adapter.dataSections.includes(adapter.outputSectionId))).toBe(
+    expect(availableAdapters.every((adapter) => adapter.output_section_id && adapter.data_sections.includes(adapter.output_section_id))).toBe(
       true
     );
-    expect(availableAdapters.flatMap((adapter) => adapter.supportedRegions)).toEqual(
+    expect(availableAdapters.flatMap((adapter) => adapter.supported_regions)).toEqual(
       expect.arrayContaining(["daejeon_yuseong"])
     );
   });

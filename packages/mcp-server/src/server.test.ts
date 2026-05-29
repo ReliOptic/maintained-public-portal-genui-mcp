@@ -88,9 +88,10 @@ describe("MCP JSON tool result", () => {
     expect(content.mimeType).toBe("application/json");
 
     const payload = AdapterDiscoveryResponseSchema.parse(JSON.parse(content.text));
-    expect(payload.adapters.map((adapter) => adapter.id)).toEqual(
+    expect(payload.resource_uri).toBe("resource://adapters/v1");
+    expect(payload.adapters.map((adapter) => adapter.adapter_id)).toEqual(
       expect.arrayContaining(["apt-rent-price-kr", "ev-chargers-kr", "korean-law-evidence"])
     );
-    expect(payload.adapters.find((adapter) => adapter.id === "korean-law-evidence")?.availability).toBe("parked");
+    expect(payload.adapters.find((adapter) => adapter.adapter_id === "korean-law-evidence")?.availability).toBe("parked");
   });
 });

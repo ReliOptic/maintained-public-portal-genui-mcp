@@ -4,9 +4,14 @@
     "AdapterDiscoveryResponse": {
       "type": "object",
       "properties": {
-        "resourceUri": {
+        "resource_uri": {
           "type": "string",
-          "const": "resource://adapters/v1"
+          "const": "resource://adapters/v1",
+          "default": "resource://adapters/v1"
+        },
+        "adapters_version": {
+          "type": "string",
+          "minLength": 1
         },
         "adapters": {
           "type": "array",
@@ -15,11 +20,11 @@
               {
                 "type": "object",
                 "properties": {
-                  "id": {
+                  "adapter_id": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "title": {
+                  "name": {
                     "type": "string",
                     "minLength": 1
                   },
@@ -27,14 +32,14 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "refreshMode": {
+                  "refresh_mode": {
                     "type": "string",
                     "enum": [
                       "scheduled",
                       "on_demand"
                     ]
                   },
-                  "triggerIntents": {
+                  "trigger_intents": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -49,7 +54,7 @@
                     },
                     "default": []
                   },
-                  "dataSections": {
+                  "data_sections": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -57,28 +62,110 @@
                     },
                     "default": []
                   },
-                  "supportedRegions": {
+                  "supported_regions": {
                     "type": "array",
                     "items": {
                       "type": "string",
                       "minLength": 1
                     },
                     "default": []
+                  },
+                  "fetch_params": {
+                    "type": "object",
+                    "properties": {
+                      "region": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "taxonomy_region_enum"
+                          }
+                        },
+                        "required": [
+                          "type"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "period": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        },
+                        "required": [
+                          "type"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "domain_filter": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "enum"
+                          },
+                          "values": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "values"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "limit": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "const": "integer"
+                          },
+                          "default": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "default"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "additionalProperties": false,
+                    "default": {}
                   },
                   "source": {
                     "type": "object",
                     "properties": {
-                      "id": {
+                      "agency": {
                         "type": "string",
                         "minLength": 1
                       },
-                      "name": {
+                      "api_name": {
                         "type": "string",
                         "minLength": 1
+                      },
+                      "auth_type": {
+                        "type": "string",
+                        "enum": [
+                          "public",
+                          "key_required"
+                        ]
                       },
                       "status": {
                         "type": "string",
-                        "const": "fixture"
+                        "enum": [
+                          "fixture",
+                          "unavailable"
+                        ]
                       },
                       "url": {
                         "type": "string",
@@ -86,9 +173,9 @@
                       }
                     },
                     "required": [
-                      "id",
-                      "name",
-                      "status"
+                      "agency",
+                      "api_name",
+                      "auth_type"
                     ],
                     "additionalProperties": false
                   },
@@ -96,123 +183,105 @@
                     "type": "string",
                     "const": "available"
                   },
-                  "outputSectionId": {
+                  "output_section_id": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "credentialBoundary": {
+                  "credential_boundary": {
                     "type": "string",
                     "const": "none"
                   }
                 },
                 "required": [
-                  "id",
-                  "title",
+                  "adapter_id",
+                  "name",
                   "description",
-                  "refreshMode",
+                  "refresh_mode",
                   "source",
                   "availability",
-                  "outputSectionId",
-                  "credentialBoundary"
+                  "output_section_id",
+                  "credential_boundary"
                 ],
                 "additionalProperties": false
               },
               {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/id"
+                  "adapter_id": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/adapter_id"
                   },
-                  "title": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/title"
+                  "name": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/name"
                   },
                   "description": {
                     "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/description"
                   },
-                  "refreshMode": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/refreshMode"
+                  "refresh_mode": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/refresh_mode"
                   },
-                  "triggerIntents": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/triggerIntents"
+                  "trigger_intents": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/trigger_intents"
                   },
-                  "dataSections": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/dataSections"
+                  "data_sections": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/data_sections"
                   },
-                  "supportedRegions": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/supportedRegions"
+                  "supported_regions": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/supported_regions"
+                  },
+                  "fetch_params": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/fetch_params"
                   },
                   "source": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/id"
-                      },
-                      "name": {
-                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/name"
-                      },
-                      "status": {
-                        "type": "string",
-                        "const": "unavailable"
-                      },
-                      "url": {
-                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/url"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name",
-                      "status"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source"
                   },
                   "availability": {
                     "type": "string",
                     "const": "unavailable"
                   },
-                  "outputSectionId": {
+                  "output_section_id": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "credentialBoundary": {
+                  "credential_boundary": {
                     "type": "string",
                     "const": "server_proxy_required"
                   },
-                  "statusReason": {
+                  "status_reason": {
                     "type": "string",
                     "minLength": 1
                   }
                 },
                 "required": [
-                  "id",
-                  "title",
+                  "adapter_id",
+                  "name",
                   "description",
-                  "refreshMode",
+                  "refresh_mode",
                   "source",
                   "availability",
-                  "credentialBoundary",
-                  "statusReason"
+                  "credential_boundary",
+                  "status_reason"
                 ],
                 "additionalProperties": false
               },
               {
                 "type": "object",
                 "properties": {
-                  "id": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/id"
+                  "adapter_id": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/adapter_id"
                   },
-                  "title": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/title"
+                  "name": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/name"
                   },
                   "description": {
                     "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/description"
                   },
-                  "refreshMode": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/refreshMode"
+                  "refresh_mode": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/refresh_mode"
                   },
-                  "triggerIntents": {
-                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/triggerIntents"
+                  "trigger_intents": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/trigger_intents"
                   },
-                  "dataSections": {
+                  "data_sections": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -222,7 +291,7 @@
                     "maxItems": 0,
                     "default": []
                   },
-                  "supportedRegions": {
+                  "supported_regions": {
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -231,73 +300,54 @@
                     "minItems": 0,
                     "maxItems": 0,
                     "default": []
+                  },
+                  "fetch_params": {
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/fetch_params"
                   },
                   "source": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/id"
-                      },
-                      "name": {
-                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/name"
-                      },
-                      "status": {
-                        "type": "string",
-                        "const": "unavailable"
-                      },
-                      "url": {
-                        "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source/properties/url"
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "name",
-                      "status"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/definitions/AdapterDiscoveryResponse/properties/adapters/items/anyOf/0/properties/source"
                   },
                   "availability": {
                     "type": "string",
                     "const": "parked"
                   },
-                  "credentialBoundary": {
+                  "credential_boundary": {
                     "type": "string",
                     "const": "decision_required"
                   },
-                  "statusReason": {
+                  "status_reason": {
                     "type": "string",
                     "minLength": 1
                   },
-                  "adrReference": {
+                  "adr_reference": {
                     "type": "string",
                     "minLength": 1
                   }
                 },
                 "required": [
-                  "id",
-                  "title",
+                  "adapter_id",
+                  "name",
                   "description",
-                  "refreshMode",
+                  "refresh_mode",
                   "source",
                   "availability",
-                  "credentialBoundary",
-                  "statusReason",
-                  "adrReference"
+                  "credential_boundary",
+                  "status_reason",
+                  "adr_reference"
                 ],
                 "additionalProperties": false
               }
             ]
           }
         },
-        "generatedAt": {
+        "generated_at": {
           "type": "string",
           "format": "date-time"
         }
       },
       "required": [
-        "resourceUri",
-        "adapters",
-        "generatedAt"
+        "adapters_version",
+        "adapters"
       ],
       "additionalProperties": false
     }

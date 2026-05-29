@@ -94,7 +94,7 @@ index 0000000..0000000 100644
 @@
 -The local design reference records ADR-0022 as:
 +ADR-0022 is accepted for this monorepo as Option C:
- 
+
 -- Status: Proposed, decision required.
 -- Recommendation: Option C, a hybrid path where legal evidence is disabled
 -  until a proxy exists and citation verification is used as a review gate.

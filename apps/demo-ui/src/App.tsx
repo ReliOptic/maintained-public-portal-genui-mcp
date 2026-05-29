@@ -60,14 +60,14 @@ function BlockRenderer({ block }: { block: A2UIBlock }) {
   if (block.type === "adapter-discovery") {
     return (
       <article className="panel adapter-discovery">
-        <p className="provider">{block.resourceUri}</p>
+        <p className="provider">{block.resource_uri}</p>
         <h3>{block.title}</h3>
         <div className="adapter-list">
           {block.adapters.map((adapter) => (
-            <div className="adapter-row" key={adapter.id}>
+            <div className="adapter-row" key={adapter.adapter_id}>
               <div>
-                <strong>{adapter.id}</strong>
-                <span>{adapter.refreshMode}</span>
+                <strong>{adapter.adapter_id}</strong>
+                <span>{adapter.refresh_mode}</span>
               </div>
               <span className={`adapter-status ${adapter.availability}`}>{adapter.availability}</span>
             </div>
