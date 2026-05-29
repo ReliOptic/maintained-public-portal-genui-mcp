@@ -152,6 +152,81 @@ h1 {
   color: #475569;
 }
 
+.metrics {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.metrics div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.metrics dt {
+  color: #475569;
+  font-weight: 700;
+}
+
+.metrics dd {
+  margin: 0;
+}
+
+.adapter-discovery {
+  grid-column: 1 / -1;
+}
+
+.adapter-list {
+  display: grid;
+  gap: 8px;
+}
+
+.adapter-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 8px;
+}
+
+.adapter-row div {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.adapter-row strong,
+.adapter-row span {
+  overflow-wrap: anywhere;
+}
+
+.adapter-status {
+  border-radius: 999px;
+  padding: 4px 8px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.adapter-status.available {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.adapter-status.unavailable {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.adapter-status.parked {
+  background: #fef3c7;
+  color: #92400e;
+}
+
 .notice {
   grid-column: 1 / -1;
   background: #eef6f4;

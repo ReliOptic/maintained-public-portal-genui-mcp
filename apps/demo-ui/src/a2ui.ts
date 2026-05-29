@@ -1,20 +1,42 @@
-import type { BenefitDetail, BenefitSearchResponse } from "@mcp-gen-ui-gateway/schema";
+import type { AdapterDiscoveryResponse, BenefitDetail, BenefitSearchResponse, DataSection } from "@mcp-gen-ui-gateway/schema";
 
 export type A2UIBlock =
-  | { type: "section"; id: string; title: string; tone?: "default" | "muted" }
+  | { type: "section"; id: string; title: string }
   | { type: "benefit-card"; id: string; title: string; provider: string; status: string; summary: string; reasons: string[]; missingInfo: string[] }
+  | {
+      type: "adapter-discovery";
+      id: string;
+      title: string;
+      resourceUri: string;
+      adapters: AdapterDiscoveryResponse["adapters"];
+    }
+  | { type: "data-section"; id: string; title: string; region: string; source: string; metrics: DataSection["metrics"] }
   | { type: "checklist"; id: string; title: string; items: { id: string; label: string; required: boolean }[] }
   | { type: "steps"; id: string; title: string; steps: { title: string; description: string }[] }
   | { type: "notice"; id: string; text: string };
 
-export function benefitSearchToA2UI(response: BenefitSearchResponse, detail: BenefitDetail): A2UIBlock[] {
+export function benefitSearchToA2UI(
+  response: BenefitSearchResponse,
+  detail: BenefitDetail,
+  adapterDiscovery?: AdapterDiscoveryResponse
+): A2UIBlock[] {
   return [
     {
       type: "section",
       id: "query-summary",
-      title: `"${response.query}" 검색 결과`,
-      tone: "default"
+      title: `"${response.query}" 검색 결과`
     },
+    ...(adapterDiscovery
+      ? [
+          {
+            type: "adapter-discovery" as const,
+            id: "adapter-discovery",
+            title: "Adapter discovery",
+            resourceUri: adapterDiscovery.resourceUri,
+            adapters: adapterDiscovery.adapters
+          }
+        ]
+      : []),
     ...response.results.map((result) => ({
       type: "benefit-card" as const,
       id: result.id,
@@ -24,6 +46,14 @@ export function benefitSearchToA2UI(response: BenefitSearchResponse, detail: Ben
       summary: result.summary,
       reasons: result.reasons,
       missingInfo: result.missingInfo
+    })),
+    ...response.dataSections.map((section) => ({
+      type: "data-section" as const,
+      id: section.id,
+      title: section.title,
+      region: section.region,
+      source: `${section.source.name} (${section.source.status})`,
+      metrics: section.metrics
     })),
     {
       type: "checklist",

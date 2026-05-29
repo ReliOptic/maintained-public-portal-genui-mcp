@@ -1,8 +1,8 @@
 import { benefitSearchToA2UI, type A2UIBlock } from "./a2ui";
-import { demoBenefitDetail, demoSearchResponse } from "./demo-data";
+import { demoAdapterDiscovery, demoBenefitDetail, demoSearchResponse } from "./demo-data";
 import "./styles.css";
 
-const blocks = benefitSearchToA2UI(demoSearchResponse, demoBenefitDetail);
+const blocks = benefitSearchToA2UI(demoSearchResponse, demoBenefitDetail, demoAdapterDiscovery);
 
 export function App() {
   return (
@@ -16,7 +16,7 @@ export function App() {
       </header>
 
       <section className="search-panel" aria-label="자연어 조건 입력">
-        <input value="서울 거주 대학생인데 받을 수 있는 지원 있어?" readOnly />
+        <input value="신혼부부 프리랜서가 대전 유성구로 이사할 때 확인할 지원은?" readOnly />
         <button type="button">검색</button>
       </section>
 
@@ -57,6 +57,26 @@ function BlockRenderer({ block }: { block: A2UIBlock }) {
     );
   }
 
+  if (block.type === "adapter-discovery") {
+    return (
+      <article className="panel adapter-discovery">
+        <p className="provider">{block.resourceUri}</p>
+        <h3>{block.title}</h3>
+        <div className="adapter-list">
+          {block.adapters.map((adapter) => (
+            <div className="adapter-row" key={adapter.id}>
+              <div>
+                <strong>{adapter.id}</strong>
+                <span>{adapter.refreshMode}</span>
+              </div>
+              <span className={`adapter-status ${adapter.availability}`}>{adapter.availability}</span>
+            </div>
+          ))}
+        </div>
+      </article>
+    );
+  }
+
   if (block.type === "checklist") {
     return (
       <article className="panel">
@@ -70,6 +90,27 @@ function BlockRenderer({ block }: { block: A2UIBlock }) {
             </li>
           ))}
         </ul>
+      </article>
+    );
+  }
+
+  if (block.type === "data-section") {
+    return (
+      <article className="panel data-section">
+        <p className="provider">{block.source}</p>
+        <h3>{block.title}</h3>
+        <p>{block.region}</p>
+        <dl className="metrics">
+          {block.metrics.map((metric) => (
+            <div key={metric.label}>
+              <dt>{metric.label}</dt>
+              <dd>
+                {metric.value}
+                {metric.unit ? ` ${metric.unit}` : ""}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </article>
     );
   }
