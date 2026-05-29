@@ -12,6 +12,7 @@ import {
   type ChecklistResponse
 } from "@mcp-gen-ui-gateway/schema";
 import type { BenefitRepository } from "./repository.js";
+import { regionalEvidenceForRegion } from "./regional-evidence.js";
 import { recommendBenefits } from "./recommender.js";
 import { SnapshotStore } from "./sqlite-store.js";
 
@@ -31,6 +32,7 @@ export class BenefitToolService {
       query: request.query,
       profile: request.profile,
       results,
+      dataSections: regionalEvidenceForRegion(request.profile.region),
       generatedAt: new Date().toISOString()
     });
   }

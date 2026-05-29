@@ -79,5 +79,58 @@ export const fixtureBenefits: BenefitRecord[] = [
     ageRanges: ["twenties", "thirties", "forties", "fifties"],
     studentOnly: false,
     employmentStatuses: ["unemployed"]
+  },
+  {
+    id: "daejeon-newlywed-housing-loan",
+    title: "대전 신혼부부 주거비 지원",
+    provider: "대전광역시",
+    category: "housing",
+    summary: "대전 거주 신혼부부의 전월세 보증금과 주거비 부담을 낮추기 위한 후보 지원 사업입니다.",
+    target: "대전광역시에 거주하거나 전입 예정인 신혼부부 중 공고 조건을 충족하는 가구",
+    eligibility: ["대전 거주 또는 전입 예정", "신혼부부 또는 예비부부", "주택 및 소득 기준 확인 필요"],
+    applicationPeriod: "공고별 상이",
+    fee: "없음",
+    processingTime: "공고별 상이",
+    documents: [
+      { id: "marriage-proof", label: "혼인관계 또는 예식 예정 확인 서류", required: true, source: "program" },
+      { id: "lease-contract", label: "임대차계약서 또는 주거 예정 확인 서류", required: true, source: "program" },
+      { id: "income-proof", label: "소득 확인 서류", required: true, source: "program" }
+    ],
+    applicationMethods: ["공고문 확인 후 온라인 또는 방문 신청"],
+    applicationUrl: "https://www.gov.kr/portal/service",
+    sourceUrl: "https://www.gov.kr/portal/service",
+    lastFetchedAt: "2026-05-29T00:00:00.000Z",
+    evidence: [],
+    searchableText: "대전 유성구 신혼부부 예비부부 이사 전입 주거 주택 전월세 보증금 지원",
+    regionTags: ["daejeon_yuseong"],
+    ageRanges: ["twenties", "thirties"],
+    studentOnly: false,
+    employmentStatuses: []
+  },
+  {
+    id: "self-employed-employment-stability",
+    title: "자영업자 고용안정 지원",
+    provider: "고용노동부",
+    category: "employment",
+    summary: "프리랜서와 자영업자가 소득 변동기에 확인할 수 있는 고용·직업훈련 후보 지원입니다.",
+    target: "자영업자 또는 특수고용·프리랜서 등 소득 변동이 있는 취업자",
+    eligibility: ["자영업 또는 프리랜서 활동 확인", "소득 및 고용 상태 기준 확인 필요"],
+    applicationPeriod: "사업별 상이",
+    fee: "없음",
+    processingTime: "사업별 심사 일정에 따름",
+    documents: [
+      { id: "business-or-income-proof", label: "사업자 또는 소득 활동 확인 자료", required: true, source: "program" },
+      { id: "employment-status-proof", label: "고용 상태 확인 자료", required: true, source: "program" }
+    ],
+    applicationMethods: ["고용센터 또는 공식 온라인 경로 확인"],
+    applicationUrl: "https://www.work24.go.kr/",
+    sourceUrl: "https://www.gov.kr/portal/service",
+    lastFetchedAt: "2026-05-29T00:00:00.000Z",
+    evidence: [],
+    searchableText: "프리랜서 자영업자 고용 안정 직업훈련 이사 정착 지원",
+    regionTags: [],
+    ageRanges: ["twenties", "thirties", "forties", "fifties"],
+    studentOnly: false,
+    employmentStatuses: ["self_employed"]
   }
 ];
